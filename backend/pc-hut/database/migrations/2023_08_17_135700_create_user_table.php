@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name", 30)->nullable(false);
             $table->string("surname", 30)->nullable(false);
             $table->string("username", 30)->nullable(false);
-            $table->string("password", 30)->nullable(false);
+            $table->string("password", 150)->nullable(false);
             $table->string("email", 45)->nullable(false);
 
 
