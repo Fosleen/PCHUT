@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
+
 import Navbar from "../components/Navbar.vue";
 import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 import Footer from "../components/Footer.vue";
+
 
 const routes = [
   {
