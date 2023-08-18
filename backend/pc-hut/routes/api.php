@@ -23,3 +23,5 @@ Route::get('switch-types/{id}', [SwitchTypeController::class, 'show']);
 Route::get('keyboards', [KeyboardController::class, 'index']);
 Route::get('keyboards/{id}', [KeyboardController::class, 'show']);
 Route::post('keyboards', [KeyboardController::class, 'store']);
+Route::put('keyboards/{id}', [KeyboardController::class, 'update']);
+Route::delete('keyboards/{id}', [KeyboardController::class, 'destroy']);

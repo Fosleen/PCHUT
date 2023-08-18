@@ -65,16 +65,70 @@ class KeyboardController extends Controller
             ]);
 
             if ($keyboard) {
-                return response()->json(
-                    ['message' => 'Keyboard created successfully'],
-                    200
-                );
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Keyboard created successfully'
+                ], 200);
             } else {
-                return response()->json(
-                    ['message' => 'Keyboard not created!'],
-                    500
-                );
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Keyboard not created!'
+                ], 500);
             }
+        }
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'model' => 'required|string',
+            'rgb' => 'required|boolean',
+            'manufacturer_id' => 'required|integer',
+            'switch_type_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->messages()
+            ], 422);
+        } else {
+            $keyboard = Keyboard::find($id);
+            if ($keyboard) {
+                $keyboard->update([
+                    'model' => $request->model,
+                    'rgb' => $request->rgb,
+                    'manufacturer_id' => $request->manufacturer_id,
+                    'switch_type_id' => $request->switch_type_id,
+                ]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Keyboard updated successfully'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'No keyboard found'
+                ], 404);
+            }
+        }
+    }
+
+
+    public function destroy($id)
+    {
+        $keyboard = Keyboard::find($id);
+        if ($keyboard) {
+            $keyboard->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Keyboard successfully deleted'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No keyboard found'
+            ], 404);
         }
     }
 }
