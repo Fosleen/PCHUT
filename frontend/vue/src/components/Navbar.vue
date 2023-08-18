@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Logo from "../../assets/logo_new.png";
+import Logo from "../assets/logo_new.png";
 import { PhUser } from "@phosphor-icons/vue";
 import { PhShoppingCartSimple } from "@phosphor-icons/vue";
 import { PhMoon } from "@phosphor-icons/vue";
