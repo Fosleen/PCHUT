@@ -59,4 +59,59 @@ class Mouse_controller extends Controller
             }
         }
     }
+
+    public function getById($id)
+    {
+        $mouse = Mouse::find($id);
+        if ($mouse) {
+            return response()->json([$mouse], 200);
+        } else {
+            return response()->json(['message' => 'mouse not found!'], 500);
+        }
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'model' => 'sometimes|required|string',
+            'dpi' => 'sometimes|required|integer',
+            'rgb' => 'sometimes|required|boolean',
+            'manufacturer_id' => 'sometimes|required|integer',
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->messages(),
+            ], 422);
+        } else {
+            $mouse = Mouse::find($id);
+
+
+            if ($mouse) {
+                $mouse->update([
+                    'model' => $request->model,
+                    'dpi' => $request->dpi,
+                    'rgb' => $request->rgb,
+                    'manufacturer_id' => $request->manufacturer_id,
+
+                ]);
+                return response()->json(['message' => 'mouse updated successfully'], 200);
+            } else {
+                return response()->json(['message' => 'mouse not updated!'], 404);
+            }
+        }
+    }
+
+    public function delete($id)
+    {
+        $mouse = Mouse::find($id);
+
+        if ($mouse) {
+            $mouse->delete();
+        } else {
+            return response()->json(['message' => 'mouse not found!'], 404);
+        }
+    }
 }
