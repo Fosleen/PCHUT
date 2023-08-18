@@ -11,5 +11,5 @@ class Mouse extends Model
 
     protected $table = 'mouse';
 
-    protected $fillable = ['model', 'dpi', 'rgb'];
+    protected $fillable = ['model', 'dpi', 'rgb', 'manufacturer_id'];
 }
