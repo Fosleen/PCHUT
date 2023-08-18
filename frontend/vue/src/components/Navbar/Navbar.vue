@@ -4,7 +4,7 @@
     <div class="navbar-icons-wrapper">
       <PhUser :size="32" color="white" />
       <PhShoppingCartSimple :size="32" color="white" />
-      <PhMoon :size="32" color="white" />
+      <PhMoon :size="32" color="white" @click="toggleTheme" />
     </div>
   </div>
 </template>
@@ -14,6 +14,16 @@ import Logo from "../../assets/logo_new.png";
 import { PhUser } from "@phosphor-icons/vue";
 import { PhShoppingCartSimple } from "@phosphor-icons/vue";
 import { PhMoon } from "@phosphor-icons/vue";
+import { ref } from "vue";
+
+const isDarkTheme = ref(true);
+
+const toggleTheme = () => {
+  isDarkTheme.value = !isDarkTheme.value;
+  document.querySelector("body").style.backgroundColor = isDarkTheme.value
+    ? "#000000"
+    : "#ffffff";
+};
 </script>
 
 <style>
