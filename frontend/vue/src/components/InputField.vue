@@ -25,10 +25,4 @@ input {
   width: 90%;
   border-radius: 4px;
 }
-
-@media screen and ($tablet) {
-  input {
-    
-  }
-}
 </style>
