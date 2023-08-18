@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cooling_type_controller;
+use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\Mouse_controller;
 use App\Http\Controllers\Part_controller;
 use Illuminate\Http\Request;
@@ -20,3 +21,11 @@ Route::post('mouses', [Mouse_controller::class, 'create']);
 Route::get('mouses/{id}', [Mouse_controller::class, 'getById']);
 Route::put('mouses/{id}/update', [Mouse_controller::class, 'update']);
 Route::delete('mouses/{id}/delete', [Mouse_controller::class, 'delete']);
+
+//=============================================================//
+
+Route::get('monitors', [MonitorController::class, 'getAll']);
+Route::post('monitors', [MonitorController::class, 'create']);
+Route::get('monitors/{id}', [MonitorController::class, 'getById']);
+Route::put('monitors/{id}/update', [MonitorController::class, 'update']);
+Route::delete('monitors/{id}/delete', [MonitorController::class, 'delete']);
