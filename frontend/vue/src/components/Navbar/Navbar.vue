@@ -19,7 +19,7 @@ import { PhMoon } from "@phosphor-icons/vue";
 <style>
 .navbar {
   background: linear-gradient(to right, #343434, #5b02cc);
-  height: 86px;
+  height: 92px;
   width: 100%;
   display: flex;
   justify-content: space-between;
