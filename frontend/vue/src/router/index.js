@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
-import Navbar from "../components/Navbar/Navbar.vue";
+import Navbar from "../components/Navbar.vue";
+import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 
 const routes = [
   {
     path: "/",
     name: "HomePage",
-    component: Navbar,
+    component: PCBuilderComponentCard,
   },
   {
     path: "/login",
