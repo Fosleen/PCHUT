@@ -19,3 +19,7 @@ Route::get('parts', [Part_controller::class, 'getAll']);
 
 Route::get('switch-types', [SwitchTypeController::class, 'index']);
 Route::get('switch-types/{id}', [SwitchTypeController::class, 'show']);
+
+Route::get('keyboards', [KeyboardController::class, 'index']);
+Route::get('keyboards/{id}', [KeyboardController::class, 'show']);
+Route::post('keyboards', [KeyboardController::class, 'store']);
