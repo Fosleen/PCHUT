@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo_new.png";
 import { PhUser } from "@phosphor-icons/vue";
 import { PhShoppingCartSimple } from "@phosphor-icons/vue";
 import { PhMoon } from "@phosphor-icons/vue";
@@ -38,5 +38,6 @@ import { PhMoon } from "@phosphor-icons/vue";
 
 .navbar-logo {
   padding-left: 150px;
+  width: 200px;
 }
 </style>
