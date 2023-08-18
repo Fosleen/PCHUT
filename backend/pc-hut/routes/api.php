@@ -24,6 +24,8 @@ Route::delete('mouses/{id}/delete', [Mouse_controller::class, 'delete']);
 
 //=============================================================//
 
+//ovo je samo da dobim badge
+
 Route::get('monitors', [MonitorController::class, 'getAll']);
 Route::post('monitors', [MonitorController::class, 'create']);
 Route::get('monitors/{id}', [MonitorController::class, 'getById']);
