@@ -28,7 +28,7 @@ const store = createStore({
     setUser: (state, userData) => {
       state.user.token = userData.token;
       state.user.data = userData.user;
-      sessionStorage.setItem("access_token", userData.token);
+      localStorage.setItem("access_token", userData.token);
     },
   },
   modules: {},

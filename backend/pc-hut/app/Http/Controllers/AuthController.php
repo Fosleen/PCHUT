@@ -57,14 +57,14 @@ class AuthController extends Controller
             return response([
                 'error' => 'Ovaj korisnik ne postoji'
             ], 422);
-
-            $user = Auth::user();
-            $token = $user->createToken('main')->plainTextToken;
-
-            return response([
-                'user' => $user,
-                'token' => $token,
-            ]);
         }
+
+        $user = Auth::user();
+        $token = $user->createToken('main')->plainTextToken;
+
+        return response([
+            'user' => $user,
+            'token' => $token,
+        ]);
     }
 }
