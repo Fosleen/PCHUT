@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrapper">
+  <div class="auth-wrapper">
     <img class="img-1" src="../assets/cpu.png" alt="cpu" />
     <img class="img-2" src="../assets/gaming.png" alt="gaming" />
     <img class="img-3" src="../assets/gamingpc.png" alt="gamingpc" />
@@ -38,7 +38,7 @@ watchEffect(() =>
 <style lang="scss">
 @import "../utils/theme.scss";
 
-.login-wrapper {
+.auth-wrapper {
   overflow: hidden;
   background: linear-gradient(135deg, $colorBgPrimary, $colorPrimary);
   height: 100vh;
@@ -46,13 +46,15 @@ watchEffect(() =>
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
 
   p {
     color: $colorTextSecondary;
     font-size: 18px;
     letter-spacing: 2px;
-    text-shadow: 1px 1px 2px rgb(36, 36, 36);
+    text-shadow: 1px 1px 15px rgb(7, 7, 7);
     font-weight: 400;
+    z-index: 1;
 
     a {
       color: $colorTextSecondary;
@@ -74,10 +76,7 @@ watchEffect(() =>
     }
 
     &.img-3 {
-      bottom: -20px;
-      right: -100px;
-      rotate: 10deg;
-      width: 70%;
+      display: none;
     }
 
     &.img-4 {
@@ -87,7 +86,7 @@ watchEffect(() =>
 }
 
 @media screen and ($tablet) {
-  .login-wrapper {
+  .auth-wrapper {
     img {
       &.img-1 {
         right: 25%;
@@ -95,6 +94,10 @@ watchEffect(() =>
       }
 
       &.img-3 {
+        display: block;
+        bottom: -160px;
+        right: -100px;
+        rotate: 10deg;
         width: 300px;
       }
     }
@@ -102,7 +105,7 @@ watchEffect(() =>
 }
 
 @media screen and ($desktop) {
-  .login-wrapper {
+  .auth-wrapper {
     img {
       &.img-1 {
         top: 0;
