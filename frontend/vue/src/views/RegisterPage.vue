@@ -35,8 +35,35 @@
 </template>
 
 <script setup>
+import store from "../store";
 import Button from "../components/Button.vue";
 import InputField from "../components/InputField.vue";
+
+const user = {
+  name: "",
+  surname: "",
+  username: "",
+  email: "",
+  password: "",
+};
+
+function register(e) {
+  e.preventDefault();
+  console.log(user);
+
+  store
+    .dispatch("register", user)
+    .then(() => {
+      // router.push({
+      //   name: "Dashboard",
+      // });
+
+      console.log("Uspjesna registracija");
+    })
+    .catch((err) => {
+      console.log(`Nest je puklo: ${err}`);
+    });
+}
 </script>
 
 <style lang="scss">
