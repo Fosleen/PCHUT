@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cooling_type_controller;
+use App\Http\Controllers\CPUController;
 use App\Http\Controllers\KeyboardController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\Mouse_controller;
@@ -42,3 +43,11 @@ Route::post('monitors', [MonitorController::class, 'create']);
 Route::get('monitors/{id}', [MonitorController::class, 'getById']);
 Route::put('monitors/{id}/update', [MonitorController::class, 'update']);
 Route::delete('monitors/{id}/delete', [MonitorController::class, 'delete']);
+
+//=============================================================//
+
+Route::get('cpus', [CPUController::class, 'getAll']);
+Route::post('cpus', [CPUController::class, 'create']);
+Route::get('cpus/{id}', [CPUController::class, 'getById']);
+Route::put('cpus/{id}/update', [CPUController::class, 'update']);
+Route::delete('cpus/{id}/delete', [CPUController::class, 'delete']);
