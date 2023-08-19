@@ -31,7 +31,7 @@ button {
 }
 
 .trapezoid {
-  height: 120px;
-  clip-path: polygon(0 0, 100% 0, 84% 41%, 16% 41%);
+  width: 220px;
+  clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%);
 }
 </style>

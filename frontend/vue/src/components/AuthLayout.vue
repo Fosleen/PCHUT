@@ -47,6 +47,7 @@ watchEffect(() =>
   justify-content: center;
   flex-direction: column;
   position: relative;
+  gap: 16px;
 
   p {
     color: $colorTextSecondary;
@@ -87,6 +88,8 @@ watchEffect(() =>
 
 @media screen and ($tablet) {
   .auth-wrapper {
+    gap: 32px;
+
     img {
       &.img-1 {
         right: 25%;
@@ -106,6 +109,8 @@ watchEffect(() =>
 
 @media screen and ($desktop) {
   .auth-wrapper {
+    gap: 48px;
+
     img {
       &.img-1 {
         top: 0;
