@@ -11,5 +11,5 @@ class Motherboard extends Model
 
     protected $table = 'motherboard';
 
-    protected $fillable = ['model',  'manufacturer_id', 'socket_id'];
+    protected $fillable = ['model', 'price',  'manufacturer_id', 'socket_id'];
 }
