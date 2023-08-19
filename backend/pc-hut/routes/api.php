@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cooling_type_controller;
+use App\Http\Controllers\GpuController;
 use App\Http\Controllers\KeyboardController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\Mouse_controller;
@@ -27,6 +28,7 @@ Route::get('keyboards/{id}', [KeyboardController::class, 'show']);
 Route::post('keyboards', [KeyboardController::class, 'store']);
 Route::put('keyboards/{id}', [KeyboardController::class, 'update']);
 Route::delete('keyboards/{id}', [KeyboardController::class, 'destroy']);
+
 Route::get('mouses', [Mouse_controller::class, 'getAll']);
 Route::post('mouses', [Mouse_controller::class, 'create']);
 Route::get('mouses/{id}', [Mouse_controller::class, 'getById']);
@@ -42,3 +44,9 @@ Route::post('monitors', [MonitorController::class, 'create']);
 Route::get('monitors/{id}', [MonitorController::class, 'getById']);
 Route::put('monitors/{id}/update', [MonitorController::class, 'update']);
 Route::delete('monitors/{id}/delete', [MonitorController::class, 'delete']);
+
+Route::get('gpus', [GpuController::class, 'index']);
+Route::get('gpus/{id}', [GpuController::class, 'show']);
+Route::post('gpus', [GpuController::class, 'store']);
+Route::put('gpus/{id}', [GpuController::class, 'update']);
+Route::delete('gpus/{id}', [GpuController::class, 'destroy']);
