@@ -29,6 +29,7 @@ Route::get('keyboards/{id}', [KeyboardController::class, 'show']);
 Route::post('keyboards', [KeyboardController::class, 'store']);
 Route::put('keyboards/{id}', [KeyboardController::class, 'update']);
 Route::delete('keyboards/{id}', [KeyboardController::class, 'destroy']);
+
 Route::get('mouses', [Mouse_controller::class, 'getAll']);
 Route::post('mouses', [Mouse_controller::class, 'create']);
 Route::get('mouses/{id}', [Mouse_controller::class, 'getById']);
@@ -58,3 +59,9 @@ Route::post('motherboards', [MotherboardController::class, 'create']);
 Route::get('motherboards/{id}', [MotherboardController::class, 'getById']);
 Route::put('motherboards/{id}/update', [MotherboardController::class, 'update']);
 Route::delete('motherboards/{id}/delete', [MotherboardController::class, 'delete']);
+//=============================================================//
+Route::get('gpus', [GpuController::class, 'index']);
+Route::get('gpus/{id}', [GpuController::class, 'show']);
+Route::post('gpus', [GpuController::class, 'store']);
+Route::put('gpus/{id}', [GpuController::class, 'update']);
+Route::delete('gpus/{id}', [GpuController::class, 'destroy']);
