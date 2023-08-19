@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('manufacturer_id'); //first you have to make this column so referential
             //integrity could work
+            $table->unsignedBigInteger('socket_id');
             $table->integer("cores")->nullable(false);
             $table->float("speed")->nullable(false);
             $table->string("model", 45)->nullable(false);
             $table->float("price")->nullable(false);
-            $table->string("socket")->nullable(false);
             $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
-            //$table->foreignId('manufacturer_id')->constrained();
+            $table->foreign('socket_id')->references('id')->on('socket');
+
 
             $table->timestamps();
         });
