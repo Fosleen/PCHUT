@@ -33,12 +33,11 @@ class CPUController extends Controller
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
             'cores' => 'required|integer',
-            'price' => 'required|integer', //float does not exist, fix this!!!
+            'price' => 'required|numeric',
             'speed' => 'required|integer',
             'manufacturer_id' => 'required|integer',
             'socket_id' => 'required|integer',
-
-
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -54,7 +53,7 @@ class CPUController extends Controller
                 'speed' => $request->speed,
                 'manufacturer_id' => $request->manufacturer_id,
                 'socket_id' => $request->socket_id,
-
+                'description' => $request->description
             ]);
 
             if ($cpu) {
@@ -78,13 +77,13 @@ class CPUController extends Controller
     public function update(Request $request, int $id)
     {
         $validator = Validator::make($request->all(), [
-            'model' => $request->model,
-            'cores' => $request->cores,
-            'price' => $request->price,
-            'speed' => $request->speed,
-            'manufacturer_id' => $request->manufacturer_id,
-            'socket_id' => $request->socket_id,
-
+            'model' => 'required|string',
+            'cores' => 'required|integer',
+            'price' => 'required|numeric',
+            'speed' => 'required|integer',
+            'manufacturer_id' => 'required|integer',
+            'socket_id' => 'required|integer',
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -104,7 +103,7 @@ class CPUController extends Controller
                     'speed' => $request->speed,
                     'manufacturer_id' => $request->manufacturer_id,
                     'socket_id' => $request->socket_id,
-
+                    'description' => $request->description
                 ]);
                 return response()->json(['message' => 'cpu updated successfully'], 200);
             } else {

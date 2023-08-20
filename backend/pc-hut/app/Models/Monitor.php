@@ -11,5 +11,5 @@ class Monitor extends Model
 
     protected $table = 'monitor';
 
-    protected $fillable = ['model', 'size', 'refresh_rate', 'curved', 'price', 'manufacturer_id'];
+    protected $fillable = ['model', 'size','description', 'refresh_rate', 'curved', 'price', 'manufacturer_id'];
 }

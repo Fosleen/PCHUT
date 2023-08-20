@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('manufacturer', function (Blueprint $table) {
             $table->id();
+            $table->text("description")->nullable(true);
             $table->string("name", 45)->nullable(false);
         });
     }

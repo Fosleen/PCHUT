@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('monitor', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('manufacturer_id');
-
+            $table->text("description")->nullable(true);
             $table->string("model", 45)->nullable(false);
             $table->float("size")->nullable(false);
             $table->float("price")->nullable(false);
