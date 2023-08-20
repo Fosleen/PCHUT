@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float("speed")->nullable(false);
             $table->string("model", 45)->nullable(false);
             $table->float("price")->nullable(false);
+            $table->text("description")->nullable(true);
             $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
             $table->foreign('socket_id')->references('id')->on('socket');
 

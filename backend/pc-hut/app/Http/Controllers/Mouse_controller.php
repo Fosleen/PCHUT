@@ -35,7 +35,7 @@ class Mouse_controller extends Controller
             'dpi' => 'required|integer',
             'rgb' => 'required|boolean',
             'manufacturer_id' => 'required|integer',
-
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -49,7 +49,7 @@ class Mouse_controller extends Controller
                 'dpi' => $request->dpi,
                 'rgb' => $request->rgb,
                 'manufacturer_id' => $request->manufacturer_id,
-
+                'description' => $request->description
             ]);
 
             if ($mouse) {
@@ -77,7 +77,7 @@ class Mouse_controller extends Controller
             'dpi' => 'sometimes|required|integer',
             'rgb' => 'sometimes|required|boolean',
             'manufacturer_id' => 'sometimes|required|integer',
-
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -95,7 +95,7 @@ class Mouse_controller extends Controller
                     'dpi' => $request->dpi,
                     'rgb' => $request->rgb,
                     'manufacturer_id' => $request->manufacturer_id,
-
+                    'description' => $request->description
                 ]);
                 return response()->json(['message' => 'mouse updated successfully'], 200);
             } else {

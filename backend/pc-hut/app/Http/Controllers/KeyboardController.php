@@ -52,7 +52,7 @@ class KeyboardController extends Controller
             'switch_type_id' => 'required|integer',
             'type' => 'required|string',
             'connector' => 'required|string',
-            'description' => 'required|string'
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -96,7 +96,7 @@ class KeyboardController extends Controller
             'switch_type_id' => 'required|integer',
             'type' => 'required|string',
             'connector' => 'required|string',
-            'description' => 'required|string'
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {

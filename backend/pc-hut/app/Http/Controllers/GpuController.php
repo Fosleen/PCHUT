@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gpu;
+use App\Models\GPU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class GpuController extends Controller
+class GPUController extends Controller
 {
     public function index()
     {
-        $gpus = Gpu::all();
+        $gpus = GPU::all();
 
         if ($gpus->count() > 0) {
             return response()->json([
@@ -27,7 +27,7 @@ class GpuController extends Controller
 
     public function show($id)
     {
-        $gpu = Gpu::find($id);
+        $gpu = GPU::find($id);
 
         if ($gpu) {
             return response()->json([
@@ -50,7 +50,7 @@ class GpuController extends Controller
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'pc_id' => 'required|integer',
-            'description' => 'required|string'
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -59,7 +59,7 @@ class GpuController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $gpu = Gpu::create([
+            $gpu = GPU::create([
                 'model' => $request->model,
                 'memory' => $request->memory,
                 'price' => $request->price,
@@ -91,7 +91,7 @@ class GpuController extends Controller
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'pc_id' => 'required|integer',
-            'description' => 'required|string'
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -100,7 +100,7 @@ class GpuController extends Controller
                 'errors' => $validator->messages()
             ], 422);
         } else {
-            $gpu = Gpu::find($id);
+            $gpu = GPU::find($id);
             if ($gpu) {
                 $gpu->update([
                     'model' => $request->model,
@@ -125,7 +125,7 @@ class GpuController extends Controller
 
     public function destroy($id)
     {
-        $gpu = Gpu::find($id);
+        $gpu = GPU::find($id);
         if ($gpu) {
             $gpu->delete();
             return response()->json([

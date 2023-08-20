@@ -11,5 +11,5 @@ class CPU extends Model
 
     protected $table = 'CPU';
 
-    protected $fillable = ['model',  'manufacturer_id', 'socket_id', 'cores', 'speed', 'price'];
+    protected $fillable = ['model',  'manufacturer_id', 'description', 'socket_id', 'cores', 'speed', 'price'];
 }
