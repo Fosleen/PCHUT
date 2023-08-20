@@ -1,8 +1,14 @@
 <template>
   <div class="footer-text-group-item-wrapper">
     <h4 class="footer-text-group-name">{{ textGroupName }}</h4>
-    <ul class="footer-ul-item">
-      <li v-for="(item, index) in textGroupItems" :key="index">{{ item }}</li>
+    <ul class="footer-ul">
+      <li
+        v-for="(item, index) in textGroupItems"
+        :key="index"
+        class="footer-list-item"
+      >
+        {{ item }}
+      </li>
     </ul>
   </div>
 </template>
@@ -17,16 +23,20 @@ const props = defineProps({
 </script>
 
 <style>
-/* .footer-text-group-item-wrapper {
-  /* width: 100%; 
-} */
-
-.footer-ul-item {
+.footer-ul {
   list-style: none;
   padding: 0;
 }
 
 .footer-text-group-name {
   text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.footer-list-item {
+  margin-bottom: 12px;
+  font-size: 16px;
 }
 </style>
