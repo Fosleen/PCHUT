@@ -84,9 +84,12 @@ export default {
 <style>
 .footer-parent-wrapper {
   background-image: url("../assets/footer_img.jpg");
-  height: 400px;
+  height: 480px;
   padding-left: 60px;
   padding-right: 60px;
+  padding-top: 40px;
+
+  background-position: center center;
 }
 
 .footer-text-groups-wrapper {
@@ -95,6 +98,7 @@ export default {
   color: white;
   justify-content: space-evenly;
   text-align: left;
+  margin-bottom: 50px;
 }
 
 .footer-badges-wrapper {
