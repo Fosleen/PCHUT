@@ -1,6 +1,6 @@
 <template>
   <div style="height: 600px; width: 400px">
-    <div class="pc-builder-component-card-wrapper">
+    <div :class="wrapperClasses">
       <div class="pc-builder-component-image-and-text-card-wrapper">
         <div class="pc-builder-component-card-image-wrapper">
           <img :src="Image" alt="" />
@@ -29,13 +29,39 @@
 <script setup>
 import PCBuilderComponentCardList from "./PCBuilderComponentCardList.vue";
 
-const props = defineProps({
+const { Image, className } = defineProps({
   Image: String,
+  className: String,
 });
+
+const wrapperClasses = {
+  [className]: className !== undefined,
+};
 </script>
 
 <style lang="scss">
 @import "../utils/theme.scss";
+
+.pc-builder-component-small-card-wrapper {
+  background-color: $white-dark;
+  width: 100%;
+  box-shadow: 0 0 20px $pink;
+  outline: 3px solid transparent;
+  outline-offset: -3px;
+  padding-top: 40px;
+
+  .pc-builder-component-card-text-group-name {
+    color: black;
+  }
+
+  .pc-builder-component-card-list-item {
+    display: none;
+  }
+
+  .price-wrapper {
+    background-color: $grey-light;
+  }
+}
 .pc-builder-component-card-wrapper {
   background-color: $grey-dark;
   width: 100%;

@@ -13,6 +13,7 @@ const routes = [
     props: {
       Image:
         "https://www.trustedreviews.com/wp-content/uploads/sites/54/2021/03/Intel-Rocker-Lake-2-e1615908186584.jpg",
+      className: "pc-builder-component-small-card-wrapper",
     },
   },
   {
