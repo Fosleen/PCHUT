@@ -38,23 +38,11 @@
     </div>
 
     <div class="footer-badges-wrapper">
-      <img
-        src="../assets/qudal_logo.png"
-        alt="why no load"
-        class="footer-image"
-      />
+      <img src="../assets/qudal_logo.png" alt="why no load" />
 
-      <img
-        src="../assets/best_buy_logo.png"
-        alt="why no load"
-        class="footer-image"
-      />
+      <img src="../assets/best_buy_logo.png" alt="why no load" />
 
-      <img
-        src="../assets/best_buy_2_logo.png"
-        alt="why no load"
-        class="footer-image"
-      />
+      <img src="../assets/best_buy_2_logo.png" alt="why no load" />
     </div>
 
     <div class="footer-logo-wrapper">
@@ -81,7 +69,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .footer-parent-wrapper {
   background-image: url("../assets/footer_img.jpg");
   height: 480px;
@@ -110,12 +98,12 @@ export default {
   gap: 20px;
   padding-top: 12px;
   padding-bottom: 12px;
-}
 
-.footer-image {
-  height: 150px;
-  z-index: 400;
-  width: 200px;
+  img {
+    height: 150px;
+    z-index: 400;
+    width: 200px;
+  }
 }
 
 .footer-logo-wrapper {
