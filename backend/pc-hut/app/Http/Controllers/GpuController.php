@@ -50,6 +50,7 @@ class GpuController extends Controller
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'pc_id' => 'required|integer',
+            'description' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -64,6 +65,7 @@ class GpuController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'pc_id' => $request->pc_id,
+                'description' => $request->description
             ]);
 
             if ($gpu) {
@@ -89,6 +91,7 @@ class GpuController extends Controller
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'pc_id' => 'required|integer',
+            'description' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -105,6 +108,7 @@ class GpuController extends Controller
                     'price' => $request->price,
                     'manufacturer_id' => $request->manufacturer_id,
                     'pc_id' => $request->pc_id,
+                    'description' => $request->description
                 ]);
                 return response()->json([
                     'status' => 200,

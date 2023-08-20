@@ -11,5 +11,5 @@ class Keyboard extends Model
 
     protected $table = 'keyboard';
 
-    protected $fillable = ['name', 'model', 'rgb', 'manufacturer_id', 'switch_type_id'];
+    protected $fillable = ['name', 'model', 'rgb', 'price', 'manufacturer_id', 'switch_type_id', 'type', 'connector', 'description'];
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cooling_type_controller;
 use App\Http\Controllers\CPUController;
+use App\Http\Controllers\GpuController;
 use App\Http\Controllers\KeyboardController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
