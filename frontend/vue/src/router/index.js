@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
-import Footer from "../components/Footer.vue";
+import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import AuthLayout from "../components/AuthLayout.vue";
 import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 import Searchbar from "../components/Searchbar.vue";
@@ -18,6 +18,20 @@ const routes = [
     //   className: "pc-builder-component-small-card-wrapper",
     // },
     component: PCPartCard,
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: ShoppingCartItem,
+    props: {
+      item: {
+        manufacturer: "Gigabyte",
+        model: "GeForce GTX 1080",
+        memory: "32 GB",
+        price: "1499.99",
+        img: "https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png",
+      },
+    },
   },
   {
     path: "/auth",
