@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('storage_type_id');
             $table->integer("size")->nullable(false);
             $table->string("model", 45)->nullable(false);
+            $table->text("description")->nullable(true);
             $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
             $table->foreign('storage_type_id')->references('id')->on('storage_type');
             $table->timestamps();

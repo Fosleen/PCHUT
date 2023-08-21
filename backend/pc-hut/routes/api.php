@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Cooling_type_controller;
 use App\Http\Controllers\CPUController;
+use App\Http\Controllers\GPUController;
 use App\Http\Controllers\KeyboardController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
@@ -60,8 +61,8 @@ Route::get('motherboards/{id}', [MotherboardController::class, 'getById']);
 Route::put('motherboards/{id}/update', [MotherboardController::class, 'update']);
 Route::delete('motherboards/{id}/delete', [MotherboardController::class, 'delete']);
 //=============================================================//
-Route::get('gpus', [GpuController::class, 'index']);
-Route::get('gpus/{id}', [GpuController::class, 'show']);
-Route::post('gpus', [GpuController::class, 'store']);
-Route::put('gpus/{id}', [GpuController::class, 'update']);
-Route::delete('gpus/{id}', [GpuController::class, 'destroy']);
+Route::get('gpus', [GPUController::class, 'index']);
+Route::get('gpus/{id}', [GPUController::class, 'show']);
+Route::post('gpus', [GPUController::class, 'store']);
+Route::put('gpus/{id}', [GPUController::class, 'update']);
+Route::delete('gpus/{id}', [GPUController::class, 'destroy']);

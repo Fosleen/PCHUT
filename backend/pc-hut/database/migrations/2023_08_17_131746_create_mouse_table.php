@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mouse', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('manufacturer_id'); //first you have to make this column so referential
-
+            $table->text("description")->nullable(true);
             $table->string("model", 45)->nullable(false);
             $table->integer("dpi")->nullable(false);
             $table->tinyInteger("rgb")->nullable(false);

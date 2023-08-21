@@ -47,8 +47,12 @@ class KeyboardController extends Controller
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
             'rgb' => 'required|boolean',
+            'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'switch_type_id' => 'required|integer',
+            'type' => 'required|string',
+            'connector' => 'required|string',
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -60,8 +64,12 @@ class KeyboardController extends Controller
             $keyboard = Keyboard::create([
                 'model' => $request->model,
                 'rgb' => $request->rgb,
+                'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'switch_type_id' => $request->switch_type_id,
+                'type' => $request->type,
+                'connector' => $request->connector,
+                'description' => $request->description
             ]);
 
             if ($keyboard) {
@@ -83,8 +91,12 @@ class KeyboardController extends Controller
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
             'rgb' => 'required|boolean',
+            'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'switch_type_id' => 'required|integer',
+            'type' => 'required|string',
+            'connector' => 'required|string',
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -98,8 +110,12 @@ class KeyboardController extends Controller
                 $keyboard->update([
                     'model' => $request->model,
                     'rgb' => $request->rgb,
+                    'price' => $request->price,
                     'manufacturer_id' => $request->manufacturer_id,
                     'switch_type_id' => $request->switch_type_id,
+                    'type' => $request->type,
+                    'connector' => $request->connector,
+                    'description' => $request->description
                 ]);
                 return response()->json([
                     'status' => 200,

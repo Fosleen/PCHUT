@@ -35,8 +35,7 @@ class MotherboardController extends Controller
             'price' => 'required|integer',
             'manufacturer_id' => 'required|integer',
             'socket_id' => 'required|integer',
-
-
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -50,7 +49,7 @@ class MotherboardController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'socket_id' => $request->socket_id,
-
+                'description' => $request->description
             ]);
 
             if ($motherboard) {
@@ -78,7 +77,7 @@ class MotherboardController extends Controller
             'dpi' => 'sometimes|required|integer',
             'rgb' => 'sometimes|required|boolean',
             'manufacturer_id' => 'sometimes|required|integer',
-
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -96,7 +95,7 @@ class MotherboardController extends Controller
                     'dpi' => $request->dpi,
                     'rgb' => $request->rgb,
                     'manufacturer_id' => $request->manufacturer_id,
-
+                    'description' => $request->description
                 ]);
                 return response()->json(['message' => 'motherboard updated successfully'], 200);
             } else {

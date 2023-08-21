@@ -53,7 +53,7 @@ class MonitorController extends Controller
                 'curved' => $request->curved,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
-
+                'description' => $request->description
             ]);
 
             if ($monitor) {
@@ -81,7 +81,7 @@ class MonitorController extends Controller
             'dpi' => 'sometimes|required|integer',
             'rgb' => 'sometimes|required|boolean',
             'manufacturer_id' => 'sometimes|required|integer',
-
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -101,7 +101,7 @@ class MonitorController extends Controller
                     'curved' => $request->curved,
                     'price' => $request->price,
                     'manufacturer_id' => $request->manufacturer_id,
-
+                    'description' => $request->description
                 ]);
                 return response()->json(['message' => 'monitor updated successfully'], 200);
             } else {
