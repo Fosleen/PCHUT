@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-cart-item-wrapper">
     <div class="shopping-cart-item-icon">
-      <PhTrash :size="32" color="white" />
+      <PhTrash :size="24" />
     </div>
     <div class="shopping-cart-item-image-wrapper">
       <div class="shopping-cart-item-image">
@@ -14,16 +14,18 @@
         {{ props.item.memory }}
       </h4>
       <QuantityCalculator :quantity="quantity" @change-quantity="change" />
-      <h3>{{ props.item.price * quantity }} €</h3>
-      <p>1 kom = {{ props.item.price }} €</p>
+      <div>
+        <h3>{{ props.item.price * quantity }} €</h3>
+        <p>1 kom = {{ props.item.price }} €</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { PhTrash } from "@phosphor-icons/vue";
-import QuantityCalculator from "./QuantityCalculator.vue";
 import { ref } from "vue";
+import QuantityCalculator from "./QuantityCalculator.vue";
 const props = defineProps({
   item: Object,
 });
@@ -32,7 +34,6 @@ let quantity = ref(1);
 
 function change(newQuantity) {
   quantity.value = newQuantity;
-  console.log(quantity.value);
 }
 </script>
 
@@ -44,6 +45,7 @@ function change(newQuantity) {
   background-color: $colorBgPrimary;
   display: flex;
   align-items: center;
+  padding: 4px;
 
   .shopping-cart-item-info {
     flex: 4;
@@ -89,6 +91,76 @@ function change(newQuantity) {
         height: 100%;
         max-height: 130px;
         object-fit: cover;
+      }
+    }
+  }
+}
+
+@media screen and ($tablet) {
+  .shopping-cart-item-wrapper {
+    .shopping-cart-item-icon {
+      display: block;
+      color: $colorBtnPrimary;
+      margin: 8px;
+      align-items: center;
+      display: flex;
+      padding: 12px;
+
+      &:hover {
+        background-color: $colorBtnPrimary;
+        color: $colorTextSecondary;
+        border-radius: 8px;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+    }
+
+    .shopping-cart-item-info {
+      flex: 2;
+      padding: 20px;
+
+      h4 {
+        font-size: 18px;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+
+    .shopping-cart-item-image-wrapper {
+      height: 180px;
+      margin: 12px;
+      width: 180px;
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .shopping-cart-item-wrapper {
+    max-width: 1200px;
+
+    .shopping-cart-item-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h4 {
+        font-size: 20px;
+        max-width: 380px;
+      }
+
+      h3 {
+        font-size: 24px;
+      }
+
+      p {
+        margin-top: 4px;
+        font-size: 16px;
       }
     }
   }
