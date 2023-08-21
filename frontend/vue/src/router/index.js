@@ -25,7 +25,8 @@ const routes = [
     props: {
       item: {
         manufacturer: "Gigabyte",
-        model: "GeForce GTX 1080",
+        model:
+          "GeForce GTX 1080 GeForce GTX 1080 GeForce GTX 1080 GeForce GTX 1080",
         memory: "32 GB",
         price: "1499.99",
         img: "https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png",

@@ -17,8 +17,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 const props = defineProps({
   quantity: Number,
 });
@@ -31,7 +29,6 @@ const props = defineProps({
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: fit-content;
-  font-size: 20px;
   font-weight: 600;
   margin: 12px 0;
 
@@ -46,6 +43,7 @@ const props = defineProps({
 
     &:first-child {
       background-color: $colorTextSecondary;
+      cursor: pointer;
     }
 
     &:nth-child(2) {
@@ -55,6 +53,23 @@ const props = defineProps({
     &:last-child {
       background-color: $colorSecondary;
       color: $colorTextSecondary;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .quantity-calc-grid {
+    font-size: 32px;
+    
+    .quantity-calc-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      width: 60px;
+      font-family: $fontTertirary;
+      font-size: 20px;
     }
   }
 }
