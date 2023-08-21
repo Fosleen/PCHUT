@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
-import Footer from "../components/Footer.vue";
+import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import AuthLayout from "../components/AuthLayout.vue";
 import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 
@@ -14,6 +14,20 @@ const routes = [
       Image:
         "https://www.trustedreviews.com/wp-content/uploads/sites/54/2021/03/Intel-Rocker-Lake-2-e1615908186584.jpg",
       className: "pc-builder-component-small-card-wrapper",
+    },
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: ShoppingCartItem,
+    props: {
+      item: {
+        manufacturer: "Gigabyte",
+        model: "GeForce GTX 1080",
+        memory: "32 GB",
+        price: "1499.99",
+        img: "https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png",
+      },
     },
   },
   {
