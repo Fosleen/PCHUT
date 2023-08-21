@@ -20,7 +20,7 @@
       </div>
 
       <div class="pc-part-card-button-wrapper">
-        <button class="odd-shape">Dodaj u košaricu</button>
+        <Button shape="trapezoid" text="Dodaj u košaricu" />
       </div>
     </div>
   </div>
@@ -72,13 +72,5 @@ import PCPartCardList from "./PCPartCardList.vue";
   display: flex;
   justify-content: center;
   padding-bottom: 16px;
-}
-
-.odd-shape {
-  //add this to button
-  background-color: #d9d9d9;
-  clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
-  color: #282828;
-  font-weight: 700;
 }
 </style>

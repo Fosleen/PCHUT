@@ -1,7 +1,12 @@
 <template>
-  <div class="trapezoid">
-    <button :form="form" :type="props.type">{{ props.text }}</button>
-  </div>
+  <button
+    :form="form"
+    :type="props.type"
+    :shape="props.shape"
+    :class="[props.shape === 'trapezoid' ? 'trapezoid' : 'odd-shape']"
+  >
+    {{ props.text }}
+  </button>
 </template>
 
 <script setup>
@@ -9,6 +14,7 @@ const props = defineProps({
   text: String,
   type: String,
   form: String || null,
+  shape: String,
 });
 </script>
 
@@ -33,5 +39,12 @@ button {
 .trapezoid {
   width: 220px;
   clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%);
+}
+
+.odd-shape {
+  background-color: #d9d9d9;
+  clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
+  color: #282828;
+  font-weight: 700;
 }
 </style>
