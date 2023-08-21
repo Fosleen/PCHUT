@@ -1,5 +1,6 @@
 <template>
   <div style="height: 600px; width: 400px">
+    <!--remove this div-->
     <div :class="wrapperClasses">
       <div class="pc-builder-component-image-and-text-card-wrapper">
         <div class="pc-builder-component-card-image-wrapper">
