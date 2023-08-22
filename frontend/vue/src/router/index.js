@@ -7,6 +7,9 @@ import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 import Dashboard from "../views/Dashboard.vue";
 import BuildPCButton from "../components/BuildPCButton.vue";
 import Homepage from "../views/Homepage.vue";
+import Contact from "../views/Contact.vue";
+import AllProducts from "../views/AllProducts.vue";
+import PCBuilder from "../views/PCBuilder.vue";
 
 const routes = [
   {
@@ -19,6 +22,24 @@ const routes = [
     //   className: "pc-builder-component-small-card-wrapper",
     // },
     component: Homepage,
+  },
+
+  {
+    path: "/kontakt",
+    name: "ContactPage",
+    component: Contact,
+  },
+
+  {
+    path: "/proizvodi",
+    name: "ProductsPage",
+    component: AllProducts,
+  },
+
+  {
+    path: "/pc-builder",
+    name: "PCBuilderPage",
+    component: PCBuilder,
   },
   {
     path: "/cart",
