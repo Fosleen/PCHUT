@@ -1,7 +1,9 @@
 <template>
-  <router-view> </router-view>
+  <MainLayout />
 </template>
 
-<script setup></script>
+<script setup>
+import MainLayout from "./components/MainLayout.vue";
+</script>
 
 <style lang="scss" scoped></style>
