@@ -72,17 +72,15 @@ export default {
 <style lang="scss">
 .footer-parent-wrapper {
   background-image: url("../assets/footer_img.jpg");
-  //height: 480px;
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 40px;
-  padding-bottom: 30px;
-
+  padding-bottom: 20px;
   position: relative;
   width: 100%;
-  /* bottom: 0; */
-
   background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .footer-text-groups-wrapper {
@@ -99,13 +97,13 @@ export default {
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 150px;
+  height: 200px;
   gap: 20px;
   padding-top: 12px;
   padding-bottom: 12px;
 
   img {
-    height: 150px;
+    height: 200px;
     z-index: 400;
     width: 200px;
   }
