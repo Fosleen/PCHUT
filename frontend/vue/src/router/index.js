@@ -4,8 +4,8 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import AuthLayout from "../components/AuthLayout.vue";
 import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
-import Searchbar from "../components/Searchbar.vue";
-import PCPartCard from "../components/PCPartCard.vue";
+import Dashboard from "../views/Dashboard.vue";
+import BuildPCButton from "../components/BuildPCButton.vue";
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
     //     "https://www.trustedreviews.com/wp-content/uploads/sites/54/2021/03/Intel-Rocker-Lake-2-e1615908186584.jpg",
     //   className: "pc-builder-component-small-card-wrapper",
     // },
-    component: PCPartCard,
+    component: BuildPCButton,
   },
   {
     path: "/cart",
@@ -44,6 +44,11 @@ const routes = [
       { path: "/login", name: "LoginPage", component: LoginPage },
       { path: "/register", name: "RegisterPage", component: RegisterPage },
     ],
+  },
+  {
+    path: "/build-pc",
+    name: "BuildPcPage",
+    component: Dashboard,
   },
 ];
 
