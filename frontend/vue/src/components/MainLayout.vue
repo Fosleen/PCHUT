@@ -4,7 +4,7 @@
 
     <div class="main-section">
       <div class="content-wrapper">
-        <router-view class="content-wrapper"></router-view>
+        <router-view></router-view>
       </div>
       <Footer />
     </div>
