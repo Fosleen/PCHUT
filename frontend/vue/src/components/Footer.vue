@@ -76,9 +76,9 @@ export default {
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 40px;
-  position: fixed;
+  position: relative;
   width: 100%;
-  bottom: 0;
+  /* bottom: 0; */
 
   background-position: center center;
 }
