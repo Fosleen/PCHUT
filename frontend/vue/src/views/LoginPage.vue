@@ -15,7 +15,12 @@
         />
       </form>
     </div>
-    <Button type="submit" text="Prijavi se" form="login"></Button>
+    <Button
+      type="submit"
+      text="Prijavi se"
+      form="login"
+      shape="trapezoid"
+    ></Button>
   </div>
 </template>
 
