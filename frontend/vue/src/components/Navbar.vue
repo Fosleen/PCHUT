@@ -4,10 +4,10 @@
 
     <div class="navbar-items-wrapper">
       <ul>
-        <li>Proizvodi</li>
-        <li>Akcija</li>
-        <li>Kontakt</li>
-        <li>Sastavi PC</li>
+        <li><router-link to="/">Početna</router-link></li>
+        <li><router-link to="/proizvodi">Svi proizvodi</router-link></li>
+        <li><router-link to="/pc-builder">PC Builder</router-link></li>
+        <li><router-link to="/kontakt">Kontakt</router-link></li>
       </ul>
     </div>
     <div class="navbar-icons-wrapper">
@@ -32,7 +32,7 @@ const toggleTheme = () => {
   isDarkTheme.value = !isDarkTheme.value;
   document.querySelector("body").style.backgroundColor = isDarkTheme.value
     ? "#000000"
-    : "#ffffff";
+    : "#f5f5f5";
 };
 </script>
 
@@ -72,8 +72,10 @@ const toggleTheme = () => {
     gap: 32px;
     justify-content: center;
     align-items: center;
+    letter-spacing: 1px;
 
-    li {
+    a {
+      text-decoration: none;
       color: white;
       text-transform: uppercase;
       font-size: 28px;
