@@ -6,6 +6,7 @@ import AuthLayout from "../components/AuthLayout.vue";
 import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 import Dashboard from "../views/Dashboard.vue";
 import BuildPCButton from "../components/BuildPCButton.vue";
+import Homepage from "../views/Homepage.vue";
 
 const routes = [
   {
@@ -17,7 +18,7 @@ const routes = [
     //     "https://www.trustedreviews.com/wp-content/uploads/sites/54/2021/03/Intel-Rocker-Lake-2-e1615908186584.jpg",
     //   className: "pc-builder-component-small-card-wrapper",
     // },
-    component: BuildPCButton,
+    component: Homepage,
   },
   {
     path: "/cart",
