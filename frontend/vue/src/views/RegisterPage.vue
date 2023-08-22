@@ -30,7 +30,12 @@
         />
       </form>
     </div>
-    <Button type="submit" text="Registriraj se" form="register"></Button>
+    <Button
+      type="submit"
+      text="Registriraj se"
+      form="register"
+      shape="trapezoid"
+    ></Button>
   </div>
 </template>
 
