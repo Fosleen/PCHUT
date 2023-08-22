@@ -72,13 +72,15 @@ export default {
 <style lang="scss">
 .footer-parent-wrapper {
   background-image: url("../assets/footer_img.jpg");
-  height: 480px;
+  //height: 480px;
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 40px;
-  position: fixed;
+  padding-bottom: 30px;
+
+  position: relative;
   width: 100%;
-  bottom: 0;
+  /* bottom: 0; */
 
   background-position: center center;
 }
