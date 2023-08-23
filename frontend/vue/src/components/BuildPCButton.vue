@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/build-pc">
+  <router-link to="/pc-builder">
     <div class="build-pc-button-wrapper">
       <div class="build-pc-button-border">
         <div class="build-pc-button-content">
