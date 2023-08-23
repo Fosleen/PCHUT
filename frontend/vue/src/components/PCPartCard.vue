@@ -1,22 +1,20 @@
 <template>
-  <div style="height: 600px; width: 400px">
-    <div class="pc-part-card-wrapper">
-      <div class="pc-part-card-image-wrapper">
-        <img :src="Image" alt="" />
-      </div>
-      <div class="pc-part-card-text-wrapper">
-        <PCPartCardList
-          :text-group-name="gpu.model"
-          :text-group-items="[`${gpu.memory} GB memorije`]"
-        />
+  <div class="pc-part-card-wrapper">
+    <div class="pc-part-card-image-wrapper">
+      <img :src="Image" alt="" />
+    </div>
+    <div class="pc-part-card-text-wrapper">
+      <PCPartCardList
+        :text-group-name="gpu.model"
+        :text-group-items="[`${gpu.memory} GB memorije`]"
+      />
 
-        <h3>Dostupno</h3>
-        <h2>{{ `${gpu.price} E` }}</h2>
-      </div>
+      <h3>Dostupno</h3>
+      <h2 class="pc-part-card-price-wrapper">{{ `${gpu.price} E` }}</h2>
+    </div>
 
-      <div class="pc-part-card-button-wrapper">
-        <Button shape="trapezoid" text="Dodaj u košaricu" />
-      </div>
+    <div class="pc-part-card-button-wrapper">
+      <Button shape="odd-shape" text="Dodaj u košaricu" />
     </div>
   </div>
 </template>
@@ -36,18 +34,20 @@ console.log("GPU PROP PROSLJEDNEI JE", gpu);
 /* @import url("../utils/theme.scss"); //iz nekog razloga ovo ne radi u ovom fileu... */
 .pc-part-card-wrapper {
   background-color: #eaeaea;
-  width: 100%;
+  //width: 300px;
   padding-top: 12px;
   box-shadow: 0 0 20px #be166e;
   outline: 3px solid transparent;
   outline-offset: -3px;
   padding-left: 16px;
   padding-right: 16px;
+  //max-width: 400px;
 }
 
 .pc-part-card-image-wrapper {
   background-color: white;
   height: 240px;
+  width: 350px;
   margin-bottom: 16px;
   img {
     object-fit: contain;

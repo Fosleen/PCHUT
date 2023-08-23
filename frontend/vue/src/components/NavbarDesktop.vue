@@ -29,10 +29,26 @@ const isDarkTheme = ref(true);
 
 const toggleTheme = () => {
   //here we will make dark mode
-  isDarkTheme.value = !isDarkTheme.value;
   document.querySelector("body").style.backgroundColor = isDarkTheme.value
-    ? "#000000"
+    ? "#282828"
     : "#f5f5f5";
+
+  document.querySelector(".pc-part-card-wrapper").style.backgroundColor =
+    isDarkTheme.value ? "#282828" : "#f5f5f5";
+
+  document.querySelector(".pc-part-card-wrapper").style.boxShadow =
+    isDarkTheme.value ? "0 0 20px 0 #68E199" : "0 0 20px 0 #be166e";
+
+  document.querySelector(".pc-part-card-text-group-name").style.color =
+    isDarkTheme.value ? "#D9D9D9" : "#282828";
+
+  document.querySelector(".pc-part-card-list-item").style.color =
+    isDarkTheme.value ? "#D9D9D9" : "#282828";
+
+  document.querySelector(".pc-part-card-price-wrapper").style.color =
+    isDarkTheme.value ? "#D9D9D9" : "#282828";
+
+  isDarkTheme.value = !isDarkTheme.value;
 };
 </script>
 
