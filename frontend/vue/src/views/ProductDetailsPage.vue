@@ -49,11 +49,46 @@
         </div>
       </div>
     </div>
+    <div class="product-details-detailed-container">
+      <h2>DETALJAN OPIS</h2>
+      <div class="product-details-detailed-info">
+        <p>{{ product.description }}</p>
+        <div class="product-details-detailed-data-container">
+          <div class="product-details-data-row">
+            <PhShieldCheck :size="24" color="#5a01cc" />
+            <p>Jamstvo:</p>
+            <p>24 mjeseca</p>
+          </div>
+          <div class="product-details-data-row">
+            <PhTruck :size="24" color="#5a01cc" />
+            <p>Dostava:</p>
+            <p>besplatna</p>
+          </div>
+          <div class="product-details-data-row">
+            <PhPackage :size="24" color="#5a01cc" />
+            <p>Isporuka:</p>
+            <p>2-5 radnih dana</p>
+          </div>
+          <div class="product-details-data-row">
+            <PhArrowUDownLeft :size="24" color="#5a01cc" />
+            <p>Pravo povrata:</p>
+            <p>14 dana</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import Button from "../components/Button.vue";
+import {
+  PhShieldCheck,
+  PhTruck,
+  PhPackage,
+  PhArrowUDownLeft,
+} from "@phosphor-icons/vue";
+
 const product = {
   id: 1,
   model: "Deatheater Elite 3XD",
@@ -73,8 +108,9 @@ const product = {
     text-transform: uppercase;
     font-size: 28px;
     text-align: center;
-    margin: 20px auto;
+    padding: 20px;
   }
+
   .product-details-container {
     display: flex;
     flex-direction: column;
@@ -117,36 +153,66 @@ const product = {
         border: 2px solid $colorTextSecondary;
         border-radius: 4px;
         padding: 16px;
-
-        .product-details-data-row {
-          display: flex;
-          padding-bottom: 12px;
-          margin-bottom: 12px;
-          border-bottom: 1px solid $colorTextSecondary;
-
-          p {
-            flex: 1;
-            font-size: 20px;
-
-            &:first-child {
-              color: $colorTextPrimary;
-            }
-          }
-
-          &:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
-            padding-bottom: 0;
-          }
-        }
       }
 
       .product-details-btn-wrapper {
         width: 100%;
         display: flex;
-        justify-content: end;
-        padding-right: 8px;
+        justify-content: center;
       }
+    }
+  }
+
+  .product-details-detailed-container {
+    background-color: $white-dark;
+    padding: 16px;
+
+    h2 {
+      font-size: 28px;
+      color: $grey-dark;
+    }
+
+    .product-details-detailed-info {
+      background-color: $white-dark;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      p {
+        text-align: justify;
+        font-size: 16px;
+        color: $grey-dark;
+      }
+
+      .product-details-detailed-data-container {
+        border: 2px solid $colorTextSecondary;
+        border-radius: 4px;
+        padding: 16px;
+      }
+    }
+  }
+
+  .product-details-data-row {
+    display: flex;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid $colorTextSecondary;
+    align-items: center;
+    gap: 16px;
+
+    p {
+      flex: 1;
+      font-size: 20px;
+
+      &:first-child {
+        color: $colorTextPrimary;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
     }
   }
 }
