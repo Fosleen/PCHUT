@@ -22,7 +22,9 @@ const props = defineProps({
 });
 </script>
 
-<style>
+<style lang="scss">
+@import "../utils/theme.scss";
+
 .footer-ul {
   list-style: none;
   padding: 0;
@@ -30,9 +32,13 @@ const props = defineProps({
 
 .footer-text-group-name {
   text-transform: uppercase;
-  margin-bottom: 10px;
   font-weight: 700;
   font-size: 20px;
+  margin-bottom: 15px;
+
+  @media screen and ($tabletLarge) {
+    margin-bottom: 10px;
+  }
 }
 
 .footer-list-item {

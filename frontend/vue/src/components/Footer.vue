@@ -70,6 +70,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../utils/theme.scss";
 .footer-parent-wrapper {
   background-image: url("../assets/footer_img.jpg");
   padding-left: 60px;
@@ -78,34 +79,53 @@ export default {
   padding-bottom: 20px;
   position: relative;
   width: 100%;
-  background-position: center center;
+  background-position: inherit;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .footer-text-groups-wrapper {
   display: flex;
-  width: 100%;
+  flex-direction: column;
   color: white;
-  justify-content: space-evenly;
+  width: 100%;
   text-align: left;
   margin-bottom: 50px;
+  text-align: center;
+
+  @media screen and ($tabletLarge) {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  /* display: flex;
+  justify-content: space-evenly; */
 }
 
 .footer-badges-wrapper {
+  height: 90px;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 200px;
   gap: 20px;
   padding-top: 12px;
   padding-bottom: 12px;
+  margin-bottom: 48px;
+
+  @media screen and ($tabletLarge) {
+    height: 200px;
+  }
 
   img {
-    height: 200px;
+    height: 90px;
     z-index: 400;
-    width: 200px;
+    width: 90px;
+
+    @media screen and ($tabletLarge) {
+      height: 200px;
+      width: 200px;
+    }
   }
 }
 
