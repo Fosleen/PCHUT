@@ -21,7 +21,6 @@ import Footer from "./Footer.vue";
   flex-grow: 1;
   width: 100%;
   position: relative;
-  //background-color: red;
 }
 
 .dashboard-layout-wrapper {
@@ -29,13 +28,7 @@ import Footer from "./Footer.vue";
   height: 100vh;
   max-width: 100vw;
   max-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
   overflow-x: hidden;
-
-  /* @media screen and (min-width: 1440px) {
-    grid-template-columns: auto 1fr;
-  } */
 }
 
 .main-section {

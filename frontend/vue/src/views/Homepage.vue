@@ -1,40 +1,12 @@
 <template>
   <div>
+    <Hero />
     <PCPartCard />
-    <!-- <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1>
-    <h1>Početna stranica</h1> -->
   </div>
 </template>
 
 <script setup>
-// import Hero from "../components/Hero.vue";
-import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
+import Hero from "../components/Hero.vue";
 import PCPartCard from "../components/PCPartCard.vue";
 </script>
 
