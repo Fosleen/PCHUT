@@ -2,7 +2,7 @@
   <div class="dashboard-layout-wrapper">
     <div class="main-section">
       <div class="content-wrapper">
-        <Navbar />
+        <Header />
 
         <router-view></router-view>
         <Footer />
@@ -12,8 +12,9 @@
 </template>
 
 <script setup>
-import Navbar from "./Navbar.vue";
+import Navbar from "./NavbarDesktop.vue";
 import Footer from "./Footer.vue";
+import Header from "./Header.vue";
 </script>
 
 <style lang="scss" scoped>
