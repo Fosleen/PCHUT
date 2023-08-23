@@ -21,9 +21,11 @@ import "swiper/css";
 const photos = ["hero.jpg", "hero.jpg", "hero.jpg", "hero.jpg", "hero.jpg"];
 </script>
 
-<style>
+<style lang="scss">
+@import "../utils/theme.scss";
+
 .swiper {
-  height: 800px;
+  height: 400px;
   width: 100%;
 }
 
@@ -31,5 +33,22 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media screen and ($tablet) {
+  .swiper {
+    /* height: 500px; */
+  }
+}
+@media screen and ($desktop) {
+  .swiper {
+    height: 600px;
+    height: calc(100vh - 92px);
+  }
+}
+@media screen and ($desktopLarge) {
+  .swiper {
+    /* height: calc(100vh - 92px); */
+  }
 }
 </style>
