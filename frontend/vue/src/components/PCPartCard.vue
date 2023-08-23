@@ -1,22 +1,17 @@
 <template>
   <div style="height: 600px; width: 400px">
-    <!--remove this div, add props to this component-->
     <div class="pc-part-card-wrapper">
       <div class="pc-part-card-image-wrapper">
-        <img src="../assets/best_buy_2_logo.png" alt="" />
+        <img :src="Image" alt="" />
       </div>
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
-          text-group-name="Najjača grafička kartica e"
-          :text-group-items="[
-            '6GB memorije',
-            'Nvidia CUDA tehnologija',
-            'Super za gaming',
-          ]"
+          :text-group-name="gpu.model"
+          :text-group-items="[`${gpu.memory} GB memorije`]"
         />
 
         <h3>Dostupno</h3>
-        <h2>2500E</h2>
+        <h2>{{ `${gpu.price} E` }}</h2>
       </div>
 
       <div class="pc-part-card-button-wrapper">
@@ -29,6 +24,12 @@
 <script setup>
 import Button from "./Button.vue";
 import PCPartCardList from "./PCPartCardList.vue";
+
+const { gpu } = defineProps({
+  gpu: Object,
+});
+
+console.log("GPU PROP PROSLJEDNEI JE", gpu);
 </script>
 
 <style lang="scss" scoped>
