@@ -2,9 +2,8 @@
   <div class="product-details-wrapper">
     <h2>{{ product.model }}</h2>
     <div class="product-details-container">
-      <div class="product-details-product-image">
-        <img src="../assets/keyboard.png" :alt="`${product.model} image`" />
-      </div>
+      <ProductImagesCarousel />
+
       <div class="product-details-info">
         <h5>Dostupno</h5>
         <h3>2.700,56 €</h3>
@@ -82,6 +81,7 @@
 
 <script setup>
 import Button from "../components/Button.vue";
+import ProductImagesCarousel from "../components/ProductImagesCarousel.vue";
 import {
   PhShieldCheck,
   PhTruck,
@@ -114,18 +114,6 @@ const product = {
   .product-details-container {
     display: flex;
     flex-direction: column;
-
-    .product-details-product-image {
-      width: 250px;
-      height: 250px;
-      margin: 0 auto;
-
-      & img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
 
     .product-details-info {
       padding: 16px;

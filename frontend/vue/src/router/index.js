@@ -9,6 +9,7 @@ import BuildPCButton from "../components/BuildPCButton.vue";
 import Homepage from "../views/Homepage.vue";
 import Contact from "../views/Contact.vue";
 import AllProducts from "../views/AllProducts.vue";
+import ProductImagesComponent from "../components/ProductImagesCarousel.vue";
 import PCBuilder from "../views/PCBuilder.vue";
 
 const routes = [
@@ -34,6 +35,11 @@ const routes = [
     path: "/proizvodi",
     name: "ProductsPage",
     component: AllProducts,
+  },
+  {
+    path: "/test",
+    name: "Test",
+    component: ProductImagesComponent,
   },
   {
     path: "/product/:id",

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@phosphor-icons/vue": "^2.1.6",
+    "@splidejs/vue-splide": "^0.6.12",
     "axios": "^1.4.0",
     "phosphor-icons": "^1.4.2",
     "swiper": "^10.2.0",
