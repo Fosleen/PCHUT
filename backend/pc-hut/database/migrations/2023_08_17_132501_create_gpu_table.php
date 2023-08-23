@@ -17,10 +17,8 @@ return new class extends Migration
             $table->tinyInteger("memory")->nullable(false);
             $table->float("price")->nullable(false);
             $table->unsignedBigInteger('manufacturer_id');
-            $table->unsignedBigInteger('pc_id');
             $table->text("description")->nullable(true);
             $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
-            $table->foreign('pc_id')->references('id')->on('pc');
             $table->timestamps();
         });
     }

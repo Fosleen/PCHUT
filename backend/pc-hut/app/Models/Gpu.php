@@ -11,5 +11,5 @@ class GPU extends Model
 
     protected $table = 'gpu';
 
-    protected $fillable = ['model', 'memory', 'price', 'description', 'manufacturer_id', 'pc_id'];
+    protected $fillable = ['model', 'memory', 'price', 'description', 'manufacturer_id',];
 }
