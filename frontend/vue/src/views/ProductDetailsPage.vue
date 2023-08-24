@@ -2,48 +2,49 @@
   <div class="product-details-wrapper">
     <h2>{{ product.model }}</h2>
     <div class="product-details-container">
-      <ProductImagesCarousel />
+      <ProductImagesCarousel :images="product.images" />
 
       <div class="product-details-info">
         <h5>Dostupno</h5>
-        <h3>2.700,56 €</h3>
+        <h3>{{ product.price }} €</h3>
         <div class="product-details-logo-image">
           <img
-            src="../assets/fosleen-logo.png"
-            :alt="`${product.model} image`"
+            :src="`${product.manufacturer_img}`"
+            :alt="`${product.manufacturer} logo`"
           />
         </div>
 
         <div class="product-details-data-container">
           <div class="product-details-data-row">
             <p>Brand:</p>
-            <p>Razer</p>
+            <p>{{ product.manufacturer }}</p>
           </div>
           <div class="product-details-data-row">
             <p>Vrsta priključka:</p>
-            <p>USB</p>
+            <p>{{ product.connector }}</p>
           </div>
           <div class="product-details-data-row">
             <p>Tip:</p>
-            <p>mehanička</p>
+            <p>{{ product.type }}</p>
           </div>
           <div class="product-details-data-row">
             <p>Switchevi:</p>
-            <p>žuti</p>
+            <p>{{ product.switch_type }}</p>
           </div>
           <div class="product-details-data-row">
             <p>RGB:</p>
-            <p>da</p>
+            <p>{{ product.rgb ? "da" : "ne" }}</p>
           </div>
         </div>
         <div class="product-details-btn-wrapper">
           <Button
             shape="trapezoid"
-            text="Dodaj u košaricu"
+            text="Dodaj u"
             :style="{
               'background-color': '#D9D9D9',
               color: '#282828',
             }"
+            :icon="true"
           />
         </div>
       </div>
@@ -90,12 +91,26 @@ import {
 } from "@phosphor-icons/vue";
 
 const product = {
-  // TODO
   id: 1,
   model: "Deatheater Elite 3XD",
-  manufacturer_id: 1,
+  manufacturer: "Razer",
+  manufacturer_img:
+    "https://www.laser-flash.com/wp-content/uploads/2020/10/Razer-logo-1.png",
   description:
     "RAZER BlackWidow V3 Tenkeyless je kompaktna mehanička tipkovnica koja pruža vrhunsku igračku izvedbu. Sa skraćenim dizajnom bez numeričke tipke, pruža više prostora na radnoj površini i olakšava prijenos. Tipkovnica je opremljena s Razer Yellow mehaničkim switchevima koji pružaju taktilni i klikajući osjećaj pri svakom pritisku tipke. Ovi switchevi su dizajnirani za brze reakcije i pružaju izvanrednu trajnost od 80 milijuna pritisaka. BlackWidow V3 Tenkeyless također dolazi s individualno osvijetljenim Razer Chroma RGB tipkama koje pružaju beskrajne mogućnosti prilagodbe boja i efekata svjetlosti. Pomoću Razer Synapse softvera možete prilagoditi osvjetljenje, dodijeliti makro tipke i prilagoditi postavke tipkovnice prema svojim željama. Uz dodatne značajke poput N-Key Rollover i Anti-Ghosting tehnologija, ova tipkovnica omogućuje brzo i precizno tipkanje bez ikakvih problema. Svojim izdržljivim aluminijskim okvirom i odvojivim USB-C kabelom, RAZER BlackWidow V3 Tenkeyless je izdržljiva i praktična tipkovnica koja će vam pružiti izvrsno iskustvo igranja i produktivnosti.",
+  switch_type: "zeleni",
+  price: "139,99",
+  rgb: true,
+  connector: "USB",
+  type: "mehanička",
+  images: [
+    "https://www.gigahertz.com.ph/cdn/shop/products/razer_blackwidow_v4_pro_mechanical_gaming_keyboard_green_switches_ac60741_26662_1024x.jpg?v=1679294271",
+    "https://assets2.razerzone.com/images/pnx.assets/9a4267d1a3614ac6bbc05bf89e706b3b/razer-blackwidow-v3-pro-usp01-mobile.jpg",
+    "https://cdn11.bigcommerce.com/s-042b2/images/stencil/1280x1280/products/953538/670796/rz03-03531700-1__18453.1624295433.jpg?c=2",
+    "https://aresstores.com/wp-content/uploads/2023/04/https-__hybrismediaprod.blob_.core_.windows.net_sys-master-phoenix-images-container_h74_h37_9477488148510_230216-bw-v4-pro-1500x1000-1.jpg",
+    "https://images.unsplash.com/photo-1636487658620-e1049fa06242?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
+    "https://images.unsplash.com/photo-1655838770846-ca6c505a2e7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+  ],
 };
 </script>
 
@@ -263,6 +278,10 @@ const product = {
       .product-details-info {
         flex: 1;
         margin-right: 6px;
+
+        .product-details-btn-wrapper {
+          padding-right: 32px;
+        }
       }
     }
 

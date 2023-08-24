@@ -5,8 +5,8 @@
       :options="mainOptions"
       ref="main"
     >
-      <SplideSlide v-for="slide in slides" :key="slide.alt">
-        <img :src="slide.src" :alt="slide.alt" />
+      <SplideSlide v-for="(slide, index) in slides" :key="slide">
+        <img :src="slide" :alt="`img ${index + 1}`" />
       </SplideSlide>
     </Splide>
 
@@ -15,85 +15,57 @@
       :options="thumbsOptions"
       ref="thumbs"
     >
-      <SplideSlide v-for="slide in slides" :key="slide.alt">
-        <img :src="slide.src" :alt="slide.alt" />
+      <SplideSlide v-for="(slide, index) in slides" :key="slide">
+        <img :src="slide" :alt="`img ${index + 1}`" />
       </SplideSlide>
     </Splide>
   </div>
 </template>
 
-<script>
+<script setup>
+import { defineProps, onMounted, ref } from "vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import { defineComponent, onMounted, ref } from "vue";
 import "@splidejs/vue-splide/css";
-
 import "@splidejs/vue-splide/css/sea-green";
 
-// import "@splidejs/vue-splide/css/core";
+const props = defineProps({
+  images: Array,
+});
 
-export default defineComponent({
-  name: "ThumbanailCarousel",
+const main = ref();
+const thumbs = ref();
+const slides = props.images;
 
-  components: {
-    Splide,
-    SplideSlide,
-  },
+const mainOptions = {
+  type: "loop",
+  perPage: 1,
+  perMove: 1,
+  gap: "1rem",
+  pagination: true,
+  autoWidth: true,
+  arrows: false,
+};
 
-  setup() {
-    const main = ref();
-    const thumbs = ref();
-    const slides = generateSlides();
+const thumbsOptions = {
+  type: "slide",
+  rewind: true,
+  gap: "4px",
+  pagination: false,
+  fixedWidth: 90,
+  fixedHeight: 70,
+  cover: true,
+  focus: "center",
+  isNavigation: true,
+  updateOnMove: true,
+  arrows: false,
+};
 
-    function generateSlides(length = 10, sig = 0) {
-      return Array.from({ length }).map((value, index) => {
-        index = sig || index;
+onMounted(() => {
+  const thumbsSplide = thumbs.value?.splide;
 
-        return {
-          src: `https://source.unsplash.com/random/800x650?sig=${index}`,
-          alt: `Image ${index}`,
-        };
-      });
-    }
-    const mainOptions = {
-      type: "loop",
-      perPage: 1,
-      perMove: 1,
-      gap: "1rem",
-      pagination: true,
-      autoWidth: true,
-      arrows: false,
-    };
-
-    const thumbsOptions = {
-      type: "slide",
-      rewind: true,
-      gap: "4px",
-      pagination: false,
-      fixedWidth: 90,
-      fixedHeight: 70,
-      cover: true,
-      focus: "center",
-      isNavigation: true,
-      updateOnMove: true,
-      arrows: false,
-    };
-
-    onMounted(() => {
-      const thumbsSplide = thumbs.value?.splide;
-
-      if (thumbsSplide) {
-        main.value?.sync(thumbsSplide);
-      }
-    });
-
-    return {
-      slides,
-      main,
-      thumbs,
-      mainOptions,
-      thumbsOptions,
-    };
-  },
+  if (thumbsSplide) {
+    main.value?.sync(thumbsSplide);
+  }
 });
 </script>
 
