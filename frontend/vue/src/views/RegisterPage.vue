@@ -32,7 +32,7 @@
     </div>
     <Button
       type="submit"
-      text="Registriraj se"
+      text="REGISTRIRAJ SE"
       form="register"
       shape="trapezoid"
     ></Button>

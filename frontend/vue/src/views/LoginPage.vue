@@ -17,7 +17,7 @@
     </div>
     <Button
       type="submit"
-      text="Prijavi se"
+      text="PRIJAVI SE"
       form="login"
       shape="trapezoid"
     ></Button>
