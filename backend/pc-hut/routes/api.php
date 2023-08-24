@@ -5,6 +5,7 @@ use App\Http\Controllers\Cooling_type_controller;
 use App\Http\Controllers\CPUController;
 use App\Http\Controllers\GPUController;
 use App\Http\Controllers\KeyboardController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
 use App\Http\Controllers\Mouse_controller;
@@ -66,3 +67,8 @@ Route::get('gpus/{id}', [GPUController::class, 'show']);
 Route::post('gpus', [GPUController::class, 'store']);
 Route::put('gpus/{id}', [GPUController::class, 'update']);
 Route::delete('gpus/{id}', [GPUController::class, 'destroy']);
+
+Route::get('manufacturers', [ManufacturerController::class, 'index']);
+Route::get('manufacturers/{id}', [ManufacturerController::class, 'show']);
+Route::post('manufacturers', [ManufacturerController::class, 'store']);
+Route::delete('manufacturers/{id}', [ManufacturerController::class, 'destroy']);

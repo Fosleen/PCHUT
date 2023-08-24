@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('manufacturer', function (Blueprint $table) {
             $table->id();
             $table->string("name", 45)->nullable(false);
+            $table->string("logo_url")->nullable(false);
+
+            $table->timestamps();
         });
     }
 
