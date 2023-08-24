@@ -4,11 +4,12 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import AuthLayout from "../components/AuthLayout.vue";
 import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
-import Dashboard from "../views/Dashboard.vue";
+import ProductDetailsPage from "../views/ProductDetailsPage.vue";
 import BuildPCButton from "../components/BuildPCButton.vue";
 import Homepage from "../views/Homepage.vue";
 import Contact from "../views/Contact.vue";
 import AllProducts from "../views/AllProducts.vue";
+import ProductImagesComponent from "../components/ProductImagesCarousel.vue";
 import PCBuilder from "../views/PCBuilder.vue";
 
 const routes = [
@@ -35,7 +36,16 @@ const routes = [
     name: "ProductsPage",
     component: AllProducts,
   },
-
+  {
+    path: "/test",
+    name: "Test",
+    component: ProductImagesComponent,
+  },
+  {
+    path: "/product/:id",
+    name: "ProductDetails",
+    component: ProductDetailsPage,
+  },
   {
     path: "/pc-builder",
     name: "PCBuilderPage",
@@ -66,11 +76,6 @@ const routes = [
       { path: "/login", name: "LoginPage", component: LoginPage },
       { path: "/register", name: "RegisterPage", component: RegisterPage },
     ],
-  },
-  {
-    path: "/build-pc",
-    name: "BuildPcPage",
-    component: Dashboard,
   },
 ];
 

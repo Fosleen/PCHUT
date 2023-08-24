@@ -5,16 +5,24 @@
     :shape="props.shape"
     :class="[props.shape === 'trapezoid' ? 'trapezoid' : 'odd-shape']"
   >
-    {{ props.text }}
+    <div class="button-content">
+      <div class="text">{{ props.text }}</div>
+      <div class="icon-wrapper" v-if="props.icon">
+        <PhShoppingCart :size="28" color="#282828" weight="fill" />
+      </div>
+    </div>
   </button>
 </template>
 
 <script setup>
+import { PhShoppingCart } from "@phosphor-icons/vue";
+
 const props = defineProps({
   text: String,
   type: String,
   form: String || null,
   shape: String,
+  icon: Boolean || false,
 });
 </script>
 
@@ -25,11 +33,21 @@ button {
   height: 50px;
   font-size: 20px;
   background-color: $colorPrimary;
-  text-transform: uppercase;
   color: $colorTextSecondary;
   font-weight: 500;
   transition: 0.2s;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+
+  .button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    word-spacing: 4px;
+  }
 
   &:hover {
     background-color: $colorSecondary;
