@@ -90,6 +90,7 @@ import {
 } from "@phosphor-icons/vue";
 
 const product = {
+  // TODO
   id: 1,
   model: "Deatheater Elite 3XD",
   manufacturer_id: 1,
@@ -100,6 +101,7 @@ const product = {
 
 <style lang="scss">
 @import "../utils/theme.scss";
+
 .product-details-wrapper {
   background-color: $colorBgPrimary;
 
@@ -117,6 +119,7 @@ const product = {
 
     .product-details-info {
       padding: 16px;
+
       h5 {
         color: #0c8d12;
         font-size: 20px;
@@ -154,6 +157,8 @@ const product = {
   .product-details-detailed-container {
     background-color: $white-dark;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
 
     h2 {
       font-size: 28px;
@@ -168,7 +173,7 @@ const product = {
 
       p {
         text-align: justify;
-        font-size: 16px;
+        font-size: 20px;
         color: $grey-dark;
       }
 
@@ -176,6 +181,7 @@ const product = {
         border: 2px solid $colorTextSecondary;
         border-radius: 4px;
         padding: 16px;
+        height: fit-content;
       }
     }
   }
@@ -201,6 +207,84 @@ const product = {
       margin-bottom: 0;
       border-bottom: none;
       padding-bottom: 0;
+    }
+  }
+}
+
+@media screen and ($tablet) {
+  .product-details-wrapper {
+    .product-details-container {
+      flex-direction: row;
+      margin: 0 20px 0 28px;
+
+      .product-details-info {
+        flex: 1;
+
+        .product-details-btn-wrapper {
+          justify-content: end;
+          padding-right: 16px;
+        }
+      }
+    }
+
+    .product-details-detailed-container {
+      margin: 20px 0;
+
+      .product-details-detailed-info {
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+
+        & p {
+          font-size: 18px;
+          max-width: 55%;
+          &:first-child {
+            font-size: 16px;
+          }
+        }
+
+        & .product-details-detailed-data-container {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .product-details-wrapper {
+    .product-details-container {
+      margin: 0 auto;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .product-details-info {
+        flex: 1;
+        margin-right: 6px;
+      }
+    }
+
+    .product-details-detailed-container {
+      display: flex;
+      align-items: center;
+
+      h2 {
+        max-width: 1200px;
+        width: 100%;
+        padding: 20px 8px;
+        text-align: left;
+      }
+
+      .product-details-detailed-info {
+        max-width: 1200px;
+        padding: 20px 8px;
+
+        & p:first-child {
+          font-size: 18px;
+        }
+      }
     }
   }
 }

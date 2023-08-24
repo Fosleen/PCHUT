@@ -44,7 +44,7 @@ export default defineComponent({
     const thumbs = ref();
     const slides = generateSlides();
 
-    function generateSlides(length = 5, sig = 0) {
+    function generateSlides(length = 10, sig = 0) {
       return Array.from({ length }).map((value, index) => {
         index = sig || index;
 
@@ -98,17 +98,46 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import "../utils/theme.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .splide {
   padding: 8px;
 }
+
 .splide__slide {
   width: 100vw;
   margin: 0 auto;
+  max-width: 500px;
 
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+@media screen and ($tablet) {
+  .wrapper {
+    max-width: 55%;
+  }
+
+  .splide__slide {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 650px;
+    flex-direction: column;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 </style>
