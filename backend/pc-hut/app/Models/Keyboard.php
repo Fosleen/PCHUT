@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Keyboard extends Model
 {
@@ -11,5 +12,10 @@ class Keyboard extends Model
 
     protected $table = 'keyboard';
 
-    protected $fillable = ['name', 'model', 'rgb', 'price', 'manufacturer_id', 'switch_type_id', 'type', 'connector', 'description'];
+    protected $fillable = ['rgb',  'switch_type_id', 'type', 'connector'];
+
+    public function component(): MorphOne
+    {
+        return $this->morphOne(Component::class, 'productable');
+    }
 }

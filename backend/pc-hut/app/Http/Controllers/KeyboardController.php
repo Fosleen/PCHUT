@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Component;
 use App\Models\Keyboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,24 +11,24 @@ class KeyboardController extends Controller
 {
     public function index()
     {
-        $keyboards = Keyboard::all();
+        $keyboards = Keyboard::with('component')->get();
 
-        if ($keyboards->count() > 0) {
-            return response()->json([
-                'status' => 200,
-                'keyboards' => $keyboards
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => "No keyboards"
-            ], 404);
+        foreach ($keyboards as $keyboard) {
+            $keyboardModel = $keyboard->model;
+            $keyboardManufacturer = $keyboard->manufacturer_id;
+            $componentModel = $keyboard->component->model;
+            $componentPrice = $keyboard->component->price;
         }
+
+        return response()->json([
+            'status' => 200,
+            'keyboards' => $keyboards,
+        ], 200);
     }
 
     public function show($id)
     {
-        $keyboard = Keyboard::find($id);
+        $keyboard = Keyboard::with('component')->find($id);
 
         if ($keyboard) {
             return response()->json([
@@ -71,6 +72,19 @@ class KeyboardController extends Controller
                 'connector' => $request->connector,
                 'description' => $request->description
             ]);
+
+            $keyboard->save();
+
+            $component = Component::create([
+                'model' => $request->model,
+                'price' => $request->price,
+                'manufacturer_id' => $request->manufacturer_id,
+                'description' => $request->description,
+                'productable_id' => $keyboard->id,
+                'productable_type' => Keyboard::class,
+            ]);
+
+
 
             if ($keyboard) {
                 return response()->json([
