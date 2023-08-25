@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class GPU extends Model
 {
@@ -11,5 +12,8 @@ class GPU extends Model
 
     protected $table = 'gpu';
 
-    protected $fillable = ['model', 'memory', 'price', 'description', 'manufacturer_id',];
+    public function component(): MorphOne
+    {
+        return $this->morphOne(Component::class, 'productable');
+    }
 }

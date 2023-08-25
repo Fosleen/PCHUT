@@ -13,12 +13,6 @@ return new class extends Migration
     {
         Schema::create('gpu', function (Blueprint $table) {
             $table->id();
-            $table->string("model", 45)->nullable(false);
-            $table->tinyInteger("memory")->nullable(false);
-            $table->float("price")->nullable(false);
-            $table->unsignedBigInteger('manufacturer_id');
-            $table->text("description")->nullable(true);
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
             $table->timestamps();
         });
     }
