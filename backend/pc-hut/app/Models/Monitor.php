@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Monitor extends Model
 {
@@ -11,5 +12,10 @@ class Monitor extends Model
 
     protected $table = 'monitor';
 
-    protected $fillable = ['model', 'size','description', 'refresh_rate', 'curved', 'price', 'manufacturer_id'];
+    protected $fillable = ['size', 'refresh_rate', 'curved'];
+
+    public function component(): MorphOne
+    {
+        return $this->morphOne(Component::class, 'productable');
+    }
 }

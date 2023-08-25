@@ -7,12 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Component;
 
-
-
-
 class CPUController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         $cpus = CPU::with('component')->get();
 
@@ -30,7 +27,7 @@ class CPUController extends Controller
         ], 200);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
@@ -79,7 +76,7 @@ class CPUController extends Controller
         }
     }
 
-    public function getById($id)
+    public function show($id)
     {
         $cpu = CPU::with('component')->find($id);
 
@@ -134,7 +131,7 @@ class CPUController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $cpu = CPU::find($id);
 

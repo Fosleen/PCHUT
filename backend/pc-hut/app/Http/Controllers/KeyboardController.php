@@ -49,6 +49,7 @@ class KeyboardController extends Controller
             'model' => 'required|string',
             'rgb' => 'required|boolean',
             'price' => 'required|numeric',
+            'wired' => 'required|boolean',
             'manufacturer_id' => 'required|integer',
             'switch_type_id' => 'required|integer',
             'type' => 'required|string',
@@ -68,6 +69,7 @@ class KeyboardController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'switch_type_id' => $request->switch_type_id,
+                'wired' => $request->wired,
                 'type' => $request->type,
                 'connector' => $request->connector,
                 'description' => $request->description
@@ -80,11 +82,12 @@ class KeyboardController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
+                'wired' => $request->wired,
                 'productable_id' => $keyboard->id,
                 'productable_type' => Keyboard::class,
             ]);
 
-
+            $keyboard->component()->save($component);
 
             if ($keyboard) {
                 return response()->json([
@@ -143,7 +146,6 @@ class KeyboardController extends Controller
             }
         }
     }
-
 
     public function destroy($id)
     {

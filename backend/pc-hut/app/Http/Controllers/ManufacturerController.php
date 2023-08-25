@@ -6,7 +6,6 @@ use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class ManufacturerController extends Controller
 {
     public function index()
@@ -31,8 +30,6 @@ class ManufacturerController extends Controller
         $manufacturer = Manufacturer::find($id);
 
         if ($manufacturer) {
-
-
             return response()->json([
                 'status' => 200,
                 'manufacturer' => $manufacturer,

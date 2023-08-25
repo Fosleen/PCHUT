@@ -7,10 +7,9 @@ use App\Models\Motherboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class MotherboardController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         $motherboards = Motherboard::with('component')->get();
 
@@ -28,7 +27,7 @@ class MotherboardController extends Controller
         ], 200);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
@@ -55,7 +54,6 @@ class MotherboardController extends Controller
 
             $motherboard->save();
 
-
             $component = Component::create([
                 'model' => $request->model,
                 'price' => $request->price,
@@ -75,7 +73,7 @@ class MotherboardController extends Controller
         }
     }
 
-    public function getById($id)
+    public function show($id)
     {
         $motherboard = Motherboard::with('component')->find($id);
         if ($motherboard) {
@@ -103,7 +101,6 @@ class MotherboardController extends Controller
         } else {
             $motherboard = Motherboard::find($id);
 
-
             if ($motherboard) {
                 $motherboard->update([
                     'model' => $request->model,
@@ -119,7 +116,7 @@ class MotherboardController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $motherboard = Motherboard::find($id);
 

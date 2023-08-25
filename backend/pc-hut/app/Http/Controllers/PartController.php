@@ -6,15 +6,12 @@ use App\Models\Keyboard;
 use App\Models\Mouse;
 use Illuminate\Http\Request;
 
-class Part_controller extends Controller
+class PartController extends Controller
 {
-    public function getAll()
+    public function index()
     {
-
         $keyboards = Keyboard::all();
         $mouses = Mouse::all();
-
-
 
         if ($mouses->count() > 0 || $keyboards->count() > 0) {
             $data = [
