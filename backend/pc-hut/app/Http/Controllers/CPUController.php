@@ -5,27 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\CPU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Component;
+
+
 
 
 class CPUController extends Controller
 {
     public function getAll()
     {
-        $CPUs = CPU::all();
+        $cpus = CPU::with('component')->get();
 
-        if ($CPUs->count() > 0) {
-            $data = [
-                'status' => 200,
-                'CPUs' => $CPUs
-            ];
-
-            return response()->json($data, 200);
-        } else {
-            return response()->json(
-                ['status' => 404, 'CPUs' => "No response"],
-                404
-            );
+        foreach ($cpus as $cpu) {
+            $cpuModel = $cpu->model;
+            $cpuManufacturer = $cpu->manufacturer_id;
+            $componentModel = $cpu->component->model;
+            $componentMemory = $cpu->component->memory;
+            $componentPrice = $cpu->component->price;
         }
+
+        return response()->json([
+            'status' => 200,
+            'cpus' => $cpus,
+        ], 200);
     }
 
     public function create(Request $request)
@@ -46,7 +48,7 @@ class CPUController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $cpu = CPU::create([
+            $cpu = new CPU([
                 'model' => $request->model,
                 'cores' => $request->cores,
                 'price' => $request->price,
@@ -55,6 +57,19 @@ class CPUController extends Controller
                 'socket_id' => $request->socket_id,
                 'description' => $request->description
             ]);
+
+            $cpu->save();
+
+            $component = Component::create([
+                'model' => $request->model,
+                'price' => $request->price,
+                'manufacturer_id' => $request->manufacturer_id,
+                'description' => $request->description,
+                'productable_id' => $cpu->id,
+                'productable_type' => CPU::class,
+            ]);
+
+            $cpu->component()->save($component);
 
             if ($cpu) {
                 return response()->json(['message' => 'cpu created successfully'], 200);
@@ -66,11 +81,18 @@ class CPUController extends Controller
 
     public function getById($id)
     {
-        $cpu = CPU::find($id);
+        $cpu = CPU::with('component')->find($id);
+
         if ($cpu) {
-            return response()->json([$cpu], 200);
+            return response()->json([
+                'status' => 200,
+                'cpu' => $cpu
+            ], 200);
         } else {
-            return response()->json(['message' => 'cpu not found!'], 500);
+            return response()->json([
+                'status' => 404,
+                'message' => "No cpu found"
+            ], 404);
         }
     }
 

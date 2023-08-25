@@ -13,12 +13,7 @@ return new class extends Migration
     {
         Schema::create('motherboard', function (Blueprint $table) {
             $table->id();
-            $table->string("model", 45)->nullable(false);
-            $table->float("price")->nullable(false);
-            $table->text("description")->nullable(true);
-            $table->unsignedBigInteger('manufacturer_id');
             $table->unsignedBigInteger('socket_id');
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
             $table->foreign('socket_id')->references('id')->on('socket');
 
             $table->timestamps();

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class CPU extends Model
 {
@@ -11,5 +12,11 @@ class CPU extends Model
 
     protected $table = 'CPU';
 
-    protected $fillable = ['model',  'manufacturer_id', 'description', 'socket_id', 'cores', 'speed', 'price'];
+    protected $fillable = ['socket_id', 'cores', 'speed',];
+
+
+    public function component(): MorphOne
+    {
+        return $this->morphOne(Component::class, 'productable');
+    }
 }
