@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Component;
 use App\Models\Mouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 
 class Mouse_controller extends Controller
 {
     public function getAll()
     {
-        $mouses = Mouse::all();
+        $mouses = Mouse::with('component')->get();
 
         if ($mouses->count() > 0) {
             $data = [
@@ -21,10 +21,10 @@ class Mouse_controller extends Controller
 
             return response()->json($data, 200);
         } else {
-            return response()->json(
-                ['status' => 404, 'mouses' => "No response"],
-                404
-            );
+            return response()->json([
+                'status' => 404,
+                'mouses' => "No mouses"
+            ], 404);
         }
     }
 
@@ -34,6 +34,8 @@ class Mouse_controller extends Controller
             'model' => 'required|string',
             'dpi' => 'required|integer',
             'rgb' => 'required|boolean',
+            'price' => 'required|numeric',
+            'wired' => 'required|boolean',
             'manufacturer_id' => 'required|integer',
             'description' => 'string'
         ]);
@@ -48,12 +50,33 @@ class Mouse_controller extends Controller
                 'model' => $request->model,
                 'dpi' => $request->dpi,
                 'rgb' => $request->rgb,
+                'price' => $request->price,
+                'wired' => $request->wired,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description
             ]);
 
+            $mouse->save();
+
+            $component = Component::create([
+                'model' => $request->model,
+                'dpi' => $request->dpi,
+                'rgb' => $request->rgb,
+                'price' => $request->price,
+                'wired' => $request->wired,
+                'manufacturer_id' => $request->manufacturer_id,
+                'description' => $request->description,
+                'productable_id' => $mouse->id,
+                'productable_type' => Mouse::class,
+            ]);
+
+            $mouse->component()->save($component);
+
             if ($mouse) {
-                return response()->json(['message' => 'Mouse created successfully'], 200);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Mouse created successfully'
+                ], 200);
             } else {
                 return response()->json(['message' => 'Mouse not created!'], 500);
             }
@@ -62,11 +85,18 @@ class Mouse_controller extends Controller
 
     public function getById($id)
     {
-        $mouse = Mouse::find($id);
+        $mouse = Mouse::with('component')->find($id);
+
         if ($mouse) {
-            return response()->json([$mouse], 200);
+            return response()->json([
+                'status' => 200,
+                'keyboard' => $mouse
+            ], 200);
         } else {
-            return response()->json(['message' => 'mouse not found!'], 500);
+            return response()->json([
+                'status' => 404,
+                'message' => "No keyboard found"
+            ], 404);
         }
     }
 
