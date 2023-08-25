@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('switch_type_id');
             $table->tinyInteger("rgb")->nullable(false);
+            $table->tinyInteger("wired")->nullable(false);
             $table->string("type", 15)->nullable(false);
             $table->string("connector", 15)->nullable(false);
             $table->foreign('switch_type_id')->references('id')->on('switch_type');

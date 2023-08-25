@@ -12,7 +12,7 @@ class Keyboard extends Model
 
     protected $table = 'keyboard';
 
-    protected $fillable = ['rgb',  'switch_type_id', 'type', 'connector'];
+    protected $fillable = ['rgb',  'switch_type_id', 'type', 'connector', 'wired'];
 
     public function component(): MorphOne
     {
