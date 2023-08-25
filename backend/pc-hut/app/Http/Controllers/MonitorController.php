@@ -7,10 +7,9 @@ use App\Models\Monitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class MonitorController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         $monitors = Monitor::with('component')->get();
 
@@ -19,7 +18,6 @@ class MonitorController extends Controller
                 'status' => 200,
                 'monitors' => $monitors
             ];
-
             return response()->json($data, 200);
         } else {
             return response()->json([
@@ -29,7 +27,7 @@ class MonitorController extends Controller
         }
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
@@ -87,7 +85,7 @@ class MonitorController extends Controller
         }
     }
 
-    public function getById($id)
+    public function show($id)
     {
         $monitor = Monitor::with('component')->find($id);
         if ($monitor) {
@@ -120,7 +118,6 @@ class MonitorController extends Controller
         } else {
             $monitor = Monitor::find($id);
 
-
             if ($monitor) {
                 $monitor->update([
                     'model' => $request->model,
@@ -140,7 +137,7 @@ class MonitorController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $monitor = Monitor::find($id);
 

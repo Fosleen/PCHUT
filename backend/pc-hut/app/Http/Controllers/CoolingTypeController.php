@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cooling_type;
-use Illuminate\Http\Request;
+use App\Models\CoolingType;
 
-class Cooling_type_controller extends Controller
+class CoolingTypeController extends Controller
 {
-    public function getAll()
+    public function index()
     {
-        $cooling_types = Cooling_type::all();
+        $cooling_types = CoolingType::all();
 
         if ($cooling_types->count() > 0) {
             $data = [

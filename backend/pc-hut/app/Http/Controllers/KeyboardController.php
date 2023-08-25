@@ -147,7 +147,6 @@ class KeyboardController extends Controller
         }
     }
 
-
     public function destroy($id)
     {
         $keyboard = Keyboard::find($id);

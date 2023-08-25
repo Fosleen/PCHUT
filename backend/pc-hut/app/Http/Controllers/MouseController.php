@@ -7,9 +7,9 @@ use App\Models\Mouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class Mouse_controller extends Controller
+class MouseController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         $mouses = Mouse::with('component')->get();
 
@@ -28,7 +28,7 @@ class Mouse_controller extends Controller
         }
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
@@ -83,7 +83,7 @@ class Mouse_controller extends Controller
         }
     }
 
-    public function getById($id)
+    public function show($id)
     {
         $mouse = Mouse::with('component')->find($id);
 
@@ -118,7 +118,6 @@ class Mouse_controller extends Controller
         } else {
             $mouse = Mouse::find($id);
 
-
             if ($mouse) {
                 $mouse->update([
                     'model' => $request->model,
@@ -134,7 +133,7 @@ class Mouse_controller extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $mouse = Mouse::find($id);
 

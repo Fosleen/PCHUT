@@ -95,11 +95,6 @@ class GPUController extends Controller
         }
     }
 
-
-
-
-
-
     public function update(Request $request, int $id)
     {
         $validator = Validator::make($request->all(), [
