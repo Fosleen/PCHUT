@@ -13,15 +13,10 @@ return new class extends Migration
     {
         Schema::create('cpu', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('manufacturer_id'); //first you have to make this column so referential
-            //integrity could work
+
             $table->unsignedBigInteger('socket_id');
             $table->integer("cores")->nullable(false);
             $table->float("speed")->nullable(false);
-            $table->string("model", 45)->nullable(false);
-            $table->float("price")->nullable(false);
-            $table->text("description")->nullable(true);
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
             $table->foreign('socket_id')->references('id')->on('socket');
 
 

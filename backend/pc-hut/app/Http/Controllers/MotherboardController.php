@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Component;
 use App\Models\Motherboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,21 +12,20 @@ class MotherboardController extends Controller
 {
     public function getAll()
     {
-        $motherboards = Motherboard::all();
+        $motherboards = Motherboard::with('component')->get();
 
-        if ($motherboards->count() > 0) {
-            $data = [
-                'status' => 200,
-                'motherboards' => $motherboards
-            ];
-
-            return response()->json($data, 200);
-        } else {
-            return response()->json(
-                ['status' => 404, 'motherboards' => "No response"],
-                404
-            );
+        foreach ($motherboards as $motherboard) {
+            $motherboardModel = $motherboard->model;
+            $motherboardManufacturer = $motherboard->manufacturer_id;
+            $componentModel = $motherboard->component->model;
+            $componentMemory = $motherboard->component->memory;
+            $componentPrice = $motherboard->component->price;
         }
+
+        return response()->json([
+            'status' => 200,
+            'motherboards' => $motherboards,
+        ], 200);
     }
 
     public function create(Request $request)
@@ -44,13 +44,28 @@ class MotherboardController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $motherboard = Motherboard::create([
+
+            $motherboard = new Motherboard([
                 'model' => $request->model,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'socket_id' => $request->socket_id,
                 'description' => $request->description
             ]);
+
+            $motherboard->save();
+
+
+            $component = Component::create([
+                'model' => $request->model,
+                'price' => $request->price,
+                'manufacturer_id' => $request->manufacturer_id,
+                'description' => $request->description,
+                'productable_id' => $motherboard->id,
+                'productable_type' => Motherboard::class,
+            ]);
+
+            $motherboard->component()->save($component);
 
             if ($motherboard) {
                 return response()->json(['message' => 'Motherboard created successfully'], 200);
@@ -62,7 +77,7 @@ class MotherboardController extends Controller
 
     public function getById($id)
     {
-        $motherboard = Motherboard::find($id);
+        $motherboard = Motherboard::with('component')->find($id);
         if ($motherboard) {
             return response()->json([$motherboard], 200);
         } else {
