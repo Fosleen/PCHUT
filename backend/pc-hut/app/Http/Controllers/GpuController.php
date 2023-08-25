@@ -29,7 +29,7 @@ class GPUController extends Controller
 
     public function show($id)
     {
-        $gpu = GPU::find($id);
+        $gpu = GPU::with('component')->find($id);
 
         if ($gpu) {
             return response()->json([
