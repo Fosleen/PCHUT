@@ -15,7 +15,6 @@ class Component extends Model
 
     protected $fillable = ['productable_id', 'productable_type', 'manufacturer_id', 'model',  'price', 'description'];
 
-    //remove memory from here
 
     public function productable(): MorphTo
     {
