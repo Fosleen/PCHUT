@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('gpu', function (Blueprint $table) {
             $table->id();
+            $table->boolean("memory")->nullable(false);
+
             $table->timestamps();
         });
     }

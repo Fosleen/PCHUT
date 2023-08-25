@@ -60,12 +60,18 @@ class GPUController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $gpu = new GPU();
+            $gpu = new GPU([
+                'model' => $request->model,
+                'memory' => $request->memory,
+                'price' => $request->price,
+                'manufacturer_id' => $request->manufacturer_id,
+                'description' => $request->description
+            ]);
+
             $gpu->save(); // Save the GPU instance to generate an ID
 
             $component = Component::create([
                 'model' => $request->model,
-                'memory' => $request->memory,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
@@ -88,6 +94,8 @@ class GPUController extends Controller
             }
         }
     }
+
+
 
 
 

@@ -12,6 +12,9 @@ class GPU extends Model
 
     protected $table = 'gpu';
 
+    protected $fillable = ['memory'];
+
+
     public function component(): MorphOne
     {
         return $this->morphOne(Component::class, 'productable');
