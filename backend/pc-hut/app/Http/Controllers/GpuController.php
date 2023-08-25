@@ -48,7 +48,7 @@ class GPUController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
-            'memory' => 'required|boolean',
+            'memory' => 'required|integer',
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'description' => 'string'
@@ -104,7 +104,7 @@ class GPUController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
-            'memory' => 'required|boolean',
+            'memory' => 'required|integer',
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'description' => 'string'
