@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Component;
 use App\Models\GPU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,24 +11,25 @@ class GPUController extends Controller
 {
     public function index()
     {
-        $gpus = GPU::all();
+        $gpus = GPU::with('component')->get();
 
-        if ($gpus->count() > 0) {
-            return response()->json([
-                'status' => 200,
-                'gpus' => $gpus
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => "No gpus"
-            ], 404);
+        foreach ($gpus as $gpu) {
+            $gpuModel = $gpu->model;
+            $gpuManufacturer = $gpu->manufacturer_id;
+            $componentModel = $gpu->component->model;
+            $componentMemory = $gpu->component->memory;
+            $componentPrice = $gpu->component->price;
         }
+
+        return response()->json([
+            'status' => 200,
+            'gpus' => $gpus,
+        ], 200);
     }
 
     public function show($id)
     {
-        $gpu = GPU::find($id);
+        $gpu = GPU::with('component')->find($id);
 
         if ($gpu) {
             return response()->json([
@@ -49,7 +51,6 @@ class GPUController extends Controller
             'memory' => 'required|boolean',
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
-            'pc_id' => 'required|integer',
             'description' => 'string'
         ]);
 
@@ -59,14 +60,26 @@ class GPUController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $gpu = GPU::create([
+            $gpu = new GPU([
                 'model' => $request->model,
                 'memory' => $request->memory,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
-                'pc_id' => $request->pc_id,
                 'description' => $request->description
             ]);
+
+            $gpu->save(); // Save the GPU instance to generate an ID
+
+            $component = Component::create([
+                'model' => $request->model,
+                'price' => $request->price,
+                'manufacturer_id' => $request->manufacturer_id,
+                'description' => $request->description,
+                'productable_id' => $gpu->id,
+                'productable_type' => GPU::class,
+            ]);
+
+            $gpu->component()->save($component);
 
             if ($gpu) {
                 return response()->json([
@@ -83,6 +96,10 @@ class GPUController extends Controller
     }
 
 
+
+
+
+
     public function update(Request $request, int $id)
     {
         $validator = Validator::make($request->all(), [
@@ -90,7 +107,6 @@ class GPUController extends Controller
             'memory' => 'required|boolean',
             'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
-            'pc_id' => 'required|integer',
             'description' => 'string'
         ]);
 
@@ -107,7 +123,6 @@ class GPUController extends Controller
                     'memory' => $request->memory,
                     'price' => $request->price,
                     'manufacturer_id' => $request->manufacturer_id,
-                    'pc_id' => $request->pc_id,
                     'description' => $request->description
                 ]);
                 return response()->json([
