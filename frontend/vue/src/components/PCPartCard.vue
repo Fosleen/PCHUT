@@ -10,7 +10,9 @@
       />
 
       <h3>Dostupno</h3>
-      <h2 class="pc-part-card-price-wrapper">{{ `${gpu.price} E` }}</h2>
+      <h2 class="pc-part-card-price-wrapper">
+        {{ `${gpu.component.price} E` }}
+      </h2>
     </div>
 
     <div class="pc-part-card-button-wrapper">
