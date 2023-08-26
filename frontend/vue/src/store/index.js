@@ -29,13 +29,16 @@ const store = createStore({
     },
 
     getProduct({ commit }, id) {
+      commit("setCurrentProductLoading", true);
       return axiosClient
         .get(`/keyboards/${id}`)
         .then((res) => {
           commit("setProduct", res.data); // calls mutation
+          commit("setCurrentProductLoading", false);
           return res;
         })
         .catch((err) => {
+          commit("setCurrentProductLoading", false);
           throw err;
         });
     },
@@ -49,6 +52,10 @@ const store = createStore({
 
     setProduct: (state, product) => {
       state.currentProduct.data = product.data;
+    },
+
+    setCurrentProductLoading: (state, loading) => {
+      state.currentProduct.loading = loading;
     },
   },
   modules: {},
