@@ -60,7 +60,7 @@ button {
 }
 
 .odd-shape {
-  background-color: #d9d9d9;
+  background-color: $colorTextSecondary;
   clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
   color: #282828;
   font-weight: 700;

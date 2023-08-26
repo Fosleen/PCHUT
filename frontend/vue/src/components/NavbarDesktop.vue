@@ -28,7 +28,6 @@ import { ref } from "vue";
 const isDarkTheme = ref(true);
 
 const toggleTheme = () => {
-  //here we will make dark mode
   document.querySelector("body").style.backgroundColor = isDarkTheme.value
     ? "#282828"
     : "#f5f5f5";

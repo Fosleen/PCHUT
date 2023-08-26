@@ -1,15 +1,11 @@
 <template>
   <div>
-    <h1>Stranica za sve proizvode</h1>
-    <h1>Stranica za sve proizvode</h1>
-    <h1>Stranica za sve proizvode</h1>
-    <h1>Stranica za sve proizvode</h1>
-    <h1>Stranica za sve proizvode</h1>
-    <h1>Stranica za sve proizvode</h1>
-    <h1>Stranica za sve proizvode</h1>
+    <PCPartCard />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import PCPartCard from "../components/PCPartCard.vue";
+</script>
 
 <style lang="scss" scoped></style>

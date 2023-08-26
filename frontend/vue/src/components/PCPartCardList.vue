@@ -28,14 +28,14 @@ const props = defineProps({
 @import "../utils/theme.scss";
 
 .pc-part-card-ul {
-  color: #282828;
+  color: $grey-dark;
   padding-left: 24px;
 }
 
 .pc-part-card-text-group-name {
   margin-bottom: 10px;
   font-size: 20px;
-  color: #282828;
+  color: $grey-dark;
 }
 
 .pc-part-card-list-item {

@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <h1>Stranica za izgraditi PC</h1>
-  </div>
+  <FinalPriceAndButton
+    price="734.5"
+    price-label="some label"
+    button-text="Kupi"
+  />
 </template>
 
-<script></script>
+<script setup>
+import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>
