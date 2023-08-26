@@ -4,9 +4,16 @@
     :modules="[Pagination, Autoplay]"
     :pagination="true"
     :autoplay="true"
+    :loop="true"
   >
-    <SwiperSlide v-for="photo in photos" :key="photo">
+    <SwiperSlide>
       <img src="../assets/hero.jpg" alt="img" />
+    </SwiperSlide>
+    <SwiperSlide>
+      <img src="../assets/hero2.jpg" alt="img" />
+    </SwiperSlide>
+    <SwiperSlide>
+      <img src="../assets/hero3.jpg" alt="img" />
     </SwiperSlide>
   </Swiper>
 </template>
@@ -18,7 +25,7 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "swiper/css";
 
-const photos = ["hero.jpg", "hero.jpg", "hero.jpg", "hero.jpg", "hero.jpg"];
+const photos = ["hero.jpg", "hero2.jpg", "hero.jpg"];
 </script>
 
 <style lang="scss">
