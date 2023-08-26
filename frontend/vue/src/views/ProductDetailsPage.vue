@@ -1,8 +1,9 @@
 <template>
-  <div class="product-details-wrapper">
+  <div v-if="productLoading">Loading...</div>
+  <div v-else class="product-details-wrapper">
     <h2>{{ product.model }}</h2>
     <div class="product-details-container">
-      <ProductImagesCarousel :images="product.images" />
+      <ProductImagesCarousel :images="productImages" />
 
       <div class="product-details-info">
         <h5>Dostupno</h5>
@@ -81,6 +82,9 @@
 </template>
 
 <script setup>
+import { ref, watch, computed } from "vue";
+import store from "../store";
+import { useRoute } from "vue-router";
 import Button from "../components/Button.vue";
 import ProductImagesCarousel from "../components/ProductImagesCarousel.vue";
 import {
@@ -90,28 +94,40 @@ import {
   PhArrowUDownLeft,
 } from "@phosphor-icons/vue";
 
-const product = {
-  id: 1,
-  model: "Deatheater Elite 3XD",
-  manufacturer: "Razer",
-  manufacturer_img:
-    "https://www.laser-flash.com/wp-content/uploads/2020/10/Razer-logo-1.png",
-  description:
-    "RAZER BlackWidow V3 Tenkeyless je kompaktna mehanička tipkovnica koja pruža vrhunsku igračku izvedbu. Sa skraćenim dizajnom bez numeričke tipke, pruža više prostora na radnoj površini i olakšava prijenos. Tipkovnica je opremljena s Razer Yellow mehaničkim switchevima koji pružaju taktilni i klikajući osjećaj pri svakom pritisku tipke. Ovi switchevi su dizajnirani za brze reakcije i pružaju izvanrednu trajnost od 80 milijuna pritisaka. BlackWidow V3 Tenkeyless također dolazi s individualno osvijetljenim Razer Chroma RGB tipkama koje pružaju beskrajne mogućnosti prilagodbe boja i efekata svjetlosti. Pomoću Razer Synapse softvera možete prilagoditi osvjetljenje, dodijeliti makro tipke i prilagoditi postavke tipkovnice prema svojim željama. Uz dodatne značajke poput N-Key Rollover i Anti-Ghosting tehnologija, ova tipkovnica omogućuje brzo i precizno tipkanje bez ikakvih problema. Svojim izdržljivim aluminijskim okvirom i odvojivim USB-C kabelom, RAZER BlackWidow V3 Tenkeyless je izdržljiva i praktična tipkovnica koja će vam pružiti izvrsno iskustvo igranja i produktivnosti.",
-  switch_type: "zeleni",
-  price: "139,99",
-  rgb: true,
-  connector: "USB",
-  type: "mehanička",
-  images: [
-    "https://www.gigahertz.com.ph/cdn/shop/products/razer_blackwidow_v4_pro_mechanical_gaming_keyboard_green_switches_ac60741_26662_1024x.jpg?v=1679294271",
-    "https://assets2.razerzone.com/images/pnx.assets/9a4267d1a3614ac6bbc05bf89e706b3b/razer-blackwidow-v3-pro-usp01-mobile.jpg",
-    "https://cdn11.bigcommerce.com/s-042b2/images/stencil/1280x1280/products/953538/670796/rz03-03531700-1__18453.1624295433.jpg?c=2",
-    "https://aresstores.com/wp-content/uploads/2023/04/https-__hybrismediaprod.blob_.core_.windows.net_sys-master-phoenix-images-container_h74_h37_9477488148510_230216-bw-v4-pro-1500x1000-1.jpg",
-    "https://images.unsplash.com/photo-1636487658620-e1049fa06242?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
-    "https://images.unsplash.com/photo-1655838770846-ca6c505a2e7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-  ],
-};
+const route = useRoute();
+const productLoading = computed(() => store.state.currentProduct.loading);
+const productImages = computed(() => product.value.images);
+
+let product = ref({
+  id: null,
+  model: null,
+  price: null,
+  description: null,
+  connector: null,
+  type: null,
+  wired: null,
+  rgb: null,
+  product_type: null,
+  discount: null,
+  manufacturer_img: null,
+  manufacturer: null,
+  switch_type: null,
+  images: null,
+});
+
+watch(
+  () => store.state.currentProduct.data,
+  (newVal, oldVal) => {
+    product.value = {
+      ...JSON.parse(JSON.stringify(newVal)),
+    };
+  }
+);
+
+store.dispatch("getProduct", {
+  id: route.params.id,
+  productable_type: route.params.productable_type,
+});
 </script>
 
 <style lang="scss">
@@ -249,10 +265,11 @@ const product = {
         flex-direction: row;
         gap: 20px;
         padding: 20px;
+        width: 100%;
 
         & p {
           font-size: 18px;
-          max-width: 55%;
+          width: 55%;
           &:first-child {
             font-size: 16px;
           }

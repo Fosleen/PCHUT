@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\KeyboardResource;
 use App\Models\Component;
 use App\Models\Keyboard;
+use App\Models\SwitchType;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,6 +21,8 @@ class KeyboardController extends Controller
             $keyboardManufacturer = $keyboard->manufacturer_id;
             $componentModel = $keyboard->component->model;
             $componentPrice = $keyboard->component->price;
+
+            $keyboard->switchType;
         }
 
         return response()->json([
@@ -31,10 +36,7 @@ class KeyboardController extends Controller
         $keyboard = Keyboard::with('component')->find($id);
 
         if ($keyboard) {
-            return response()->json([
-                'status' => 200,
-                'keyboard' => $keyboard
-            ], 200);
+            return new KeyboardResource($keyboard);
         } else {
             return response()->json([
                 'status' => 404,

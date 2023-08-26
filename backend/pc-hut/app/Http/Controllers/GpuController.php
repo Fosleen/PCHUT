@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GPUResource;
 use App\Models\Component;
 use App\Models\GPU;
 use Illuminate\Http\Request;
@@ -32,10 +33,7 @@ class GPUController extends Controller
         $gpu = GPU::with('component')->find($id);
 
         if ($gpu) {
-            return response()->json([
-                'status' => 200,
-                'gpu' => $gpu
-            ], 200);
+            return new GPUResource($gpu);
         } else {
             return response()->json([
                 'status' => 404,

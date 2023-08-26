@@ -7,6 +7,10 @@ const store = createStore({
       data: {},
       token: sessionStorage.getItem("access_token"),
     },
+    currentProduct: {
+      loading: false,
+      data: {},
+    },
   },
   getters: {},
   actions: {
@@ -23,12 +27,44 @@ const store = createStore({
         return data;
       });
     },
+
+    getProduct({ commit }, { id, productable_type }) {
+      commit("setCurrentProductLoading", true);
+      console.log("Tip je", productable_type);
+
+      let apiUrl = "";
+      if (productable_type === "GPU") {
+        apiUrl = `/gpus/${id}`;
+      } else if (productable_type === "keyboard") {
+        apiUrl = `/keyboards/${id}`;
+      }
+
+      return axiosClient
+        .get(apiUrl)
+        .then((res) => {
+          commit("setProduct", res.data);
+          commit("setCurrentProductLoading", false);
+          return res;
+        })
+        .catch((err) => {
+          commit("setCurrentProductLoading", false);
+          throw err;
+        });
+    },
   },
   mutations: {
     setUser: (state, userData) => {
       state.user.token = userData.token;
       state.user.data = userData.user;
       localStorage.setItem("access_token", userData.token);
+    },
+
+    setProduct: (state, product) => {
+      state.currentProduct.data = product.data;
+    },
+
+    setCurrentProductLoading: (state, loading) => {
+      state.currentProduct.loading = loading;
     },
   },
   modules: {},

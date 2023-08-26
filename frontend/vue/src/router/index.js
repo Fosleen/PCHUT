@@ -16,12 +16,6 @@ const routes = [
   {
     path: "/",
     name: "HomePage",
-    // component: PCBuilderComponentCard,
-    // props: {
-    //   Image:
-    //     "https://www.trustedreviews.com/wp-content/uploads/sites/54/2021/03/Intel-Rocker-Lake-2-e1615908186584.jpg",
-    //   className: "pc-builder-component-small-card-wrapper",
-    // },
     component: Homepage,
   },
 
@@ -42,7 +36,7 @@ const routes = [
     component: ProductImagesComponent,
   },
   {
-    path: "/product/:id",
+    path: "/:productable_type/:id",
     name: "ProductDetails",
     component: ProductDetailsPage,
   },
