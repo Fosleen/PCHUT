@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\ComponentImageController;
 use App\Http\Controllers\CoolingTypeController;
 use App\Http\Controllers\CPUController;
@@ -77,3 +78,6 @@ Route::delete('manufacturers/{id}', [ManufacturerController::class, 'destroy']);
 Route::get('component-images', [ComponentImageController::class, 'index']);
 Route::get('component-images/{id}', [ComponentImageController::class, 'show']);
 Route::post('component-images', [ComponentImageController::class, 'store']);
+
+Route::get('component', [ComponentController::class, 'index']);
+Route::get('component/{id}', [ComponentController::class, 'show']);
