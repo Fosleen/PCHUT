@@ -1,24 +1,35 @@
 <template>
-  <div class="pc-part-card-wrapper">
-    <div class="pc-part-card-image-wrapper">
-      <img :src="Image" alt="" />
-    </div>
-    <div class="pc-part-card-text-wrapper">
-      <PCPartCardList
-        :text-group-name="gpu.model"
-        :text-group-items="[`${gpu.memory} GB memorije`]"
-      />
+  <router-link
+    :to="{
+      name: 'ProductDetails',
+      params: {
+        productable_type: getModelName(),
+        id: gpu.component.productable_id,
+      },
+    }"
+    class="pc-part-card-link"
+  >
+    <div class="pc-part-card-wrapper">
+      <div class="pc-part-card-image-wrapper">
+        <img :src="Image" alt="" />
+      </div>
+      <div class="pc-part-card-text-wrapper">
+        <PCPartCardList
+          :text-group-name="gpu.model"
+          :text-group-items="[`${gpu.memory} GB memorije`]"
+        />
 
-      <h3>Dostupno</h3>
-      <h2 class="pc-part-card-price-wrapper">
-        {{ `${gpu.component.price} E` }}
-      </h2>
-    </div>
+        <h3>Dostupno</h3>
+        <h2 class="pc-part-card-price-wrapper">
+          {{ `${gpu.component.price} E` }}
+        </h2>
+      </div>
 
-    <div class="pc-part-card-button-wrapper">
-      <Button shape="odd-shape" text="Dodaj u košaricu" />
+      <div class="pc-part-card-button-wrapper">
+        <Button shape="odd-shape" text="Dodaj u košaricu" />
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
@@ -28,6 +39,11 @@ import PCPartCardList from "./PCPartCardList.vue";
 const { gpu } = defineProps({
   gpu: Object,
 });
+
+const getModelName = () => {
+  const modelName = gpu.component.productable_type.replace("App\\Models\\", "");
+  return modelName;
+};
 
 console.log("GPU PROP PROSLJEDNEI JE", gpu);
 </script>
@@ -75,5 +91,9 @@ console.log("GPU PROP PROSLJEDNEI JE", gpu);
   display: flex;
   justify-content: center;
   padding-bottom: 16px;
+}
+
+.pc-part-card-link {
+  text-decoration: none;
 }
 </style>

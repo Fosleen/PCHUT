@@ -124,7 +124,10 @@ watch(
   }
 );
 
-store.dispatch("getProduct", route.params.id);
+store.dispatch("getProduct", {
+  id: route.params.id,
+  productable_type: route.params.productable_type,
+});
 </script>
 
 <style lang="scss">

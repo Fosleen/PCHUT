@@ -28,12 +28,21 @@ const store = createStore({
       });
     },
 
-    getProduct({ commit }, id) {
+    getProduct({ commit }, { id, productable_type }) {
       commit("setCurrentProductLoading", true);
+      console.log("Tip je", productable_type);
+
+      let apiUrl = "";
+      if (productable_type === "GPU") {
+        apiUrl = `/gpus/${id}`;
+      } else if (productable_type === "keyboard") {
+        apiUrl = `/keyboards/${id}`;
+      }
+
       return axiosClient
-        .get(`/keyboards/${id}`)
+        .get(apiUrl)
         .then((res) => {
-          commit("setProduct", res.data); // calls mutation
+          commit("setProduct", res.data);
           commit("setCurrentProductLoading", false);
           return res;
         })
