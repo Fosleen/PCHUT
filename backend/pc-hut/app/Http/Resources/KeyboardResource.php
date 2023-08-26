@@ -28,7 +28,7 @@ class KeyboardResource extends JsonResource
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
             'manufacturer' => $this->component->manufacturer->name,
-            'switch-type' => $this->switchType->name
+            'switch_type' => $this->switchType->name
         ];
     }
 }

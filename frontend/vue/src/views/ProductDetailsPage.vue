@@ -81,6 +81,9 @@
 </template>
 
 <script setup>
+import { ref, watch } from "vue";
+import store from "../store";
+import { useRoute, useRouter } from "vue-router";
 import Button from "../components/Button.vue";
 import ProductImagesCarousel from "../components/ProductImagesCarousel.vue";
 import {
@@ -90,19 +93,23 @@ import {
   PhArrowUDownLeft,
 } from "@phosphor-icons/vue";
 
-const product = {
-  id: 1,
-  model: "Deatheater Elite 3XD",
-  manufacturer: "Razer",
-  manufacturer_img:
-    "https://www.laser-flash.com/wp-content/uploads/2020/10/Razer-logo-1.png",
-  description:
-    "RAZER BlackWidow V3 Tenkeyless je kompaktna mehanička tipkovnica koja pruža vrhunsku igračku izvedbu. Sa skraćenim dizajnom bez numeričke tipke, pruža više prostora na radnoj površini i olakšava prijenos. Tipkovnica je opremljena s Razer Yellow mehaničkim switchevima koji pružaju taktilni i klikajući osjećaj pri svakom pritisku tipke. Ovi switchevi su dizajnirani za brze reakcije i pružaju izvanrednu trajnost od 80 milijuna pritisaka. BlackWidow V3 Tenkeyless također dolazi s individualno osvijetljenim Razer Chroma RGB tipkama koje pružaju beskrajne mogućnosti prilagodbe boja i efekata svjetlosti. Pomoću Razer Synapse softvera možete prilagoditi osvjetljenje, dodijeliti makro tipke i prilagoditi postavke tipkovnice prema svojim željama. Uz dodatne značajke poput N-Key Rollover i Anti-Ghosting tehnologija, ova tipkovnica omogućuje brzo i precizno tipkanje bez ikakvih problema. Svojim izdržljivim aluminijskim okvirom i odvojivim USB-C kabelom, RAZER BlackWidow V3 Tenkeyless je izdržljiva i praktična tipkovnica koja će vam pružiti izvrsno iskustvo igranja i produktivnosti.",
-  switch_type: "zeleni",
-  price: "139,99",
-  rgb: true,
-  connector: "USB",
-  type: "mehanička",
+const route = useRoute();
+
+let product = ref({
+  id: null,
+  model: null,
+  price: null,
+  description: null,
+  connector: null,
+  type: null,
+  wired: null,
+  rgb: null,
+  product_type: null,
+  discount: null,
+  manufacturer_img: null,
+  manufacturer: null,
+  switch_type: null,
+
   images: [
     "https://www.gigahertz.com.ph/cdn/shop/products/razer_blackwidow_v4_pro_mechanical_gaming_keyboard_green_switches_ac60741_26662_1024x.jpg?v=1679294271",
     "https://assets2.razerzone.com/images/pnx.assets/9a4267d1a3614ac6bbc05bf89e706b3b/razer-blackwidow-v3-pro-usp01-mobile.jpg",
@@ -111,7 +118,18 @@ const product = {
     "https://images.unsplash.com/photo-1636487658620-e1049fa06242?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
     "https://images.unsplash.com/photo-1655838770846-ca6c505a2e7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
   ],
-};
+});
+
+watch(
+  () => store.state.currentProduct.data,
+  (newVal, oldVal) => {
+    product.value = {
+      ...JSON.parse(JSON.stringify(newVal)),
+    };
+  }
+);
+
+store.dispatch("getProduct", route.params.id);
 </script>
 
 <style lang="scss">
@@ -249,10 +267,11 @@ const product = {
         flex-direction: row;
         gap: 20px;
         padding: 20px;
+        width: 100%;
 
         & p {
           font-size: 18px;
-          max-width: 55%;
+          width: 55%;
           &:first-child {
             font-size: 16px;
           }
