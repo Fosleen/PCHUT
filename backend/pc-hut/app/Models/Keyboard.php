@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Keyboard extends Model
@@ -17,5 +18,10 @@ class Keyboard extends Model
     public function component(): MorphOne
     {
         return $this->morphOne(Component::class, 'productable');
+    }
+
+    public function switchType(): BelongsTo
+    {
+        return $this->belongsTo(SwitchType::class, 'switch_type_id');
     }
 }
