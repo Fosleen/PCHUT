@@ -1,7 +1,9 @@
 <template>
   <div v-if="productLoading">Loading...</div>
   <div v-else class="product-details-wrapper">
-    <h2>{{ product.model }}</h2>
+    <h2>
+      {{ product.product_type }} {{ product.manufacturer }} {{ product.model }}
+    </h2>
     <div class="product-details-container">
       <ProductImagesCarousel :images="productImages" />
 
@@ -20,21 +22,57 @@
             <p>Brand:</p>
             <p>{{ product.manufacturer }}</p>
           </div>
-          <div class="product-details-data-row">
+          <div v-if="product.connector" class="product-details-data-row">
             <p>Vrsta priključka:</p>
             <p>{{ product.connector }}</p>
           </div>
-          <div class="product-details-data-row">
+          <div v-if="product.type" class="product-details-data-row">
             <p>Tip:</p>
             <p>{{ product.type }}</p>
           </div>
-          <div class="product-details-data-row">
+          <div v-if="product.cores" class="product-details-data-row">
+            <p>Broj jezgri:</p>
+            <p>{{ product.cores }}</p>
+          </div>
+          <div v-if="product.memory" class="product-details-data-row">
+            <p>Memorija:</p>
+            <p>{{ product.memory }} GB</p>
+          </div>
+          <div v-if="product.speed" class="product-details-data-row">
+            <p>Brzina:</p>
+            <p>{{ product.speed }} GHz</p>
+          </div>
+          <div v-if="product.dpi" class="product-details-data-row">
+            <p>DPI:</p>
+            <p>{{ product.dpi }}</p>
+          </div>
+          <div v-if="product.size" class="product-details-data-row">
+            <p>Dijagonala:</p>
+            <p>{{ product.size }}''</p>
+          </div>
+          <div v-if="product.refresh_rate" class="product-details-data-row">
+            <p>Osvježavanje slike:</p>
+            <p>{{ product.refresh_rate }}</p>
+          </div>
+          <div v-if="product.wired" class="product-details-data-row">
+            <p>Tip:</p>
+            <p>{{ product.wired ? "žičan" : "bežičan" }}</p>
+          </div>
+          <div v-if="product.switch_type" class="product-details-data-row">
             <p>Switchevi:</p>
             <p>{{ product.switch_type }}</p>
           </div>
-          <div class="product-details-data-row">
+          <div v-if="product.socket" class="product-details-data-row">
+            <p>Socket:</p>
+            <p>{{ product.socket }}</p>
+          </div>
+          <div v-if="product.rgb" class="product-details-data-row">
             <p>RGB:</p>
             <p>{{ product.rgb ? "da" : "ne" }}</p>
+          </div>
+          <div v-if="product.curved == true" class="product-details-data-row">
+            <p>Zakrivljen:</p>
+            <p>{{ product.curved ? "da" : "ne" }}</p>
           </div>
         </div>
         <div class="product-details-btn-wrapper">

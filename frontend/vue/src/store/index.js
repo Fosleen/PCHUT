@@ -30,14 +30,7 @@ const store = createStore({
 
     getProduct({ commit }, { id, productable_type }) {
       commit("setCurrentProductLoading", true);
-      console.log("Tip je", productable_type);
-
-      let apiUrl = "";
-      if (productable_type === "GPU") {
-        apiUrl = `/gpus/${id}`;
-      } else if (productable_type === "keyboard") {
-        apiUrl = `/keyboards/${id}`;
-      }
+      let apiUrl = `/${productable_type}s/${id}`;
 
       return axiosClient
         .get(apiUrl)
@@ -67,6 +60,7 @@ const store = createStore({
       state.currentProduct.loading = loading;
     },
   },
+
   modules: {},
 });
 
