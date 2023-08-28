@@ -19,6 +19,7 @@ class GPUResource extends JsonResource
             'model' => $this->component->model,
             'price' => $this->component->price,
             'description' => $this->component->description,
+            'memory' => $this->component->memory,
             'product_type' => "Grafička",
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
