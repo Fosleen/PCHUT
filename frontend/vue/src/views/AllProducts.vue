@@ -9,6 +9,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import PCPartCard from "../components/PCPartCard.vue";
+</script>
 
 <style lang="scss" scoped></style>

@@ -49,7 +49,7 @@ console.log("GPU PROP PROSLJEDNEI JE", gpu);
 </script>
 
 <style lang="scss" scoped>
-/* @import url("../utils/theme.scss"); //iz nekog razloga ovo ne radi u ovom fileu... */
+@import "../utils/theme.scss";
 .pc-part-card-wrapper {
   background-color: #eaeaea;
   //width: 300px;
@@ -76,14 +76,14 @@ console.log("GPU PROP PROSLJEDNEI JE", gpu);
 
 .pc-part-card-text-wrapper {
   h3 {
-    color: #36ae51;
+    color: $colorSuccess;
     font-size: 20px;
   }
 
   h2 {
     font-size: 32px;
     margin-bottom: 8px;
-    color: #282828;
+    color: $grey-dark;
   }
 }
 

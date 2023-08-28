@@ -28,25 +28,47 @@ import { ref } from "vue";
 const isDarkTheme = ref(true);
 
 const toggleTheme = () => {
-  //here we will make dark mode
   document.querySelector("body").style.backgroundColor = isDarkTheme.value
     ? "#282828"
     : "#f5f5f5";
 
-  document.querySelector(".pc-part-card-wrapper").style.backgroundColor =
-    isDarkTheme.value ? "#282828" : "#f5f5f5";
+  let pcPartCardWrapper = document.querySelector(".pc-part-card-wrapper");
 
-  document.querySelector(".pc-part-card-wrapper").style.boxShadow =
-    isDarkTheme.value ? "0 0 20px 0 #68E199" : "0 0 20px 0 #be166e";
+  let pcPartCardListItem = document.querySelector(".pc-part-card-list-item");
 
-  document.querySelector(".pc-part-card-text-group-name").style.color =
-    isDarkTheme.value ? "#D9D9D9" : "#282828";
+  let pcPartCardTextGroupName = document.querySelector(
+    ".pc-part-card-text-group-name"
+  );
 
-  document.querySelector(".pc-part-card-list-item").style.color =
-    isDarkTheme.value ? "#D9D9D9" : "#282828";
+  let pcPartCardPriceWrapper = document.querySelector(
+    ".pc-part-card-price-wrapper"
+  );
 
-  document.querySelector(".pc-part-card-price-wrapper").style.color =
-    isDarkTheme.value ? "#D9D9D9" : "#282828";
+  if (pcPartCardPriceWrapper) {
+    pcPartCardPriceWrapper.style.color = isDarkTheme.value
+      ? "#D9D9D9"
+      : "#282828";
+  }
+
+  if (pcPartCardListItem) {
+    pcPartCardListItem.style.color = isDarkTheme.value ? "#D9D9D9" : "#282828";
+  }
+
+  if (pcPartCardTextGroupName) {
+    pcPartCardTextGroupName.style.color = isDarkTheme.value
+      ? "#D9D9D9"
+      : "#282828";
+  }
+
+  if (pcPartCardWrapper) {
+    pcPartCardWrapper.style.backgroundColor = isDarkTheme.value
+      ? "#282828"
+      : "#f5f5f5";
+
+    pcPartCardWrapper.style.boxShadow = isDarkTheme.value
+      ? "0 0 20px 0 #68E199"
+      : "0 0 20px 0 #be166e";
+  }
 
   isDarkTheme.value = !isDarkTheme.value;
 };

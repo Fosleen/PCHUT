@@ -97,8 +97,6 @@ export default {
     flex-direction: row;
     justify-content: space-evenly;
   }
-  /* display: flex;
-  justify-content: space-evenly; */
 }
 
 .footer-badges-wrapper {
