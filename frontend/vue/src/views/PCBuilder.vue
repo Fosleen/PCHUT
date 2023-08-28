@@ -35,6 +35,50 @@
         alt=""
         class="pc-builder-background-image pc-builder-gpu-image"
       />
+
+      <div>
+        <Dropdown
+          placeholder="Odaberi dio"
+          :options="hardcodedOptions"
+          class="pc-builder-first-dropdown"
+        />
+      </div>
+      <Dropdown
+        placeholder="Odaberi dio"
+        :options="hardcodedOptions"
+        hardcoded-value="First option"
+        class="pc-builder-second-dropdown"
+      />
+      <Dropdown
+        placeholder="Odaberi dio"
+        :options="hardcodedOptions"
+        hardcoded-value="First option"
+        class="pc-builder-third-dropdown"
+      />
+      <Dropdown
+        placeholder="Odaberi dio"
+        :options="hardcodedOptions"
+        hardcoded-value="First option"
+        class="pc-builder-fourth-drodpown"
+      />
+      <Dropdown
+        placeholder="Odaberi dio"
+        :options="hardcodedOptions"
+        hardcoded-value="First option"
+        class="pc-builder-fifth-background"
+      />
+      <Dropdown
+        placeholder="Odaberi dio"
+        :options="hardcodedOptions"
+        hardcoded-value="First option"
+        class="pc-builder-sixth-background"
+      />
+      <Dropdown
+        placeholder="Odaberi dio"
+        :options="hardcodedOptions"
+        hardcoded-value="First option"
+        class="pc-builder-seventh-background"
+      />
     </div>
   </div>
 
@@ -42,12 +86,6 @@
     price="734.5"
     price-label="some label"
     button-text="Kupi"
-  />
-
-  <Dropdown
-    placeholder="Odaberi dio"
-    :options="hardcodedOptions"
-    hardcoded-value="First option"
   />
 </template>
 
@@ -78,6 +116,12 @@ const hardcodedOptions = [
   padding-top: 120px;
   padding-bottom: 120px;
   border-radius: 8px;
+
+  select {
+    position: absolute;
+    width: 25%;
+    z-index: 1000;
+  }
 }
 
 .pc-builder-custom-pc-image {
@@ -124,5 +168,37 @@ const hardcodedOptions = [
   left: 150px;
   z-index: 200;
   transform: rotate(-20deg);
+}
+
+.pc-builder-first-dropdown {
+  left: 50px;
+  top: 150px;
+}
+
+.pc-builder-second-dropdown {
+  left: 50px;
+}
+
+.pc-builder-third-dropdown {
+  left: 50px;
+  bottom: 200px;
+}
+
+.pc-builder-fourth-drodpown {
+  top: 100px;
+}
+
+.pc-builder-fifth-background {
+  bottom: 100px;
+}
+
+.pc-builder-sixth-background {
+  top: 300px;
+  right: 100px;
+}
+
+.pc-builder-seventh-background {
+  bottom: 160px;
+  right: 100px;
 }
 </style>

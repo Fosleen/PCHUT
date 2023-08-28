@@ -1,7 +1,7 @@
 <template>
   <select @input="$emit('input', $event.target.value)" v-bind="$attrs">
     <option value="" disabled>
-      {{ hardcodedValue }}
+      {{ placeholder }}
     </option>
     <option v-for="option in options" :key="option.id" :value="option.id">
       {{ option.name }}
