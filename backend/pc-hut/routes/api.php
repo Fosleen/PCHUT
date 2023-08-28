@@ -12,6 +12,7 @@ use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
 use App\Http\Controllers\MouseController;
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\RAMController;
 use App\Http\Controllers\SwitchTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,15 @@ Route::get('gpus/{id}', [GPUController::class, 'show']);
 Route::post('gpus', [GPUController::class, 'store']);
 Route::put('gpus/{id}', [GPUController::class, 'update']);
 Route::delete('gpus/{id}', [GPUController::class, 'destroy']);
+
+//=============================================================//
+
+Route::get('rams', [RAMController::class, 'index']);
+Route::get('rams/{id}', [RAMController::class, 'show']);
+Route::post('rams', [RAMController::class, 'store']);
+Route::delete('rams/{id}', [RAMController::class, 'destroy']);
+//=============================================================//
+
 
 Route::get('manufacturers', [ManufacturerController::class, 'index']);
 Route::get('manufacturers/{id}', [ManufacturerController::class, 'show']);
