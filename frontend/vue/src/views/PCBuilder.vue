@@ -43,10 +43,23 @@
     price-label="some label"
     button-text="Kupi"
   />
+
+  <Dropdown
+    placeholder="Odaberi dio"
+    :options="hardcodedOptions"
+    hardcoded-value="First option"
+  />
 </template>
 
 <script setup>
+import Dropdown from "../components/Dropdown.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
+
+const hardcodedOptions = [
+  { id: 1, name: "Option 1" },
+  { id: 2, name: "Option 2" },
+  { id: 3, name: "Option 3" },
+];
 </script>
 
 <style lang="scss">
