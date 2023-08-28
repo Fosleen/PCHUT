@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MonitorResource;
 use App\Models\Component;
 use App\Models\Monitor;
 use Illuminate\Http\Request;
@@ -89,7 +90,7 @@ class MonitorController extends Controller
     {
         $monitor = Monitor::with('component')->find($id);
         if ($monitor) {
-            return response()->json([$monitor], 200);
+            return new MonitorResource($monitor);
         } else {
             return response()->json([
                 'status' => 404,
