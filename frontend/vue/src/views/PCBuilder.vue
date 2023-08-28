@@ -38,43 +38,44 @@
 
       <div>
         <Dropdown
-          placeholder="Odaberi dio"
+          placeholder="Odaberi procesor"
+          :hardcodedValue="selectedOption"
           :options="hardcodedOptions"
           class="pc-builder-first-dropdown"
         />
       </div>
       <Dropdown
-        placeholder="Odaberi dio"
+        placeholder="Odaberi grafičku karticu"
         :options="hardcodedOptions"
         hardcoded-value="First option"
         class="pc-builder-second-dropdown"
       />
       <Dropdown
-        placeholder="Odaberi dio"
+        placeholder="Odaberi memoriju (pohranu)"
         :options="hardcodedOptions"
         hardcoded-value="First option"
         class="pc-builder-third-dropdown"
       />
       <Dropdown
-        placeholder="Odaberi dio"
+        placeholder="Odaberi RAM memoriju"
         :options="hardcodedOptions"
         hardcoded-value="First option"
         class="pc-builder-fourth-drodpown"
       />
       <Dropdown
-        placeholder="Odaberi dio"
+        placeholder="Odaberi napajanje"
         :options="hardcodedOptions"
         hardcoded-value="First option"
         class="pc-builder-fifth-background"
       />
       <Dropdown
-        placeholder="Odaberi dio"
+        placeholder="Odaberi matičnu ploču"
         :options="hardcodedOptions"
         hardcoded-value="First option"
         class="pc-builder-sixth-background"
       />
       <Dropdown
-        placeholder="Odaberi dio"
+        placeholder="Odaberi kućište"
         :options="hardcodedOptions"
         hardcoded-value="First option"
         class="pc-builder-seventh-background"
@@ -98,6 +99,8 @@ const hardcodedOptions = [
   { id: 2, name: "Option 2" },
   { id: 3, name: "Option 3" },
 ];
+
+let selectedOption = "Krvaprca"; // Set the initial selected option
 </script>
 
 <style lang="scss">
@@ -105,6 +108,7 @@ const hardcodedOptions = [
   display: flex;
   justify-content: center;
   padding-top: 48px;
+  padding-bottom: -20px;
 }
 .pc-builder-wrapper {
   background-color: #eee3ff;

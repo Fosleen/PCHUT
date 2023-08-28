@@ -1,6 +1,6 @@
 <template>
   <select @input="$emit('input', $event.target.value)" v-bind="$attrs">
-    <option value="" disabled>
+    <option :value="null" disabled selected>
       {{ placeholder }}
     </option>
     <option v-for="option in options" :key="option.id" :value="option.id">
@@ -10,6 +10,8 @@
 </template>
 
 <script setup>
+import { defineProps } from "vue";
+
 const props = defineProps({
   placeholder: String,
   options: Array,
