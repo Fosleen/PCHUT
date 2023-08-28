@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MotherboardResource;
 use App\Models\Component;
 use App\Models\Motherboard;
 use Illuminate\Http\Request;
@@ -77,7 +78,7 @@ class MotherboardController extends Controller
     {
         $motherboard = Motherboard::with('component')->find($id);
         if ($motherboard) {
-            return response()->json([$motherboard], 200);
+            return new MotherboardResource($motherboard);
         } else {
             return response()->json(['message' => 'motherboard not found!'], 500);
         }

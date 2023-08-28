@@ -29,12 +29,12 @@ class ComponentController extends Controller
     public function show($id)
     {
         $component = Component::find($id);
+        $component->images;
 
         if ($component) {
             return response()->json([
                 'status' => 200,
                 'component' => $component,
-                'images' =>  $component->images,
             ], 200);
         } else {
             return response()->json([
