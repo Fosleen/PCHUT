@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MouseResource;
 use App\Models\Component;
 use App\Models\Mouse;
 use Illuminate\Http\Request;
@@ -88,10 +89,7 @@ class MouseController extends Controller
         $mouse = Mouse::with('component')->find($id);
 
         if ($mouse) {
-            return response()->json([
-                'status' => 200,
-                'keyboard' => $mouse
-            ], 200);
+            return new MouseResource($mouse);
         } else {
             return response()->json([
                 'status' => 404,
