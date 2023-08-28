@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CPUResource;
 use App\Models\CPU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -81,10 +82,7 @@ class CPUController extends Controller
         $cpu = CPU::with('component')->find($id);
 
         if ($cpu) {
-            return response()->json([
-                'status' => 200,
-                'cpu' => $cpu
-            ], 200);
+            return new CPUResource($cpu);
         } else {
             return response()->json([
                 'status' => 404,
