@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('motherboard', function (Blueprint $table) {
+        Schema::create('ram', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('socket_id');
+            $table->integer("speed")->nullable(false);
             $table->unsignedBigInteger('ram_type_id');
-
-            $table->foreign('socket_id')->references('id')->on('socket');
             $table->foreign('ram_type_id')->references('id')->on('ram_type');
-
 
             $table->timestamps();
         });
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('motherboard');
+        Schema::dropIfExists('ram');
     }
 };
