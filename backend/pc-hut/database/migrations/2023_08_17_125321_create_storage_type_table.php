@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('storage_type', function (Blueprint $table) {
             $table->id();
             $table->string("name", 45)->nullable(false);
-            $table->text("description")->nullable(true);
             $table->timestamps();
         });
     }

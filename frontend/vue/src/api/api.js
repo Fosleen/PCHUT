@@ -18,6 +18,12 @@ export function getAllRAMs() {
   });
 }
 
+export function getAllStorages() {
+  return axiosClient.get("/storages").then(({ data }) => {
+    return data;
+  });
+}
+
 export function getAllPSUs() {
   return axiosClient.get("/psus").then(({ data }) => {
     return data;

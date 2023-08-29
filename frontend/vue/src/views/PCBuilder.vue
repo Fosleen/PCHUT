@@ -52,7 +52,7 @@
       />
       <Dropdown
         placeholder="Odaberi memoriju (pohranu)"
-        :options="hardcodedOptions"
+        :options="storages"
         hardcoded-value="First option"
         class="pc-builder-third-dropdown"
       />
@@ -99,6 +99,7 @@ import {
   getAllCPUs,
   getAllMotherboards,
   getAllRAMs,
+  getAllStorages,
 } from "../api/api";
 
 const hardcodedOptions = [
@@ -112,6 +113,8 @@ const cpus = ref([]);
 const motherboards = ref([]);
 
 const rams = ref([]);
+
+const storages = ref([]);
 
 onMounted(async () => {
   const graphicCards = await getAllGraphicCards();
@@ -129,6 +132,10 @@ onMounted(async () => {
   const allRams = await getAllRAMs();
   rams.value = allRams.rams;
   console.log("Rams", rams.value);
+
+  const allStorages = await getAllStorages();
+  storages.value = allStorages.rams;
+  console.log("Storages", storages.value);
 });
 </script>
 

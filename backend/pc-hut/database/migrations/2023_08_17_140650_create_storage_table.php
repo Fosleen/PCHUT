@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('storage', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('manufacturer_id');
             $table->unsignedBigInteger('storage_type_id');
             $table->integer("size")->nullable(false);
-            $table->string("model", 45)->nullable(false);
-            $table->text("description")->nullable(true);
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
             $table->foreign('storage_type_id')->references('id')->on('storage_type');
             $table->timestamps();
         });
