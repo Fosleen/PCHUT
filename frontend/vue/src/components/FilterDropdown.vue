@@ -58,25 +58,102 @@
       </div>
 
       <div class="filter-dropdown-custom-filters">
-        <div class="filter-dropdown-custom-filter-cores">
-          <h4>BROJ JEZGRI</h4>
-          <CheckboxInput
-            value="1"
-            name="cores"
-            id="core-1"
-            @checkbox-click="changeCheckboxes('core-1', 'cores')"
-          />
+        <div class="filter-dropdown-custom-filter-group">
+          <h4>BROJ JEZGRI:</h4>
           <CheckboxInput
             value="2"
             name="cores"
-            id="core-2"
-            @checkbox-click="changeCheckboxes('core-2', 'cores')"
+            id="2"
+            @checkbox-click="changeCheckboxes('2', 'cores')"
           />
           <CheckboxInput
-            value="3"
+            value="4"
             name="cores"
-            id="core-3"
-            @checkbox-click="changeCheckboxes('core-3', 'cores')"
+            id="4"
+            @checkbox-click="changeCheckboxes('4', 'cores')"
+          />
+          <CheckboxInput
+            value="6"
+            name="cores"
+            id="6"
+            @checkbox-click="changeCheckboxes('6', 'cores')"
+          />
+          <CheckboxInput
+            value="8"
+            name="cores"
+            id="8"
+            @checkbox-click="changeCheckboxes('8', 'cores')"
+          />
+          <CheckboxInput
+            value="10"
+            name="cores"
+            id="10"
+            @checkbox-click="changeCheckboxes('10', 'cores')"
+          /><CheckboxInput
+            value="12"
+            name="cores"
+            id="12"
+            @checkbox-click="changeCheckboxes('12', 'cores')"
+          />
+          <CheckboxInput
+            value="14"
+            name="cores"
+            id="14"
+            @checkbox-click="changeCheckboxes('14', 'cores')"
+          />
+          <CheckboxInput
+            value="16"
+            name="cores"
+            id="16"
+            @checkbox-click="changeCheckboxes('16', 'cores')"
+          />
+        </div>
+        <div class="filter-dropdown-custom-filter-group">
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="AMD"
+            name="manufacturers"
+            id="AMD"
+            @checkbox-click="changeCheckboxes('AMD', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Intel"
+            name="manufacturers"
+            id="Intel"
+            @checkbox-click="changeCheckboxes('Intel-4', 'manufacturers')"
+          />
+        </div>
+        <div class="filter-dropdown-custom-filter-group">
+          <h4>SERIJA:</h4>
+          <CheckboxInput
+            value="Intel Core i3"
+            name="series"
+            id="intel-core-i3"
+            @checkbox-click="changeCheckboxes('Intel Core i3', 'series')"
+          />
+          <CheckboxInput
+            value="Intel Core i5"
+            name="series"
+            id="intel-core-i5"
+            @checkbox-click="changeCheckboxes('Intel Core i5', 'series')"
+          />
+          <CheckboxInput
+            value="Intel Core i7"
+            name="series"
+            id="intel-core-i7"
+            @checkbox-click="changeCheckboxes('Intel Core i7', 'series')"
+          />
+          <CheckboxInput
+            value="Intel Core i9"
+            name="series"
+            id="intel-core-i9"
+            @checkbox-click="changeCheckboxes('Intel Core i9', 'series')"
+          />
+          <CheckboxInput
+            value="Intel Pentium Gold"
+            name="series"
+            id="Intel Pentium Gold"
+            @checkbox-click="changeCheckboxes('Intel Pentium Gold', 'series')"
           />
         </div>
       </div>
@@ -93,7 +170,7 @@ import {
   PhKeyboard,
   PhTrash,
 } from "@phosphor-icons/vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import RangeSlider from "./RangeSlider.vue";
 import CheckboxInput from "./CheckboxInput.vue";
 
@@ -101,6 +178,8 @@ let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
 const cores = ref([]);
+const manufacturers = ref([]);
+const series = ref([]);
 
 function changePriceRange(min, max) {
   minRange.value = min;
@@ -286,7 +365,7 @@ function changeCheckboxes(id, groupName) {
         font-weight: 300;
       }
 
-      .filter-dropdown-custom-filter-cores {
+      .filter-dropdown-custom-filter-group {
         display: flex;
         flex-direction: column;
         gap: 8px;
