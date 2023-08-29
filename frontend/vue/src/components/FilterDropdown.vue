@@ -13,10 +13,12 @@
           <li><PhMouse :size="26" />MIŠEVI</li>
           <li><PhMonitor :size="26" />MONITORI</li>
         </ul>
-        <div class="filter-dropdown-close-button"><PhX :size="32" /></div>
+        <div class="filter-dropdown-close-button">
+          <PhX :size="32" />
+        </div>
       </div>
       <div class="filter-dropdown-applied-filters">
-        <div class="filter-dropdown-applied-filters-title">
+        <div class="filter-dropdown-applied-filters-row">
           <h3>PRIMIJENJENI FILTERI:</h3>
           <PhTrash :size="26" color="#FFABAB" />
         </div>
@@ -36,10 +38,18 @@
         </div>
       </div>
       <div class="filter-dropdown-price-range">
-        <div class="filter-dropdown-price-range-title">
+        <div class="filter-dropdown-price-range-row">
           <h3>RASPON CIJENE:</h3>
+          <div class="filter-dropdown-price-range-inputs">
+            <input type="text" v-model="minRange" disabled />
+            <p>€ -</p>
+            <input type="text" v-model="maxRange" disabled />
+            <p>€</p>
+          </div>
         </div>
-        <p>-------O-----O--</p>
+        <div class="filter-dropdown-price-range-slider">
+          <RangeSlider @price-range-change="changePriceRange" />
+        </div>
       </div>
     </div>
   </div>
@@ -54,6 +64,16 @@ import {
   PhKeyboard,
   PhTrash,
 } from "@phosphor-icons/vue";
+import { ref } from "vue";
+import RangeSlider from "./RangeSlider.vue";
+
+let minRange = ref(0); // default values
+let maxRange = ref(6000);
+
+function changePriceRange(min, max) {
+  minRange.value = min;
+  maxRange.value = max;
+}
 </script>
 
 <style lang="scss">
@@ -113,7 +133,7 @@ import {
     .filter-dropdown-applied-filters {
       margin: 10px;
 
-      .filter-dropdown-applied-filters-title {
+      .filter-dropdown-applied-filters-row {
         display: flex;
         justify-content: space-between;
         color: $colorTextSecondary;
@@ -142,6 +162,47 @@ import {
           font-weight: 600;
           color: $colorTextPrimary;
         }
+      }
+    }
+
+    .filter-dropdown-price-range {
+      margin: 16px 10px;
+
+      .filter-dropdown-price-range-row {
+        display: flex;
+        gap: 10px;
+        color: $colorTextSecondary;
+        align-items: center;
+
+        h3 {
+          font-size: 20px;
+          font-weight: 300;
+        }
+
+        .filter-dropdown-price-range-inputs {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          input {
+            text-align: center;
+            width: 56px;
+            padding: 8px 0;
+            border: none;
+            background-color: $grey-dark;
+            color: $colorTextSecondary;
+          }
+
+          p {
+            color: $colorTextSecondary;
+            font-size: 16px;
+            width: fit-content;
+          }
+        }
+      }
+
+      .filter-dropdown-price-range-slider {
+        margin: 32px 0;
       }
     }
   }
