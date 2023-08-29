@@ -123,7 +123,10 @@
             @checkbox-click="changeCheckboxes('16', 'cores')"
           />
         </div>
-        <div class="filter-dropdown-custom-filter-group">
+        <div
+          v-if="isTypeShown('cpu')"
+          class="filter-dropdown-custom-filter-group"
+        >
           <h4>PROIZVOĐAČ:</h4>
           <CheckboxInput
             value="AMD"
@@ -138,7 +141,10 @@
             @checkbox-click="changeCheckboxes('Intel', 'manufacturers')"
           />
         </div>
-        <div class="filter-dropdown-custom-filter-group">
+        <div
+          v-if="isTypeShown('cpu')"
+          class="filter-dropdown-custom-filter-group"
+        >
           <h4
             v-if="
               isFilterShown('Intel', 'manufacturers') ||
@@ -235,13 +241,16 @@ let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
 const selectedComponentType = ref("");
-const cores = ref([]);
-const manufacturers = ref([]);
-const series = ref([]);
+let cores = ref([]);
+let manufacturers = ref([]);
+let series = ref([]);
 
 function displayFilter(componentType) {
+  manufacturers.value = [];
+  cores.value = [];
+  series.value = [];
+
   selectedComponentType.value = componentType;
-  console.log(selectedComponentType.value);
 }
 
 function changePriceRange(min, max) {
@@ -263,6 +272,8 @@ function changeCheckboxes(id, groupName) {
 }
 
 function isFilterShown(name, groupName) {
+  console.log(JSON.parse(JSON.stringify(manufacturers.value)));
+
   return this[groupName].includes(name);
 }
 
