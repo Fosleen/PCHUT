@@ -120,41 +120,83 @@
             value="Intel"
             name="manufacturers"
             id="Intel"
-            @checkbox-click="changeCheckboxes('Intel-4', 'manufacturers')"
+            @checkbox-click="changeCheckboxes('Intel', 'manufacturers')"
           />
         </div>
         <div class="filter-dropdown-custom-filter-group">
-          <h4>SERIJA:</h4>
-          <CheckboxInput
-            value="Intel Core i3"
-            name="series"
-            id="intel-core-i3"
-            @checkbox-click="changeCheckboxes('Intel Core i3', 'series')"
-          />
-          <CheckboxInput
-            value="Intel Core i5"
-            name="series"
-            id="intel-core-i5"
-            @checkbox-click="changeCheckboxes('Intel Core i5', 'series')"
-          />
-          <CheckboxInput
-            value="Intel Core i7"
-            name="series"
-            id="intel-core-i7"
-            @checkbox-click="changeCheckboxes('Intel Core i7', 'series')"
-          />
-          <CheckboxInput
-            value="Intel Core i9"
-            name="series"
-            id="intel-core-i9"
-            @checkbox-click="changeCheckboxes('Intel Core i9', 'series')"
-          />
-          <CheckboxInput
-            value="Intel Pentium Gold"
-            name="series"
-            id="Intel Pentium Gold"
-            @checkbox-click="changeCheckboxes('Intel Pentium Gold', 'series')"
-          />
+          <h4
+            v-if="
+              isFilterShown('Intel', 'manufacturers') ||
+              isFilterShown('AMD', 'manufacturers')
+            "
+          >
+            SERIJA:
+          </h4>
+
+          <div
+            v-if="isFilterShown('AMD', 'manufacturers')"
+            class="filter-dropdown-custom-filter-subgroup"
+          >
+            <CheckboxInput
+              value="AMD Ryzen 3"
+              name="series"
+              id="AMD Ryzen 3"
+              @checkbox-click="changeCheckboxes('AMD Ryzen 3', 'series')"
+            />
+            <CheckboxInput
+              value="AMD Ryzen 5"
+              name="series"
+              id="AMD Ryzen 5"
+              @checkbox-click="changeCheckboxes('AMD Ryzen 5', 'series')"
+            />
+            <CheckboxInput
+              value="AMD Ryzen 7"
+              name="series"
+              id="AMD Ryzen 7"
+              @checkbox-click="changeCheckboxes('AMD Ryzen 7', 'series')"
+            />
+            <CheckboxInput
+              value="AMD Ryzen 9"
+              name="series"
+              id="AMD Ryzen 9"
+              @checkbox-click="changeCheckboxes('AMD Ryzen 9', 'series')"
+            />
+          </div>
+          <div
+            v-if="isFilterShown('Intel', 'manufacturers')"
+            class="filter-dropdown-custom-filter-subgroup"
+          >
+            <CheckboxInput
+              value="Intel Core i3"
+              name="series"
+              id="intel-core-i3"
+              @checkbox-click="changeCheckboxes('Intel Core i3', 'series')"
+            />
+            <CheckboxInput
+              value="Intel Core i5"
+              name="series"
+              id="intel-core-i5"
+              @checkbox-click="changeCheckboxes('Intel Core i5', 'series')"
+            />
+            <CheckboxInput
+              value="Intel Core i7"
+              name="series"
+              id="intel-core-i7"
+              @checkbox-click="changeCheckboxes('Intel Core i7', 'series')"
+            />
+            <CheckboxInput
+              value="Intel Core i9"
+              name="series"
+              id="intel-core-i9"
+              @checkbox-click="changeCheckboxes('Intel Core i9', 'series')"
+            />
+            <CheckboxInput
+              value="Intel Pentium Gold"
+              name="series"
+              id="Intel Pentium Gold"
+              @checkbox-click="changeCheckboxes('Intel Pentium Gold', 'series')"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -197,6 +239,15 @@ function changeCheckboxes(id, groupName) {
   }
 
   console.log(JSON.parse(JSON.stringify(groupArray))); // removes JS proxy and leaves normal array
+}
+
+function isFilterShown(name, groupName) {
+  console.log(name);
+
+  const groupArray = this[groupName];
+  console.log(groupArray.includes(name));
+
+  return groupArray.includes(name);
 }
 </script>
 
@@ -366,6 +417,12 @@ function changeCheckboxes(id, groupName) {
       }
 
       .filter-dropdown-custom-filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .filter-dropdown-custom-filter-subgroup {
         display: flex;
         flex-direction: column;
         gap: 8px;
