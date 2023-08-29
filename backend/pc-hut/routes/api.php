@@ -12,6 +12,7 @@ use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
 use App\Http\Controllers\MouseController;
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\PSUController;
 use App\Http\Controllers\RAMController;
 use App\Http\Controllers\SwitchTypeController;
 use Illuminate\Http\Request;
@@ -77,6 +78,13 @@ Route::get('rams', [RAMController::class, 'index']);
 Route::get('rams/{id}', [RAMController::class, 'show']);
 Route::post('rams', [RAMController::class, 'store']);
 Route::delete('rams/{id}', [RAMController::class, 'destroy']);
+//=============================================================//
+
+
+Route::get('psus', [PSUController::class, 'index']);
+Route::get('psus/{id}', [PSUController::class, 'show']);
+Route::post('psus', [PSUController::class, 'store']);
+Route::delete('psus/{id}', [PSUController::class, 'destroy']);
 //=============================================================//
 
 
