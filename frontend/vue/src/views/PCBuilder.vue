@@ -134,7 +134,7 @@ onMounted(async () => {
   console.log("Rams", rams.value);
 
   const allStorages = await getAllStorages();
-  storages.value = allStorages.rams;
+  storages.value = allStorages.storages;
   console.log("Storages", storages.value);
 });
 </script>
