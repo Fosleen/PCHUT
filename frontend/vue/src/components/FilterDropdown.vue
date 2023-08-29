@@ -17,12 +17,12 @@
           <PhX :size="32" />
         </div>
       </div>
-      <div class="filter-dropdown-applied-filters">
+      <div class="filter-dropdown-applied-filters-container">
         <div class="filter-dropdown-applied-filters-row">
           <h3>PRIMIJENJENI FILTERI:</h3>
           <PhTrash :size="26" color="#FFABAB" />
         </div>
-        <div class="filter-dropdown-applied-filters-container">
+        <div class="filter-dropdown-applied-filters-inner">
           <div class="filter-dropdown-applied-filters-item">
             <PhX weight="bold" /> tipkovnice
           </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="filter-dropdown-price-range">
+      <div class="filter-dropdown-price-range-container">
         <div class="filter-dropdown-price-range-row">
           <h3>RASPON CIJENE:</h3>
           <div class="filter-dropdown-price-range-inputs">
@@ -49,6 +49,35 @@
         </div>
         <div class="filter-dropdown-price-range-slider">
           <RangeSlider @price-range-change="changePriceRange" />
+        </div>
+      </div>
+
+      <div class="filter-dropdown-only-avaliable-container">
+        <input id="ch" type="checkbox" />
+        <h3>SAMO ODMAH DOSTUPNI:</h3>
+      </div>
+
+      <div class="filter-dropdown-custom-filters">
+        <div class="filter-dropdown-custom-filter-cores">
+          <h4>BROJ JEZGRI</h4>
+          <CheckboxInput
+            value="1"
+            name="cores"
+            id="core-1"
+            @checkbox-click="changeCheckboxes('core-1', 'cores')"
+          />
+          <CheckboxInput
+            value="2"
+            name="cores"
+            id="core-2"
+            @checkbox-click="changeCheckboxes('core-2', 'cores')"
+          />
+          <CheckboxInput
+            value="3"
+            name="cores"
+            id="core-3"
+            @checkbox-click="changeCheckboxes('core-3', 'cores')"
+          />
         </div>
       </div>
     </div>
@@ -66,13 +95,29 @@ import {
 } from "@phosphor-icons/vue";
 import { ref } from "vue";
 import RangeSlider from "./RangeSlider.vue";
+import CheckboxInput from "./CheckboxInput.vue";
 
 let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
+const cores = ref([]);
+
 function changePriceRange(min, max) {
   minRange.value = min;
   maxRange.value = max;
+}
+
+function changeCheckboxes(id, groupName) {
+  const groupArray = this[groupName];
+
+  const index = groupArray.indexOf(id);
+  if (index !== -1) {
+    groupArray.splice(index, 1);
+  } else {
+    groupArray.push(id);
+  }
+
+  console.log(JSON.parse(JSON.stringify(groupArray))); // removes JS proxy and leaves normal array
 }
 </script>
 
@@ -130,7 +175,7 @@ function changePriceRange(min, max) {
       }
     }
 
-    .filter-dropdown-applied-filters {
+    .filter-dropdown-applied-filters-container {
       margin: 10px;
 
       .filter-dropdown-applied-filters-row {
@@ -143,7 +188,7 @@ function changePriceRange(min, max) {
           font-weight: 300;
         }
       }
-      .filter-dropdown-applied-filters-container {
+      .filter-dropdown-applied-filters-inner {
         margin: 16px 0;
         display: flex;
         flex-wrap: wrap;
@@ -161,11 +206,15 @@ function changePriceRange(min, max) {
           font-size: 16px;
           font-weight: 600;
           color: $colorTextPrimary;
+
+          & svg {
+            cursor: pointer;
+          }
         }
       }
     }
 
-    .filter-dropdown-price-range {
+    .filter-dropdown-price-range-container {
       margin: 16px 10px;
 
       .filter-dropdown-price-range-row {
@@ -203,6 +252,44 @@ function changePriceRange(min, max) {
 
       .filter-dropdown-price-range-slider {
         margin: 32px 0;
+      }
+    }
+
+    .filter-dropdown-only-avaliable-container {
+      display: flex;
+      color: $colorTextSecondary;
+      justify-content: start;
+      align-items: center;
+      gap: 4px;
+
+      input {
+        accent-color: #68e199;
+        background-color: gray;
+        height: 20px;
+        width: 20px;
+        margin: 0 10px;
+      }
+
+      h3 {
+        font-size: 20px;
+        font-weight: 300;
+      }
+    }
+
+    .filter-dropdown-custom-filters {
+      color: $colorTextSecondary;
+      margin: 10px;
+
+      h4 {
+        margin: 24px 0 0px;
+        font-size: 20px;
+        font-weight: 300;
+      }
+
+      .filter-dropdown-custom-filter-cores {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
     }
   }
