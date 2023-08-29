@@ -13,13 +13,7 @@ return new class extends Migration
     {
         Schema::create('psu', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('manufacturer_id');
-            $table->unsignedBigInteger('pc_id');
-            $table->string("model", 45)->nullable(false);
             $table->float("power")->nullable(false);
-            $table->text("description")->nullable(true);
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturer');
-            $table->foreign('pc_id')->references('id')->on('pc');
             $table->timestamps();
         });
     }
