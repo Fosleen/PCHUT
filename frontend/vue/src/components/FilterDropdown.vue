@@ -3,25 +3,49 @@
     <div class="filter-dropdown-component-container">
       <div class="filter-dropdown-component-types-container">
         <ul class="">
-          <li @click="displayFilter('pc')">
+          <li @mouseover="displayFilter('pc')" @click="displayFilter('pc')">
             <PhCpu :size="26" />LAPTOPI, RAČUNALA
           </li>
-          <li @click="displayFilter('cpu')"><PhCpu :size="26" />PROCESORI</li>
-          <li @click="displayFilter('gpu')">
+          <li @mouseover="displayFilter('cpu')" @click="displayFilter('cpu')">
+            <PhCpu :size="26" />PROCESORI
+          </li>
+          <li @mouseover="displayFilter('gpu')" @click="displayFilter('gpu')">
             <PhCpu :size="26" />GRAFIČKE KARTICE
           </li>
-          <li @click="displayFilter('motherboard')">
+          <li
+            @mouseover="displayFilter('motherboard')"
+            @click="displayFilter('motherboard')"
+          >
             <PhCpu :size="26" />MATIČNE PLOČE
           </li>
-          <li @click="displayFilter('cooling')">
+          <li
+            @mouseover="displayFilter('cooling')"
+            @click="displayFilter('cooling')"
+          >
             <PhCpu :size="26" />HLAĐENJE
           </li>
-          <li @click="displayFilter('memory')"><PhCpu :size="26" />MEMORIJA</li>
-          <li @click="displayFilter('keyboard')">
+          <li
+            @mouseover="displayFilter('memory')"
+            @click="displayFilter('memory')"
+          >
+            <PhCpu :size="26" />MEMORIJA
+          </li>
+          <li
+            @mouseover="displayFilter('keyboard')"
+            @click="displayFilter('keyboard')"
+          >
             <PhKeyboard :size="26" />TIPKOVNICE
           </li>
-          <li @click="displayFilter('mouse')"><PhMouse :size="26" />MIŠEVI</li>
-          <li @click="displayFilter('monitor')">
+          <li
+            @mouseover="displayFilter('mouse')"
+            @click="displayFilter('mouse')"
+          >
+            <PhMouse :size="26" />MIŠEVI
+          </li>
+          <li
+            @mouseover="displayFilter('monitor')"
+            @click="displayFilter('monitor')"
+          >
             <PhMonitor :size="26" />MONITORI
           </li>
         </ul>
