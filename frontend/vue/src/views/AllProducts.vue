@@ -1,5 +1,6 @@
 <template>
   <div>
+    <FilterDropdown />
     <router-link to="/mouse/1"> <p>Mis</p></router-link>
     <router-link to="/cpu/1"> <p>CPU</p></router-link>
     <router-link to="/gpu/1"> <p>GPU</p></router-link>
@@ -10,7 +11,7 @@
 </template>
 
 <script setup>
-import PCPartCard from "../components/PCPartCard.vue";
+import FilterDropdown from "../components/FilterDropdown.vue";
 </script>
 
 <style lang="scss" scoped></style>
