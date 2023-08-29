@@ -12,6 +12,7 @@ use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
 use App\Http\Controllers\MouseController;
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\PSUController;
 use App\Http\Controllers\RAMController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SwitchTypeController;
@@ -84,6 +85,13 @@ Route::get('storages', [StorageController::class, 'index']);
 Route::get('storages/{id}', [StorageController::class, 'show']);
 Route::post('storages', [StorageController::class, 'store']);
 Route::delete('storages/{id}', [StorageController::class, 'destroy']);
+//=============================================================//
+
+
+Route::get('psus', [PSUController::class, 'index']);
+Route::get('psus/{id}', [PSUController::class, 'show']);
+Route::post('psus', [PSUController::class, 'store']);
+Route::delete('psus/{id}', [PSUController::class, 'destroy']);
 //=============================================================//
 
 
