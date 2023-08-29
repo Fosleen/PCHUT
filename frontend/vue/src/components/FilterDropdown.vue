@@ -3,15 +3,27 @@
     <div class="filter-dropdown-component-container">
       <div class="filter-dropdown-component-types-container">
         <ul class="">
-          <li><PhCpu :size="26" />LAPTOPI, RAČUNALA</li>
-          <li><PhCpu :size="26" />PROCESORI</li>
-          <li><PhCpu :size="26" />GRAFIČKE KARTICE</li>
-          <li><PhCpu :size="26" />MATIČNE PLOČE</li>
-          <li><PhCpu :size="26" />HLAĐENJE</li>
-          <li><PhCpu :size="26" />MEMORIJA</li>
-          <li><PhKeyboard :size="26" />TIPKOVNICE</li>
-          <li><PhMouse :size="26" />MIŠEVI</li>
-          <li><PhMonitor :size="26" />MONITORI</li>
+          <li @click="displayFilter('pc')">
+            <PhCpu :size="26" />LAPTOPI, RAČUNALA
+          </li>
+          <li @click="displayFilter('cpu')"><PhCpu :size="26" />PROCESORI</li>
+          <li @click="displayFilter('gpu')">
+            <PhCpu :size="26" />GRAFIČKE KARTICE
+          </li>
+          <li @click="displayFilter('motherboard')">
+            <PhCpu :size="26" />MATIČNE PLOČE
+          </li>
+          <li @click="displayFilter('cooling')">
+            <PhCpu :size="26" />HLAĐENJE
+          </li>
+          <li @click="displayFilter('memory')"><PhCpu :size="26" />MEMORIJA</li>
+          <li @click="displayFilter('keyboard')">
+            <PhKeyboard :size="26" />TIPKOVNICE
+          </li>
+          <li @click="displayFilter('mouse')"><PhMouse :size="26" />MIŠEVI</li>
+          <li @click="displayFilter('monitor')">
+            <PhMonitor :size="26" />MONITORI
+          </li>
         </ul>
         <div class="filter-dropdown-close-button">
           <PhX :size="32" />
@@ -58,7 +70,10 @@
       </div>
 
       <div class="filter-dropdown-custom-filters">
-        <div class="filter-dropdown-custom-filter-group">
+        <div
+          v-if="isTypeShown('cpu')"
+          class="filter-dropdown-custom-filter-group"
+        >
           <h4>BROJ JEZGRI:</h4>
           <CheckboxInput
             value="2"
@@ -219,9 +234,15 @@ import CheckboxInput from "./CheckboxInput.vue";
 let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
+const selectedComponentType = ref("");
 const cores = ref([]);
 const manufacturers = ref([]);
 const series = ref([]);
+
+function displayFilter(componentType) {
+  selectedComponentType.value = componentType;
+  console.log(selectedComponentType.value);
+}
 
 function changePriceRange(min, max) {
   minRange.value = min;
@@ -242,12 +263,11 @@ function changeCheckboxes(id, groupName) {
 }
 
 function isFilterShown(name, groupName) {
-  console.log(name);
+  return this[groupName].includes(name);
+}
 
-  const groupArray = this[groupName];
-  console.log(groupArray.includes(name));
-
-  return groupArray.includes(name);
+function isTypeShown(groupName) {
+  return selectedComponentType.value === groupName;
 }
 </script>
 
@@ -302,6 +322,7 @@ function isFilterShown(name, groupName) {
         background-color: $white-dark;
         color: $colorSecondary;
         border-radius: 8px;
+        cursor: pointer;
       }
     }
 
