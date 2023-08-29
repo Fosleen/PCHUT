@@ -12,21 +12,16 @@ class MotherboardController extends Controller
 {
     public function index()
     {
-        $motherboards = Motherboard::with('component')->get();
 
-        foreach ($motherboards as $motherboard) {
-            $motherboardModel = $motherboard->model;
-            $motherboardManufacturer = $motherboard->manufacturer_id;
-            $componentModel = $motherboard->component->model;
-            $componentMemory = $motherboard->component->memory;
-            $componentPrice = $motherboard->component->price;
-        }
+        $motherboards = Motherboard::with('component')->get();
+        $formattedmotherboards = MotherboardResource::collection($motherboards);
 
         return response()->json([
             'status' => 200,
-            'motherboards' => $motherboards,
+            'motherboards' => $formattedmotherboards,
         ], 200);
     }
+
 
     public function store(Request $request)
     {
@@ -35,6 +30,8 @@ class MotherboardController extends Controller
             'price' => 'required|integer',
             'manufacturer_id' => 'required|integer',
             'socket_id' => 'required|integer',
+            'ram_type_id' => 'required|integer',
+
             'description' => 'string'
         ]);
 
@@ -50,7 +47,9 @@ class MotherboardController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'socket_id' => $request->socket_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'ram_type_id' => $request->ram_type_id,
+
             ]);
 
             $motherboard->save();

@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RAMResource;
-use App\Models\RAM;
+use App\Http\Resources\StorageResource;
+use App\Models\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Component;
 
 
 
-class RAMController extends Controller
+class StorageController extends Controller
 {
     public function index()
     {
-        $rams = RAM::with('component')->get();
-        $formattedrams = RAMResource::collection($rams);
+        $storages = Storage::with('component')->get();
+        $formattedstorages = StorageResource::collection($storages);
 
         return response()->json([
             'status' => 200,
-            'rams' => $formattedrams,
+            'storages' => $formattedstorages,
         ], 200);
     }
 
@@ -28,9 +28,8 @@ class RAMController extends Controller
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
             'price' => 'required|numeric',
-            'speed' => 'required|integer',
             'manufacturer_id' => 'required|integer',
-            'ram_type_id' => 'required|integer',
+            'storage_type_id' => 'required|integer',
             'description' => 'string'
         ]);
 
@@ -40,47 +39,33 @@ class RAMController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $ram = new RAM([
+            $storage = new Storage([
                 'model' => $request->model,
                 'price' => $request->price,
-                'speed' => $request->speed,
                 'manufacturer_id' => $request->manufacturer_id,
-                'ram_type_id' => $request->ram_type_id,
-                'description' => $request->description
+                'storage_type_id' => $request->storage_type_id,
+                'description' => $request->description,
+                'size' => $request->size,
             ]);
 
-            $ram->save();
+            $storage->save();
 
             $component = Component::create([
                 'model' => $request->model,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
-                'productable_id' => $ram->id,
-                'productable_type' => ram::class,
+                'productable_id' => $storage->id,
+                'productable_type' => Storage::class,
             ]);
 
-            $ram->component()->save($component);
+            $storage->component()->save($component);
 
-            if ($ram) {
-                return response()->json(['message' => 'ram created successfully'], 200);
+            if ($storage) {
+                return response()->json(['message' => 'storage created successfully'], 200);
             } else {
-                return response()->json(['message' => 'ram not created!'], 500);
+                return response()->json(['message' => 'storage not created!'], 500);
             }
-        }
-    }
-
-    public function show($id)
-    {
-        $ram = RAM::with('component')->find($id);
-
-        if ($ram) {
-            return new RAMResource($ram);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => "No ram found"
-            ], 404);
         }
     }
 }

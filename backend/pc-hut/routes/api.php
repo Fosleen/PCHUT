@@ -14,6 +14,7 @@ use App\Http\Controllers\MouseController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PSUController;
 use App\Http\Controllers\RAMController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SwitchTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +79,12 @@ Route::get('rams', [RAMController::class, 'index']);
 Route::get('rams/{id}', [RAMController::class, 'show']);
 Route::post('rams', [RAMController::class, 'store']);
 Route::delete('rams/{id}', [RAMController::class, 'destroy']);
+//=============================================================//
+
+Route::get('storages', [StorageController::class, 'index']);
+Route::get('storages/{id}', [StorageController::class, 'show']);
+Route::post('storages', [StorageController::class, 'store']);
+Route::delete('storages/{id}', [StorageController::class, 'destroy']);
 //=============================================================//
 
 

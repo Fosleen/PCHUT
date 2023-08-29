@@ -4,7 +4,7 @@
       name: 'ProductDetails',
       params: {
         productable_type: getModelName(),
-        id: gpu.component.productable_id,
+        id: gpu.productable_id,
       },
     }"
     class="pc-part-card-link"
@@ -16,12 +16,12 @@
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
           :text-group-name="gpu.model"
-          :text-group-items="[`${gpu.memory} GB memorije`]"
+          :text-group-items="[gpu.memory]"
         />
 
         <h3>Dostupno</h3>
         <h2 class="pc-part-card-price-wrapper">
-          {{ `${gpu.component.price} E` }}
+          {{ `${gpu.price} E` }}
         </h2>
       </div>
 
@@ -41,7 +41,7 @@ const { gpu } = defineProps({
 });
 
 const getModelName = () => {
-  const modelName = gpu.component.productable_type.replace("App\\Models\\", "");
+  const modelName = gpu.productable_type.replace("App\\Models\\", "");
   return modelName;
 };
 

@@ -13,18 +13,11 @@ class CPUController extends Controller
     public function index()
     {
         $cpus = CPU::with('component')->get();
-
-        foreach ($cpus as $cpu) {
-            $cpuModel = $cpu->model;
-            $cpuManufacturer = $cpu->manufacturer_id;
-            $componentModel = $cpu->component->model;
-            $componentMemory = $cpu->component->memory;
-            $componentPrice = $cpu->component->price;
-        }
+        $formattedcpus = CPUResource::collection($cpus);
 
         return response()->json([
             'status' => 200,
-            'cpus' => $cpus,
+            'cpus' => $formattedcpus,
         ], 200);
     }
 
