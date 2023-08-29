@@ -13,7 +13,7 @@ class Motherboard extends Model
 
     protected $table = 'motherboard';
 
-    protected $fillable = ['socket_id'];
+    protected $fillable = ['socket_id', 'ram_type_id'];
 
     public function component(): MorphOne
     {
@@ -23,5 +23,10 @@ class Motherboard extends Model
     public function socket(): BelongsTo
     {
         return $this->belongsTo(Socket::class, 'socket_id');
+    }
+
+    public function ram_type(): BelongsTo
+    {
+        return $this->belongsTo(RamType::class, 'ram_type_id');
     }
 }

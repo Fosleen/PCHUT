@@ -3,8 +3,8 @@
     <option :value="null" disabled selected>
       {{ placeholder }}
     </option>
-    <option v-for="option in options" :key="option.id" :value="option.id">
-      {{ option.name }}
+    <option v-for="option in options" :key="option.id" :value="option">
+      {{ option.model }}
     </option>
   </select>
 </template>

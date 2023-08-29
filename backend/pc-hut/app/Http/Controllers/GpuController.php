@@ -13,18 +13,11 @@ class GPUController extends Controller
     public function index()
     {
         $gpus = GPU::with('component')->get();
-
-        foreach ($gpus as $gpu) {
-            $gpuModel = $gpu->model;
-            $gpuManufacturer = $gpu->manufacturer_id;
-            $componentModel = $gpu->component->model;
-            $componentMemory = $gpu->component->memory;
-            $componentPrice = $gpu->component->price;
-        }
+        $formattedGpus = GPUResource::collection($gpus);
 
         return response()->json([
             'status' => 200,
-            'gpus' => $gpus,
+            'gpus' => $formattedGpus,
         ], 200);
     }
 

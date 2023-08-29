@@ -15,10 +15,11 @@ class RAMController extends Controller
     public function index()
     {
         $rams = RAM::with('component')->get();
+        $formattedrams = RAMResource::collection($rams);
 
         return response()->json([
             'status' => 200,
-            'rams' => $rams,
+            'rams' => $formattedrams,
         ], 200);
     }
 
