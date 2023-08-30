@@ -174,7 +174,7 @@
         <div class="filter-dropdown-applied-filters-container">
           <div class="filter-dropdown-applied-filters-row">
             <h3>PRIMIJENJENI FILTERI:</h3>
-            <PhTrash :size="32" />
+            <PhTrash :size="32" @click="clearAppliedFilters" />
           </div>
           <div class="filter-dropdown-applied-filters-inner">
             <div
@@ -296,6 +296,13 @@ function isFilterShown(name, groupName) {
 function isTypeShown(groupName) {
   return selectedComponentType.value === groupName;
 }
+
+function clearAppliedFilters() {
+  appliedFilters.value.forEach((filterArray) => {
+    clearArray(filterArray);
+  });
+  selectedComponentType.value = "";
+}
 </script>
 
 <style lang="scss">
@@ -404,7 +411,7 @@ function isTypeShown(groupName) {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        max-width: 320px;
+        width: 320px;
 
         .filter-dropdown-applied-filters-item {
           width: fit-content;
@@ -418,6 +425,7 @@ function isTypeShown(groupName) {
           font-size: 16px;
           font-weight: 600;
           color: $colorTextPrimary;
+          max-width: 290px;
 
           & svg {
             cursor: pointer;
@@ -522,14 +530,18 @@ function isTypeShown(groupName) {
     padding: 16px 24px;
 
     .filter-dropdown-close-button {
-      right: 16px;
-      top: 16px;
+      right: 10px;
+      top: 10px;
     }
 
     .filter-dropdown-component-container {
       .filter-dropdown-column {
         flex-flow: column-reverse;
         display: flex;
+
+        .filter-dropdown-custom-filters {
+          width: 100%;
+        }
 
         .filter-dropdown-applied-filters-row {
           width: 100%;
@@ -583,8 +595,8 @@ function isTypeShown(groupName) {
 @media screen and ($desktop) {
   .filter-dropdown-wrapper {
     .filter-dropdown-close-button {
-      right: 36px;
-      top: 36px;
+      right: 20px;
+      top: 20px;
     }
 
     .filter-dropdown-component-container {
