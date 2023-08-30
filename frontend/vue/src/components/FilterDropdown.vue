@@ -1,96 +1,66 @@
 <template>
   <div class="filter-dropdown-wrapper">
+    <div class="filter-dropdown-close-button">
+      <PhX :size="32" />
+    </div>
     <div class="filter-dropdown-component-container">
       <div class="filter-dropdown-component-types-container">
         <ul class="">
           <li @mouseover="displayFilter('pc')" @click="displayFilter('pc')">
-            <PhCpu :size="26" />LAPTOPI, RAČUNALA
+            <PhCpu :size="26" />LAPTOPI, PC
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li @mouseover="displayFilter('cpu')" @click="displayFilter('cpu')">
             <PhCpu :size="26" />PROCESORI
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li @mouseover="displayFilter('gpu')" @click="displayFilter('gpu')">
             <PhCpu :size="26" />GRAFIČKE KARTICE
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li
             @mouseover="displayFilter('motherboard')"
             @click="displayFilter('motherboard')"
           >
             <PhCpu :size="26" />MATIČNE PLOČE
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li
             @mouseover="displayFilter('cooling')"
             @click="displayFilter('cooling')"
           >
             <PhCpu :size="26" />HLAĐENJE
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li
             @mouseover="displayFilter('memory')"
             @click="displayFilter('memory')"
           >
             <PhCpu :size="26" />MEMORIJA
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li
             @mouseover="displayFilter('keyboard')"
             @click="displayFilter('keyboard')"
           >
             <PhKeyboard :size="26" />TIPKOVNICE
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li
             @mouseover="displayFilter('mouse')"
             @click="displayFilter('mouse')"
           >
             <PhMouse :size="26" />MIŠEVI
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
           <li
             @mouseover="displayFilter('monitor')"
             @click="displayFilter('monitor')"
           >
             <PhMonitor :size="26" />MONITORI
+            <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
         </ul>
-        <div class="filter-dropdown-close-button">
-          <PhX :size="32" />
-        </div>
-      </div>
-      <div class="filter-dropdown-applied-filters-container">
-        <div class="filter-dropdown-applied-filters-row">
-          <h3>PRIMIJENJENI FILTERI:</h3>
-          <PhTrash :size="26" color="#FFABAB" />
-        </div>
-        <div class="filter-dropdown-applied-filters-inner">
-          <div class="filter-dropdown-applied-filters-item">
-            <PhX weight="bold" /> tipkovnice
-          </div>
-          <div class="filter-dropdown-applied-filters-item">
-            <PhX weight="bold" /> ducky
-          </div>
-          <div class="filter-dropdown-applied-filters-item">
-            <PhX weight="bold" /> rgb
-          </div>
-          <div class="filter-dropdown-applied-filters-item">
-            <PhX weight="bold" /> 80 - 250 €
-          </div>
-        </div>
-      </div>
-      <div class="filter-dropdown-price-range-container">
-        <div class="filter-dropdown-price-range-row">
-          <h3>RASPON CIJENE:</h3>
-          <div class="filter-dropdown-price-range-inputs">
-            <input type="text" v-model="minRange" disabled />
-            <p>€ -</p>
-            <input type="text" v-model="maxRange" disabled />
-            <p>€</p>
-          </div>
-        </div>
-        <div class="filter-dropdown-price-range-slider">
-          <RangeSlider @price-range-change="changePriceRange" />
-        </div>
-      </div>
-
-      <div class="filter-dropdown-only-avaliable-container">
-        <input id="ch" type="checkbox" />
-        <h3>SAMO ODMAH DOSTUPNI:</h3>
       </div>
 
       <div class="filter-dropdown-custom-filters">
@@ -244,6 +214,47 @@
           </div>
         </div>
       </div>
+
+      <div class="filter-dropdown-column">
+        <div class="filter-dropdown-applied-filters-container">
+          <div class="filter-dropdown-applied-filters-row">
+            <h3>PRIMIJENJENI FILTERI:</h3>
+            <PhTrash :size="32" />
+          </div>
+          <div class="filter-dropdown-applied-filters-inner">
+            <div class="filter-dropdown-applied-filters-item">
+              <PhX weight="bold" /> tipkovnice
+            </div>
+            <div class="filter-dropdown-applied-filters-item">
+              <PhX weight="bold" /> ducky
+            </div>
+            <div class="filter-dropdown-applied-filters-item">
+              <PhX weight="bold" /> rgb
+            </div>
+            <div class="filter-dropdown-applied-filters-item">
+              <PhX weight="bold" /> 80 - 250 €
+            </div>
+          </div>
+        </div>
+        <div class="filter-dropdown-price-range-container">
+          <div class="filter-dropdown-price-range-row">
+            <h3>RASPON CIJENE:</h3>
+            <div class="filter-dropdown-price-range-inputs">
+              <input type="text" v-model="minRange" disabled />
+              <p>€ -</p>
+              <input type="text" v-model="maxRange" disabled />
+              <p>€</p>
+            </div>
+          </div>
+          <div class="filter-dropdown-price-range-slider">
+            <RangeSlider @price-range-change="changePriceRange" />
+          </div>
+        </div>
+        <div class="filter-dropdown-only-avaliable-container">
+          <input id="ch" type="checkbox" />
+          <h3>SAMO ODMAH DOSTUPNI:</h3>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -256,6 +267,7 @@ import {
   PhMonitor,
   PhKeyboard,
   PhTrash,
+  PhCaretRight,
 } from "@phosphor-icons/vue";
 import { ref, computed } from "vue";
 import RangeSlider from "./RangeSlider.vue";
@@ -312,14 +324,30 @@ function isTypeShown(groupName) {
 .filter-dropdown-wrapper {
   width: 100%;
   background-color: $colorTextPrimary;
+  position: relative;
+
+  .filter-dropdown-close-button {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white-dark;
+    color: $colorSecondary;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 
   .filter-dropdown-component-container {
     padding: 4px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     .filter-dropdown-component-types-container {
-      position: relative;
+      order: 1;
 
       ul {
         color: $colorBgPrimary;
@@ -336,28 +364,26 @@ function isTypeShown(groupName) {
           font-size: 24px;
           font-weight: 500;
           display: flex;
-          gap: 8px;
+          gap: 4px;
           cursor: pointer;
+          align-items: center;
 
           &:hover {
             color: $colorBtnTertiary;
           }
-        }
-      }
 
-      .filter-dropdown-close-button {
-        position: absolute;
-        right: 8px;
-        top: 10px;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $white-dark;
-        color: $colorSecondary;
-        border-radius: 8px;
-        cursor: pointer;
+          .icon {
+            display: none;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+
+            &:hover {
+              display: block;
+            }
+          }
+        }
       }
     }
 
@@ -373,12 +399,26 @@ function isTypeShown(groupName) {
           font-size: 20px;
           font-weight: 300;
         }
+
+        & svg {
+          cursor: pointer;
+          padding: 4px;
+          color: #ffabab;
+          border-radius: 8px;
+
+          &:hover {
+            transition: 0.5s;
+            background-color: #ffabab;
+            color: $colorTextPrimary;
+          }
+        }
       }
       .filter-dropdown-applied-filters-inner {
         margin: 16px 0;
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        max-width: 320px;
 
         .filter-dropdown-applied-filters-item {
           width: fit-content;
@@ -442,6 +482,7 @@ function isTypeShown(groupName) {
     }
 
     .filter-dropdown-only-avaliable-container {
+      margin-top: 12px;
       display: flex;
       color: $colorTextSecondary;
       justify-content: start;
@@ -465,6 +506,8 @@ function isTypeShown(groupName) {
     .filter-dropdown-custom-filters {
       color: $colorTextSecondary;
       margin: 10px;
+      flex-flow: wrap;
+      display: flex;
 
       h4 {
         margin: 24px 0 0px;
@@ -476,12 +519,99 @@ function isTypeShown(groupName) {
         display: flex;
         flex-direction: column;
         gap: 8px;
+        width: 50%;
       }
 
       .filter-dropdown-custom-filter-subgroup {
         display: flex;
         flex-direction: column;
         gap: 8px;
+      }
+    }
+  }
+}
+
+@media screen and ($tabletLarge) {
+  .filter-dropdown-wrapper {
+    padding: 16px 24px;
+
+    .filter-dropdown-close-button {
+      right: 16px;
+      top: 16px;
+    }
+
+    .filter-dropdown-component-container {
+      .filter-dropdown-column {
+        flex-flow: column-reverse;
+        display: flex;
+
+        .filter-dropdown-applied-filters-row {
+          width: 100%;
+        }
+
+        .filter-dropdown-price-range-slider {
+          order: 1;
+          background-color: blueviolet;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and ($tabletLarge) {
+  .filter-dropdown-wrapper {
+    .filter-dropdown-component-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .filter-dropdown-column {
+        margin-bottom: 56px;
+        margin-left: 20px;
+      }
+
+      .filter-dropdown-custom-filters {
+        gap: 16px 8px;
+        max-height: 400px;
+        flex-flow: column wrap;
+
+        h4 {
+          margin: 0;
+        }
+
+        .filter-dropdown-custom-filter-group {
+          margin: 0 4px;
+          padding: 0;
+          width: fit-content;
+        }
+      }
+
+      .filter-dropdown-component-types-container {
+        order: 0;
+      }
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .filter-dropdown-wrapper {
+    .filter-dropdown-close-button {
+      right: 36px;
+      top: 36px;
+    }
+
+    .filter-dropdown-component-container {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .filter-dropdown-custom-filters {
+        /* width: fit-content; */
+      }
+      .filter-dropdown-column {
+        /* width: fit-content; */
+        margin-left: auto;
       }
     }
   }

@@ -43,6 +43,8 @@ const props = defineProps({
   label {
     font-size: 20px;
     font-weight: 300;
+    word-wrap: break-word;
+    max-width: 100px;
   }
 }
 </style>
