@@ -11,6 +11,9 @@ const store = createStore({
       loading: false,
       data: {},
     },
+    filter: {
+      isOpen: false,
+    },
   },
   getters: {},
   actions: {
@@ -44,6 +47,10 @@ const store = createStore({
           throw err;
         });
     },
+
+    toggleFilterDropdown({ commit }) {
+      commit("toggleFilter");
+    },
   },
   mutations: {
     setUser: (state, userData) => {
@@ -58,6 +65,10 @@ const store = createStore({
 
     setCurrentProductLoading: (state, loading) => {
       state.currentProduct.loading = loading;
+    },
+
+    toggleFilter: (state) => {
+      state.filter.isOpen = !state.filter.isOpen;
     },
   },
 

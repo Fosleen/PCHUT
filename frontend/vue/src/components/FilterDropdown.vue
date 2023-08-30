@@ -1,7 +1,7 @@
 <template>
   <div class="filter-dropdown-wrapper">
     <div class="filter-dropdown-close-button">
-      <PhX :size="32" />
+      <PhX :size="32" @click="store.dispatch('toggleFilterDropdown')" />
     </div>
     <div class="filter-dropdown-component-container">
       <div class="filter-dropdown-component-types-container">
@@ -229,6 +229,9 @@ import {
 import { ref, computed } from "vue";
 import RangeSlider from "./RangeSlider.vue";
 import CheckboxInput from "./CheckboxInput.vue";
+import store from "../store";
+
+const isFilterOpen = computed(() => store.state.filter.isOpen);
 
 let minRange = ref(0); // default values
 let maxRange = ref(6000);
@@ -316,6 +319,12 @@ function isTypeShown(groupName) {
     color: $colorSecondary;
     border-radius: 8px;
     cursor: pointer;
+
+    &:hover {
+      background-color: $colorBtnTertiary;
+      transition: 0.5s;
+      color: $colorTextPrimary;
+    }
   }
 
   .filter-dropdown-component-container {
