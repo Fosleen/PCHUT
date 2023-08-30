@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('storage_type', function (Blueprint $table) {
+        Schema::create('pc_case', function (Blueprint $table) {
             $table->id();
-            $table->string("name", 45)->nullable(false);
+
+            $table->unsignedBigInteger('case_size_id');
+            $table->foreign('case_size_id')->references('id')->on('case_size');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('storage_type');
+        Schema::dropIfExists('pc_case');
     }
 };

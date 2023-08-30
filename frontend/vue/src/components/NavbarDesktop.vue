@@ -20,58 +20,74 @@
 
 <script setup>
 import Logo from "../assets/logo_new.png";
-import { PhUser } from "@phosphor-icons/vue";
-import { PhShoppingCartSimple } from "@phosphor-icons/vue";
-import { PhMoon } from "@phosphor-icons/vue";
-import { ref } from "vue";
+import { PhUser, PhShoppingCartSimple, PhMoon } from "@phosphor-icons/vue";
+import { ref, onMounted } from "vue";
 
 const isDarkTheme = ref(true);
 
 const toggleTheme = () => {
-  document.querySelector("body").style.backgroundColor = isDarkTheme.value
-    ? "#282828"
-    : "#f5f5f5";
+  const isDarkThemeValue = !isDarkTheme.value;
+  const backgroundColor = isDarkThemeValue ? "#282828" : "#f5f5f5";
+  const textColor = isDarkThemeValue ? "#D9D9D9" : "#282828";
+  const shadowColor = isDarkThemeValue ? "#68E199" : "#be166e";
 
-  let pcPartCardWrapper = document.querySelector(".pc-part-card-wrapper");
+  // Apply styles here
 
-  let pcPartCardListItem = document.querySelector(".pc-part-card-list-item");
+  document.querySelector("body").style.backgroundColor = backgroundColor;
 
-  let pcPartCardTextGroupName = document.querySelector(
+  const pcPartCardWrappers = document.querySelectorAll(".pc-part-card-wrapper");
+  pcPartCardWrappers.forEach((pcPartCardWrapper) => {
+    pcPartCardWrapper.style.backgroundColor = backgroundColor;
+    pcPartCardWrapper.style.boxShadow = `0 0 20px 0 ${shadowColor}`;
+  });
+
+  const pcPartCardListItems = document.querySelectorAll(
+    ".pc-part-card-list-item"
+  );
+  pcPartCardListItems.forEach((pcPartCardListItem) => {
+    pcPartCardListItem.style.color = textColor;
+  });
+
+  const pcPartCardTextGroupNames = document.querySelectorAll(
     ".pc-part-card-text-group-name"
   );
+  pcPartCardTextGroupNames.forEach((pcPartCardTextGroupName) => {
+    pcPartCardTextGroupName.style.color = textColor;
+  });
 
-  let pcPartCardPriceWrapper = document.querySelector(
+  const pcPartCardPriceWrappers = document.querySelectorAll(
     ".pc-part-card-price-wrapper"
   );
+  pcPartCardPriceWrappers.forEach((pcPartCardPriceWrapper) => {
+    pcPartCardPriceWrapper.style.color = textColor;
+  });
 
-  if (pcPartCardPriceWrapper) {
-    pcPartCardPriceWrapper.style.color = isDarkTheme.value
-      ? "#D9D9D9"
-      : "#282828";
+  const productDetailsWrapper = document.querySelector(
+    ".product-details-wrapper"
+  );
+  if (productDetailsWrapper) {
+    productDetailsWrapper.style.backgroundColor = backgroundColor;
   }
 
-  if (pcPartCardListItem) {
-    pcPartCardListItem.style.color = isDarkTheme.value ? "#D9D9D9" : "#282828";
-  }
-
-  if (pcPartCardTextGroupName) {
-    pcPartCardTextGroupName.style.color = isDarkTheme.value
-      ? "#D9D9D9"
-      : "#282828";
-  }
-
-  if (pcPartCardWrapper) {
-    pcPartCardWrapper.style.backgroundColor = isDarkTheme.value
-      ? "#282828"
-      : "#f5f5f5";
-
-    pcPartCardWrapper.style.boxShadow = isDarkTheme.value
-      ? "0 0 20px 0 #68E199"
-      : "0 0 20px 0 #be166e";
-  }
-
-  isDarkTheme.value = !isDarkTheme.value;
+  isDarkTheme.value = isDarkThemeValue;
+  saveThemePreference();
 };
+
+const saveThemePreference = () => {
+  const themeToSave = isDarkTheme.value ? "dark" : "light";
+  localStorage.setItem("theme", themeToSave);
+};
+
+onMounted(() => {
+  const currentTheme = localStorage.getItem("theme");
+  if (currentTheme === "dark") {
+    isDarkTheme.value = true;
+    toggleTheme();
+  } else {
+    isDarkTheme.value = false;
+    toggleTheme();
+  }
+});
 </script>
 
 <style lang="scss">

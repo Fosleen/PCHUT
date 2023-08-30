@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RAMResource;
-use App\Models\RAM;
+use App\Http\Resources\PCCaseResource;
+use App\Models\PcCase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Component;
 
-
-
-class RAMController extends Controller
+class PcCaseController extends Controller
 {
     public function index()
     {
-        $rams = RAM::with('component')->get();
-        $formattedrams = RAMResource::collection($rams);
+        $pccases = PcCase::with('component')->get();
+        $formattedpccases = PCCaseResource::collection($pccases);
 
         return response()->json([
             'status' => 200,
-            'rams' => $formattedrams,
+            'pccases' => $formattedpccases,
         ], 200);
     }
 
@@ -28,9 +26,7 @@ class RAMController extends Controller
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
             'price' => 'required|numeric',
-            'speed' => 'required|integer',
             'manufacturer_id' => 'required|integer',
-            'ram_type_id' => 'required|integer',
             'description' => 'string'
         ]);
 
@@ -40,47 +36,32 @@ class RAMController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $ram = new RAM([
+            $pccase = new PcCase([
                 'model' => $request->model,
                 'price' => $request->price,
-                'speed' => $request->speed,
                 'manufacturer_id' => $request->manufacturer_id,
-                'ram_type_id' => $request->ram_type_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'case_size_id' => $request->case_size_id
             ]);
 
-            $ram->save();
+            $pccase->save();
 
             $component = Component::create([
                 'model' => $request->model,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
-                'productable_id' => $ram->id,
-                'productable_type' => ram::class,
+                'productable_id' => $pccase->id,
+                'productable_type' => pccase::class,
             ]);
 
-            $ram->component()->save($component);
+            $pccase->component()->save($component);
 
-            if ($ram) {
-                return response()->json(['message' => 'ram created successfully'], 200);
+            if ($pccase) {
+                return response()->json(['message' => 'pccase created successfully'], 200);
             } else {
-                return response()->json(['message' => 'ram not created!'], 500);
+                return response()->json(['message' => 'pccase not created!'], 500);
             }
-        }
-    }
-
-    public function show($id)
-    {
-        $ram = RAM::with('component')->find($id);
-
-        if ($ram) {
-            return new RAMResource($ram);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => "No ram found"
-            ], 404);
         }
     }
 }

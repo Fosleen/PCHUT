@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RAMResource extends JsonResource
+class StorageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,15 +19,14 @@ class RAMResource extends JsonResource
             'model' => $this->component->model,
             'price' => $this->component->price,
             'description' => $this->component->description,
-            'speed' => $this->speed,
-            'product_type' => "Ram",
+            'product_type' => "Storage",
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
-            //'ram_type_name' => $this->component->ram_type->name, fix this
-
             'manufacturer' => $this->component->manufacturer->name,
+            // 'storage_type_id' => $this->storage_type->name, fix later if needed
+
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }

@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RAMResource;
-use App\Models\RAM;
+use App\Http\Resources\PSUResource;
+use App\Models\PSU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Component;
 
 
-
-class RAMController extends Controller
+class PSUController extends Controller
 {
     public function index()
     {
-        $rams = RAM::with('component')->get();
-        $formattedrams = RAMResource::collection($rams);
+        $psus = PSU::with('component')->get();
+        $formattedpsus = PSUResource::collection($psus);
 
         return response()->json([
             'status' => 200,
-            'rams' => $formattedrams,
+            'psus' => $formattedpsus,
         ], 200);
     }
 
@@ -28,9 +27,7 @@ class RAMController extends Controller
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
             'price' => 'required|numeric',
-            'speed' => 'required|integer',
             'manufacturer_id' => 'required|integer',
-            'ram_type_id' => 'required|integer',
             'description' => 'string'
         ]);
 
@@ -40,46 +37,45 @@ class RAMController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $ram = new RAM([
+            $psu = new PSU([
                 'model' => $request->model,
                 'price' => $request->price,
-                'speed' => $request->speed,
                 'manufacturer_id' => $request->manufacturer_id,
-                'ram_type_id' => $request->ram_type_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'power' => $request->power,
             ]);
 
-            $ram->save();
+            $psu->save();
 
             $component = Component::create([
                 'model' => $request->model,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
-                'productable_id' => $ram->id,
-                'productable_type' => ram::class,
+                'productable_id' => $psu->id,
+                'productable_type' => PSU::class,
             ]);
 
-            $ram->component()->save($component);
+            $psu->component()->save($component);
 
-            if ($ram) {
-                return response()->json(['message' => 'ram created successfully'], 200);
+            if ($psu) {
+                return response()->json(['message' => 'psu created successfully'], 200);
             } else {
-                return response()->json(['message' => 'ram not created!'], 500);
+                return response()->json(['message' => 'psu not created!'], 500);
             }
         }
     }
 
     public function show($id)
     {
-        $ram = RAM::with('component')->find($id);
+        $psu = PSU::with('component')->find($id);
 
-        if ($ram) {
-            return new RAMResource($ram);
+        if ($psu) {
+            return $psu; //mby add resource later
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => "No ram found"
+                'message' => "No psu found"
             ], 404);
         }
     }
