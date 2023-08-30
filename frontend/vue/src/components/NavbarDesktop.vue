@@ -28,49 +28,41 @@ import { ref } from "vue";
 const isDarkTheme = ref(true);
 
 const toggleTheme = () => {
-  document.querySelector("body").style.backgroundColor = isDarkTheme.value
-    ? "#282828"
-    : "#f5f5f5";
+  const isDarkThemeValue = !isDarkTheme.value;
+  const backgroundColor = isDarkThemeValue ? "#282828" : "#f5f5f5";
+  const textColor = isDarkThemeValue ? "#D9D9D9" : "#282828";
+  const shadowColor = isDarkThemeValue ? "#68E199" : "#be166e";
 
-  let pcPartCardWrapper = document.querySelector(".pc-part-card-wrapper");
+  document.querySelector("body").style.backgroundColor = backgroundColor;
 
-  let pcPartCardListItem = document.querySelector(".pc-part-card-list-item");
+  const pcPartCardWrappers = document.querySelectorAll(".pc-part-card-wrapper");
+  pcPartCardWrappers.forEach((pcPartCardWrapper) => {
+    pcPartCardWrapper.style.backgroundColor = backgroundColor;
+    pcPartCardWrapper.style.boxShadow = `0 0 20px 0 ${shadowColor}`;
+  });
 
-  let pcPartCardTextGroupName = document.querySelector(
+  const pcPartCardListItems = document.querySelectorAll(
+    ".pc-part-card-list-item"
+  );
+  pcPartCardListItems.forEach((pcPartCardListItem) => {
+    pcPartCardListItem.style.color = textColor;
+  });
+
+  const pcPartCardTextGroupNames = document.querySelectorAll(
     ".pc-part-card-text-group-name"
   );
+  pcPartCardTextGroupNames.forEach((pcPartCardTextGroupName) => {
+    pcPartCardTextGroupName.style.color = textColor;
+  });
 
-  let pcPartCardPriceWrapper = document.querySelector(
+  const pcPartCardPriceWrappers = document.querySelectorAll(
     ".pc-part-card-price-wrapper"
   );
+  pcPartCardPriceWrappers.forEach((pcPartCardPriceWrapper) => {
+    pcPartCardPriceWrapper.style.color = textColor;
+  });
 
-  if (pcPartCardPriceWrapper) {
-    pcPartCardPriceWrapper.style.color = isDarkTheme.value
-      ? "#D9D9D9"
-      : "#282828";
-  }
-
-  if (pcPartCardListItem) {
-    pcPartCardListItem.style.color = isDarkTheme.value ? "#D9D9D9" : "#282828";
-  }
-
-  if (pcPartCardTextGroupName) {
-    pcPartCardTextGroupName.style.color = isDarkTheme.value
-      ? "#D9D9D9"
-      : "#282828";
-  }
-
-  if (pcPartCardWrapper) {
-    pcPartCardWrapper.style.backgroundColor = isDarkTheme.value
-      ? "#282828"
-      : "#f5f5f5";
-
-    pcPartCardWrapper.style.boxShadow = isDarkTheme.value
-      ? "0 0 20px 0 #68E199"
-      : "0 0 20px 0 #be166e";
-  }
-
-  isDarkTheme.value = !isDarkTheme.value;
+  isDarkTheme.value = isDarkThemeValue;
 };
 </script>
 
