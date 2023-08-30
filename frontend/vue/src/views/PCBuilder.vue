@@ -64,7 +64,7 @@
       />
       <Dropdown
         placeholder="Odaberi napajanje"
-        :options="hardcodedOptions"
+        :options="psus"
         hardcoded-value="First option"
         class="pc-builder-fifth-background"
       />
@@ -76,7 +76,7 @@
       />
       <Dropdown
         placeholder="Odaberi kućište"
-        :options="hardcodedOptions"
+        :options="cases"
         hardcoded-value="First option"
         class="pc-builder-seventh-background"
       />
@@ -100,6 +100,8 @@ import {
   getAllMotherboards,
   getAllRAMs,
   getAllStorages,
+  getAllPSUs,
+  getAllCases,
 } from "../api/api";
 
 const hardcodedOptions = [
@@ -115,6 +117,10 @@ const motherboards = ref([]);
 const rams = ref([]);
 
 const storages = ref([]);
+
+const psus = ref([]);
+
+const cases = ref([]);
 
 onMounted(async () => {
   const graphicCards = await getAllGraphicCards();
@@ -136,6 +142,14 @@ onMounted(async () => {
   const allStorages = await getAllStorages();
   storages.value = allStorages.storages;
   console.log("Storages", storages.value);
+
+  const allPsus = await getAllPSUs();
+  psus.value = allPsus.psus;
+  console.log("Psus", psus.value);
+
+  const allCases = await getAllCases();
+  cases.value = allCases.pccases;
+  console.log("Pc cases", cases.value);
 });
 </script>
 

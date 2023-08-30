@@ -18,13 +18,11 @@ export function getAllRAMs() {
   });
 }
 
-
 export function getAllStorages() {
   return axiosClient.get("/storages").then(({ data }) => {
     return data;
   });
 }
-
 
 export function getAllPSUs() {
   return axiosClient.get("/psus").then(({ data }) => {
@@ -34,6 +32,12 @@ export function getAllPSUs() {
 
 export function getAllMotherboards() {
   return axiosClient.get("/motherboards").then(({ data }) => {
+    return data;
+  });
+}
+
+export function getAllCases() {
+  return axiosClient.get("/pccases").then(({ data }) => {
     return data;
   });
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
 use App\Http\Controllers\MouseController;
 use App\Http\Controllers\PartController;
+use App\Http\Controllers\PcCaseController;
 use App\Http\Controllers\PSUController;
 use App\Http\Controllers\RAMController;
 use App\Http\Controllers\StorageController;
@@ -92,6 +93,12 @@ Route::get('psus', [PSUController::class, 'index']);
 Route::get('psus/{id}', [PSUController::class, 'show']);
 Route::post('psus', [PSUController::class, 'store']);
 Route::delete('psus/{id}', [PSUController::class, 'destroy']);
+//=============================================================//
+
+Route::get('pccases', [PcCaseController::class, 'index']);
+Route::get('pccases/{id}', [PcCaseController::class, 'show']);
+Route::post('pccases', [PcCaseController::class, 'store']);
+Route::delete('pccases/{id}', [PcCaseController::class, 'destroy']);
 //=============================================================//
 
 

@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PSUResource;
-use App\Models\PSU;
+use App\Http\Resources\PCCaseResource;
+use App\Models\PcCase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Component;
 
-
-class PSUController extends Controller
+class PcCaseController extends Controller
 {
     public function index()
     {
-        $psus = PSU::with('component')->get();
-        $formattedpsus = PSUResource::collection($psus);
+        $pccases = PcCase::with('component')->get();
+        $formattedpccases = PCCaseResource::collection($pccases);
 
         return response()->json([
             'status' => 200,
-            'psus' => $formattedpsus,
+            'pccases' => $formattedpccases,
         ], 200);
     }
 
@@ -37,46 +36,32 @@ class PSUController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $psu = new PSU([
+            $pccase = new PcCase([
                 'model' => $request->model,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
-                'power' => $request->power,
+                'case_size_id' => $request->case_size_id
             ]);
 
-            $psu->save();
+            $pccase->save();
 
             $component = Component::create([
                 'model' => $request->model,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
-                'productable_id' => $psu->id,
-                'productable_type' => PSU::class,
+                'productable_id' => $pccase->id,
+                'productable_type' => pccase::class,
             ]);
 
-            $psu->component()->save($component);
+            $pccase->component()->save($component);
 
-            if ($psu) {
-                return response()->json(['message' => 'psu created successfully'], 200);
+            if ($pccase) {
+                return response()->json(['message' => 'pccase created successfully'], 200);
             } else {
-                return response()->json(['message' => 'psu not created!'], 500);
+                return response()->json(['message' => 'pccase not created!'], 500);
             }
-        }
-    }
-
-    public function show($id)
-    {
-        $psu = PSU::with('component')->find($id);
-
-        if ($psu) {
-            return $psu; //mby add resource later
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => "No psu found"
-            ], 404);
         }
     }
 }
