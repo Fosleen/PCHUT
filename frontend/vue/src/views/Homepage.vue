@@ -3,12 +3,12 @@
     <Hero />
 
     <div class="gpus-wrapper">
-      <PCPartCard v-for="(gpu, index) in gpus" :key="index" :gpu="gpu" />
+      <PCPartCard v-for="(gpu, index) in gpus" :key="index" :component="gpu" />
       <!--if i pass props that dont exist, nothing will render!!-->
     </div>
 
     <div class="gpus-wrapper">
-      <PCPartCard v-for="(cpu, index) in cpus" :key="index" :gpu="cpu" />
+      <PCPartCard v-for="(cpu, index) in cpus" :key="index" :component="cpu" />
       <!--if i pass props that dont exist, nothing will render!!-->
     </div>
   </div>
