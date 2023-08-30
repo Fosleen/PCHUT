@@ -11,7 +11,7 @@
   >
     <div class="pc-part-card-wrapper">
       <div class="pc-part-card-image-wrapper">
-        <img :src="Image" alt="" />
+        <img :src="gpu.images[0]" alt="" />
       </div>
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
