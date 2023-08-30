@@ -4,29 +4,37 @@
       name: 'ProductDetails',
       params: {
         productable_type: getModelName(),
-        id: gpu.productable_id,
+        id: component.productable_id,
       },
     }"
     class="pc-part-card-link"
   >
     <div class="pc-part-card-wrapper">
       <div class="pc-part-card-image-wrapper">
-        <img :src="Image" alt="" />
+        <img :src="component.images[0]" alt="" />
       </div>
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
-          :text-group-name="gpu.model"
-          :text-group-items="[gpu.memory]"
+          :text-group-name="component.model"
+          :text-group-items="[component.memory]"
         />
 
         <h3>Dostupno</h3>
         <h2 class="pc-part-card-price-wrapper">
-          {{ `${gpu.price} E` }}
+          {{ `${component.price} E` }}
         </h2>
       </div>
 
       <div class="pc-part-card-button-wrapper">
-        <Button shape="odd-shape" text="Dodaj u košaricu" />
+        <Button
+          shape="odd-shape"
+          text="Dodaj u"
+          :style="{
+            'background-color': '#D9D9D9',
+            color: '#282828',
+          }"
+          :icon="true"
+        />
       </div>
     </div>
   </router-link>
@@ -36,16 +44,16 @@
 import Button from "./Button.vue";
 import PCPartCardList from "./PCPartCardList.vue";
 
-const { gpu } = defineProps({
-  gpu: Object,
+const { component } = defineProps({
+  component: Object,
 });
 
 const getModelName = () => {
-  const modelName = gpu.productable_type.replace("App\\Models\\", "");
+  const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
 };
 
-console.log("GPU PROP PROSLJEDNEI JE", gpu);
+console.log("component PROP PROSLJEDNEI JE", component);
 </script>
 
 <style lang="scss" scoped>

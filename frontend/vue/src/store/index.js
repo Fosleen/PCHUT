@@ -30,7 +30,7 @@ const store = createStore({
 
     getProduct({ commit }, { id, productable_type }) {
       commit("setCurrentProductLoading", true);
-      let apiUrl = `/${productable_type}s/${id}`;
+      let apiUrl = `/${productable_type.toLowerCase()}s/${id}`;
 
       return axiosClient
         .get(apiUrl)
