@@ -20,10 +20,8 @@
 
 <script setup>
 import Logo from "../assets/logo_new.png";
-import { PhUser } from "@phosphor-icons/vue";
-import { PhShoppingCartSimple } from "@phosphor-icons/vue";
-import { PhMoon } from "@phosphor-icons/vue";
-import { ref } from "vue";
+import { PhUser, PhShoppingCartSimple, PhMoon } from "@phosphor-icons/vue";
+import { ref, onMounted } from "vue";
 
 const isDarkTheme = ref(true);
 
@@ -32,6 +30,8 @@ const toggleTheme = () => {
   const backgroundColor = isDarkThemeValue ? "#282828" : "#f5f5f5";
   const textColor = isDarkThemeValue ? "#D9D9D9" : "#282828";
   const shadowColor = isDarkThemeValue ? "#68E199" : "#be166e";
+
+  // Apply styles here
 
   document.querySelector("body").style.backgroundColor = backgroundColor;
 
@@ -62,8 +62,32 @@ const toggleTheme = () => {
     pcPartCardPriceWrapper.style.color = textColor;
   });
 
+  const productDetailsWrapper = document.querySelector(
+    ".product-details-wrapper"
+  );
+  if (productDetailsWrapper) {
+    productDetailsWrapper.style.backgroundColor = backgroundColor;
+  }
+
   isDarkTheme.value = isDarkThemeValue;
+  saveThemePreference();
 };
+
+const saveThemePreference = () => {
+  const themeToSave = isDarkTheme.value ? "dark" : "light";
+  localStorage.setItem("theme", themeToSave);
+};
+
+onMounted(() => {
+  const currentTheme = localStorage.getItem("theme");
+  if (currentTheme === "dark") {
+    isDarkTheme.value = true;
+    toggleTheme();
+  } else {
+    isDarkTheme.value = false;
+    toggleTheme();
+  }
+});
 </script>
 
 <style lang="scss">

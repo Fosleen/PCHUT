@@ -26,7 +26,15 @@
       </div>
 
       <div class="pc-part-card-button-wrapper">
-        <Button shape="odd-shape" text="Dodaj u košaricu" />
+        <Button
+          shape="odd-shape"
+          text="Dodaj u"
+          :style="{
+            'background-color': '#D9D9D9',
+            color: '#282828',
+          }"
+          :icon="true"
+        />
       </div>
     </div>
   </router-link>

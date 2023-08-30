@@ -2,10 +2,13 @@
   <div>
     <Hero />
 
+    <h1 style="color: red">Grafičke</h1>
     <div class="gpus-wrapper">
       <PCPartCard v-for="(gpu, index) in gpus" :key="index" :component="gpu" />
       <!--if i pass props that dont exist, nothing will render!!-->
     </div>
+
+    <h1 style="color: red">Procesori</h1>
 
     <div class="gpus-wrapper">
       <PCPartCard v-for="(cpu, index) in cpus" :key="index" :component="cpu" />
