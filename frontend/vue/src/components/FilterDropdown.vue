@@ -181,14 +181,14 @@
               v-if="selectedComponentType"
               class="filter-dropdown-applied-filters-item"
             >
-              <PhX weight="bold" /> {{ selectedComponentType }}
+              {{ selectedComponentType }}
             </div>
             <div v-for="item in appliedFilters" :key="item.value">
               <div
                 v-if="item.value.length > 0"
                 class="filter-dropdown-applied-filters-item"
               >
-                <PhX weight="bold" /> {{ item }}
+                {{ getArrayText(item) }}
               </div>
             </div>
           </div>
@@ -252,11 +252,20 @@ let series = ref([]);
 let appliedFilters = ref([cores, manufacturers, series]);
 
 function displayFilter(componentType) {
-  manufacturers.value = [];
-  cores.value = [];
-  series.value = [];
+  clearArray(manufacturers);
+  clearArray(cores);
+  clearArray(series);
 
   selectedComponentType.value = componentType;
+}
+
+function clearArray(name) {
+  // console.log("delete " + JSON.parse(JSON.stringify(name.value)));
+  name.value = [];
+}
+
+function getArrayText(name) {
+  return JSON.parse(JSON.stringify(name.value)).toString();
 }
 
 function changePriceRange(min, max) {
@@ -278,7 +287,6 @@ function changeCheckboxes(id, groupName) {
 }
 
 function isFilterShown(name, groupName) {
-  // console.log(JSON.parse(JSON.stringify(manufacturers.value)));
   return this[groupName].includes(name);
 }
 
