@@ -6,58 +6,13 @@
     <div class="filter-dropdown-component-container">
       <div class="filter-dropdown-component-types-container">
         <ul class="">
-          <li @mouseover="displayFilter('pc')" @click="displayFilter('pc')">
-            <PhCpu :size="26" />LAPTOPI, PC
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li @mouseover="displayFilter('cpu')" @click="displayFilter('cpu')">
-            <PhCpu :size="26" />PROCESORI
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li @mouseover="displayFilter('gpu')" @click="displayFilter('gpu')">
-            <PhCpu :size="26" />GRAFIČKE KARTICE
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
           <li
-            @mouseover="displayFilter('motherboard')"
-            @click="displayFilter('motherboard')"
+            v-for="type of componentTypes"
+            :key="type"
+            @mouseover="displayFilter(`${type}`)"
+            @click="displayFilter(`${type}`)"
           >
-            <PhCpu :size="26" />MATIČNE PLOČE
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li
-            @mouseover="displayFilter('cooling')"
-            @click="displayFilter('cooling')"
-          >
-            <PhCpu :size="26" />HLAĐENJE
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li
-            @mouseover="displayFilter('memory')"
-            @click="displayFilter('memory')"
-          >
-            <PhCpu :size="26" />MEMORIJA
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li
-            @mouseover="displayFilter('keyboard')"
-            @click="displayFilter('keyboard')"
-          >
-            <PhKeyboard :size="26" />TIPKOVNICE
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li
-            @mouseover="displayFilter('mouse')"
-            @click="displayFilter('mouse')"
-          >
-            <PhMouse :size="26" />MIŠEVI
-            <div class="icon"><PhCaretRight :size="20" /></div>
-          </li>
-          <li
-            @mouseover="displayFilter('monitor')"
-            @click="displayFilter('monitor')"
-          >
-            <PhMonitor :size="26" />MONITORI
+            <PhCpu :size="26" />{{ type }}
             <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
         </ul>
@@ -65,7 +20,7 @@
 
       <div class="filter-dropdown-custom-filters">
         <div
-          v-if="isTypeShown('cpu')"
+          v-if="isTypeShown('PROCESORI')"
           class="filter-dropdown-custom-filter-group"
         >
           <h4>BROJ JEZGRI:</h4>
@@ -118,7 +73,7 @@
           />
         </div>
         <div
-          v-if="isTypeShown('cpu')"
+          v-if="isTypeShown('PROCESORI')"
           class="filter-dropdown-custom-filter-group"
         >
           <h4>PROIZVOĐAČ:</h4>
@@ -136,7 +91,7 @@
           />
         </div>
         <div
-          v-if="isTypeShown('cpu')"
+          v-if="isTypeShown('PROCESORI')"
           class="filter-dropdown-custom-filter-group"
         >
           <h4
@@ -222,17 +177,19 @@
             <PhTrash :size="32" />
           </div>
           <div class="filter-dropdown-applied-filters-inner">
-            <div class="filter-dropdown-applied-filters-item">
-              <PhX weight="bold" /> tipkovnice
+            <div
+              v-if="selectedComponentType"
+              class="filter-dropdown-applied-filters-item"
+            >
+              <PhX weight="bold" /> {{ selectedComponentType }}
             </div>
-            <div class="filter-dropdown-applied-filters-item">
-              <PhX weight="bold" /> ducky
-            </div>
-            <div class="filter-dropdown-applied-filters-item">
-              <PhX weight="bold" /> rgb
-            </div>
-            <div class="filter-dropdown-applied-filters-item">
-              <PhX weight="bold" /> 80 - 250 €
+            <div v-for="item in appliedFilters" :key="item.value">
+              <div
+                v-if="item.value.length > 0"
+                class="filter-dropdown-applied-filters-item"
+              >
+                <PhX weight="bold" /> {{ item }}
+              </div>
             </div>
           </div>
         </div>
@@ -276,10 +233,23 @@ import CheckboxInput from "./CheckboxInput.vue";
 let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
+const componentTypes = [
+  "LAPTOPI, PC",
+  "PROCESORI",
+  "GRAFIČKE KARTICE",
+  "MATIČNE PLOČE",
+  "HLAĐENJE",
+  "MEMORIJA",
+  "TIPKOVNICE",
+  "MIŠEVI",
+  "MONITORI",
+];
+
 const selectedComponentType = ref("");
 let cores = ref([]);
 let manufacturers = ref([]);
 let series = ref([]);
+let appliedFilters = ref([cores, manufacturers, series]);
 
 function displayFilter(componentType) {
   manufacturers.value = [];
@@ -308,8 +278,7 @@ function changeCheckboxes(id, groupName) {
 }
 
 function isFilterShown(name, groupName) {
-  console.log(JSON.parse(JSON.stringify(manufacturers.value)));
-
+  // console.log(JSON.parse(JSON.stringify(manufacturers.value)));
   return this[groupName].includes(name);
 }
 
@@ -566,8 +535,9 @@ function isTypeShown(groupName) {
       flex-wrap: wrap;
 
       .filter-dropdown-column {
-        margin-bottom: 56px;
+        margin-top: 0px;
         margin-left: 20px;
+        justify-content: start;
       }
 
       .filter-dropdown-custom-filters {
