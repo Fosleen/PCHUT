@@ -5,12 +5,12 @@
         <h2>Posljednji korak!</h2>
         <p>Odaberite način plaćanja i unesite podatke</p>
         <div class="payment-details-payment-type-container">
-          <div class="payment-details-payment-type-item">
+          <div class="payment-details-item">
             <input type="radio" value="card" v-model="paymentType" />
             <img src="../assets/credit-card.png" alt="recognise-card-type" />
             <p>Kartica</p>
           </div>
-          <div class="payment-details-payment-type-item">
+          <div class="payment-details-item">
             <input type="radio" value="cod" v-model="paymentType" />
             <img src="../assets/cod.png" alt="recognise-card-type" />
             <div>
@@ -26,16 +26,19 @@
           <div class="payment-details-payment-card-details-item">
             <p>Podaci o vlasniku</p>
             <div class="payment-details-payment-card-details-row">
-              <InputField placeholder="Ime *" />
-              <InputField placeholder="Prezime *" />
+              <InputField
+                placeholder="Ime *"
+                @update:inputValue="card.name = $event"
+              />
+              <InputField
+                placeholder="Prezime *"
+                @update:inputValue="card.surname = $event"
+              />
             </div>
           </div>
           <div class="payment-details-payment-card-details-item">
             <p>Broj kartice</p>
-            <div
-              class="payment-details-payment-card-details-row"
-              @click="setPaymentType(card)"
-            >
+            <div class="payment-details-payment-card-details-row">
               <InputField
                 placeholder="4512 4514 2224 4444 *"
                 class="form-control"
@@ -49,10 +52,7 @@
             </div>
           </div>
           <div class="payment-details-payment-card-details-row">
-            <div
-              class="payment-details-payment-card-detail"
-              @click="setPaymentType(cod)"
-            >
+            <div class="payment-details-payment-card-detail">
               <p>Istek kartice</p>
               <InputField
                 placeholder="01/23 *"
@@ -73,33 +73,134 @@
           </div>
         </div>
       </div>
-      <div class="payment-details-person-data"></div>
-      <button @click="logValues">Click</button>
+      <div class="payment-details-person-data">
+        <h2>Podaci o naručitelju</h2>
+        <p>Unesite podatke dostave</p>
+        <div class="payment-details-delivery-data-container">
+          <div class="payment-details-delivery-data-row">
+            <div class="payment-details-item">
+              <input type="radio" value="default" v-model="deliveryType" />
+              <span></span>
+              <p>Podaci profila</p>
+            </div>
+            <div
+              class="payment-details-default-data"
+              v-if="deliveryType == 'default'"
+            >
+              <p>{{ loggedUser.name }} {{ loggedUser.surname }}</p>
+              <p>
+                {{ loggedUser.address }}, {{ loggedUser.postal }}
+                {{ loggedUser.city }}
+              </p>
+              <p>{{ loggedUser.email }}</p>
+            </div>
+          </div>
+          <div class="payment-details-item">
+            <input type="radio" value="custom" v-model="deliveryType" />
+            <span></span>
+            <p>Drugačiji podaci</p>
+          </div>
+          <form
+            id="delivery-data"
+            v-if="deliveryType == 'custom'"
+            class="payment-details-custom-data"
+          >
+            <p>Ime naručitelja:</p>
+            <InputField
+              placeholder="Ime *"
+              @update:inputValue="customer.name = $event"
+            />
+            <p>Prezime naručitelja:</p>
+            <InputField
+              placeholder="Prezime *"
+              @update:inputValue="customer.surname = $event"
+            />
+            <p>Email naručitelja:</p>
+            <InputField
+              placeholder="email@email.com *"
+              @update:inputValue="customer.email = $event"
+              type="email"
+            />
+            <p>Adresa dostave:</p>
+            <InputField
+              placeholder="Ulica Slavka Horvata 123a *"
+              @update:inputValue="customer.address = $event"
+            />
+            <p>Poštanski broj:</p>
+            <InputField
+              placeholder="10000 *"
+              @update:inputValue="customer.postal = $event"
+              type="number"
+            />
+            <p>Grad:</p>
+            <InputField
+              placeholder="Zagreb *"
+              @update:inputValue="customer.city = $event"
+            />
+          </form>
+        </div>
+      </div>
+      <button type="button" form="delivery-data" @click="logValues">
+        Click without validation
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import VueCreditCardValidation from "vue-credit-card-validation";
 import InputField from "../components/InputField.vue";
 
-const paymentType = ref("");
+const paymentType = ref("card");
+const deliveryType = ref("default");
+
 const card = {
+  name: "",
+  surname: "",
   number: "",
   expire_date: "",
   cvv: "",
 };
 
+const customer = {
+  name: "",
+  surname: "",
+  address: "",
+  city: "",
+  postal: "",
+  email: "",
+};
+
+const loggedUser = {
+  name: "Mirko",
+  surname: "Klokanić",
+  address: "Ulica Netkog Nečijeg 28b",
+  city: "Karlovac",
+  postal: "47000",
+  email: "mirko.klokanic@gmail.com",
+};
+
 function logValues() {
-  console.log(paymentType.value);
-  console.log(card);
+  console.log(paymentType.value == "card" ? card : "cod");
+  console.log(deliveryType.value == "default" ? loggedUser : customer);
 }
 </script>
 
 <style lang="scss">
 @import "../utils/theme.scss";
 
+h2 {
+  color: $grey-dark;
+}
+
+p {
+  color: $grey-dark;
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+}
 .payment-details-wrapper {
   background-color: $colorBgPrimary;
 
@@ -108,6 +209,7 @@ function logValues() {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 16px;
     align-items: center;
 
     .payment-details-card-details {
@@ -123,25 +225,6 @@ function logValues() {
         display: flex;
         justify-content: space-between;
         margin: 20px 0;
-
-        .payment-details-payment-type-item {
-          flex-direction: row;
-          display: flex;
-          width: 48%;
-          gap: 6px;
-          padding: 8px;
-          align-items: center;
-          border: 2px solid #d6d6d6;
-          border-radius: 16px;
-
-          img {
-            max-width: 40px;
-          }
-
-          p:nth-child(2) {
-            font-size: 12px;
-          }
-        }
       }
 
       .payment-details-payment-card-details {
@@ -175,18 +258,60 @@ function logValues() {
         }
       }
     }
-  }
 
-  h2 {
-    color: $grey-dark;
-  }
-  p {
-    color: $grey-dark;
-    font-size: 16px;
-  }
+    .payment-details-item {
+      flex-direction: row;
+      display: flex;
+      width: fit-content;
+      gap: 6px;
+      padding: 8px;
+      align-items: center;
+      border: 2px solid #d6d6d6;
+      border-radius: 16px;
+      min-height: 48px;
+      white-space: pre;
 
-  input {
-    width: 100%;
+      img {
+        max-width: 40px;
+      }
+
+      p:nth-child(2) {
+        font-size: 12px;
+      }
+    }
+
+    .payment-details-person-data {
+      background-color: $white-dark;
+      box-shadow: 0 0 16px 4px #dbc9f3;
+      width: 98%;
+      padding: 32px 12px 0;
+      border-radius: 20px;
+
+      .payment-details-delivery-data-container {
+        display: flex;
+        flex-direction: column;
+        margin: 24px 0;
+        gap: 8px;
+
+        .payment-details-delivery-data-row {
+          display: flex;
+          gap: 8px;
+
+          .payment-details-default-data {
+            p {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .payment-details-custom-data {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: 16px 0;
+        }
+      }
+    }
   }
 }
 </style>
