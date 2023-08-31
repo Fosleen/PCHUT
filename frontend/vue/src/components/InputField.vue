@@ -1,5 +1,6 @@
 <template>
   <input
+    class="form-control"
     :type="props.type"
     :placeholder="props.placeholder"
     required
