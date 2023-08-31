@@ -2,7 +2,7 @@
   <div class="final-price-button-parent-wrapper">
     <div class="final-price-wrapper">
       <h5>{{ props.priceLabel }}</h5>
-      <h3>{{ props.price }}</h3>
+      <h3>{{ props.price }} €</h3>
     </div>
 
     <div class="final-price-button-wrapper">
@@ -41,6 +41,8 @@ const props = defineProps({
   padding-top: 24px;
   padding-bottom: 24px;
   font-size: 24px;
+  width: 100%;
+  justify-content: center;
 
   h5 {
     color: $grey-light;

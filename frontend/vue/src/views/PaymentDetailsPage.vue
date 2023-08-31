@@ -73,76 +73,82 @@
           </div>
         </div>
       </div>
-      <div class="payment-details-person-data">
-        <h2>Podaci o naručitelju</h2>
-        <p>Unesite podatke dostave</p>
-        <div class="payment-details-delivery-data-container">
-          <div class="payment-details-delivery-data-row">
+      <div class="payment-details-person-price-wrapper">
+        <div class="payment-details-person-data">
+          <h2>Podaci o naručitelju</h2>
+          <p>Unesite podatke dostave</p>
+          <div class="payment-details-delivery-data-container">
+            <div class="payment-details-delivery-data-row">
+              <div class="payment-details-item">
+                <input type="radio" value="default" v-model="deliveryType" />
+                <span></span>
+                <p>Podaci profila</p>
+              </div>
+              <div
+                class="payment-details-default-data"
+                v-if="deliveryType == 'default'"
+              >
+                <p>{{ loggedUser.name }} {{ loggedUser.surname }}</p>
+                <p>
+                  {{ loggedUser.address }}, {{ loggedUser.postal }}
+                  {{ loggedUser.city }}
+                </p>
+                <p>{{ loggedUser.email }}</p>
+              </div>
+            </div>
             <div class="payment-details-item">
-              <input type="radio" value="default" v-model="deliveryType" />
+              <input type="radio" value="custom" v-model="deliveryType" />
               <span></span>
-              <p>Podaci profila</p>
+              <p>Drugačiji podaci</p>
             </div>
-            <div
-              class="payment-details-default-data"
-              v-if="deliveryType == 'default'"
+            <form
+              id="delivery-data"
+              v-if="deliveryType == 'custom'"
+              class="payment-details-custom-data"
             >
-              <p>{{ loggedUser.name }} {{ loggedUser.surname }}</p>
-              <p>
-                {{ loggedUser.address }}, {{ loggedUser.postal }}
-                {{ loggedUser.city }}
-              </p>
-              <p>{{ loggedUser.email }}</p>
-            </div>
+              <p>Ime naručitelja:</p>
+              <InputField
+                placeholder="Ime *"
+                @update:inputValue="customer.name = $event"
+              />
+              <p>Prezime naručitelja:</p>
+              <InputField
+                placeholder="Prezime *"
+                @update:inputValue="customer.surname = $event"
+              />
+              <p>Email naručitelja:</p>
+              <InputField
+                placeholder="email@email.com *"
+                @update:inputValue="customer.email = $event"
+                type="email"
+              />
+              <p>Adresa dostave:</p>
+              <InputField
+                placeholder="Ulica Slavka Horvata 123a *"
+                @update:inputValue="customer.address = $event"
+              />
+              <p>Poštanski broj:</p>
+              <InputField
+                placeholder="10000 *"
+                @update:inputValue="customer.postal = $event"
+                type="number"
+              />
+              <p>Grad:</p>
+              <InputField
+                placeholder="Zagreb *"
+                @update:inputValue="customer.city = $event"
+              />
+            </form>
           </div>
-          <div class="payment-details-item">
-            <input type="radio" value="custom" v-model="deliveryType" />
-            <span></span>
-            <p>Drugačiji podaci</p>
-          </div>
-          <form
-            id="delivery-data"
-            v-if="deliveryType == 'custom'"
-            class="payment-details-custom-data"
-          >
-            <p>Ime naručitelja:</p>
-            <InputField
-              placeholder="Ime *"
-              @update:inputValue="customer.name = $event"
-            />
-            <p>Prezime naručitelja:</p>
-            <InputField
-              placeholder="Prezime *"
-              @update:inputValue="customer.surname = $event"
-            />
-            <p>Email naručitelja:</p>
-            <InputField
-              placeholder="email@email.com *"
-              @update:inputValue="customer.email = $event"
-              type="email"
-            />
-            <p>Adresa dostave:</p>
-            <InputField
-              placeholder="Ulica Slavka Horvata 123a *"
-              @update:inputValue="customer.address = $event"
-            />
-            <p>Poštanski broj:</p>
-            <InputField
-              placeholder="10000 *"
-              @update:inputValue="customer.postal = $event"
-              type="number"
-            />
-            <p>Grad:</p>
-            <InputField
-              placeholder="Zagreb *"
-              @update:inputValue="customer.city = $event"
-            />
-          </form>
+        </div>
+        <div class="payment-details-price-wrapper">
+          <FinalPriceAndButton
+            priceLabel="Ukupan iznos narudžbe:"
+            price="8101.68"
+            buttonText="Završi narudžbu i plati"
+          />
         </div>
       </div>
-      <button type="button" form="delivery-data" @click="logValues">
-        Click without validation
-      </button>
     </div>
   </div>
 </template>
@@ -150,6 +156,7 @@
 <script setup>
 import { ref } from "vue";
 import InputField from "../components/InputField.vue";
+import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
 
 const paymentType = ref("card");
 const deliveryType = ref("default");
@@ -202,20 +209,20 @@ input {
   width: 100%;
 }
 .payment-details-wrapper {
-  background-color: $colorBgPrimary;
+  justify-content: center;
 
   .payment-details-inner {
     max-width: 1200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 32px;
     align-items: center;
 
     .payment-details-card-details {
       background-color: $white-dark;
       box-shadow: 0 0 16px 4px #dbc9f3;
-      width: 98%;
+      width: 100%;
       padding: 32px 12px;
       border-radius: 20px;
 
@@ -223,8 +230,9 @@ input {
         flex-direction: row;
         width: 100%;
         display: flex;
-        justify-content: space-between;
-        margin: 20px 0;
+        gap: 16px;
+        justify-content: center;
+        margin: 20px auto;
       }
 
       .payment-details-payment-card-details {
@@ -259,6 +267,51 @@ input {
       }
     }
 
+    .payment-details-person-price-wrapper {
+      border-radius: 20px;
+      background-color: $white-dark;
+      position: relative;
+      margin-bottom: 150px;
+      width: 100%;
+
+      .payment-details-person-data {
+        box-shadow: 0 0 16px 4px #dbc9f3;
+        padding: 32px 12px 0;
+        border-radius: 20px;
+
+        .payment-details-delivery-data-container {
+          display: flex;
+          flex-direction: column;
+          padding: 24px 0;
+          gap: 8px;
+
+          .payment-details-delivery-data-row {
+            display: flex;
+            gap: 8px;
+
+            .payment-details-default-data {
+              p {
+                font-size: 14px;
+              }
+            }
+          }
+
+          .payment-details-custom-data {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 16px 0;
+          }
+        }
+      }
+
+      .payment-details-price-wrapper {
+        position: absolute;
+        bottom: -120px;
+        width: 100%;
+      }
+    }
+
     .payment-details-item {
       flex-direction: row;
       display: flex;
@@ -279,36 +332,61 @@ input {
         font-size: 12px;
       }
     }
+  }
+}
 
-    .payment-details-person-data {
-      background-color: $white-dark;
-      box-shadow: 0 0 16px 4px #dbc9f3;
-      width: 98%;
-      padding: 32px 12px 0;
-      border-radius: 20px;
+@media screen and ($tablet) {
+  p {
+    color: $grey-dark;
+    font-size: 20px;
+  }
 
-      .payment-details-delivery-data-container {
-        display: flex;
-        flex-direction: column;
-        margin: 24px 0;
-        gap: 8px;
+  .payment-details-wrapper {
+    width: 90%;
+    margin: 10px auto;
 
-        .payment-details-delivery-data-row {
-          display: flex;
-          gap: 8px;
+    .payment-details-inner {
+      .payment-details-card-details {
+        padding: 48px;
 
-          .payment-details-default-data {
-            p {
-              font-size: 14px;
-            }
-          }
+        .payment-details-payment-type-container {
+          justify-content: start;
         }
+      }
 
-        .payment-details-custom-data {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          padding: 16px 0;
+      .payment-details-person-price-wrapper {
+        .payment-details-person-data {
+          padding: 48px;
+        }
+      }
+    }
+  }
+}
+@media screen and ($desktop) {
+  .payment-details-wrapper {
+    /* height: 70vh; */
+    align-items: center;
+    display: flex;
+
+    .payment-details-inner {
+      flex-direction: row;
+      align-items: start;
+
+      .payment-details-card-details {
+        height: 500px;
+        width: 450px;
+      }
+
+      .payment-details-person-data {
+        min-height: 420px;
+      }
+      .payment-details-person-price-wrapper {
+        width: 450px;
+
+        .payment-details-price-wrapper {
+          position: absolute;
+          bottom: -80px;
+          width: 100%;
         }
       }
     }
