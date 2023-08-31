@@ -2,39 +2,36 @@
   <div>
     <Hero />
 
-    <h1 style="color: red">Grafičke</h1>
-    <div class="gpus-wrapper">
+    <h1 class="homepage-component-wrapper-title">Grafičke</h1>
+    <div class="item-type-wrapper">
       <PCPartCard v-for="(gpu, index) in gpus" :key="index" :component="gpu" />
       <!--if i pass props that dont exist, nothing will render!!-->
     </div>
 
-    <h1 style="color: red">Procesori</h1>
+    <h1 class="homepage-component-wrapper-title">Procesori</h1>
 
-    <div class="gpus-wrapper">
+    <div class="item-type-wrapper">
       <PCPartCard v-for="(cpu, index) in cpus" :key="index" :component="cpu" />
-      <!--if i pass props that dont exist, nothing will render!!-->
     </div>
 
-    <h1 style="color: red">Matične ploče</h1>
+    <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
 
-    <div class="gpus-wrapper">
+    <div class="item-type-wrapper">
       <PCPartCard
         v-for="(motherboard, index) in mbs"
         :key="index"
         :component="motherboard"
       />
-      <!--if i pass props that dont exist, nothing will render!!-->
     </div>
 
-    <h1 style="color: red">RAM memorije</h1>
+    <h1 class="homepage-component-wrapper-title">RAM memorije</h1>
 
-    <div class="gpus-wrapper">
+    <div class="item-type-wrapper">
       <PCPartCard
         v-for="(motherboard, index) in rams"
         :key="index"
         :component="motherboard"
       />
-      <!--if i pass props that dont exist, nothing will render!!-->
     </div>
   </div>
 </template>
@@ -78,12 +75,29 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.gpus-wrapper {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  justify-content: center;
-  gap: 20px;
+@import "../utils/theme.scss";
+.item-type-wrapper {
+  display: flex;
+  flex-direction: column;
   padding: 12px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and ($tabletLarge) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    justify-content: center;
+  }
+
+  @media screen and ($desktopLarge) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.homepage-component-wrapper-title {
+  color: $pink;
+  padding-left: 12px;
 }
 </style>

@@ -83,7 +83,7 @@ console.log("component PROP PROSLJEDNEI JE", component);
 @import "../utils/theme.scss";
 .pc-part-card-wrapper {
   background-color: #eaeaea;
-  //width: 300px;
+  width: 400px;
   padding-top: 12px;
   box-shadow: 0 0 20px #be166e;
   outline: 3px solid transparent;
@@ -96,7 +96,7 @@ console.log("component PROP PROSLJEDNEI JE", component);
 .pc-part-card-image-wrapper {
   background-color: white;
   height: 240px;
-  width: 350px;
+  width: 100%;
   margin-bottom: 16px;
   img {
     object-fit: contain;
