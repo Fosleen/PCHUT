@@ -33,12 +33,19 @@
         :component="motherboard"
       />
     </div>
+
+    <PcBuilderHomepage />
+
+    <h1>Još određeno vrijeme na akciji</h1>
+
+    <DiscountProducts />
   </div>
 </template>
 
 <script setup>
 import Hero from "../components/Hero.vue";
 import PCPartCard from "../components/PCPartCard.vue";
+import PcBuilderHomepage from "../components/PcBuilderHomepage.vue";
 import { ref, onMounted } from "vue";
 
 import {
@@ -47,6 +54,7 @@ import {
   getAllMotherboards,
   getAllRAMs,
 } from "../api/api";
+import DiscountProducts from "../components/DiscountProducts.vue";
 const gpus = ref([]);
 
 const cpus = ref([]);
