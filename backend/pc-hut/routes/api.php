@@ -121,3 +121,4 @@ Route::get('component/{id}', [ComponentController::class, 'show']);
 //=============================================================//
 
 Route::get('order', [OrderController::class, 'index']);
+Route::get('order/{id}', [OrderController::class, 'show']);
