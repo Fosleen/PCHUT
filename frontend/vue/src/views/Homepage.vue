@@ -25,6 +25,17 @@
       />
       <!--if i pass props that dont exist, nothing will render!!-->
     </div>
+
+    <h1 style="color: red">RAM memorije</h1>
+
+    <div class="gpus-wrapper">
+      <PCPartCard
+        v-for="(motherboard, index) in rams"
+        :key="index"
+        :component="motherboard"
+      />
+      <!--if i pass props that dont exist, nothing will render!!-->
+    </div>
   </div>
 </template>
 
@@ -33,12 +44,19 @@ import Hero from "../components/Hero.vue";
 import PCPartCard from "../components/PCPartCard.vue";
 import { ref, onMounted } from "vue";
 
-import { getAllGraphicCards, getAllCPUs, getAllMotherboards } from "../api/api";
+import {
+  getAllGraphicCards,
+  getAllCPUs,
+  getAllMotherboards,
+  getAllRAMs,
+} from "../api/api";
 const gpus = ref([]);
 
 const cpus = ref([]);
 
 const mbs = ref([]);
+
+const rams = ref([]);
 
 onMounted(async () => {
   const graphicCards = await getAllGraphicCards();
@@ -52,6 +70,10 @@ onMounted(async () => {
   const motherboards = await getAllMotherboards();
   mbs.value = motherboards.motherboards;
   console.log("Motherboards", mbs.value);
+
+  const allRams = await getAllRAMs();
+  rams.value = allRams.rams;
+  console.log("Rams", rams.value);
 });
 </script>
 

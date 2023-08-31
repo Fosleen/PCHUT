@@ -15,13 +15,34 @@
       </div>
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
+          v-if="getModelName() == 'GPU'"
           :text-group-name="component.model"
-          :text-group-items="[component.memory]"
+          :text-group-items="[component.memory + 'GB memorije']"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'CPU'"
+          :text-group-name="component.model"
+          :text-group-items="[
+            component.cores + ' jezgri',
+            component.socket + ' socket',
+          ]"
+        />
+
+        <PCPartCardList
+          v-if="getModelName() == 'Motherboard'"
+          :text-group-name="component.model"
+          :text-group-items="[component.socket + ' socket']"
+        />
+
+        <PCPartCardList
+          v-if="getModelName() == 'RAM'"
+          :text-group-name="component.model"
+          :text-group-items="[component.speed + ' MHz']"
         />
 
         <h3>Dostupno</h3>
         <h2 class="pc-part-card-price-wrapper">
-          {{ `${component.price} E` }}
+          {{ `${component.price} &#x20AC` }}
         </h2>
       </div>
 
@@ -52,6 +73,8 @@ const getModelName = () => {
   const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
 };
+
+console.log(getModelName());
 
 console.log("component PROP PROSLJEDNEI JE", component);
 </script>
