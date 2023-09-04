@@ -102,7 +102,7 @@ export default {
 }
 
 .mobile-nav-logo {
-  height: 80px;
+  height: 32px;
 }
 
 .mobile-nav-icons {
