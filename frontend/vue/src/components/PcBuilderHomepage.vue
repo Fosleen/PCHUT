@@ -46,11 +46,11 @@ onMounted(async () => {
     gpu.value = graphicCard.data;
     console.log("Gpu", gpu.value);
 
-    const procesor = await getCPUById(1);
+    const procesor = await getCPUById(2);
     cpu.value = procesor.data;
     console.log("CPU", cpu.value);
 
-    const motherboard = await getMotherboardById(1);
+    const motherboard = await getMotherboardById(2);
     mbd.value = motherboard.data;
     console.log("Motherboard", mbd.value); //tu je dobro
   } catch {
@@ -66,7 +66,7 @@ onMounted(async () => {
   background-position: inherit;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 900px;
+  height: 2400px;
 
   h3 {
     color: white;
@@ -79,6 +79,10 @@ onMounted(async () => {
     justify-content: space-between;
     padding: 12px;
   }
+
+  @media screen and ($tabletLarge) {
+    height: 900px;
+  }
 }
 
 .pc-builder-homepage-components-wrapper {
@@ -90,18 +94,14 @@ onMounted(async () => {
   justify-content: center;
   align-items: center;
   padding-bottom: 24px;
+  flex-direction: column;
 
-  /* @media screen and ($tabletLarge) {
+  @media screen and ($tabletLarge) {
     display: flex;
     flex-direction: row;
-    //grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     justify-content: center;
   }
-
-  @media screen and ($desktopLarge) {
-    //grid-template-columns: repeat(3, 1fr);
-  } */
 
   h2 {
     font-size: 120px;
