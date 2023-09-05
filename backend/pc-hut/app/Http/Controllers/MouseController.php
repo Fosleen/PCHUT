@@ -54,7 +54,8 @@ class MouseController extends Controller
                 'price' => $request->price,
                 'wired' => $request->wired,
                 'manufacturer_id' => $request->manufacturer_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'discount' => $request->discount
             ]);
 
             $mouse->save();
@@ -69,6 +70,7 @@ class MouseController extends Controller
                 'description' => $request->description,
                 'productable_id' => $mouse->id,
                 'productable_type' => Mouse::class,
+                'discount' => $request->discount
             ]);
 
             $mouse->component()->save($component);

@@ -46,7 +46,8 @@ class CPUController extends Controller
                 'speed' => $request->speed,
                 'manufacturer_id' => $request->manufacturer_id,
                 'socket_id' => $request->socket_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'discount' => $request->discount
             ]);
 
             $cpu->save();
@@ -58,6 +59,7 @@ class CPUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $cpu->id,
                 'productable_type' => CPU::class,
+                'discount' => $request->discount
             ]);
 
             $cpu->component()->save($component);

@@ -15,7 +15,7 @@ class Component extends Model
 
     protected $table = 'component';
 
-    protected $fillable = ['productable_id', 'productable_type', 'manufacturer_id', 'model',  'price', 'description'];
+    protected $fillable = ['productable_id', 'productable_type', 'manufacturer_id', 'model',  'price', 'description', 'discount'];
 
 
     public function productable(): MorphTo

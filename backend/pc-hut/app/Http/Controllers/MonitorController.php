@@ -53,7 +53,8 @@ class MonitorController extends Controller
                 'curved' => $request->curved,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'discount' => $request->discount
             ]);
 
             $monitor->save();
@@ -68,6 +69,7 @@ class MonitorController extends Controller
                 'description' => $request->description,
                 'productable_id' => $monitor->id,
                 'productable_type' => Mouse::class,
+                'discount' => $request->discount
             ]);
 
             $monitor->component()->save($component);

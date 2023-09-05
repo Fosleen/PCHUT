@@ -49,6 +49,7 @@ class MotherboardController extends Controller
                 'socket_id' => $request->socket_id,
                 'description' => $request->description,
                 'ram_type_id' => $request->ram_type_id,
+                'discount' => $request->discount
 
             ]);
 
@@ -61,6 +62,7 @@ class MotherboardController extends Controller
                 'description' => $request->description,
                 'productable_id' => $motherboard->id,
                 'productable_type' => Motherboard::class,
+                'discount' => $request->discount
             ]);
 
             $motherboard->component()->save($component);

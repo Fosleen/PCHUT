@@ -41,7 +41,8 @@ class PcCaseController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
-                'case_size_id' => $request->case_size_id
+                'case_size_id' => $request->case_size_id,
+                'discount' => $request->discount
             ]);
 
             $pccase->save();
@@ -53,6 +54,7 @@ class PcCaseController extends Controller
                 'description' => $request->description,
                 'productable_id' => $pccase->id,
                 'productable_type' => pccase::class,
+                'discount' => $request->discount
             ]);
 
             $pccase->component()->save($component);

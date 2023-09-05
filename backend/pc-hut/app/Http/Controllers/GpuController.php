@@ -56,7 +56,8 @@ class GPUController extends Controller
                 'memory' => $request->memory,
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'discount' => $request->discount
             ]);
 
             $gpu->save(); // Save the GPU instance to generate an ID
@@ -68,6 +69,7 @@ class GPUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $gpu->id,
                 'productable_type' => GPU::class,
+                'discount' => $request->discount,
             ]);
 
             $gpu->component()->save($component);
