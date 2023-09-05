@@ -24,14 +24,14 @@
           :text-group-name="component.model"
           :text-group-items="[
             component.cores + ' jezgri',
-            component.socket_id + ' socket',
+            component.socket_name + ' socket',
           ]"
         />
 
         <PCPartCardList
           v-if="getModelName() == 'Motherboard'"
           :text-group-name="component.model"
-          :text-group-items="[component.socket_id + ' socket']"
+          :text-group-items="[component.socket_name + ' socket']"
         />
 
         <PCPartCardList
