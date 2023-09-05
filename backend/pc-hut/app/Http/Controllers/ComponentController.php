@@ -9,7 +9,7 @@ class ComponentController extends Controller
 {
     public function index()
     {
-        $components = Component::all();
+        $components = Component::with('productable')->get();
 
         if ($components->count() > 0) {
             $data = [
@@ -28,7 +28,9 @@ class ComponentController extends Controller
 
     public function indexDiscount()
     {
-        $components = Component::whereNotNull('discount')->get();
+        $components = Component::whereNotNull('discount')
+            ->with('productable')
+            ->get();
 
         if ($components->count() > 0) {
             $data = [
@@ -45,10 +47,13 @@ class ComponentController extends Controller
         }
     }
 
+
     public function show($id)
     {
         $component = Component::find($id);
         $component->images;
+        $component->productable;
+
 
         if ($component) {
             return response()->json([
