@@ -138,4 +138,14 @@ const props = defineProps({
     padding-bottom: 0;
   }
 }
+
+@media screen and ($desktop) {
+  .orders-list-item-container {
+    .orders-list-item-left {
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+}
 </style>

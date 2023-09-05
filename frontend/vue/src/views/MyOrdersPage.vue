@@ -118,12 +118,10 @@ import OrdersListItem from "../components/OrdersListItem.vue";
 @import "../utils/theme.scss";
 
 .orders-wrapper {
-  max-width: 1200px;
-
   .orders-container {
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+    max-width: 1200px;
 
     h2 {
       font-size: 20px;
@@ -209,8 +207,27 @@ import OrdersListItem from "../components/OrdersListItem.vue";
 @media screen and ($tablet) {
   .orders-wrapper {
     .orders-container {
+      .past-orders-wrapper {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+        margin: 12px 24px;
+        height: fit-content;
+      }
+
       .current-order-wrapper {
+        padding: 0px;
+        gap: 0px;
+
+        .current-order-items-wrapper {
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+          margin: 12px 24px;
+          padding: 20px;
+        }
+
         .current-order-details-wrapper {
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+          margin: 12px 24px 24px;
+          padding: 20px;
+
           .current-order-details-container {
             & > div {
               flex-direction: row;
@@ -221,6 +238,34 @@ import OrdersListItem from "../components/OrdersListItem.vue";
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .orders-wrapper {
+    .orders-container {
+      flex-direction: row;
+      margin: 16px auto;
+      gap: 20px;
+
+      .past-orders-wrapper {
+        flex: 3;
+        margin: 0;
+      }
+
+      .current-order-wrapper {
+        flex: 7;
+        gap: 20px;
+
+        .current-order-items-wrapper {
+          margin: 0;
+        }
+
+        .current-order-details-wrapper {
+          margin: 0;
         }
       }
     }
