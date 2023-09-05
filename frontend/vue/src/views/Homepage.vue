@@ -36,8 +36,6 @@
 
     <PcBuilderHomepage />
 
-    <h1>Još određeno vrijeme na akciji</h1>
-
     <DiscountProducts />
   </div>
 </template>

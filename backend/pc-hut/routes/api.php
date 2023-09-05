@@ -113,4 +113,4 @@ Route::post('component-images', [ComponentImageController::class, 'store']);
 
 Route::get('component', [ComponentController::class, 'index']);
 Route::get('component/{id}', [ComponentController::class, 'show']);
-Route::get('discount-component', [ComponentController::class, 'indexDiscount']);
+Route::get('discount-components', [ComponentController::class, 'indexDiscount']);

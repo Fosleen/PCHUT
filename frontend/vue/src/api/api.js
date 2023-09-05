@@ -59,3 +59,9 @@ export function getAllCases() {
     return data;
   });
 }
+
+export function getAllProductsOnDiscount() {
+  return axiosClient.get("/discount-components").then(({ data }) => {
+    return data;
+  });
+}
