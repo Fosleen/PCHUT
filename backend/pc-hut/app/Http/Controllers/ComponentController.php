@@ -26,6 +26,25 @@ class ComponentController extends Controller
         }
     }
 
+    public function indexDiscount()
+    {
+        $components = Component::whereNotNull('discount')->get();
+
+        if ($components->count() > 0) {
+            $data = [
+                'status' => 200,
+                'components' => $components,
+            ];
+
+            return response()->json($data, 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "No components"
+            ], 404);
+        }
+    }
+
     public function show($id)
     {
         $component = Component::find($id);
