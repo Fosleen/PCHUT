@@ -54,6 +54,8 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
+            'payment' => 'required|integer',
+            'delivery_status' => 'required|integer',
             'component_id' => 'required|array',
             'component_id.*' => 'required|integer',
             'quantity' => 'required|array',
@@ -68,7 +70,10 @@ class OrderController extends Controller
         } else {
             $order = Order::create([
                 'id' => $request->order_id,
+                'payment' => $request->payment,
+                'delivery_status' => $request->delivery_status,
                 'user_id' => $request->user_id,
+
             ]);
 
             foreach ($request->component_id as $index => $component_id) {
@@ -99,6 +104,28 @@ class OrderController extends Controller
         } else {
             return response()->json([
                 'message' => 'Order not found!'
+            ], 404);
+        }
+    }
+
+    public function getOrdersByUser($id)
+    {
+        $orders = Order::all()->where('user_id', $id);
+
+        foreach ($orders as $order) {
+            $order->component;
+        }
+
+        if ($orders->count() > 0) {
+            $data = [
+                'status' => 200,
+                'orders' => $orders,
+            ];
+            return response()->json($data, 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "No orders"
             ], 404);
         }
     }
