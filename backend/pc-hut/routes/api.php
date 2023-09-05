@@ -121,6 +121,7 @@ Route::get('component/{id}', [ComponentController::class, 'show']);
 //=============================================================//
 
 Route::get('order', [OrderController::class, 'index']);
+Route::get('user-orders/{id}', [OrderController::class, 'getOrdersByUser']);
 Route::get('order/{id}', [OrderController::class, 'show']);
 Route::post('order', [OrderController::class, 'store']);
 Route::delete('order/{id}', [OrderController::class, 'destroy']);

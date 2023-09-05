@@ -6,6 +6,7 @@ const store = createStore({
     user: {
       data: {},
       token: sessionStorage.getItem("access_token"),
+      orders: {},
     },
     currentProduct: {
       loading: false,
@@ -48,6 +49,26 @@ const store = createStore({
         });
     },
 
+    getOrdersByUser({ commit }, { id }) {
+      let apiUrl = `/user-orders/${id}`;
+      return axiosClient
+        .get(apiUrl)
+        .then((res) => {
+          const ordersData = res.data.orders;
+          const ordersArray = Object.keys(ordersData).map((orderId) => ({
+            ...ordersData[orderId],
+            id: Number(orderId),
+          }));
+          console.log(ordersArray);
+
+          commit("setUsersOrders", ordersArray);
+          return res;
+        })
+        .catch((err) => {
+          throw err;
+        });
+    },
+
     toggleFilterDropdown({ commit }) {
       commit("toggleFilter");
     },
@@ -61,6 +82,12 @@ const store = createStore({
 
     setProduct: (state, product) => {
       state.currentProduct.data = product.data;
+    },
+
+    setUsersOrders: (state, data) => {
+      console.log(data);
+
+      state.user.orders = data;
     },
 
     setCurrentProductLoading: (state, loading) => {

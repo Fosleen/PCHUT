@@ -3,32 +3,18 @@
     <div class="orders-container">
       <div class="past-orders-wrapper">
         <h3>Povijest naručivanja</h3>
-        <div class="past-orders-container">
+        <div
+          v-for="order in orders"
+          v-bind:key="order.id"
+          class="past-orders-container"
+        >
           <OrdersListItem
             :order="{
-              id: 1,
-              total: 2541.99,
-              quantity: 4,
-              shipping: 1,
-              payment: 1,
-            }"
-          />
-          <OrdersListItem
-            :order="{
-              id: 2,
-              total: 784.99,
-              quantity: 2,
-              shipping: 0,
-              payment: 0,
-            }"
-          />
-          <OrdersListItem
-            :order="{
-              id: 3,
-              total: 541.45,
-              quantity: 1,
-              shipping: 2,
-              payment: 1,
+              id: order.id,
+              total: calculateTotalPrice(order),
+              quantity: calculateTotalQuantity(order),
+              shipping: order.delivery_status,
+              payment: order.payment,
             }"
           />
         </div>
@@ -112,6 +98,30 @@
 <script setup>
 import OrderItem from "../components/OrderItem.vue";
 import OrdersListItem from "../components/OrdersListItem.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+store.dispatch("getOrdersByUser", {
+  id: 1, // TODO current user ID
+});
+const orders = computed(() => store.state.user.orders);
+
+const calculateTotalQuantity = (order) => {
+  let totalQuantity = 0;
+  order.component.forEach((component) => {
+    totalQuantity += component.pivot.quantity;
+  });
+  return totalQuantity;
+};
+
+const calculateTotalPrice = (order) => {
+  let totalPrice = 0;
+  order.component.forEach((component) => {
+    totalPrice += component.pivot.quantity * component.price;
+  });
+  return totalPrice;
+};
 </script>
 
 <style lang="scss">
