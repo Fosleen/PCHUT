@@ -38,7 +38,8 @@
           ></div>
         </div>
       </div>
-      <p>Plaćeno</p>
+      <p v-if="props.order.payment == 0">Plaćanje pouzećem</p>
+      <p v-if="props.order.payment == 1">Plaćeno</p>
     </div>
   </div>
 </template>
