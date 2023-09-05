@@ -17,21 +17,21 @@
         <PCPartCardList
           v-if="getModelName() == 'GPU'"
           :text-group-name="component.model"
-          :text-group-items="[component.memory + 'GB memorije']"
+          :text-group-items="[component.productable.memory + 'GB memorije']"
         />
         <PCPartCardList
           v-if="getModelName() == 'CPU'"
           :text-group-name="component.model"
           :text-group-items="[
-            component.cores + ' jezgri',
-            component.socket + ' socket',
+            component.productable.cores + ' jezgri',
+            component.productable.socket_id + ' socket',
           ]"
         />
 
         <PCPartCardList
           v-if="getModelName() == 'Motherboard'"
           :text-group-name="component.model"
-          :text-group-items="[component.socket + ' socket']"
+          :text-group-items="[component.productable.socket_id + ' socket']"
         />
 
         <PCPartCardList
