@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ComponentResource;
 use App\Models\Component;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,8 @@ class ComponentController extends Controller
         }
     }
 
+
+
     public function indexDiscount()
     {
         $components = Component::whereNotNull('discount')
@@ -33,12 +36,9 @@ class ComponentController extends Controller
             ->get();
 
         if ($components->count() > 0) {
-            $data = [
-                'status' => 200,
-                'components' => $components,
-            ];
-
-            return response()->json($data, 200);
+            return ComponentResource::collection($components)
+                ->response()
+                ->setStatusCode(200);
         } else {
             return response()->json([
                 'status' => 404,
@@ -46,6 +46,7 @@ class ComponentController extends Controller
             ], 404);
         }
     }
+
 
 
     public function show($id)

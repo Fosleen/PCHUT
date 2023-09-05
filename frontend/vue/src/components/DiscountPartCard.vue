@@ -7,13 +7,13 @@
         id: component.productable_id,
       },
     }"
-    class="pc-part-card-link"
+    class="discount-part-card-link"
   >
-    <div class="pc-part-card-wrapper">
-      <div class="pc-part-card-image-wrapper">
+    <div class="discount-part-card-wrapper">
+      <div class="discount-part-card-image-wrapper">
         <!-- <img :src="component.images[0]" alt="" /> -->
       </div>
-      <div class="pc-part-card-text-wrapper">
+      <div class="discount-part-card-text-wrapper">
         <PCPartCardList
           v-if="getModelName() == 'GPU'"
           :text-group-name="component.model"
@@ -41,12 +41,12 @@
         />
 
         <h3>Dostupno</h3>
-        <h2 class="pc-part-card-price-wrapper">
+        <h2 class="discount-part-card-price-wrapper">
           {{ `${component.price} &#x20AC` }}
         </h2>
       </div>
 
-      <div class="pc-part-card-button-wrapper">
+      <div class="discount-part-card-button-wrapper">
         <Button
           shape="odd-shape"
           text="Dodaj u"
@@ -81,7 +81,7 @@ const { component } = defineProps({
 
 @import "../utils/theme.scss";
 
-.pc-part-card-wrapper {
+.discount-part-card-wrapper {
   background-color: #eaeaea;
   width: 400px;
   padding-top: 12px;
@@ -93,7 +93,7 @@ const { component } = defineProps({
   //max-width: 400px;
 }
 
-.pc-part-card-image-wrapper {
+.discount-part-card-image-wrapper {
   background-color: white;
   height: 240px;
   width: 100%;
@@ -105,7 +105,7 @@ const { component } = defineProps({
   }
 }
 
-.pc-part-card-text-wrapper {
+.discount-part-card-text-wrapper {
   h3 {
     color: $colorSuccess;
     font-size: 20px;
@@ -118,13 +118,13 @@ const { component } = defineProps({
   }
 }
 
-.pc-part-card-button-wrapper {
+.discount-part-card-button-wrapper {
   display: flex;
   justify-content: center;
   padding-bottom: 16px;
 }
 
-.pc-part-card-link {
+.discount-part-card-link {
   text-decoration: none;
 }
 </style>
