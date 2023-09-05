@@ -11,6 +11,7 @@ use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\MotherboardController;
 use App\Http\Controllers\MouseController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\PcCaseController;
 use App\Http\Controllers\PSUController;
@@ -101,16 +102,26 @@ Route::post('pccases', [PcCaseController::class, 'store']);
 Route::delete('pccases/{id}', [PcCaseController::class, 'destroy']);
 //=============================================================//
 
-
 Route::get('manufacturers', [ManufacturerController::class, 'index']);
 Route::get('manufacturers/{id}', [ManufacturerController::class, 'show']);
 Route::post('manufacturers', [ManufacturerController::class, 'store']);
 Route::delete('manufacturers/{id}', [ManufacturerController::class, 'destroy']);
 
+//=============================================================//
+
 Route::get('component-images', [ComponentImageController::class, 'index']);
 Route::get('component-images/{id}', [ComponentImageController::class, 'show']);
 Route::post('component-images', [ComponentImageController::class, 'store']);
 
+//=============================================================//
+
 Route::get('component', [ComponentController::class, 'index']);
 Route::get('component/{id}', [ComponentController::class, 'show']);
+
+//=============================================================//
+
+Route::get('order', [OrderController::class, 'index']);
+Route::get('order/{id}', [OrderController::class, 'show']);
+Route::post('order', [OrderController::class, 'store']);
+Route::delete('order/{id}', [OrderController::class, 'destroy']);
 Route::get('discount-components', [ComponentController::class, 'indexDiscount']);
