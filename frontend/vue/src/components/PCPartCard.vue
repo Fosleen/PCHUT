@@ -74,9 +74,9 @@ const getModelName = () => {
   return modelName;
 };
 
-console.log(getModelName());
+// console.log(getModelName());
 
-console.log("component PROP PROSLJEDNEI JE", component);
+// console.log("component PROP PROSLJEDNEI JE", component);
 </script>
 
 <style lang="scss" scoped>

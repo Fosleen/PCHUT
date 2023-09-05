@@ -6,8 +6,26 @@ export function getAllGraphicCards() {
   });
 }
 
+export function getGraphicCardById(id) {
+  return axiosClient.get(`/gpus/${id}`).then(({ data }) => {
+    return data;
+  });
+}
+
 export function getAllCPUs() {
   return axiosClient.get("/cpus").then(({ data }) => {
+    return data;
+  });
+}
+
+export function getCPUById(id) {
+  return axiosClient.get(`/cpus/${id}`).then(({ data }) => {
+    return data;
+  });
+}
+
+export function getMotherboardById(id) {
+  return axiosClient.get(`/motherboards/${id}`).then(({ data }) => {
     return data;
   });
 }

@@ -6,19 +6,31 @@
       </div>
       <div class="pc-builder-component-card-text-wrapper">
         <PCBuilderComponentCardList
-          text-group-name="Najjača grafička kartica e"
+          v-if="component && component.product_type == 'Grafička'"
+          :text-group-name="component.model"
+          :text-group-items="[component.memory + 'GB memorije']"
+        />
+
+        <PCBuilderComponentCardList
+          v-if="component && component.product_type == 'Procesor'"
+          :text-group-name="component.model"
           :text-group-items="[
-            '6GB memorije',
-            'Nvidia CUDA tehnologija',
-            'Super za gaming',
+            component.cores + 'jezgri',
+            component.socket + ' socket',
           ]"
+        />
+
+        <PCBuilderComponentCardList
+          v-if="component && component.product_type == 'Matična ploča'"
+          :text-group-name="component.model"
+          :text-group-items="[component.socket + ' socket']"
         />
       </div>
     </div>
 
     <div class="pc-builder-component-card-button-wrapper">
       <div class="price-wrapper">
-        <p>3400 eur</p>
+        <p>{{ component.price+ " &#x20AC" }}</p>
       </div>
     </div>
   </div>
@@ -27,13 +39,21 @@
 <script setup>
 import PCBuilderComponentCardList from "./PCBuilderComponentCardList.vue";
 
-const { Image, className } = defineProps({
+const { Image, className, component } = defineProps({
   Image: String,
   className: String,
+  component: Object,
 });
 
 const wrapperClasses = {
   [className]: className !== undefined,
+};
+
+console.log("Ja dobim ovo", component);
+
+const getModelName = () => {
+  const modelName = component.productable_type.replace("App\\Models\\", "");
+  return modelName;
 };
 </script>
 

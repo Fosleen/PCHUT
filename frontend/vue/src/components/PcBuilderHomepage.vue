@@ -9,17 +9,20 @@
       <PcBuilderComponentCard
         class="pc-builder-component-small-card-wrapper"
         Image="https://cdn.mos.cms.futurecdn.net/9fdc0e6c7e4e1e175a8b986dc221e1cb.png"
+        :component="gpu"
       />
       <h2>+</h2>
       <PcBuilderComponentCard
         class="pc-builder-component-small-card-wrapper"
         Image="https://cdn.mos.cms.futurecdn.net/9fdc0e6c7e4e1e175a8b986dc221e1cb.png"
+        :component="cpu"
       />
       +
       <h2>+</h2>
       <PcBuilderComponentCard
         class="pc-builder-component-small-card-wrapper"
         Image="https://cdn.mos.cms.futurecdn.net/9fdc0e6c7e4e1e175a8b986dc221e1cb.png"
+        :component="mbd"
       />
     </div>
 
@@ -30,6 +33,30 @@
 <script setup>
 import BuildPCButton from "./BuildPCButton.vue";
 import PcBuilderComponentCard from "../components/PcBuilderComponentCard.vue";
+import { onMounted, ref } from "vue";
+import { getGraphicCardById, getCPUById, getMotherboardById } from "../api/api";
+
+const gpu = ref([]);
+const cpu = ref([]);
+const mbd = ref([]);
+
+onMounted(async () => {
+  try {
+    const graphicCard = await getGraphicCardById(1);
+    gpu.value = graphicCard.data;
+    console.log("Gpu", gpu.value);
+
+    const procesor = await getCPUById(1);
+    cpu.value = procesor.data;
+    console.log("CPU", cpu.value);
+
+    const motherboard = await getMotherboardById(1);
+    mbd.value = motherboard.data;
+    console.log("Motherboard", mbd.value); //tu je dobro
+  } catch {
+    console.log("Doslo je do errora");
+  }
+});
 </script>
 
 <style lang="scss" scoped>
