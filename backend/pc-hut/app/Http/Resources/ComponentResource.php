@@ -28,6 +28,10 @@ class ComponentResource extends JsonResource
             'memory' => $this->when($this->productable_type === 'App\\Models\\GPU', function () {
                 return $this->productable->memory;
             }),
+
+            'cores' => $this->when($this->productable_type === 'App\\Models\\CPU', function () {
+                return $this->productable->cores;
+            }),
         ];
     }
 }

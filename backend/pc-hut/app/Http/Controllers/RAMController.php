@@ -12,14 +12,27 @@ use App\Models\Component;
 
 class RAMController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $rams = RAM::with('component')->get();
-        $formattedrams = RAMResource::collection($rams);
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $rams = RAM::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $rams = RAM::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'rams' => $formattedrams,
+            'rams' => RAMResource::collection($rams),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $rams->currentPage(),
+                'last_page' => $rams->lastPage(),
+                'per_page' => $rams->perPage(),
+                'total' => $rams->total(),
+            ] : null,
         ], 200);
     }
 

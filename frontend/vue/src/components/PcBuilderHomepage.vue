@@ -52,7 +52,7 @@ onMounted(async () => {
 
     const motherboard = await getMotherboardById(2);
     mbd.value = motherboard.data;
-    console.log("Motherboard", mbd.value); //tu je dobro
+    console.log("Motherboard", mbd.value);
   } catch {
     console.log("Doslo je do errora");
   }
@@ -67,17 +67,19 @@ onMounted(async () => {
   background-repeat: no-repeat;
   background-size: cover;
   height: 2400px;
+  margin-bottom: 48px;
 
   h3 {
     color: white;
     text-transform: uppercase;
+    font-size: 32px;
   }
 
   .pc-builder-text-button-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px;
+    padding: 24px;
   }
 
   @media screen and ($tabletLarge) {

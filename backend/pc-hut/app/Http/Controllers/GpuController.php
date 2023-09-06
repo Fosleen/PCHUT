@@ -10,16 +10,31 @@ use Illuminate\Support\Facades\Validator;
 
 class GPUController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $gpus = GPU::with('component')->get();
-        $formattedGpus = GPUResource::collection($gpus);
+        $paginate = $request->query('paginate', true); // Default to true for pagination
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $gpus = GPU::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $gpus = GPU::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'gpus' => $formattedGpus,
+            'gpus' => GPUResource::collection($gpus),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $gpus->currentPage(),
+                'last_page' => $gpus->lastPage(),
+                'per_page' => $gpus->perPage(),
+                'total' => $gpus->total(),
+            ] : null,
         ], 200);
     }
+
+
 
     public function show($id)
     {

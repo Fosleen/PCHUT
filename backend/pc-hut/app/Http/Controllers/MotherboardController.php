@@ -10,15 +10,28 @@ use Illuminate\Support\Facades\Validator;
 
 class MotherboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $motherboards = Motherboard::with('component')->get();
-        $formattedmotherboards = MotherboardResource::collection($motherboards);
+        $paginate = $request->query('paginate', true); // Default to true for pagination
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $motherboards = Motherboard::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $motherboards = Motherboard::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'motherboards' => $formattedmotherboards,
+            'motherboards' => MotherboardResource::collection($motherboards),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $motherboards->currentPage(),
+                'last_page' => $motherboards->lastPage(),
+                'per_page' => $motherboards->perPage(),
+                'total' => $motherboards->total(),
+            ] : null,
         ], 200);
     }
 
