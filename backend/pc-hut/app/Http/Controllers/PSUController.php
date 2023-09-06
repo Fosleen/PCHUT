@@ -54,6 +54,7 @@ class PSUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $psu->id,
                 'productable_type' => PSU::class,
+                'product_type_cro' => "PSU",
             ]);
 
             $psu->component()->save($component);

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('productable_id');
             $table->string('productable_type');
+            $table->string('product_type_cro');
             $table->string("model", 45)->nullable(false);
 
             $table->float("price")->nullable(false);

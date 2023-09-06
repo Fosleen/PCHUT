@@ -74,7 +74,8 @@ class KeyboardController extends Controller
                 'wired' => $request->wired,
                 'type' => $request->type,
                 'connector' => $request->connector,
-                'description' => $request->description
+                'description' => $request->description,
+                'product_type_cro' => "Tipkovnica",
             ]);
 
             $keyboard->save();

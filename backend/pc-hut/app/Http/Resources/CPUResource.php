@@ -21,7 +21,7 @@ class CPUResource extends JsonResource
             'description' => $this->component->description,
             'cores' => $this->cores,
             'speed' => $this->speed,
-            'product_type' => "Procesor",
+            'product_type_cro' => $this->component->product_type_cro,
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,

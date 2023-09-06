@@ -53,6 +53,7 @@ class PcCaseController extends Controller
                 'description' => $request->description,
                 'productable_id' => $pccase->id,
                 'productable_type' => pccase::class,
+                'product_type_cro' => "Kučište",
             ]);
 
             $pccase->component()->save($component);

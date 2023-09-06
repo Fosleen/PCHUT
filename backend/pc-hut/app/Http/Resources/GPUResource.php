@@ -20,7 +20,7 @@ class GPUResource extends JsonResource
             'price' => $this->component->price,
             'description' => $this->component->description,
             'memory' => $this->memory,
-            'product_type' => "Grafička",
+            'product_type_cro' => $this->component->product_type_cro,
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,

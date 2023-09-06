@@ -68,6 +68,7 @@ class GPUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $gpu->id,
                 'productable_type' => GPU::class,
+                'product_type_cro' => "Grafička kartica",
             ]);
 
             $gpu->component()->save($component);

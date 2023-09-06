@@ -58,6 +58,7 @@ class CPUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $cpu->id,
                 'productable_type' => CPU::class,
+                'product_type_cro' => "Procesor",
             ]);
 
             $cpu->component()->save($component);

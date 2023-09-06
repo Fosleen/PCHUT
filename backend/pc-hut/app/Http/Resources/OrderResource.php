@@ -29,6 +29,7 @@ class OrderResource extends JsonResource
                     'model' => $component->model,
                     'price' => $component->price,
                     'discount' => $component->discount,
+                    'product_type_cro' => $component->product_type_cro,
                     'description' => $component->description,
                     'manufacturer' => $component->manufacturer->name,
                     'quantity' => $component->pivot->quantity,

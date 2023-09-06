@@ -2,7 +2,8 @@
   <div v-if="productLoading">Loading...</div>
   <div v-else class="product-details-wrapper">
     <h2>
-      {{ product.product_type }} {{ product.manufacturer }} {{ product.model }}
+      {{ product.product_type_cro }} {{ product.manufacturer }}
+      {{ product.model }}
     </h2>
     <div class="product-details-container">
       <ProductImagesCarousel :images="productImages" />

@@ -69,6 +69,7 @@ class MouseController extends Controller
                 'description' => $request->description,
                 'productable_id' => $mouse->id,
                 'productable_type' => Mouse::class,
+                'product_type_cro' => "Miš",
             ]);
 
             $mouse->component()->save($component);

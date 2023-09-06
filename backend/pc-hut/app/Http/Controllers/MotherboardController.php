@@ -61,6 +61,7 @@ class MotherboardController extends Controller
                 'description' => $request->description,
                 'productable_id' => $motherboard->id,
                 'productable_type' => Motherboard::class,
+                'product_type_cro' => "Matična ploča",
             ]);
 
             $motherboard->component()->save($component);

@@ -20,7 +20,7 @@ class RAMResource extends JsonResource
             'price' => $this->component->price,
             'description' => $this->component->description,
             'speed' => $this->speed,
-            'product_type' => "Ram",
+            'product_type_cro' => $this->component->product_type_cro,
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,

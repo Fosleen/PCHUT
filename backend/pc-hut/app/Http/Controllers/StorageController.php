@@ -46,6 +46,7 @@ class StorageController extends Controller
                 'storage_type_id' => $request->storage_type_id,
                 'description' => $request->description,
                 'size' => $request->size,
+                'product_type_cro' => "Memorija",
             ]);
 
             $storage->save();

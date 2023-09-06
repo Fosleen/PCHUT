@@ -58,6 +58,7 @@ class RAMController extends Controller
                 'description' => $request->description,
                 'productable_id' => $ram->id,
                 'productable_type' => ram::class,
+                'product_type_cro' => "RAM memorija",
             ]);
 
             $ram->component()->save($component);

@@ -22,7 +22,7 @@ class MonitorResource extends JsonResource
             'size' => $this->size,
             'refresh_rate' => $this->refresh_rate,
             'curved' => $this->curved,
-            'product_type' => "Monitor",
+            'product_type_cro' => $this->component->product_type_cro,
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,

@@ -19,7 +19,7 @@ class PSUResource extends JsonResource
             'model' => $this->component->model,
             'price' => $this->component->price,
             'description' => $this->component->description,
-            'product_type' => "PSU",
+            'product_type_cro' => $this->component->product_type_cro,
             'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
