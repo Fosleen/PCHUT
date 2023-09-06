@@ -75,6 +75,7 @@ class KeyboardController extends Controller
                 'type' => $request->type,
                 'connector' => $request->connector,
                 'description' => $request->description,
+                'discount' => $request->discount,
                 'product_type_cro' => "Tipkovnica",
             ]);
 
@@ -88,6 +89,7 @@ class KeyboardController extends Controller
                 'wired' => $request->wired,
                 'productable_id' => $keyboard->id,
                 'productable_type' => Keyboard::class,
+                'discount' => $request->discount
             ]);
 
             $keyboard->component()->save($component);

@@ -1,27 +1,36 @@
 <template>
-  <div style="height: 600px; width: 400px">
-    <!--remove this div-->
-    <div :class="wrapperClasses">
-      <div class="pc-builder-component-image-and-text-card-wrapper">
-        <div class="pc-builder-component-card-image-wrapper">
-          <img :src="Image" alt="" />
-        </div>
-        <div class="pc-builder-component-card-text-wrapper">
-          <PCBuilderComponentCardList
-            text-group-name="Najjača grafička kartica e"
-            :text-group-items="[
-              '6GB memorije',
-              'Nvidia CUDA tehnologija',
-              'Super za gaming',
-            ]"
-          />
-        </div>
+  <div :class="wrapperClasses">
+    <div class="pc-builder-component-image-and-text-card-wrapper">
+      <div class="pc-builder-component-card-image-wrapper">
+        <img :src="Image" alt="" />
       </div>
+      <div class="pc-builder-component-card-text-wrapper">
+        <PCBuilderComponentCardList
+          v-if="component && component.product_type == 'Grafička'"
+          :text-group-name="component.model"
+          :text-group-items="[component.memory + 'GB memorije']"
+        />
 
-      <div class="pc-builder-component-card-button-wrapper">
-        <div class="price-wrapper">
-          <p>3400 err</p>
-        </div>
+        <PCBuilderComponentCardList
+          v-if="component && component.product_type == 'Procesor'"
+          :text-group-name="component.model"
+          :text-group-items="[
+            component.cores + 'jezgri',
+            component.socket + ' socket',
+          ]"
+        />
+
+        <PCBuilderComponentCardList
+          v-if="component && component.product_type == 'Matična ploča'"
+          :text-group-name="component.model"
+          :text-group-items="[component.socket + ' socket']"
+        />
+      </div>
+    </div>
+
+    <div class="pc-builder-component-card-button-wrapper">
+      <div class="price-wrapper">
+        <p>{{ component.price+ " &#x20AC" }}</p>
       </div>
     </div>
   </div>
@@ -30,13 +39,21 @@
 <script setup>
 import PCBuilderComponentCardList from "./PCBuilderComponentCardList.vue";
 
-const { Image, className } = defineProps({
+const { Image, className, component } = defineProps({
   Image: String,
   className: String,
+  component: Object,
 });
 
 const wrapperClasses = {
   [className]: className !== undefined,
+};
+
+console.log("Ja dobim ovo", component);
+
+const getModelName = () => {
+  const modelName = component.productable_type.replace("App\\Models\\", "");
+  return modelName;
 };
 </script>
 
@@ -44,24 +61,22 @@ const wrapperClasses = {
 @import "../utils/theme.scss";
 
 .pc-builder-component-small-card-wrapper {
-  background-color: $white-dark;
+  background-color: $grey-dark;
   width: 100%;
   box-shadow: 0 0 20px $pink;
   outline: 3px solid transparent;
   outline-offset: -3px;
   padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .pc-builder-component-card-text-group-name {
-    color: black;
+    color: $grey-light;
   }
 
-  .pc-builder-component-card-list-item {
-    display: none;
-  }
-
-  .price-wrapper {
-    background-color: $grey-light;
-  }
+  /* .pc-builder-component-card-list-item {
+  } */
 }
 .pc-builder-component-card-wrapper {
   background-color: $grey-dark;
@@ -70,10 +85,12 @@ const wrapperClasses = {
   box-shadow: 0 0 20px $pink;
   outline: 3px solid transparent;
   outline-offset: -3px;
+
 }
 
 .pc-builder-component-card-image-wrapper {
-  height: 180px;
+  height: 400px;
+  //max-height: 300px;
   margin-bottom: 36px;
 
   img {
@@ -100,11 +117,10 @@ const wrapperClasses = {
   clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%);
   padding-bottom: 5px;
   padding-top: 5px;
-}
-
-p {
-  color: $purple-dark;
-  font-weight: 600;
-  font-size: 30px;
+  p {
+    font-size: 30px;
+    font-weight: 600;
+    color: $purple-dark;
+  }
 }
 </style>

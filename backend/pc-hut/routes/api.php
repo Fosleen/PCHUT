@@ -125,3 +125,4 @@ Route::get('user-orders/{id}', [OrderController::class, 'getOrdersByUser']);
 Route::get('order/{id}', [OrderController::class, 'show']);
 Route::post('order', [OrderController::class, 'store']);
 Route::delete('order/{id}', [OrderController::class, 'destroy']);
+Route::get('discount-components', [ComponentController::class, 'indexDiscount']);

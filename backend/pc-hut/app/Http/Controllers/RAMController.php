@@ -12,14 +12,27 @@ use App\Models\Component;
 
 class RAMController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $rams = RAM::with('component')->get();
-        $formattedrams = RAMResource::collection($rams);
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $rams = RAM::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $rams = RAM::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'rams' => $formattedrams,
+            'rams' => RAMResource::collection($rams),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $rams->currentPage(),
+                'last_page' => $rams->lastPage(),
+                'per_page' => $rams->perPage(),
+                'total' => $rams->total(),
+            ] : null,
         ], 200);
     }
 
@@ -46,7 +59,8 @@ class RAMController extends Controller
                 'speed' => $request->speed,
                 'manufacturer_id' => $request->manufacturer_id,
                 'ram_type_id' => $request->ram_type_id,
-                'description' => $request->description
+                'description' => $request->description,
+                'discount' => $request->discount
             ]);
 
             $ram->save();
@@ -58,6 +72,7 @@ class RAMController extends Controller
                 'description' => $request->description,
                 'productable_id' => $ram->id,
                 'productable_type' => ram::class,
+                'discount' => $request->discount
                 'product_type_cro' => "RAM memorija",
             ]);
 

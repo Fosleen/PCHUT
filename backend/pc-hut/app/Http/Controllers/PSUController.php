@@ -43,6 +43,7 @@ class PSUController extends Controller
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
                 'power' => $request->power,
+                'discount' => $request->discount
             ]);
 
             $psu->save();
@@ -54,6 +55,7 @@ class PSUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $psu->id,
                 'productable_type' => PSU::class,
+                'discount' => $request->discount
                 'product_type_cro' => "PSU",
             ]);
 

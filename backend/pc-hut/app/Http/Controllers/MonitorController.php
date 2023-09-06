@@ -54,6 +54,7 @@ class MonitorController extends Controller
                 'price' => $request->price,
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
+                'discount' => $request->discount,
             ]);
 
             $monitor->save();
@@ -68,6 +69,7 @@ class MonitorController extends Controller
                 'description' => $request->description,
                 'productable_id' => $monitor->id,
                 'productable_type' => Monitor::class,
+                'discount' => $request->discount
                 'product_type_cro' => "Monitor",
             ]);
 
