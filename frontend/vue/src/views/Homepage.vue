@@ -9,7 +9,7 @@
     </div>
 
     <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" @click="loadMore" />
+      <Button shape="trapezoid" text="Učitaj više" @click="loadMoreGPU" />
     </div>
 
     <h1 class="homepage-component-wrapper-title">Procesori</h1>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" />
+      <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCPU" />
     </div>
 
     <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
@@ -64,15 +64,17 @@ import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 
 import {
-  getAllGraphicCards,
   getAllCPUs,
   getAllMotherboards,
   getAllRAMs,
   getAllGraphicCardsPaginated,
+  getAllCPUsPaginated,
 } from "../api/api";
 import DiscountProducts from "../components/DiscountProducts.vue";
 
-const currentPage = ref(1);
+const gpuCurrentPage = ref(1);
+const cpuCurrentPage = ref(1);
+
 const gpus = ref([]);
 
 const cpus = ref([]);
@@ -81,26 +83,34 @@ const mbs = ref([]);
 
 const rams = ref([]);
 
-const fetchData = async (page) => {
+const fetchGpuData = async (page) => {
   const response = await getAllGraphicCardsPaginated(page);
-  gpus.value = [...gpus.value, ...response.gpus];
+  gpus.value = [...gpus.value, ...response.gpus]; //to append items that were loaded before
 };
 
-const loadMore = () => {
-  currentPage.value++;
-  fetchData(currentPage.value); // Fetch data for the next page
+const fetchCpuData = async (page) => {
+  const response = await getAllCPUsPaginated(page);
+  cpus.value = [...cpus.value, ...response.cpus]; //to append items that were loaded before
+};
+
+const loadMoreGPU = () => {
+  gpuCurrentPage.value++;
+  fetchGpuData(gpuCurrentPage.value); // Fetch data for the next page
+};
+
+const loadMoreCPU = () => {
+  cpuCurrentPage.value++;
+  fetchCpuData(cpuCurrentPage.value); // Fetch data for the next page
 };
 
 onMounted(async () => {
-  // const graphicCards = await getAllGraphicCardsPaginated(currentPage.value);
-  // gpus.value = graphicCards.gpus;
-  // console.log("Gpus", gpus.value);
+  await fetchGpuData(gpuCurrentPage.value);
 
-  await fetchData(currentPage.value);
+  await fetchCpuData(cpuCurrentPage.value);
 
-  const procesors = await getAllCPUs();
-  cpus.value = procesors.cpus;
-  console.log("Cpus", cpus.value);
+  // const procesors = await getAllCPUs();
+  // cpus.value = procesors.cpus;
+  // console.log("Cpus", cpus.value);
 
   const motherboards = await getAllMotherboards();
   mbs.value = motherboards.motherboards;

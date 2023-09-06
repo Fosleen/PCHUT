@@ -26,6 +26,14 @@ export function getAllCPUs() {
   });
 }
 
+export function getAllCPUsPaginated(page) {
+  return axiosClient
+    .get(`/cpus/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
 export function getCPUById(id) {
   return axiosClient.get(`/cpus/${id}`).then(({ data }) => {
     return data;
