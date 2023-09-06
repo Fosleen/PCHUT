@@ -32,6 +32,8 @@ class ComponentResource extends JsonResource
             'cores' => $this->when($this->productable_type === 'App\\Models\\CPU', function () {
                 return $this->productable->cores;
             }),
+
+            'images' =>  $this->images->pluck('url')->toArray()
         ];
     }
 }
