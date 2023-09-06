@@ -5,24 +5,30 @@
       <BuildPCButton />
     </div>
 
-    <div class="pc-builder-homepage-components-wrapper">
+    <div
+      class="pc-builder-homepage-components-wrapper"
+      v-if="gpu && cpu && mbd"
+    >
       <PcBuilderComponentCard
         class="pc-builder-component-small-card-wrapper"
-        Image="https://cdn.mos.cms.futurecdn.net/9fdc0e6c7e4e1e175a8b986dc221e1cb.png"
         :component="gpu"
+        v-if="gpu && gpu.images"
+        :Image="gpu?.images[0]"
       />
       <h2>+</h2>
       <PcBuilderComponentCard
         class="pc-builder-component-small-card-wrapper"
-        Image="https://cdn.mos.cms.futurecdn.net/9fdc0e6c7e4e1e175a8b986dc221e1cb.png"
         :component="cpu"
+        v-if="cpu && cpu.images"
+        :Image="cpu?.images[0]"
       />
       +
       <h2>+</h2>
       <PcBuilderComponentCard
         class="pc-builder-component-small-card-wrapper"
-        Image="https://cdn.mos.cms.futurecdn.net/9fdc0e6c7e4e1e175a8b986dc221e1cb.png"
         :component="mbd"
+        v-if="mbd && mbd.images"
+        :Image="mbd?.images[0]"
       />
     </div>
 
