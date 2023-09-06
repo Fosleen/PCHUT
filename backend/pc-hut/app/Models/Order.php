@@ -12,7 +12,7 @@ class Order extends Model
 
     protected $table = 'order';
 
-    protected $fillable = ['user_id', 'payment', 'delivery_status'];
+    protected $fillable = ['user_id', 'payment', 'delivery_status', 'order_name', 'order_address'];
 
     public function component(): BelongsToMany
     {

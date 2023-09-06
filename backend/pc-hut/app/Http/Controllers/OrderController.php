@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +39,7 @@ class OrderController extends Controller
         if ($order->count() > 0) {
             $data = [
                 'status' => 200,
-                'order' => $order,
+                'order' => new OrderResource($order),
             ];
 
             return response()->json($data, 200);
@@ -60,6 +61,8 @@ class OrderController extends Controller
             'component_id.*' => 'required|integer',
             'quantity' => 'required|array',
             'quantity.*' => 'required|integer',
+            'order_name' => 'required|string',
+            'order_address' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -73,7 +76,8 @@ class OrderController extends Controller
                 'payment' => $request->payment,
                 'delivery_status' => $request->delivery_status,
                 'user_id' => $request->user_id,
-
+                'order_name' => $request->order_name,
+                'order_address' => $request->order_address,
             ]);
 
             foreach ($request->component_id as $index => $component_id) {
@@ -119,7 +123,9 @@ class OrderController extends Controller
         if ($orders->count() > 0) {
             $data = [
                 'status' => 200,
-                'orders' => $orders,
+                'orders' => $orders->map(function ($order) {
+                    return new OrderResource($order);
+                }),
             ];
             return response()->json($data, 200);
         } else {
