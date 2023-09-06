@@ -6,6 +6,14 @@ export function getAllGraphicCards() {
   });
 }
 
+export function getAllGraphicCardsPaginated(page) {
+  return axiosClient
+    .get(`/gpus/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
 export function getGraphicCardById(id) {
   return axiosClient.get(`/gpus/${id}`).then(({ data }) => {
     return data;

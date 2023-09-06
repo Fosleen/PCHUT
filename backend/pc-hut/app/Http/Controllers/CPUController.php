@@ -10,14 +10,28 @@ use App\Models\Component;
 
 class CPUController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cpus = CPU::with('component')->get();
-        $formattedcpus = CPUResource::collection($cpus);
+
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $cpus = CPU::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $cpus = CPU::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'cpus' => $formattedcpus,
+            'cpus' => CPUResource::collection($cpus),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $cpus->currentPage(),
+                'last_page' => $cpus->lastPage(),
+                'per_page' => $cpus->perPage(),
+                'total' => $cpus->total(),
+            ] : null,
         ], 200);
     }
 
