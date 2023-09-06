@@ -10,8 +10,8 @@
     class="discount-part-card-link"
   >
     <div class="discount-part-card-wrapper">
-      <div class="discount-part-card-image-wrapper">
-        <!-- <img :src="component.images[0]" alt="" /> -->
+      <div class="discount-part-card-image-wrapper" v-if="component.images">
+        <img :src="component.images[0]" alt="" />
       </div>
       <div class="discount-part-card-text-wrapper">
         <PCPartCardList

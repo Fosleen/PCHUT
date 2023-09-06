@@ -32,7 +32,7 @@ class ComponentController extends Controller
     public function indexDiscount()
     {
         $components = Component::whereNotNull('discount')
-            ->with('productable')
+            ->with('productable')->with('images')
             ->get();
 
         if ($components->count() > 0) {
