@@ -78,6 +78,7 @@ const store = createStore({
       state.user.token = userData.token;
       state.user.data = userData.user;
       localStorage.setItem("access_token", userData.token);
+      localStorage.setItem("user_id", userData.user.id); // TODO change to more safer way
     },
 
     setProduct: (state, product) => {
