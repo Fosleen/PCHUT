@@ -92,6 +92,8 @@ onMounted(() => {
 
 <style lang="scss">
 .navbar {
+  z-index: 2;
+  position: relative;
   background: linear-gradient(to right, #343434, #5b02cc);
   height: 92px;
   width: 100%;

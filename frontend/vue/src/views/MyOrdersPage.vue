@@ -1,59 +1,42 @@
 <template>
   <div class="orders-wrapper">
+    <img class="img-background" src="../assets/gpu-grey.png" alt="" />
+    <img class="img-background" src="../assets/cpu-grey.png" alt="" />
     <div class="orders-container">
       <div class="past-orders-wrapper">
         <h3>Povijest naručivanja</h3>
-        <div
-          v-for="order in orders"
-          v-bind:key="order.id"
-          class="past-orders-container"
-        >
+        <div class="past-orders-container">
           <OrdersListItem
+            v-for="order in orders"
+            v-bind:key="order.id"
+            @click="changeSelectedOrder(order)"
             :order="{
               id: order.id,
               total: calculateTotalPrice(order),
               quantity: calculateTotalQuantity(order),
               shipping: order.delivery_status,
-              payment: order.payment,
+              payment: recalculatePayment(order),
             }"
           />
         </div>
       </div>
-      <div class="current-order-wrapper">
+      <div v-if="selectedOrder" class="current-order-wrapper">
         <div class="current-order-items-wrapper">
           <div class="current-order-items-title">
-            <h2>Narudžba #38929</h2>
-            <p>(4)</p>
+            <h2>#{{ selectedOrder.id }}</h2>
+            <p>({{ calculateTotalQuantity(selectedOrder) }})</p>
           </div>
           <div class="current-order-items-container">
             <OrderItem
+              v-for="component in selectedOrder.components"
+              v-bind:key="component.id"
               :item="{
-                img: 'https://www.pngmart.com/files/7/Graphics-Card-PNG-Transparent-HD-Photo.png',
-                manufacturer: 'Intel',
-                model: 'Ultra Smart Reedranioc 7800XD',
-                price: 250,
-                type: 'Grafička kartica',
-                quantity: 3,
-              }"
-            />
-            <OrderItem
-              :item="{
-                img: 'https://www.pngmart.com/files/7/Graphics-Card-PNG-Transparent-HD-Photo.png',
-                manufacturer: 'Intel',
-                model: 'Ultra Smart Reedranioc 7800XD',
-                price: 250,
-                type: 'Grafička kartica',
-                quantity: 3,
-              }"
-            />
-            <OrderItem
-              :item="{
-                img: 'https://www.pngmart.com/files/7/Graphics-Card-PNG-Transparent-HD-Photo.png',
-                manufacturer: 'Intel',
-                model: 'Ultra Smart Reedranioc 7800XD',
-                price: 250,
-                type: 'Grafička kartica',
-                quantity: 3,
+                img: component.images,
+                manufacturer: component.manufacturer,
+                model: component.model,
+                price: component.price,
+                type: component.product_type_cro,
+                quantity: component.quantity,
               }"
             />
           </div>
@@ -65,28 +48,27 @@
           <div class="current-order-details-container">
             <div>
               <p>Ime i prezime:</p>
-              <p>Ivan Horvat</p>
+              <p>{{ selectedOrder.order_name }}</p>
             </div>
             <div>
               <p>Adresa:</p>
-              <p>Ul. kneza Branimira 451, Slavonski Brod, 35000, Hrvatska</p>
+              <p>{{ selectedOrder.order_address }}</p>
             </div>
             <div>
               <p>Način plaćanja:</p>
-              <p>Plaćeno online</p>
+              <p>{{ recalculatePayment(selectedOrder) }}</p>
             </div>
             <div>
               <p>Status dostave:</p>
-              <p>U dostavi</p>
+              <p>{{ recalculateDeliveryStatus(selectedOrder) }}</p>
             </div>
             <div>
               <p>Očekivan datum dostave:</p>
               <p>15. kolovoz - 17. kolovoz 2023.</p>
             </div>
-
             <div>
               <p>Ukupno:</p>
-              <p>2541,88 €</p>
+              <p>{{ calculateTotalPrice(selectedOrder) }} €</p>
             </div>
           </div>
         </div>
@@ -98,29 +80,53 @@
 <script setup>
 import OrderItem from "../components/OrderItem.vue";
 import OrdersListItem from "../components/OrdersListItem.vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
 store.dispatch("getOrdersByUser", {
-  id: 1, // TODO current user ID
+  id: localStorage.getItem("user_id"), // TODO change to more safer way
 });
 const orders = computed(() => store.state.user.orders);
+const selectedOrder = ref(null);
 
 const calculateTotalQuantity = (order) => {
   let totalQuantity = 0;
-  order.component.forEach((component) => {
-    totalQuantity += component.pivot.quantity;
+  order.components.forEach((component) => {
+    totalQuantity += component.quantity;
   });
   return totalQuantity;
 };
 
 const calculateTotalPrice = (order) => {
   let totalPrice = 0;
-  order.component.forEach((component) => {
-    totalPrice += component.pivot.quantity * component.price;
+  order.components.forEach((component) => {
+    totalPrice += component.quantity * component.price;
   });
   return totalPrice;
+};
+
+const changeSelectedOrder = (order) => {
+  selectedOrder.value = order;
+  console.log(selectedOrder.value);
+};
+
+const recalculatePayment = (order) => {
+  if (order.payment == 0) {
+    return "Plaćanje pouzećem";
+  } else if (order.payment == 1) {
+    return "Plaćeno";
+  }
+};
+
+const recalculateDeliveryStatus = (order) => {
+  if (order.delivery_status == 0) {
+    return "Obrada narudžbe";
+  } else if (order.delivery_status == 1) {
+    return "U dostavi";
+  } else {
+    return "Dostavljeno";
+  }
 };
 </script>
 
@@ -128,10 +134,19 @@ const calculateTotalPrice = (order) => {
 @import "../utils/theme.scss";
 
 .orders-wrapper {
+  position: relative;
+  min-height: calc(100vh - 92px);
+
+  .img-background {
+    display: none;
+  }
+
   .orders-container {
     display: flex;
     flex-direction: column;
     max-width: 1200px;
+    z-index: 1;
+    position: relative;
 
     h2 {
       font-size: 20px;
@@ -139,6 +154,7 @@ const calculateTotalPrice = (order) => {
 
     .past-orders-wrapper {
       padding: 20px;
+      background-color: $colorBgPrimary;
 
       h3 {
         font-weight: 400;
@@ -159,6 +175,10 @@ const calculateTotalPrice = (order) => {
       gap: 16px;
       padding: 20px;
 
+      .current-order-items-wrapper {
+        background-color: $colorBgPrimary;
+      }
+
       .current-order-items-title {
         display: flex;
         gap: 4px;
@@ -170,6 +190,8 @@ const calculateTotalPrice = (order) => {
       }
 
       .current-order-details-wrapper {
+        background-color: $colorBgPrimary;
+
         .current-order-details-container {
           display: flex;
           gap: 8px;
@@ -196,7 +218,7 @@ const calculateTotalPrice = (order) => {
             }
 
             &:last-child {
-              border-top: 2px solid $grey-light;
+              border-top: 1px solid $grey-light;
               margin-top: 8px;
               padding-top: 8px;
               flex-direction: row;
@@ -256,18 +278,43 @@ const calculateTotalPrice = (order) => {
 
 @media screen and ($desktop) {
   .orders-wrapper {
+    .img-background {
+      position: absolute;
+      display: block;
+
+      &:first-of-type {
+        top: 30px;
+        right: 0;
+        transform: rotate(25deg);
+        width: 270px;
+        z-index: 0;
+        scale: 1.2;
+      }
+
+      &:last-of-type {
+        top: 70%;
+        left: -20px;
+        scale: 1.5;
+        transform: rotate(25deg);
+        width: 270px;
+        z-index: 0;
+      }
+    }
+
     .orders-container {
       flex-direction: row;
       margin: 16px auto;
       gap: 20px;
 
       .past-orders-wrapper {
-        flex: 3;
+        width: calc(30% - 20px);
         margin: 0;
+        z-index: 1;
+        position: relative;
       }
 
       .current-order-wrapper {
-        flex: 7;
+        width: 70%;
         gap: 20px;
 
         .current-order-items-wrapper {

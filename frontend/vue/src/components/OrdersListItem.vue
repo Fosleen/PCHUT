@@ -38,8 +38,7 @@
           ></div>
         </div>
       </div>
-      <p v-if="props.order.payment == 0">Plaćanje pouzećem</p>
-      <p v-if="props.order.payment == 1">Plaćeno</p>
+      <p>{{ props.order.payment }}</p>
     </div>
   </div>
 </template>
@@ -61,7 +60,7 @@ const props = defineProps({
   color: $colorTextPrimary;
   padding-bottom: 12px;
   padding-top: 12px;
-  border-bottom: 1px solid $colorTextSecondary;
+  border-bottom: 2px solid $colorTextSecondary;
   width: 100%;
   cursor: pointer;
 
