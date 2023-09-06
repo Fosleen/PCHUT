@@ -1,5 +1,7 @@
 <template>
-  <h1 class="homepage-component-wrapper-title">Proizvodi trenutno na akciji</h1>
+  <h1 class="homepage-component-wrapper-title">
+    Još određeno vrijeme na akciji
+  </h1>
 
   <div class="item-type-wrapper">
     <DiscountPartCard
@@ -44,5 +46,11 @@ onMounted(async () => {
   @media screen and ($desktopLarge) {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.homepage-component-wrapper-title {
+  text-transform: uppercase;
+  color: $pink;
+  margin-bottom: 16px;
 }
 </style>

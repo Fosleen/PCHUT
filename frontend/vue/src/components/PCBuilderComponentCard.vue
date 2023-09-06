@@ -67,6 +67,9 @@ const getModelName = () => {
   outline: 3px solid transparent;
   outline-offset: -3px;
   padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .pc-builder-component-card-text-group-name {
     color: $grey-light;
@@ -82,6 +85,7 @@ const getModelName = () => {
   box-shadow: 0 0 20px $pink;
   outline: 3px solid transparent;
   outline-offset: -3px;
+
 }
 
 .pc-builder-component-card-image-wrapper {
