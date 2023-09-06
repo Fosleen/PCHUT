@@ -6,13 +6,13 @@
       </div>
       <div class="pc-builder-component-card-text-wrapper">
         <PCBuilderComponentCardList
-          v-if="component && component.product_type == 'Grafička'"
+          v-if="component && component.product_type_cro == 'Grafička kartica'"
           :text-group-name="component.model"
           :text-group-items="[component.memory + 'GB memorije']"
         />
 
         <PCBuilderComponentCardList
-          v-if="component && component.product_type == 'Procesor'"
+          v-if="component && component.product_type_cro == 'Procesor'"
           :text-group-name="component.model"
           :text-group-items="[
             component.cores + 'jezgri',
@@ -21,7 +21,7 @@
         />
 
         <PCBuilderComponentCardList
-          v-if="component && component.product_type == 'Matična ploča'"
+          v-if="component && component.product_type_cro == 'Matična ploča'"
           :text-group-name="component.model"
           :text-group-items="[component.socket + ' socket']"
         />

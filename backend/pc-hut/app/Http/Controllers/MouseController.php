@@ -70,7 +70,7 @@ class MouseController extends Controller
                 'description' => $request->description,
                 'productable_id' => $mouse->id,
                 'productable_type' => Mouse::class,
-                'discount' => $request->discount
+                'discount' => $request->discount,
                 'product_type_cro' => "Miš",
             ]);
 

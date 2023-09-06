@@ -69,7 +69,7 @@ class MonitorController extends Controller
                 'description' => $request->description,
                 'productable_id' => $monitor->id,
                 'productable_type' => Monitor::class,
-                'discount' => $request->discount
+                'discount' => $request->discount,
                 'product_type_cro' => "Monitor",
             ]);
 

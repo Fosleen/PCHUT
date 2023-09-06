@@ -73,7 +73,7 @@ class CPUController extends Controller
                 'description' => $request->description,
                 'productable_id' => $cpu->id,
                 'productable_type' => CPU::class,
-                'discount' => $request->discount
+                'discount' => $request->discount,
                 'product_type_cro' => "Procesor",
             ]);
 

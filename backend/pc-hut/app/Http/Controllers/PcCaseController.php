@@ -54,7 +54,7 @@ class PcCaseController extends Controller
                 'description' => $request->description,
                 'productable_id' => $pccase->id,
                 'productable_type' => pccase::class,
-                'discount' => $request->discount
+                'discount' => $request->discount,
                 'product_type_cro' => "Kučište",
             ]);
 

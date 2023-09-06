@@ -60,7 +60,7 @@ class RAMController extends Controller
                 'manufacturer_id' => $request->manufacturer_id,
                 'ram_type_id' => $request->ram_type_id,
                 'description' => $request->description,
-                'discount' => $request->discount
+                'discount' => $request->discount,
             ]);
 
             $ram->save();
@@ -72,7 +72,7 @@ class RAMController extends Controller
                 'description' => $request->description,
                 'productable_id' => $ram->id,
                 'productable_type' => ram::class,
-                'discount' => $request->discount
+                'discount' => $request->discount,
                 'product_type_cro' => "RAM memorija",
             ]);
 
