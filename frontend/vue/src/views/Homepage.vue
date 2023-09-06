@@ -33,7 +33,11 @@
     </div>
 
     <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" />
+      <Button
+        shape="trapezoid"
+        text="Učitaj više"
+        @click="loadMoreMotherboards"
+      />
     </div>
 
     <h1 class="homepage-component-wrapper-title">RAM memorije</h1>
@@ -47,7 +51,7 @@
     </div>
 
     <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" />
+      <Button shape="trapezoid" text="Učitaj više" @click="loadMoreRAMs" />
     </div>
 
     <PcBuilderHomepage />
@@ -64,16 +68,18 @@ import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 
 import {
-  getAllCPUs,
-  getAllMotherboards,
   getAllRAMs,
   getAllGraphicCardsPaginated,
   getAllCPUsPaginated,
+  getAllMotherboardsPaginated,
+  getAllRAMsPaginated,
 } from "../api/api";
 import DiscountProducts from "../components/DiscountProducts.vue";
 
 const gpuCurrentPage = ref(1);
 const cpuCurrentPage = ref(1);
+const motherboardCurrentPage = ref(1);
+const ramsCurrentPage = ref(1);
 
 const gpus = ref([]);
 
@@ -93,6 +99,16 @@ const fetchCpuData = async (page) => {
   cpus.value = [...cpus.value, ...response.cpus]; //to append items that were loaded before
 };
 
+const fetchMotherboardsData = async (page) => {
+  const response = await getAllMotherboardsPaginated(page);
+  mbs.value = [...mbs.value, ...response.motherboards]; //to append items that were loaded before
+};
+
+const fetchRAMsData = async (page) => {
+  const response = await getAllRAMsPaginated(page);
+  rams.value = [...rams.value, ...response.rams]; //to append items that were loaded before
+};
+
 const loadMoreGPU = () => {
   gpuCurrentPage.value++;
   fetchGpuData(gpuCurrentPage.value); // Fetch data for the next page
@@ -103,22 +119,28 @@ const loadMoreCPU = () => {
   fetchCpuData(cpuCurrentPage.value); // Fetch data for the next page
 };
 
+const loadMoreMotherboards = () => {
+  motherboardCurrentPage.value++;
+  fetchMotherboardsData(motherboardCurrentPage.value); // Fetch data for the next page
+};
+
+const loadMoreRAMs = () => {
+  ramsCurrentPage.value++;
+  fetchRAMsData(ramsCurrentPage.value); // Fetch data for the next page
+};
+
 onMounted(async () => {
   await fetchGpuData(gpuCurrentPage.value);
 
   await fetchCpuData(cpuCurrentPage.value);
 
-  // const procesors = await getAllCPUs();
-  // cpus.value = procesors.cpus;
-  // console.log("Cpus", cpus.value);
+  await fetchMotherboardsData(motherboardCurrentPage.value);
 
-  const motherboards = await getAllMotherboards();
-  mbs.value = motherboards.motherboards;
-  console.log("Motherboards", mbs.value);
+  await fetchRAMsData(ramsCurrentPage.value);
 
-  const allRams = await getAllRAMs();
-  rams.value = allRams.rams;
-  console.log("Rams", rams.value);
+  // const allRams = await getAllRAMs();
+  // rams.value = allRams.rams;
+  // console.log("Rams", rams.value);
 });
 </script>
 

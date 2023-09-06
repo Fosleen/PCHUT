@@ -46,10 +46,26 @@ export function getMotherboardById(id) {
   });
 }
 
+export function getAllMotherboardsPaginated(page) {
+  return axiosClient
+    .get(`/motherboards/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
 export function getAllRAMs() {
   return axiosClient.get("/rams").then(({ data }) => {
     return data;
   });
+}
+
+export function getAllRAMsPaginated(page) {
+  return axiosClient
+    .get(`/rams/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
 }
 
 export function getAllStorages() {
