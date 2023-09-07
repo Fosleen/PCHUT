@@ -12,7 +12,6 @@
 </template>
 
 <script setup>
-import Navbar from "./NavbarDesktop.vue";
 import Footer from "./Footer.vue";
 import Header from "./Header.vue";
 </script>
