@@ -6,6 +6,7 @@ const store = createStore({
     user: {
       data: {},
       token: sessionStorage.getItem("access_token"),
+      cart: sessionStorage.getItem("cart"),
       orders: {},
     },
     currentProduct: {
@@ -39,6 +40,8 @@ const store = createStore({
       return axiosClient
         .get(apiUrl)
         .then((res) => {
+          console.log(res);
+
           commit("setProduct", res.data);
           commit("setCurrentProductLoading", false);
           return res;

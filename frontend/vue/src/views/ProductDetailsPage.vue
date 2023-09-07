@@ -76,7 +76,7 @@
             <p>{{ product.curved ? "da" : "ne" }}</p>
           </div>
         </div>
-        <div class="product-details-btn-wrapper">
+        <div @click="addToCart(product.id)" class="product-details-btn-wrapper">
           <Button
             shape="trapezoid"
             text="Dodaj u"
@@ -152,6 +152,7 @@ let product = ref({
   manufacturer: null,
   switch_type: null,
   images: null,
+  productable_id: null,
 });
 
 watch(
@@ -162,6 +163,22 @@ watch(
     };
   }
 );
+
+const addToCart = (id) => {
+  const existingItems = sessionStorage.getItem("cart");
+  let cartItems = [];
+
+  if (existingItems) {
+    cartItems = JSON.parse(existingItems);
+  }
+
+  const product = { id: id, quantity: 1 };
+  cartItems.push(product);
+
+  console.log(cartItems);
+
+  sessionStorage.setItem("cart", JSON.stringify(cartItems));
+};
 
 store.dispatch("getProduct", {
   id: route.params.id,
