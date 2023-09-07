@@ -15,12 +15,12 @@ class PSUResource extends JsonResource
     public function toArray(Request $request): array
     {
         return  [
-            'id' => $this->id,
+            'productable_id' =>  $this->component->productable_id,
+            'id' => $this->component->id,
             'model' => $this->component->model,
             'price' => $this->component->price,
             'description' => $this->component->description,
             'product_type_cro' => $this->component->product_type_cro,
-            'productable_id' =>  $this->component->productable_id,
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
