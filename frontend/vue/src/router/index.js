@@ -9,6 +9,7 @@ import PaymentDetailsPage from "../views/PaymentDetailsPage.vue";
 import Homepage from "../views/Homepage.vue";
 import Contact from "../views/Contact.vue";
 import AllProducts from "../views/AllProducts.vue";
+import MyCartPage from "../views/MyCartPage.vue";
 import ProductImagesComponent from "../components/ProductImagesCarousel.vue";
 import MyOrdersPage from "../views/MyOrdersPage.vue";
 import PCBuilder from "../views/PCBuilder.vue";
@@ -42,29 +43,19 @@ const routes = [
     component: PCBuilder,
   },
   {
-    path: "/payment-details",
+    path: "/detalji-placanja",
     name: "PaymentDetails",
     component: PaymentDetailsPage,
   },
   {
-    path: "/my-orders",
+    path: "/narudzbe",
     name: "MyOrders",
     component: MyOrdersPage,
   },
   {
-    path: "/cart",
-    name: "Cart",
-    component: ShoppingCartItem,
-    props: {
-      item: {
-        manufacturer: "Gigabyte",
-        model:
-          "GeForce GTX 1080 GeForce GTX 1080 GeForce GTX 1080 GeForce GTX 1080",
-        memory: "32 GB",
-        price: "1499.99",
-        img: "https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png",
-      },
-    },
+    path: "/kosarica",
+    name: "ShoppingCartPage",
+    component: MyCartPage,
   },
   {
     path: "/auth",

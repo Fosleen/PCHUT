@@ -3,7 +3,7 @@
     :form="form"
     :type="props.type"
     :shape="props.shape"
-    :class="[props.shape === 'trapezoid' ? 'trapezoid' : 'odd-shape']"
+    :class="[props.shape === 'trapezoid' ? 'trapezoid' : props.shape]"
   >
     <div class="button-content">
       <div class="text">{{ props.text }}</div>
@@ -63,6 +63,13 @@ button {
   background-color: $colorTextSecondary;
   clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
   color: #282828;
+  font-weight: 700;
+}
+
+.odd-shape-reversed {
+  background-color: #282828;
+  clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
+  color: $colorTextSecondary;
   font-weight: 700;
 }
 </style>
