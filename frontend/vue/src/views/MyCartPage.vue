@@ -27,7 +27,9 @@
           />
         </div>
         <div class="my-cart-items-total-price-wrapper">
-          <div class="my-cart-items-total-price"><p>8010.65 €</p></div>
+          <div class="my-cart-items-total-price">
+            <p>{{ totalPrice }} €</p>
+          </div>
         </div>
       </div>
       <div class="my-cart-details-container">
@@ -59,11 +61,11 @@
           <div class="my-cart-details-details-data-prices">
             <div class="my-cart-details-details-data-prices-row">
               <p>Osnovica:</p>
-              <p>6076,26 €</p>
+              <p>{{ totalPrice * 0.75 }} €</p>
             </div>
             <div class="my-cart-details-details-data-prices-row">
               <p>Porez:</p>
-              <p>2025,42 €</p>
+              <p>{{ totalPrice * 0.25 }} €</p>
             </div>
             <div class="my-cart-details-details-data-prices-row">
               <p>Dostava:</p>
@@ -71,7 +73,7 @@
             </div>
             <div class="my-cart-details-details-data-prices-row">
               <p>Ukupan iznos košarice:</p>
-              <p>8010.65 €</p>
+              <p>{{ totalPrice }} €</p>
             </div>
           </div>
         </div>
@@ -94,6 +96,7 @@ import { getComponentById } from "../api/api";
 
 const deliveryType = ref("home-delivery");
 const cartItems = ref([]);
+const totalPrice = ref(0);
 
 const fetchCartItemsData = async () => {
   try {
@@ -102,11 +105,13 @@ const fetchCartItemsData = async () => {
 
       const response = await getComponentById(el.id);
       cartItems.value.push(response.component);
+      totalPrice.value += response.component.price;
     }
   } catch (err) {
     console.log("Error - " + err);
   }
-  console.log(cartItems.value);
+  console.log(JSON.parse(JSON.stringify(cartItems.value)));
+  console.log(totalPrice.value);
 };
 
 onMounted(async () => {
