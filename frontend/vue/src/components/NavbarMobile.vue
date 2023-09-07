@@ -78,6 +78,8 @@ export default {
   background: linear-gradient(to right, #343434, #5b02cc);
   padding-top: 12px;
   padding-bottom: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .navbar-items-wrapper-mobile {
