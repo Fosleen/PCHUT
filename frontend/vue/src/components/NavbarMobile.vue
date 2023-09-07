@@ -110,5 +110,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   height: 48px;
+  background-color: white;
+  z-index: 1;
+  position: relative;
 }
 </style>
