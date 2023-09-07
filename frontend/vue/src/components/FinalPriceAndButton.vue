@@ -41,7 +41,7 @@ const props = defineProps({
   padding-top: 24px;
   padding-bottom: 24px;
   font-size: 24px;
-  width: 100%;
+  //width: 100%;
   justify-content: center;
 
   h5 {

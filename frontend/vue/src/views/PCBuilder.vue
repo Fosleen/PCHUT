@@ -1,16 +1,18 @@
 <template>
   <div class="pc-builder-parent-wrapper">
     <div class="pc-builder-wrapper">
-      <img
-        src="../assets/pc_build_image.png"
-        class="pc-builder-custom-pc-image"
-      />
+      <div class="pc-builder-pc-wrapper">
+        <img
+          src="../assets/pc_build_image.png"
+          class="pc-builder-custom-pc-image"
+        />
 
-      <img
-        src="../assets/maticna.png"
-        alt=""
-        class="pc-builder-custom-motherboard-image"
-      />
+        <img
+          src="../assets/maticna.png"
+          alt=""
+          class="pc-builder-custom-motherboard-image"
+        />
+      </div>
 
       <img
         src="../assets/gaming.png"
@@ -36,50 +38,51 @@
         class="pc-builder-background-image pc-builder-gpu-image"
       />
 
-      <div>
+      <div class="pc-builder-dropdowns-wrapper">
         <Dropdown
           placeholder="Odaberi procesor"
           :hardcodedValue="selectedOption"
           :options="cpus"
           class="pc-builder-first-dropdown"
         />
+
+        <Dropdown
+          placeholder="Odaberi grafičku karticu"
+          :options="gpus"
+          hardcoded-value="First option"
+          class="pc-builder-second-dropdown"
+        />
+        <Dropdown
+          placeholder="Odaberi memoriju (pohranu)"
+          :options="storages"
+          hardcoded-value="First option"
+          class="pc-builder-third-dropdown"
+        />
+        <Dropdown
+          placeholder="Odaberi RAM memoriju"
+          :options="rams"
+          hardcoded-value="First option"
+          class="pc-builder-fourth-drodpown"
+        />
+        <Dropdown
+          placeholder="Odaberi napajanje"
+          :options="psus"
+          hardcoded-value="First option"
+          class="pc-builder-fifth-background"
+        />
+        <Dropdown
+          placeholder="Odaberi matičnu ploču"
+          :options="motherboards"
+          hardcoded-value="First option"
+          class="pc-builder-sixth-background"
+        />
+        <Dropdown
+          placeholder="Odaberi kućište"
+          :options="cases"
+          hardcoded-value="First option"
+          class="pc-builder-seventh-background"
+        />
       </div>
-      <Dropdown
-        placeholder="Odaberi grafičku karticu"
-        :options="gpus"
-        hardcoded-value="First option"
-        class="pc-builder-second-dropdown"
-      />
-      <Dropdown
-        placeholder="Odaberi memoriju (pohranu)"
-        :options="storages"
-        hardcoded-value="First option"
-        class="pc-builder-third-dropdown"
-      />
-      <Dropdown
-        placeholder="Odaberi RAM memoriju"
-        :options="rams"
-        hardcoded-value="First option"
-        class="pc-builder-fourth-drodpown"
-      />
-      <Dropdown
-        placeholder="Odaberi napajanje"
-        :options="psus"
-        hardcoded-value="First option"
-        class="pc-builder-fifth-background"
-      />
-      <Dropdown
-        placeholder="Odaberi matičnu ploču"
-        :options="motherboards"
-        hardcoded-value="First option"
-        class="pc-builder-sixth-background"
-      />
-      <Dropdown
-        placeholder="Odaberi kućište"
-        :options="cases"
-        hardcoded-value="First option"
-        class="pc-builder-seventh-background"
-      />
     </div>
   </div>
 
@@ -154,41 +157,82 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
+@import "../utils/theme.scss";
 .pc-builder-parent-wrapper {
   display: flex;
   justify-content: center;
   padding-top: 48px;
   padding-bottom: -20px;
+
+  @media screen and ($tabletLarge) {
+    padding-bottom: 40px;
+  }
+
+  .pc-builder-gpu-image,
+  .pc-builder-cpu-image,
+  .pc-builder-gamepad-image,
+  .pc-builder-gaming2-image {
+    visibility: hidden;
+  }
+
+  @media screen and ($desktop) {
+    .pc-builder-gpu-image,
+    .pc-builder-cpu-image,
+    .pc-builder-gamepad-image,
+    .pc-builder-gaming2-image {
+      visibility: visible;
+    }
+  }
 }
 .pc-builder-wrapper {
   background-color: #eee3ff;
   width: 90%;
   display: flex;
   justify-content: center;
-  align-items: center;
   position: relative;
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-bottom: 60px;
   border-radius: 8px;
+  flex-direction: column;
+
+  @media screen and ($tabletLarge) {
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 150px;
+  }
 
   select {
-    position: absolute;
-    width: 25%;
     z-index: 1000;
+
+    @media screen and ($tabletLarge) {
+      position: absolute;
+      width: fit-content;
+    }
   }
 }
 
 .pc-builder-custom-pc-image {
   height: 80%;
   z-index: 400;
+  width: 350px;
+
+  @media screen and ($tabletLarge) {
+    height: 400px;
+    width: 400px;
+  }
 }
 
 .pc-builder-custom-motherboard-image {
   position: absolute;
-  height: 35%;
-  margin-right: 140px;
-  margin-bottom: 130px;
+  height: 15%;
+  //margin-right: 140px;
+  margin-right: 130px;
+  margin-top: 25px;
+  //margin-bottom: 130px;
   z-index: 500;
+
+  @media screen and ($tabletLarge) {
+    height: 25%;
+  }
 }
 
 .pc-builder-background-image {
@@ -198,7 +242,7 @@ onMounted(async () => {
 
 .pc-builder-cpu-image {
   margin-left: 800px;
-  margin-bottom: 400px;
+  margin-bottom: 350px;
   margin-right: 300px;
   transform: rotate(60deg);
   z-index: 200;
@@ -231,6 +275,10 @@ onMounted(async () => {
 
 .pc-builder-second-dropdown {
   left: 50px;
+
+  @media screen and ($tabletLarge) {
+    top: 45%;
+  }
 }
 
 .pc-builder-third-dropdown {
@@ -240,19 +288,45 @@ onMounted(async () => {
 
 .pc-builder-fourth-drodpown {
   top: 100px;
+
+  @media screen and ($tabletLarge) {
+    top: 80px;
+  }
 }
 
 .pc-builder-fifth-background {
   bottom: 100px;
+
+  @media screen and ($tabletLarge) {
+    bottom: 60px;
+  }
 }
 
 .pc-builder-sixth-background {
   top: 300px;
   right: 100px;
+
+  @media screen and ($tabletLarge) {
+    top: 230px;
+  }
 }
 
 .pc-builder-seventh-background {
   bottom: 160px;
   right: 100px;
+}
+
+.pc-builder-dropdowns-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pc-builder-pc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
 }
 </style>
