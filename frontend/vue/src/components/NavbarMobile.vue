@@ -30,6 +30,11 @@
               >Kontakt</router-link
             >
           </li>
+          <div class="mobile-navbar-ph-icons">
+            <PhUser :size="32" color="white" />
+            <PhShoppingCartSimple :size="32" color="white" />
+            <PhMoon :size="32" color="white" />
+          </div>
         </ul>
       </div>
     </div>
@@ -39,12 +44,16 @@
 <script>
 import { PhList } from "@phosphor-icons/vue";
 import { PhX } from "@phosphor-icons/vue";
+import { PhUser, PhShoppingCartSimple, PhMoon } from "@phosphor-icons/vue";
 
 export default {
   components: {
     //da ih moze prepoznati gore
     PhList,
     PhX,
+    PhUser,
+    PhShoppingCartSimple,
+    PhMoon,
   },
   data() {
     return {
@@ -115,5 +124,10 @@ export default {
   background-color: white;
   z-index: 1;
   position: relative;
+}
+
+.mobile-navbar-ph-icons {
+  display: flex;
+  gap: 24px;
 }
 </style>
