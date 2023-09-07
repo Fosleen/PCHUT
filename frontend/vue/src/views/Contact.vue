@@ -63,6 +63,11 @@ import Textarea from "../components/Textarea.vue";
 
   img {
     position: absolute;
+    visibility: hidden;
+
+    @media screen and ($tabletLarge) {
+      visibility: visible;
+    }
   }
 
   .contact-form-wrapper {
@@ -70,7 +75,6 @@ import Textarea from "../components/Textarea.vue";
     max-width: 600px;
     background-color: $white-dark;
     width: 100%;
-    text-align: center;
     border-radius: 8px;
     box-shadow: 0px 0px 8px $colorPrimary;
     padding-left: 48px;
@@ -80,7 +84,6 @@ import Textarea from "../components/Textarea.vue";
 
     h2 {
       font-family: $fontPrimary;
-      //text-transform: uppercase;
       color: $colorTextPrimary;
       margin-top: 32px;
       margin-bottom: 8px;
@@ -114,11 +117,12 @@ import Textarea from "../components/Textarea.vue";
   height: 300px;
   top: -20px;
   transform: rotate(30deg);
+  z-index: 0;
 }
 .contact-page-grey-keyboard {
   height: 400px;
   bottom: -80px;
-  left: 350px;
+  left: 20%;
   transform: rotate(-20deg);
 }
 </style>
