@@ -54,7 +54,7 @@ class ComponentController extends Controller
         $component = Component::find($id);
         $component->images;
         $component->productable;
-
+        $component->manufacturer;
 
         if ($component) {
             return response()->json([

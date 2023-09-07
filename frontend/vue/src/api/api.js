@@ -97,3 +97,9 @@ export function getAllProductsOnDiscount() {
     return data;
   });
 }
+
+export function getComponentById(id) {
+  return axiosClient.get(`/component/${id}`).then(({ data }) => {
+    return data;
+  });
+}

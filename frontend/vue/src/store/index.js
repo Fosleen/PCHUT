@@ -13,6 +13,9 @@ const store = createStore({
       loading: false,
       data: {},
     },
+    cartItem: {
+      data: {},
+    },
     filter: {
       isOpen: false,
     },
@@ -48,6 +51,22 @@ const store = createStore({
         })
         .catch((err) => {
           commit("setCurrentProductLoading", false);
+          throw err;
+        });
+    },
+
+    getCartItem({ commit }, { id }) {
+      let apiUrl = `/component/${id}`;
+
+      return axiosClient
+        .get(apiUrl)
+        .then((res) => {
+          console.log(res);
+
+          commit("setCartItem", res.data);
+          return res;
+        })
+        .catch((err) => {
           throw err;
         });
     },
@@ -88,9 +107,12 @@ const store = createStore({
       state.currentProduct.data = product.data;
     },
 
+    setCartItem: (state, product) => {
+      state.cartItem.data = product.data;
+    },
+
     setUsersOrders: (state, data) => {
       console.log(data);
-
       state.user.orders = data;
     },
 

@@ -12,30 +12,17 @@
         </div>
         <div class="my-cart-items-list">
           <ShoppingCartItem
+            v-for="item in cartItems"
+            v-bind:key="item"
             :item="{
-              manufacturer: 'Gigabyte',
-              model: 'GeForce GTX 1080',
-              memory: '32 GB',
-              price: '1499.99',
-              img: 'https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png',
-            }"
-          />
-          <ShoppingCartItem
-            :item="{
-              manufacturer: 'Gigabyte',
-              model: 'GeForce GTX 1080',
-              memory: '32 GB',
-              price: '1499.99',
-              img: 'https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png',
-            }"
-          />
-          <ShoppingCartItem
-            :item="{
-              manufacturer: 'Gigabyte',
-              model: 'GeForce GTX 1080',
-              memory: '32 GB',
-              price: '1499.99',
-              img: 'https://www.pngmart.com/files/7/Graphics-Card-Transparent-Background.png',
+              manufacturer: item.manufacturer.name,
+              model: item.model,
+              memory: item.memory,
+              price: item.price,
+              img:
+                item.images && item.images.length > 0
+                  ? item.images[0].url
+                  : 'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
             }"
           />
         </div>
@@ -99,12 +86,32 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import { PhCalendarCheck } from "@phosphor-icons/vue";
+import { getComponentById } from "../api/api";
 
 const deliveryType = ref("home-delivery");
+const cartItems = ref([]);
+
+const fetchCartItemsData = async () => {
+  try {
+    for (const el of JSON.parse(sessionStorage.getItem("cart"))) {
+      // this kind of loop is for async calls
+
+      const response = await getComponentById(el.id);
+      cartItems.value.push(response.component);
+    }
+  } catch (err) {
+    console.log("Error - " + err);
+  }
+  console.log(cartItems.value);
+};
+
+onMounted(async () => {
+  await fetchCartItemsData();
+});
 </script>
 
 <style lang="scss">
