@@ -15,12 +15,8 @@
         />
       </form>
     </div>
-    <Button
-      type="submit"
-      text="PRIJAVI SE"
-      form="login"
-      shape="trapezoid"
-    ></Button>
+    <Button type="submit" text="PRIJAVI SE" form="login" shape="trapezoid">
+    </Button>
   </div>
 </template>
 
@@ -28,6 +24,7 @@
 import store from "../store";
 import InputField from "../components/InputField.vue";
 import Button from "../components/Button.vue";
+import router from "../router";
 
 const user = {
   email: "",
@@ -41,11 +38,8 @@ function login(e) {
   store
     .dispatch("login", user)
     .then(() => {
-      // router.push({
-      //   name: "Dashboard",
-      // });
-
       console.log("Uspjesna prijava");
+      router.push({ path: "/kosarica" });
     })
     .catch((err) => {
       console.log(`Nest je puklo: ${err}`);

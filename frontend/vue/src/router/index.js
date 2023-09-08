@@ -13,6 +13,7 @@ import MyCartPage from "../views/MyCartPage.vue";
 import ProductImagesComponent from "../components/ProductImagesCarousel.vue";
 import MyOrdersPage from "../views/MyOrdersPage.vue";
 import PCBuilder from "../views/PCBuilder.vue";
+import store from "../store";
 
 const routes = [
   {
@@ -20,13 +21,11 @@ const routes = [
     name: "HomePage",
     component: Homepage,
   },
-
   {
     path: "/kontakt",
     name: "ContactPage",
     component: Contact,
   },
-
   {
     path: "/proizvodi",
     name: "ProductsPage",
@@ -44,16 +43,19 @@ const routes = [
   },
   {
     path: "/detalji-placanja",
+    meta: { requiresAuth: true },
     name: "PaymentDetails",
     component: PaymentDetailsPage,
   },
   {
     path: "/narudzbe",
+    meta: { requiresAuth: true },
     name: "MyOrders",
     component: MyOrdersPage,
   },
   {
     path: "/kosarica",
+    meta: { requiresAuth: true },
     name: "ShoppingCartPage",
     component: MyCartPage,
   },
@@ -73,6 +75,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.state.user.token) {
+    console.log(store.state.user.token);
+    next({ name: "LoginPage" });
+  } else if (store.state.user.token && to.meta.isGuest) {
+    next({ name: "ShoppingCartPage" });
+  } else {
+    next();
+  }
 });
 
 export default router;
