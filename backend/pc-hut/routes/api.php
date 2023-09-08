@@ -18,6 +18,7 @@ use App\Http\Controllers\PSUController;
 use App\Http\Controllers\RAMController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SwitchTypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -126,3 +127,8 @@ Route::get('order/{id}', [OrderController::class, 'show']);
 Route::post('order', [OrderController::class, 'store']);
 Route::delete('order/{id}', [OrderController::class, 'destroy']);
 Route::get('discount-components', [ComponentController::class, 'indexDiscount']);
+
+//=============================================================//
+
+Route::get('users', [UserController::class, 'index']);
+Route::post('users/{id}', [UserController::class, 'show']);
