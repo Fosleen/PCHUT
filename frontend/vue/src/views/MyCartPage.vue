@@ -123,7 +123,7 @@ const fetchCartItemsData = async () => {
       console.log(response.component);
 
       cartItems.value.push(response.component);
-      totalPrice.value += response.component.price;
+      totalPrice.value += response.component.price * el.quantity;
     }
   } catch (err) {
     console.log("Error - " + err);
