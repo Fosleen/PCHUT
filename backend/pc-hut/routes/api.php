@@ -131,4 +131,4 @@ Route::get('discount-components', [ComponentController::class, 'indexDiscount'])
 //=============================================================//
 
 Route::get('users', [UserController::class, 'index']);
-Route::post('users/{id}', [UserController::class, 'show']);
+Route::get('users/{id}', [UserController::class, 'show']);

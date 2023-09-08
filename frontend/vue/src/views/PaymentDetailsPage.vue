@@ -143,8 +143,9 @@
         </div>
         <div class="payment-details-price-wrapper">
           <FinalPriceAndButton
+            @click="createOrder"
             priceLabel="Ukupan iznos narudžbe:"
-            price="8101.68"
+            :price="totalPrice"
             buttonText="Završi narudžbu i plati"
           />
         </div>
@@ -154,12 +155,18 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, computed } from "vue";
 import InputField from "../components/InputField.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
+import axiosClient from "../axios";
+import store from "../store";
+
+const cartItemsId = ref([]);
+const cartItemsQuantity = ref([]);
 
 const paymentType = ref("card");
 const deliveryType = ref("default");
+const totalPrice = computed(() => store.state.user.cart.totalPrice.toFixed(2));
 
 const card = {
   name: "",
@@ -169,28 +176,79 @@ const card = {
   cvv: "",
 };
 
-const customer = {
+const customer = ref({
   name: "",
   surname: "",
   address: "",
   city: "",
   postal: "",
   email: "",
+});
+
+const loggedUser = ref({
+  name: "",
+  surname: "",
+  address: "",
+  city: "",
+  postal: "",
+  email: "",
+});
+
+const createOrder = async () => {
+  try {
+    await axiosClient
+      .post("/order", {
+        user_id: 2, // TODO logged user id
+        component_id: cartItemsId.value,
+        quantity: cartItemsQuantity.value,
+        payment: paymentType.value == "card" ? 1 : 0,
+        delivery_status: 0,
+        order_name:
+          deliveryType.value == "default"
+            ? loggedUser.value.name + " " + loggedUser.value.surname
+            : customer.value.name + " " + customer.value.surname,
+        order_address:
+          deliveryType.value == "default"
+            ? loggedUser.value.address +
+              ", " +
+              loggedUser.value.postal +
+              " " +
+              loggedUser.value.city
+            : customer.value.address +
+              ", " +
+              customer.value.postal +
+              " " +
+              customer.value.city,
+      })
+      .then(({ data }) => {
+        console.log(data);
+      });
+  } catch (err) {
+    console.log("Error - " + err);
+  }
 };
 
-const loggedUser = {
-  name: "Mirko",
-  surname: "Klokanić",
-  address: "Ulica Netkog Nečijeg 28b",
-  city: "Karlovac",
-  postal: "47000",
-  email: "mirko.klokanic@gmail.com",
+const fetchCartItemsData = async () => {
+  try {
+    for (const el of JSON.parse(sessionStorage.getItem("cart"))) {
+      cartItemsId.value.push(el.id);
+      cartItemsQuantity.value.push(el.quantity);
+    }
+  } catch (err) {
+    console.log("Error - " + err);
+  }
 };
 
-function logValues() {
-  console.log(paymentType.value == "card" ? card : "cod");
-  console.log(deliveryType.value == "default" ? loggedUser : customer);
-}
+onMounted(async () => {
+  await fetchCartItemsData();
+
+  try {
+    const response = await axiosClient.get("/users/2"); // TODO logged user id
+    loggedUser.value = response.data.user;
+  } catch (err) {
+    console.error("Error fetching user data:", err);
+  }
+});
 </script>
 
 <style lang="scss">

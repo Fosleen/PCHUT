@@ -6,7 +6,7 @@ const store = createStore({
     user: {
       data: {},
       token: sessionStorage.getItem("access_token"),
-      cart: sessionStorage.getItem("cart"),
+      cart: { data: sessionStorage.getItem("cart"), totalPrice: null },
       orders: {},
     },
     currentProduct: {
@@ -34,6 +34,12 @@ const store = createStore({
         commit("setUser", data);
         return data;
       });
+    },
+
+    totalCartPrice({ commit }, price) {
+      console.log(price);
+
+      commit("setTotalCartPrice", price);
     },
 
     getProduct({ commit }, { id, productable_type }) {
@@ -118,6 +124,10 @@ const store = createStore({
 
     setCurrentProductLoading: (state, loading) => {
       state.currentProduct.loading = loading;
+    },
+
+    setTotalCartPrice: (state, totalPrice) => {
+      state.user.cart.totalPrice = totalPrice;
     },
 
     toggleFilter: (state) => {

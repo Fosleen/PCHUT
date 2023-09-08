@@ -95,6 +95,7 @@ import Button from "../components/Button.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import { PhCalendarCheck } from "@phosphor-icons/vue";
 import { getComponentById } from "../api/api";
+import store from "../store";
 
 const deliveryType = ref("home-delivery");
 const cartItems = ref([]);
@@ -105,11 +106,16 @@ function change(id, price, newQuantity) {
 
   savedCart.forEach((element) => {
     if (element.id == id) {
+      newQuantity > element.quantity
+        ? (totalPrice.value += price)
+        : (totalPrice.value -= price);
+
       element.quantity = newQuantity;
-      totalPrice.value += price;
     }
     sessionStorage.setItem("cart", JSON.stringify(savedCart));
   });
+
+  store.dispatch("totalCartPrice", totalPrice.value);
 }
 
 const fetchCartItemsData = async () => {
@@ -129,6 +135,7 @@ const fetchCartItemsData = async () => {
     console.log("Error - " + err);
   }
   console.log(JSON.parse(JSON.stringify(cartItems.value)));
+  store.dispatch("totalCartPrice", totalPrice.value);
 };
 
 onMounted(async () => {
