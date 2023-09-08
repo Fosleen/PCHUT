@@ -24,11 +24,12 @@
                   ? item.images[0].url
                   : 'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
             }"
+            @change-quantity="change(item.id, item.price, $event)"
           />
         </div>
         <div class="my-cart-items-total-price-wrapper">
           <div class="my-cart-items-total-price">
-            <p>{{ totalPrice }} €</p>
+            <p>{{ totalPrice.toFixed(2) }} €</p>
           </div>
         </div>
       </div>
@@ -61,11 +62,11 @@
           <div class="my-cart-details-details-data-prices">
             <div class="my-cart-details-details-data-prices-row">
               <p>Osnovica:</p>
-              <p>{{ totalPrice * 0.75 }} €</p>
+              <p>{{ (totalPrice * 0.75).toFixed(2) }} €</p>
             </div>
             <div class="my-cart-details-details-data-prices-row">
               <p>Porez:</p>
-              <p>{{ totalPrice * 0.25 }} €</p>
+              <p>{{ (totalPrice * 0.25).toFixed(2) }} €</p>
             </div>
             <div class="my-cart-details-details-data-prices-row">
               <p>Dostava:</p>
@@ -98,6 +99,18 @@ const deliveryType = ref("home-delivery");
 const cartItems = ref([]);
 const totalPrice = ref(0);
 
+function change(id, price, newQuantity) {
+  const savedCart = JSON.parse(sessionStorage.getItem("cart"));
+
+  savedCart.forEach((element) => {
+    if (element.id == id) {
+      element.quantity = newQuantity;
+      totalPrice.value += price;
+    }
+    sessionStorage.setItem("cart", JSON.stringify(savedCart));
+  });
+}
+
 const fetchCartItemsData = async () => {
   try {
     for (const el of JSON.parse(sessionStorage.getItem("cart"))) {
@@ -111,7 +124,6 @@ const fetchCartItemsData = async () => {
     console.log("Error - " + err);
   }
   console.log(JSON.parse(JSON.stringify(cartItems.value)));
-  console.log(totalPrice.value);
 };
 
 onMounted(async () => {

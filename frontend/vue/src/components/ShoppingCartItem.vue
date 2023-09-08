@@ -15,8 +15,8 @@
       </h4>
       <QuantityCalculator :quantity="quantity" @change-quantity="change" />
       <div>
-        <h3>{{ props.item.price * quantity }} €</h3>
-        <p>1 kom = {{ props.item.price }} €</p>
+        <h3>{{ (props.item.price * quantity).toFixed(2) }} €</h3>
+        <p>1 kom = {{ props.item.price.toFixed(2) }} €</p>
       </div>
     </div>
   </div>
@@ -30,10 +30,12 @@ const props = defineProps({
   item: Object,
 });
 
+const emit = defineEmits();
 let quantity = ref(1);
 
 function change(newQuantity) {
   quantity.value = newQuantity;
+  emit("changeQuantity", quantity.value);
 }
 </script>
 
