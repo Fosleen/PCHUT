@@ -160,6 +160,7 @@ import InputField from "../components/InputField.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
 import axiosClient from "../axios";
 import store from "../store";
+import { getLoggedUser } from "../api/api";
 
 const cartItemsId = ref([]);
 const cartItemsQuantity = ref([]);
@@ -186,6 +187,7 @@ const customer = ref({
 });
 
 const loggedUser = ref({
+  id: "",
   name: "",
   surname: "",
   address: "",
@@ -196,9 +198,11 @@ const loggedUser = ref({
 
 const createOrder = async () => {
   try {
+    console.log(loggedUser.value.id);
+
     await axiosClient
       .post("/order", {
-        user_id: 2, // TODO logged user id
+        user_id: loggedUser.value.id,
         component_id: cartItemsId.value,
         quantity: cartItemsQuantity.value,
         payment: paymentType.value == "card" ? 1 : 0,
@@ -243,8 +247,10 @@ onMounted(async () => {
   await fetchCartItemsData();
 
   try {
-    const response = await axiosClient.get("/users/2"); // TODO logged user id
-    loggedUser.value = response.data.user;
+    const user = await getLoggedUser();
+    console.log(user);
+
+    loggedUser.value = user;
   } catch (err) {
     console.error("Error fetching user data:", err);
   }

@@ -82,10 +82,10 @@ import OrderItem from "../components/OrderItem.vue";
 import OrdersListItem from "../components/OrdersListItem.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-
 const store = useStore();
+
 store.dispatch("getOrdersByUser", {
-  id: localStorage.getItem("user_id"), // TODO change to more safer way
+  id: store.state.user.data.id,
 });
 const orders = computed(() => store.state.user.orders);
 const selectedOrder = ref(null);

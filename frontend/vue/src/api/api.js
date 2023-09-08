@@ -103,3 +103,18 @@ export function getComponentById(id) {
     return data;
   });
 }
+
+export function getLoggedUser() {
+  const bodyParameters = { key: "value" };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    },
+  };
+
+  return axiosClient
+    .get("/logged-user", bodyParameters, config)
+    .then(({ data }) => {
+      return data;
+    });
+}

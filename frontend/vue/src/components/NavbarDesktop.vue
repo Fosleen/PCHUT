@@ -11,11 +11,12 @@
       </ul>
     </div>
     <div class="navbar-icons-wrapper">
-      <PhUser :size="32" color="white" />
+      <router-link to="/narudzbe">
+        <PhUser :size="32" color="white"
+      /></router-link>
       <router-link to="/kosarica">
-        <PhShoppingCartSimple :size="32" color="white"
-      />
-    </router-link>
+        <PhShoppingCartSimple :size="32" color="white" />
+      </router-link>
       <PhMoon :size="32" color="white" @click="toggleTheme" />
     </div>
   </div>
