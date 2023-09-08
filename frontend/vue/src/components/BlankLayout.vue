@@ -1,20 +1,10 @@
 <template>
-  <div class="dashboard-layout-wrapper">
-    <div class="main-section">
-      <div class="content-wrapper">
-        <Header />
-
-        <router-view></router-view>
-        <Footer />
-      </div>
-    </div>
+  <div id="app">
+    <router-view></router-view>
   </div>
 </template>
 
-<script setup>
-import Footer from "./Footer.vue";
-import Header from "./Header.vue";
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .content-wrapper {

@@ -1,9 +1,24 @@
 <template>
-  <MainLayout />
+  <div id="app">
+    <component :is="layoutComponent">
+      <router-view></router-view>
+    </component>
+  </div>
 </template>
 
-<script setup>
+<script>
 import MainLayout from "./components/MainLayout.vue";
-</script>
+import BlankLayout from "./components/BlankLayout.vue";
 
-<style lang="scss" scoped></style>
+export default {
+  computed: {
+    layoutComponent() {
+      if (this.$route.path === "/register" || this.$route.path === "/login") {
+        return BlankLayout;
+      } else {
+        return MainLayout;
+      }
+    },
+  },
+};
+</script>
