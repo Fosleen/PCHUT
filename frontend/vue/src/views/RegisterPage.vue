@@ -19,6 +19,21 @@
           @update:inputValue="user.username = $event"
         />
         <InputField
+          placeholder="Ulica i kućni broj *"
+          type="text"
+          @update:inputValue="user.address = $event"
+        />
+        <InputField
+          placeholder="Poštanski broj *"
+          type="text"
+          @update:inputValue="user.postal = $event"
+        />
+        <InputField
+          placeholder="Grad *"
+          type="text"
+          @update:inputValue="user.city = $event"
+        />
+        <InputField
           placeholder="Email *"
           type="email"
           @update:inputValue="user.email = $event"
@@ -43,6 +58,7 @@
 import store from "../store";
 import Button from "../components/Button.vue";
 import InputField from "../components/InputField.vue";
+import router from "../router";
 
 const user = {
   name: "",
@@ -50,6 +66,9 @@ const user = {
   username: "",
   email: "",
   password: "",
+  address: "",
+  postal: "",
+  city: "",
 };
 
 function register(e) {
@@ -59,11 +78,8 @@ function register(e) {
   store
     .dispatch("register", user)
     .then(() => {
-      // router.push({
-      //   name: "Dashboard",
-      // });
-
       console.log("Uspjesna registracija");
+      router.push({ path: "/kosarica" });
     })
     .catch((err) => {
       console.log(`Nest je puklo: ${err}`);

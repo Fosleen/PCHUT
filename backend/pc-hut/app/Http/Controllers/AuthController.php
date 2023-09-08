@@ -14,6 +14,9 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => 'required|string|',
             'surname' => 'required|string|',
+            'address' => 'required|string|',
+            'city' => 'required|string|',
+            'postal' => 'required|string|',
             'username' => 'required|string|unique:user,username',
             'password' => 'required|string', 'confirmed', Password::min(6),
             'email' => 'required|string|email|unique:user,email',
@@ -25,6 +28,9 @@ class AuthController extends Controller
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
             'email' => $data['email'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'postal' => $data['postal'],
         ]);
 
         $token = $user->createToken('main')->plainTextToken;
