@@ -66,4 +66,9 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
+
+    public function getLoggedUser(Request $request)
+    {
+        return $request->user();
+    }
 }
