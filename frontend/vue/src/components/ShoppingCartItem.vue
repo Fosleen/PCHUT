@@ -31,7 +31,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits();
-let quantity = ref(1);
+let quantity = ref(props.item.quantity);
 
 function change(newQuantity) {
   quantity.value = newQuantity;

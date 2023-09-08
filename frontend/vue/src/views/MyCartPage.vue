@@ -19,6 +19,7 @@
               model: item.model,
               memory: item.memory,
               price: item.price,
+              quantity: item.currQuantity,
               img:
                 item.images && item.images.length > 0
                   ? item.images[0].url
@@ -115,8 +116,12 @@ const fetchCartItemsData = async () => {
   try {
     for (const el of JSON.parse(sessionStorage.getItem("cart"))) {
       // this kind of loop is for async calls
+      console.log(el.quantity);
 
       const response = await getComponentById(el.id);
+      response.component.currQuantity = el.quantity;
+      console.log(response.component);
+
       cartItems.value.push(response.component);
       totalPrice.value += response.component.price;
     }
