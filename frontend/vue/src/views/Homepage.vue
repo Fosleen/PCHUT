@@ -2,56 +2,66 @@
   <div>
     <Hero />
 
-    <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
-    <div class="item-type-wrapper">
-      <PCPartCard v-for="(gpu, index) in gpus" :key="index" :component="gpu" />
-      <!--if i pass props that dont exist, nothing will render!!-->
-    </div>
+    <div class="homepage-component-outer-wrapper">
+      <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(gpu, index) in gpus"
+          :key="index"
+          :component="gpu"
+        />
+        <!--if i pass props that dont exist, nothing will render!!-->
+      </div>
 
-    <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" @click="loadMoreGPU" />
-    </div>
+      <div class="pagination-button-wrapper">
+        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreGPU" />
+      </div>
 
-    <h1 class="homepage-component-wrapper-title">Procesori</h1>
+      <h1 class="homepage-component-wrapper-title">Procesori</h1>
 
-    <div class="item-type-wrapper">
-      <PCPartCard v-for="(cpu, index) in cpus" :key="index" :component="cpu" />
-    </div>
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(cpu, index) in cpus"
+          :key="index"
+          :component="cpu"
+        />
+      </div>
 
-    <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCPU" />
-    </div>
+      <div class="pagination-button-wrapper">
+        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCPU" />
+      </div>
 
-    <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
+      <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
 
-    <div class="item-type-wrapper">
-      <PCPartCard
-        v-for="(motherboard, index) in mbs"
-        :key="index"
-        :component="motherboard"
-      />
-    </div>
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(motherboard, index) in mbs"
+          :key="index"
+          :component="motherboard"
+        />
+      </div>
 
-    <div class="pagination-button-wrapper">
-      <Button
-        shape="trapezoid"
-        text="Učitaj više"
-        @click="loadMoreMotherboards"
-      />
-    </div>
+      <div class="pagination-button-wrapper">
+        <Button
+          shape="trapezoid"
+          text="Učitaj više"
+          @click="loadMoreMotherboards"
+        />
+      </div>
 
-    <h1 class="homepage-component-wrapper-title">RAM memorije</h1>
+      <h1 class="homepage-component-wrapper-title">RAM memorije</h1>
 
-    <div class="item-type-wrapper">
-      <PCPartCard
-        v-for="(motherboard, index) in rams"
-        :key="index"
-        :component="motherboard"
-      />
-    </div>
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(motherboard, index) in rams"
+          :key="index"
+          :component="motherboard"
+        />
+      </div>
 
-    <div class="pagination-button-wrapper">
-      <Button shape="trapezoid" text="Učitaj više" @click="loadMoreRAMs" />
+      <div class="pagination-button-wrapper">
+        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreRAMs" />
+      </div>
     </div>
 
     <PcBuilderHomepage />
@@ -68,7 +78,6 @@ import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 
 import {
-  getAllRAMs,
   getAllGraphicCardsPaginated,
   getAllCPUsPaginated,
   getAllMotherboardsPaginated,
@@ -137,43 +146,53 @@ onMounted(async () => {
   await fetchMotherboardsData(motherboardCurrentPage.value);
 
   await fetchRAMsData(ramsCurrentPage.value);
-
-  // const allRams = await getAllRAMs();
-  // rams.value = allRams.rams;
-  // console.log("Rams", rams.value);
 });
 </script>
 
 <style lang="scss" scoped>
 @import "../utils/theme.scss";
-.item-type-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 24px;
 
-  @media screen and ($tabletLarge) {
+.homepage-component-outer-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .homepage-component-wrapper-title {
+    color: $pink;
+    padding: 12px 12px 0;
+  }
+
+  .item-type-wrapper {
+    padding: 12px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
+  }
+  .pagination-button-wrapper {
+    display: flex;
     justify-content: center;
-  }
 
-  @media screen and ($desktopLarge) {
-    grid-template-columns: repeat(4, 1fr);
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
   }
 }
 
-.homepage-component-wrapper-title {
-  color: $pink;
-  padding-left: 12px;
+@media screen and ($tablet) {
+  .homepage-component-outer-wrapper {
+    .item-type-wrapper {
+      justify-content: center;
+    }
+  }
 }
 
-.pagination-button-wrapper {
-  display: flex;
-  justify-content: center;
+@media screen and ($tabletLarge) {
+  .homepage-component-outer-wrapper {
+    .item-type-wrapper {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 }
 </style>

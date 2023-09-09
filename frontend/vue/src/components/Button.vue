@@ -3,7 +3,10 @@
     :form="form"
     :type="props.type"
     :shape="props.shape"
-    :class="[props.shape === 'trapezoid' ? 'trapezoid' : props.shape]"
+    :class="[
+      props.shape === 'trapezoid' ? 'trapezoid' : props.shape,
+      props.isSmall === true ? 'small' : 'large',
+    ]"
   >
     <div class="button-content">
       <div class="text">{{ props.text }}</div>
@@ -21,6 +24,7 @@ const props = defineProps({
   text: String,
   type: String,
   form: String || null,
+  isSmall: Boolean || false,
   shape: String,
   icon: Boolean || false,
 });
@@ -28,10 +32,9 @@ const props = defineProps({
 
 <style lang="scss">
 @import "../utils/theme.scss";
+
 button {
-  width: 220px;
   height: 50px;
-  font-size: 20px;
   background-color: $colorPrimary;
   color: $colorTextSecondary;
   font-weight: 500;
@@ -40,6 +43,18 @@ button {
   align-items: center;
   justify-content: center;
   font-weight: 600;
+
+  &.small {
+    width: 100%;
+    font-size: 16px;
+    height: 40px;
+  }
+
+  &.large {
+    width: 220px;
+    font-size: 20px;
+    height: 50px;
+  }
 
   .button-content {
     display: flex;

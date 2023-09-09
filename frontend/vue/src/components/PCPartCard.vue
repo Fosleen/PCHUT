@@ -42,7 +42,7 @@
 
         <h3>Dostupno</h3>
         <h2 class="pc-part-card-price-wrapper">
-          {{ `${component.price} &#x20AC` }}
+          {{ `${component.price} &#x20AC;` }}
         </h2>
       </div>
 
@@ -55,6 +55,7 @@
             color: '#282828',
           }"
           :icon="true"
+          :is-small="true"
         />
       </div>
     </div>
@@ -73,58 +74,122 @@ const getModelName = () => {
   const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
 };
-
-// console.log(getModelName());
-
-// console.log("component PROP PROSLJEDNEI JE", component);
 </script>
 
 <style lang="scss" scoped>
 @import "../utils/theme.scss";
 .pc-part-card-wrapper {
   background-color: #eaeaea;
-  width: 400px;
-  padding-top: 12px;
-  box-shadow: 0 0 20px #be166e;
+  width: 100%;
+  box-shadow: 0 0 12px #d66ea4;
   outline: 3px solid transparent;
   outline-offset: -3px;
-  padding-left: 16px;
-  padding-right: 16px;
-  //max-width: 400px;
-}
+  padding: 8px 8px 0;
 
-.pc-part-card-image-wrapper {
-  background-color: white;
-  height: 240px;
-  width: 100%;
-  margin-bottom: 16px;
-  img {
-    object-fit: contain;
-    height: 100%;
+  .pc-part-card-image-wrapper {
+    background-color: white;
+    height: 32vw;
     width: 100%;
-  }
-}
+    margin-bottom: 16px;
 
-.pc-part-card-text-wrapper {
-  h3 {
-    color: $colorSuccess;
-    font-size: 20px;
+    img {
+      object-fit: contain;
+      height: 100%;
+      width: 100%;
+    }
   }
 
-  h2 {
-    font-size: 32px;
-    margin-bottom: 8px;
-    color: $grey-dark;
-  }
-}
+  .pc-part-card-text-wrapper {
+    h3 {
+      color: $colorSuccess;
+      font-size: 14px;
+    }
 
-.pc-part-card-button-wrapper {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 16px;
+    h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: $grey-dark;
+    }
+  }
+
+  .pc-part-card-button-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 8px;
+  }
 }
 
 .pc-part-card-link {
   text-decoration: none;
+}
+
+@media screen and ($tablet) {
+  .pc-part-card-wrapper {
+    padding: 12px 12px 0;
+
+    .pc-part-card-text-wrapper {
+      h3 {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+    }
+
+    .pc-part-card-button-wrapper {
+      padding-bottom: 16px;
+    }
+  }
+}
+
+@media screen and ($tabletLarge) {
+  .pc-part-card-wrapper {
+    .pc-part-card-image-wrapper {
+      height: 16vw;
+    }
+
+    .pc-part-card-text-wrapper {
+      h3 {
+        color: $colorSuccess;
+        font-size: 16px;
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: $grey-dark;
+      }
+    }
+
+    .pc-part-card-button-wrapper {
+      padding-bottom: 16px;
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .pc-part-card-wrapper {
+    padding: 12px 16px 0;
+
+    .pc-part-card-image-wrapper {
+      height: 200px;
+    }
+
+    .pc-part-card-text-wrapper {
+      h3 {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 32px;
+      }
+    }
+
+    .pc-part-card-button-wrapper {
+      padding-bottom: 16px;
+    }
+  }
 }
 </style>
