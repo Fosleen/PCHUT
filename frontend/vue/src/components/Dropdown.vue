@@ -1,5 +1,10 @@
 <template>
-  <select @input="$emit('input', $event.target.value)" v-bind="$attrs">
+  <select
+    @input="$emit('input', $event.target.value)"
+    v-bind="$attrs"
+    @change="change"
+  >
+    <!--default on change does not exist in vue- you have to use @change-->
     <option :value="null" disabled selected>
       {{ placeholder }}
     </option>
@@ -16,6 +21,7 @@ const props = defineProps({
   placeholder: String,
   options: Array,
   hardcodedValue: String,
+  change: Function,
 });
 </script>
 

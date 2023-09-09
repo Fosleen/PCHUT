@@ -44,6 +44,7 @@
           :hardcodedValue="selectedOption"
           :options="cpus"
           class="pc-builder-first-dropdown"
+          :disabled="!isMotherboardChosen"
         />
 
         <Dropdown
@@ -75,6 +76,7 @@
           :options="motherboards"
           hardcoded-value="First option"
           class="pc-builder-sixth-background"
+          :change="setIsMotherboardChosen"
         />
         <Dropdown
           placeholder="Odaberi kućište"
@@ -96,7 +98,18 @@
 <script setup>
 import Dropdown from "../components/Dropdown.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
+
+const isMotherboardChosen = ref(false);
+
+function setIsMotherboardChosen() {
+  isMotherboardChosen.value = !isMotherboardChosen.value; // this will set the value of `isMotherboardChosen` to be equal
+  console.log(isMotherboardChosen.value);
+}
+
+watch(isMotherboardChosen, (newVal) => {
+  console.log("Is motherboard chosen:", newVal);
+});
 import {
   getAllGraphicCards,
   getAllCPUs,
@@ -106,12 +119,6 @@ import {
   getAllPSUs,
   getAllCases,
 } from "../api/api";
-
-const hardcodedOptions = [
-  { id: 1, name: "Option 1" },
-  { id: 2, name: "Option 2" },
-  { id: 3, name: "Option 3" },
-];
 
 const gpus = ref([]);
 const cpus = ref([]);
