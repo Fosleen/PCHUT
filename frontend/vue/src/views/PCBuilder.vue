@@ -44,6 +44,8 @@
           :hardcodedValue="selectedOption"
           :options="cpus"
           class="pc-builder-first-dropdown"
+          :disabled="!motherboardOption"
+          v-model="cpuOption"
         />
 
         <Dropdown
@@ -51,45 +53,63 @@
           :options="gpus"
           hardcoded-value="First option"
           class="pc-builder-second-dropdown"
+          v-model="gpuOption"
         />
         <Dropdown
           placeholder="Odaberi memoriju (pohranu)"
           :options="storages"
           hardcoded-value="First option"
           class="pc-builder-third-dropdown"
+          v-model="storageOption"
         />
         <Dropdown
           placeholder="Odaberi RAM memoriju"
           :options="rams"
           hardcoded-value="First option"
           class="pc-builder-fourth-drodpown"
+          :disabled="!motherboardOption"
+          v-model="ramOption"
         />
         <Dropdown
           placeholder="Odaberi napajanje"
           :options="psus"
           hardcoded-value="First option"
           class="pc-builder-fifth-background"
+          v-model="psuOption"
         />
         <Dropdown
           placeholder="Odaberi matičnu ploču"
           :options="motherboards"
           hardcoded-value="First option"
           class="pc-builder-sixth-background"
+          v-model="motherboardOption"
         />
         <Dropdown
           placeholder="Odaberi kućište"
           :options="cases"
           hardcoded-value="First option"
           class="pc-builder-seventh-background"
+          v-model="caseOption"
         />
       </div>
     </div>
   </div>
 
   <FinalPriceAndButton
-    price="734.5"
-    price-label="some label"
+    :price="totalPrice"
+    price-label="Ukupna cijena"
     button-text="Kupi"
+    @click="
+      addToCart(
+        gpuOption,
+        cpuOption,
+        psuOption,
+        ramOption,
+        caseOption,
+        motherboardOption,
+        storageOption
+      )
+    "
   />
 </template>
 
@@ -97,6 +117,7 @@
 import Dropdown from "../components/Dropdown.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
 import { onMounted, ref } from "vue";
+
 import {
   getAllGraphicCards,
   getAllCPUs,
@@ -107,11 +128,47 @@ import {
   getAllCases,
 } from "../api/api";
 
-const hardcodedOptions = [
-  { id: 1, name: "Option 1" },
-  { id: 2, name: "Option 2" },
-  { id: 3, name: "Option 3" },
-];
+const addToCart = (...ids) => {
+  const existingItems = sessionStorage.getItem("cart");
+  let cartItems = [];
+
+  if (existingItems) {
+    cartItems = JSON.parse(existingItems);
+  }
+
+  const product = { id: ids, quantity: 1 };
+  cartItems.push(product);
+
+  sessionStorage.setItem("cart", JSON.stringify(cartItems));
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const item = cartItems[i];
+    const idArray = item.id;
+
+    if (Array.isArray(idArray)) {
+      let totalPrice = 0;
+
+      for (let j = 0; j < idArray.length; j++) {
+        const itemInArray = idArray[j];
+        if (itemInArray && itemInArray.price) {
+          totalPrice += itemInArray.price;
+        }
+      }
+
+      console.log("Total Price of kart is", totalPrice);
+    } else {
+      console.log("Invalid item structure at index", i + 1);
+    }
+  }
+};
+
+const motherboardOption = ref(null);
+const cpuOption = ref(null);
+const gpuOption = ref(null);
+const psuOption = ref(null);
+const ramOption = ref(null);
+const caseOption = ref(null);
+const storageOption = ref(null);
 
 const gpus = ref([]);
 const cpus = ref([]);

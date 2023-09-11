@@ -28,6 +28,8 @@ class CPUResource extends JsonResource
             'manufacturer_img' => $this->component->manufacturer->logo_url,
             'manufacturer' => $this->component->manufacturer->name,
             'socket' => $this->socket->name,
+            'socket_id' => $this->socket->id,
+
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }
