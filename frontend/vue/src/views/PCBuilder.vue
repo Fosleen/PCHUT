@@ -99,6 +99,17 @@
     price="734.5"
     price-label="some label"
     button-text="Kupi"
+    @click="
+      addToCart(
+        gpuOption,
+        cpuOption,
+        psuOption,
+        ramOption,
+        caseOption,
+        motherboardOption,
+        storageOption
+      )
+    "
   />
 </template>
 
@@ -117,7 +128,7 @@ import {
   getAllCases,
 } from "../api/api";
 
-const addToCart = (id) => {
+const addToCart = (...ids) => {
   const existingItems = sessionStorage.getItem("cart");
   let cartItems = [];
 
@@ -125,10 +136,10 @@ const addToCart = (id) => {
     cartItems = JSON.parse(existingItems);
   }
 
-  const product = { id: id, quantity: 1 };
+  const product = { id: ids, quantity: 1 };
   cartItems.push(product);
 
-  console.log(cartItems);
+  console.log("Itemi u kosarici su", cartItems);
 
   sessionStorage.setItem("cart", JSON.stringify(cartItems));
 };
