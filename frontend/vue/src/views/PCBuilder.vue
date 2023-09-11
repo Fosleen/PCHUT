@@ -96,8 +96,8 @@
   </div>
 
   <FinalPriceAndButton
-    price="734.5"
-    price-label="some label"
+    :price="totalPrice"
+    price-label="Ukupna cijena"
     button-text="Kupi"
     @click="
       addToCart(
@@ -139,9 +139,27 @@ const addToCart = (...ids) => {
   const product = { id: ids, quantity: 1 };
   cartItems.push(product);
 
-  console.log("Itemi u kosarici su", cartItems);
-
   sessionStorage.setItem("cart", JSON.stringify(cartItems));
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const item = cartItems[i];
+    const idArray = item.id;
+
+    if (Array.isArray(idArray)) {
+      let totalPrice = 0;
+
+      for (let j = 0; j < idArray.length; j++) {
+        const itemInArray = idArray[j];
+        if (itemInArray && itemInArray.price) {
+          totalPrice += itemInArray.price;
+        }
+      }
+
+      console.log("Total Price of kart is", totalPrice);
+    } else {
+      console.log("Invalid item structure at index", i + 1);
+    }
+  }
 };
 
 const motherboardOption = ref(null);
