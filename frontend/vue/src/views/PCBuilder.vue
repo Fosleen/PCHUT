@@ -44,7 +44,8 @@
           :hardcodedValue="selectedOption"
           :options="cpus"
           class="pc-builder-first-dropdown"
-          :disabled="!isMotherboardChosen"
+          :disabled="!motherboardOption"
+          v-model="cpuOption"
         />
 
         <Dropdown
@@ -52,37 +53,43 @@
           :options="gpus"
           hardcoded-value="First option"
           class="pc-builder-second-dropdown"
+          v-model="gpuOption"
         />
         <Dropdown
           placeholder="Odaberi memoriju (pohranu)"
           :options="storages"
           hardcoded-value="First option"
           class="pc-builder-third-dropdown"
+          v-model="storageOption"
         />
         <Dropdown
           placeholder="Odaberi RAM memoriju"
           :options="rams"
           hardcoded-value="First option"
           class="pc-builder-fourth-drodpown"
+          :disabled="!motherboardOption"
+          v-model="ramOption"
         />
         <Dropdown
           placeholder="Odaberi napajanje"
           :options="psus"
           hardcoded-value="First option"
           class="pc-builder-fifth-background"
+          v-model="psuOption"
         />
         <Dropdown
           placeholder="Odaberi matičnu ploču"
           :options="motherboards"
           hardcoded-value="First option"
           class="pc-builder-sixth-background"
-          :change="setIsMotherboardChosen"
+          v-model="motherboardOption"
         />
         <Dropdown
           placeholder="Odaberi kućište"
           :options="cases"
           hardcoded-value="First option"
           class="pc-builder-seventh-background"
+          v-model="caseOption"
         />
       </div>
     </div>
@@ -98,18 +105,8 @@
 <script setup>
 import Dropdown from "../components/Dropdown.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 
-const isMotherboardChosen = ref(false);
-
-function setIsMotherboardChosen() {
-  isMotherboardChosen.value = !isMotherboardChosen.value; // this will set the value of `isMotherboardChosen` to be equal
-  console.log(isMotherboardChosen.value);
-}
-
-watch(isMotherboardChosen, (newVal) => {
-  console.log("Is motherboard chosen:", newVal);
-});
 import {
   getAllGraphicCards,
   getAllCPUs,
@@ -119,6 +116,30 @@ import {
   getAllPSUs,
   getAllCases,
 } from "../api/api";
+
+const addToCart = (id) => {
+  const existingItems = sessionStorage.getItem("cart");
+  let cartItems = [];
+
+  if (existingItems) {
+    cartItems = JSON.parse(existingItems);
+  }
+
+  const product = { id: id, quantity: 1 };
+  cartItems.push(product);
+
+  console.log(cartItems);
+
+  sessionStorage.setItem("cart", JSON.stringify(cartItems));
+};
+
+const motherboardOption = ref(null);
+const cpuOption = ref(null);
+const gpuOption = ref(null);
+const psuOption = ref(null);
+const ramOption = ref(null);
+const caseOption = ref(null);
+const storageOption = ref(null);
 
 const gpus = ref([]);
 const cpus = ref([]);
