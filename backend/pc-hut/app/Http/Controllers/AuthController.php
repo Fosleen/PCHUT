@@ -17,7 +17,6 @@ class AuthController extends Controller
             'address' => 'required|string|',
             'city' => 'required|string|',
             'postal' => 'required|string|',
-            'username' => 'required|string|unique:user,username',
             'password' => 'required|string', 'confirmed', Password::min(6),
             'email' => 'required|string|email|unique:user,email',
         ]);
@@ -25,7 +24,6 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
-            'username' => $data['username'],
             'password' => bcrypt($data['password']),
             'email' => $data['email'],
             'address' => $data['address'],
