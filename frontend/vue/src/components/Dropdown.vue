@@ -10,19 +10,18 @@
       {{ placeholder }}
     </option>
     <option v-for="option in options" :key="option.id" :value="option">
-      {{ option.model + option.id }}
+      {{ option.model + " " + option.price + "&#x20AC;" }}
     </option>
   </select>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
-import { reactive, computed } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   placeholder: String,
   options: Array,
-  hardcodedValue: String,
   change: Function,
   modelValue: String,
 });
