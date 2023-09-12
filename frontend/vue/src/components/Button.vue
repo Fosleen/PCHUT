@@ -66,6 +66,7 @@ button {
 
   &:hover {
     background-color: $colorSecondary;
+    color: $colorTextSecondary;
   }
 }
 
@@ -86,5 +87,10 @@ button {
   clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
   color: $colorTextSecondary;
   font-weight: 700;
+}
+
+.grey {
+  background-color: $white-dark;
+  color: $colorTextPrimary;
 }
 </style>

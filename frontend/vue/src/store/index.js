@@ -20,7 +20,11 @@ const store = createStore({
       isOpen: false,
     },
   },
-  getters: {},
+  getters: {
+    getUserData(state) {
+      return state.user.data;
+    },
+  },
   actions: {
     register({ commit }, user) {
       return axiosClient.post("/register", user).then(({ data }) => {
@@ -104,7 +108,11 @@ const store = createStore({
   mutations: {
     setUser: (state, userData) => {
       state.user.token = userData.token;
+      console.log(userData.user);
+
       state.user.data = userData.user;
+      console.log(state.user.data);
+
       localStorage.setItem("access_token", userData.token);
     },
 
