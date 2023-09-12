@@ -41,7 +41,6 @@
       <div class="pc-builder-dropdowns-wrapper">
         <Dropdown
           placeholder="Odaberi procesor"
-          :hardcodedValue="selectedOption"
           :options="cpus"
           class="pc-builder-first-dropdown"
           :disabled="!motherboardOption"
@@ -51,21 +50,18 @@
         <Dropdown
           placeholder="Odaberi grafičku karticu"
           :options="gpus"
-          hardcoded-value="First option"
           class="pc-builder-second-dropdown"
           v-model="gpuOption"
         />
         <Dropdown
           placeholder="Odaberi memoriju (pohranu)"
           :options="storages"
-          hardcoded-value="First option"
           class="pc-builder-third-dropdown"
           v-model="storageOption"
         />
         <Dropdown
           placeholder="Odaberi RAM memoriju"
           :options="rams"
-          hardcoded-value="First option"
           class="pc-builder-fourth-drodpown"
           :disabled="!motherboardOption"
           v-model="ramOption"
@@ -73,21 +69,18 @@
         <Dropdown
           placeholder="Odaberi napajanje"
           :options="psus"
-          hardcoded-value="First option"
           class="pc-builder-fifth-background"
           v-model="psuOption"
         />
         <Dropdown
           placeholder="Odaberi matičnu ploču"
           :options="motherboards"
-          hardcoded-value="First option"
           class="pc-builder-sixth-background"
           v-model="motherboardOption"
         />
         <Dropdown
           placeholder="Odaberi kućište"
           :options="cases"
-          hardcoded-value="First option"
           class="pc-builder-seventh-background"
           v-model="caseOption"
         />
@@ -96,7 +89,6 @@
   </div>
 
   <FinalPriceAndButton
-    :price="totalPrice"
     price-label="Ukupna cijena"
     button-text="Kupi"
     @click="
@@ -162,6 +154,30 @@ const addToCart = (...ids) => {
   }
 };
 
+// const addToCart = (...items) => {
+//   const existingItems = sessionStorage.getItem("cart");
+//   let cartItems = [];
+
+//   if (existingItems) {
+//     cartItems = JSON.parse(existingItems);
+//   }
+
+//   items.forEach(({ id, quantity = 1 }) => {
+//     const existingProductIndex = cartItems.findIndex((item) => item.id === id);
+
+//     if (existingProductIndex !== -1) {
+//       cartItems[existingProductIndex].quantity += quantity;
+//     } else {
+//       const product = { id, quantity };
+//       cartItems.push(product);
+//     }
+//   });
+
+//   sessionStorage.setItem("cart", JSON.stringify(cartItems));
+
+//   console.log("Updated Cart:", cartItems);
+// };
+
 const motherboardOption = ref(null);
 const cpuOption = ref(null);
 const gpuOption = ref(null);
@@ -185,31 +201,24 @@ const cases = ref([]);
 onMounted(async () => {
   const graphicCards = await getAllGraphicCards();
   gpus.value = graphicCards.gpus;
-  console.log("Gpus", gpus.value);
 
   const procesors = await getAllCPUs();
   cpus.value = procesors.cpus;
-  console.log("Cpus", cpus.value);
 
   const allMotherboards = await getAllMotherboards();
   motherboards.value = allMotherboards.motherboards;
-  console.log("Motherboards", motherboards.value);
 
   const allRams = await getAllRAMs();
   rams.value = allRams.rams;
-  console.log("Rams", rams.value);
 
   const allStorages = await getAllStorages();
   storages.value = allStorages.storages;
-  console.log("Storages", storages.value);
 
   const allPsus = await getAllPSUs();
   psus.value = allPsus.psus;
-  console.log("Psus", psus.value);
 
   const allCases = await getAllCases();
   cases.value = allCases.pccases;
-  console.log("Pc cases", cases.value);
 });
 </script>
 
@@ -221,9 +230,9 @@ onMounted(async () => {
   padding-top: 48px;
   padding-bottom: -20px;
 
-  @media screen and ($tabletLarge) {
+  /* @media screen and ($tabletLarge) {
     padding-bottom: 40px;
-  }
+  } */
 
   .pc-builder-gpu-image,
   .pc-builder-cpu-image,
