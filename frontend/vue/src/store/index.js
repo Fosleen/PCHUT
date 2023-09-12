@@ -104,6 +104,13 @@ const store = createStore({
     toggleFilterDropdown({ commit }) {
       commit("toggleFilter");
     },
+
+    updateUser({ commit }, user) {
+      return axiosClient.put(`/users/${user.id}`, user).then((res) => {
+        commit("setUpdatedUser", res.data.data);
+        return res;
+      });
+    },
   },
   mutations: {
     setUser: (state, userData) => {
@@ -114,6 +121,11 @@ const store = createStore({
       console.log(state.user.data);
 
       localStorage.setItem("access_token", userData.token);
+    },
+
+    setUpdatedUser: (state, userData) => {
+      console.log(userData);
+      state.user.data = userData;
     },
 
     setProduct: (state, product) => {

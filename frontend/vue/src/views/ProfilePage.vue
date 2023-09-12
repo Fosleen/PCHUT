@@ -20,7 +20,7 @@
             <PhX
               :size="32"
               :class="[isEdit ? 'edit-mode' : '']"
-              @click="isEdit = false"
+              @click="discardChanges"
             />
             <PhPencilSimpleLine
               :size="32"
@@ -35,27 +35,48 @@
                 :disabled="!isEdit"
                 :inputValue="user.name"
                 @update:inputValue="user.name = $event"
+                :key="isEdit ? 'edit' : 'view'"
               />
             </div>
             <div class="profile-user-data-list-item">
               <h4>Prezime</h4>
-              <InputField :disabled="!isEdit" :inputValue="user.surname" />
+              <InputField
+                :disabled="!isEdit"
+                :inputValue="user.surname"
+                @update:inputValue="user.surname = $event"
+              />
             </div>
             <div class="profile-user-data-list-item">
               <h4>Ulica i kućni broj</h4>
-              <InputField :disabled="!isEdit" :inputValue="user.address" />
+              <InputField
+                :disabled="!isEdit"
+                :inputValue="user.address"
+                @update:inputValue="user.address = $event"
+              />
             </div>
             <div class="profile-user-data-list-item">
               <h4>Poštanski broj</h4>
-              <InputField :disabled="!isEdit" :inputValue="user.postal" />
+              <InputField
+                :disabled="!isEdit"
+                :inputValue="user.postal"
+                @update:inputValue="user.postal = $event"
+              />
             </div>
             <div class="profile-user-data-list-item">
               <h4>Grad</h4>
-              <InputField :disabled="!isEdit" :inputValue="user.city" />
+              <InputField
+                :disabled="!isEdit"
+                :inputValue="user.city"
+                @update:inputValue="user.city = $event"
+              />
             </div>
             <div class="profile-user-data-list-item">
               <h4>E-mail</h4>
-              <InputField :disabled="!isEdit" :inputValue="user.email" />
+              <InputField
+                :disabled="!isEdit"
+                :inputValue="user.email"
+                @update:inputValue="user.email = $event"
+              />
             </div>
           </div>
         </div>
@@ -65,13 +86,14 @@
             text="Odustani"
             shape="trapezoid grey"
             :class="[isEdit ? 'edit-mode' : '']"
-            @click="isEdit = false"
+            @click="discardChanges"
           ></Button>
           <Button
             type="button"
             text="Spremi"
             shape="trapezoid"
             :class="[isEdit ? 'edit-mode' : '']"
+            @click="update"
           ></Button>
         </div>
       </div>
@@ -89,7 +111,8 @@ import { ref, onMounted } from "vue";
 
 const isEdit = ref(false);
 
-const user = ref({
+const initialUser = ref({
+  id: "",
   name: "",
   surname: "",
   email: "",
@@ -98,10 +121,28 @@ const user = ref({
   postal: "",
   city: "",
 });
+const user = ref({ ...initialUser.value }); 
+
+function update() {
+  store
+    .dispatch("updateUser", JSON.parse(JSON.stringify(user.value)))
+    .then(() => {
+      isEdit.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function discardChanges() {
+  isEdit.value = false;
+  user.value = { ...initialUser.value }; 
+}
 
 onMounted(async () => {
-  user.value = store.getters.getUserData;
-  console.log(user.value);
+  const userData = store.getters.getUserData;
+  user.value = { ...userData }; 
+  initialUser.value = { ...userData }; 
 });
 </script>
 
