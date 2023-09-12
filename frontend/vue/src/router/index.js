@@ -1,16 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
-import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import AuthLayout from "../components/AuthLayout.vue";
-import PCBuilderComponentCard from "../components/PCBuilderComponentCard.vue";
 import ProductDetailsPage from "../views/ProductDetailsPage.vue";
 import PaymentDetailsPage from "../views/PaymentDetailsPage.vue";
 import Homepage from "../views/Homepage.vue";
 import Contact from "../views/Contact.vue";
 import AllProducts from "../views/AllProducts.vue";
 import MyCartPage from "../views/MyCartPage.vue";
-import ProductImagesComponent from "../components/ProductImagesCarousel.vue";
+import ProfilePage from "../views/ProfilePage.vue";
 import MyOrdersPage from "../views/MyOrdersPage.vue";
 import PCBuilder from "../views/PCBuilder.vue";
 import store from "../store";
@@ -58,6 +56,12 @@ const routes = [
     meta: { requiresAuth: true },
     name: "ShoppingCartPage",
     component: MyCartPage,
+  },
+  {
+    path: "/profil",
+    meta: { requiresAuth: true },
+    name: "ProfilePage",
+    component: ProfilePage,
   },
   {
     path: "/auth",

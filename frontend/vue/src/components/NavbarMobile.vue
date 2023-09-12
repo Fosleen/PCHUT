@@ -16,23 +16,27 @@
             <router-link to="/" @click.native="closeNav">Početna</router-link>
           </li>
           <li>
-            <router-link to="/proizvodi" @click.native="closeNav"
-              >Svi proizvodi</router-link
-            >
+            <router-link to="/proizvodi" @click.native="closeNav">
+              Svi proizvodi
+            </router-link>
           </li>
           <li>
-            <router-link to="/pc-builder" @click.native="closeNav"
-              >PC Builder</router-link
-            >
+            <router-link to="/pc-builder" @click.native="closeNav">
+              PC Builder
+            </router-link>
           </li>
           <li>
-            <router-link to="/kontakt" @click.native="closeNav"
-              >Kontakt</router-link
-            >
+            <router-link to="/kontakt" @click.native="closeNav">
+              Kontakt
+            </router-link>
           </li>
           <div class="mobile-navbar-ph-icons">
-            <PhUser :size="32" color="white" />
-            <PhShoppingCartSimple :size="32" color="white" />
+            <router-link to="/profil" @click.native="closeNav">
+              <PhUser :size="32" color="white" />
+            </router-link>
+            <router-link to="/kosarica" @click.native="closeNav">
+              <PhShoppingCartSimple :size="32" color="white" />
+            </router-link>
             <PhMoon :size="32" color="white" />
           </div>
         </ul>

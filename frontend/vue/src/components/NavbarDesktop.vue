@@ -11,9 +11,9 @@
       </ul>
     </div>
     <div class="navbar-icons-wrapper">
-      <router-link to="/narudzbe">
-        <PhUser :size="32" color="white"
-      /></router-link>
+      <router-link to="/profil">
+        <PhUser :size="32" color="white" />
+      </router-link>
       <router-link to="/kosarica">
         <PhShoppingCartSimple :size="32" color="white" />
       </router-link>
