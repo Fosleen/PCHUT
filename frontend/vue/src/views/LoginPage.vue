@@ -80,6 +80,7 @@ function login(e) {
       align-items: center;
       flex-direction: column;
       gap: 24px;
+      padding: 16px;
     }
   }
 }

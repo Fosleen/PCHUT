@@ -13,11 +13,7 @@
           type="text"
           @update:inputValue="user.surname = $event"
         />
-        <InputField
-          placeholder="Korisničko ime *"
-          type="text"
-          @update:inputValue="user.username = $event"
-        />
+
         <InputField
           placeholder="Ulica i kućni broj *"
           type="text"
@@ -63,7 +59,6 @@ import router from "../router";
 const user = {
   name: "",
   surname: "",
-  username: "",
   email: "",
   password: "",
   address: "",
@@ -94,32 +89,57 @@ function register(e) {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 8px;
 
   .register-inner {
     z-index: 1;
     max-width: 480px;
     background-color: $colorBgTertiary;
-    width: 90%;
+    width: 100%;
     text-align: center;
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0px 0px 8px $colorPrimary;
-    padding: 16px 8px 32px;
+    padding: 16px 8px 0px;
 
     h2 {
       font-family: $fontPrimary;
       text-transform: uppercase;
       color: $colorTextPrimary;
-      margin: 32px;
+      margin: 8px;
     }
 
     & form {
-      margin: 20px 0;
+      margin: 8px 0;
       justify-content: center;
       display: flex;
       align-items: center;
       flex-direction: column;
-      gap: 24px;
+      gap: 8px;
+      padding: 16px;
+    }
+  }
+}
+
+@media screen and ($tablet) {
+  .register-outer {
+    .register-inner {
+      padding: 16px 8px 32px;
+
+      & form {
+        margin: 20px 0;
+        gap: 16px;
+      }
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .register-outer {
+    .register-inner {
+      & form {
+        gap: 24px;
+      }
     }
   }
 }

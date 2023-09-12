@@ -3,7 +3,7 @@
     <div class="profile-container">
       <div class="profile-menu">
         <div class="profile-menu-item">
-          <router-link to="/kosarica">Moje narudžbe</router-link>
+          <router-link to="/narudzbe">Moje narudžbe</router-link>
         </div>
         <div class="profile-menu-item" @click="isEdit = true">
           Promijeni podatke
@@ -92,7 +92,6 @@ const isEdit = ref(false);
 const user = ref({
   name: "",
   surname: "",
-  username: "",
   email: "",
   password: "",
   address: "",

@@ -27,7 +27,7 @@
         <InputField
           placeholder="Email *"
           type="email"
-          @update:inputValue="user.username = $event"
+          @update:inputValue="user.email = $event"
         />
 
         <Textarea placeholder="Sadržaj pitanja*" />
