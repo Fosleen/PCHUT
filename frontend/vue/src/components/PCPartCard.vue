@@ -79,9 +79,9 @@ const getModelName = () => {
 <style lang="scss" scoped>
 @import "../utils/theme.scss";
 .pc-part-card-wrapper {
-  background-color: #eaeaea;
+  background-color: $white-dark;
   width: 100%;
-  box-shadow: 0 0 12px #d66ea4;
+  box-shadow: 0 0 8px #eebdd6;
   outline: 3px solid transparent;
   outline-offset: -3px;
   padding: 8px 8px 0;

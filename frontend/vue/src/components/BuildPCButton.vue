@@ -83,5 +83,9 @@ import { PhHammer } from "@phosphor-icons/vue";
       }
     }
   }
+
+  a {
+    width: fit-content;
+  }
 }
 </style>

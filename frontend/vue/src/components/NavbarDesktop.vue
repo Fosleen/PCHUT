@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
-    <img :src="Logo" alt="" class="navbar-logo" />
+    <router-link to="/"
+      ><img :src="Logo" alt="" class="navbar-logo"
+    /></router-link>
 
     <div class="navbar-items-wrapper">
       <ul>
@@ -33,7 +35,7 @@ const toggleTheme = () => {
   const isDarkThemeValue = !isDarkTheme.value;
   const backgroundColor = isDarkThemeValue ? "#282828" : "#f5f5f5";
   const textColor = isDarkThemeValue ? "#D9D9D9" : "#282828";
-  const shadowColor = isDarkThemeValue ? "#68E199" : "#be166e";
+  // const shadowColor = isDarkThemeValue ? "#68E199" : "#be166e";
 
   // Apply styles here
 

@@ -1,38 +1,42 @@
 <template>
   <div class="pc-builder-homepage-wrapper">
-    <div class="pc-builder-text-button-wrapper">
-      <h3>Sastavi PC iz snova</h3>
-      <BuildPCButton />
-    </div>
+    <div class="pc-builder-homepage-container">
+      <div class="pc-builder-text-button-wrapper">
+        <h3>SASTAVI PC IZ SNOVA</h3>
+        <BuildPCButton />
+      </div>
 
-    <div
-      class="pc-builder-homepage-components-wrapper"
-      v-if="gpu && cpu && mbd"
-    >
-      <PcBuilderComponentCard
-        class="pc-builder-component-small-card-wrapper"
-        :component="gpu"
-        v-if="gpu && gpu.images"
-        :Image="gpu?.images[0]"
-      />
-      <h2>+</h2>
-      <PcBuilderComponentCard
-        class="pc-builder-component-small-card-wrapper"
-        :component="cpu"
-        v-if="cpu && cpu.images"
-        :Image="cpu?.images[0]"
-      />
-      +
-      <h2>+</h2>
-      <PcBuilderComponentCard
-        class="pc-builder-component-small-card-wrapper"
-        :component="mbd"
-        v-if="mbd && mbd.images"
-        :Image="mbd?.images[0]"
-      />
-    </div>
+      <div
+        class="pc-builder-homepage-components-wrapper"
+        v-if="gpu && cpu && mbd"
+      >
+        <PcBuilderComponentCard
+          class="pc-builder-component-small-card-wrapper"
+          :component="gpu"
+          v-if="gpu && gpu.images"
+          :Image="gpu?.images[0]"
+        />
+        <h2>+</h2>
+        <PcBuilderComponentCard
+          class="pc-builder-component-small-card-wrapper"
+          :component="cpu"
+          v-if="cpu && cpu.images"
+          :Image="cpu?.images[0]"
+        />
 
-    <h3>Odaberi svoje komponente</h3>
+        <h2>+</h2>
+        <PcBuilderComponentCard
+          class="pc-builder-component-small-card-wrapper"
+          :component="mbd"
+          v-if="mbd && mbd.images"
+          :Image="mbd?.images[0]"
+        />
+      </div>
+      <div class="pc-builder-choose-container">
+        <h3 class="choose">Odaberi svoje komponente</h3>
+        <img src="../assets/arrow.png" alt="arrow-img" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -72,49 +76,102 @@ onMounted(async () => {
   background-position: inherit;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 2400px;
   margin-bottom: 48px;
 
-  h3 {
-    color: white;
-    text-transform: uppercase;
-    font-size: 32px;
-  }
+  .pc-builder-homepage-container {
+    max-width: 1200px;
+    margin: 0 auto;
 
-  .pc-builder-text-button-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px;
-  }
+    h3 {
+      color: white;
+      font-size: 32px;
+      letter-spacing: 1px;
+      font-weight: 600;
 
-  @media screen and ($tabletLarge) {
-    height: 900px;
+      @media screen and ($desktop) {
+        font-size: 40px;
+      }
+      &.choose {
+        font-size: 32px;
+        -webkit-text-stroke: 2px $pink;
+        font-weight: 900;
+      }
+    }
+
+    .pc-builder-choose-container {
+      display: none;
+      margin-top: 40px;
+      align-items: end;
+      gap: 16px;
+      padding-bottom: 32px;
+      margin-left: 16px;
+
+      & img {
+        padding-bottom: 6px;
+      }
+
+      @media screen and ($tablet) {
+        display: flex;
+      }
+    }
+
+    .pc-builder-text-button-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 0;
+      position: relative;
+      gap: 24px;
+      margin-left: 24px;
+
+      @media screen and ($tablet) {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
   }
 }
 
 .pc-builder-homepage-components-wrapper {
   display: flex;
-  gap: 24px;
+  gap: 8px;
   justify-content: space-around;
-  padding-left: 24px;
-  padding-right: 24px;
   justify-content: center;
   align-items: center;
   padding-bottom: 24px;
   flex-direction: column;
 
-  @media screen and ($tabletLarge) {
-    display: flex;
+  @media screen and ($tablet) {
     flex-direction: row;
-    justify-items: center;
-    justify-content: center;
+    gap: 0px;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0 16px;
+  }
+
+  @media screen and ($tabletLarge) {
+    gap: 8px;
+  }
+
+  @media screen and ($desktop) {
+    margin: 0;
   }
 
   h2 {
-    font-size: 120px;
+    font-size: 64px;
     color: white;
-    font-weight: 200;
+    font-weight: 500;
+    padding-bottom: 20px;
+
+    @media screen and ($tablet) {
+      font-size: 48px;
+      padding-bottom: 0px;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media screen and ($tabletLarge) {
+      font-size: 64px;
+    }
   }
 }
 </style>
