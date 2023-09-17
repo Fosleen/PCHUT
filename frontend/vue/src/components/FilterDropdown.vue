@@ -20,6 +20,624 @@
 
       <div class="filter-dropdown-custom-filters">
         <div
+          v-if="isTypeShown('MONITORI')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="ACER"
+            name="manufacturers"
+            id="ACER"
+            @checkbox-click="changeCheckboxes('ACER', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="AOC"
+            name="manufacturers"
+            id="AOC"
+            @checkbox-click="changeCheckboxes('AOC', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="DELL"
+            name="manufacturers"
+            id="DELL"
+            @checkbox-click="changeCheckboxes('DELL', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Lenovo"
+            name="manufacturers"
+            id="Lenovo"
+            @checkbox-click="changeCheckboxes('Lenovo', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="LG"
+            name="manufacturers"
+            id="LG"
+            @checkbox-click="changeCheckboxes('LG', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Philips"
+            name="manufacturers"
+            id="Philips"
+            @checkbox-click="changeCheckboxes('Philips', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Samsung"
+            name="manufacturers"
+            id="Samsung"
+            @checkbox-click="changeCheckboxes('Samsung', 'manufacturers')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('LAPTOPI, PC')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>Tip:</h4>
+          <CheckboxInput
+            value="Laptop"
+            name="type"
+            id="Laptop"
+            @checkbox-click="changeCheckboxes('Laptop', 'type')"
+          />
+          <CheckboxInput
+            value="PC"
+            name="type"
+            id="PC"
+            @checkbox-click="changeCheckboxes('PC', 'type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('POHRANA')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>Vrsta:</h4>
+          <CheckboxInput
+            value="PC disk"
+            name="type"
+            id="PC disk"
+            @checkbox-click="changeCheckboxes('PC disk', 'type')"
+          />
+          <CheckboxInput
+            value="SSD disk"
+            name="type"
+            id="SSD disk"
+            @checkbox-click="changeCheckboxes('SSD disk', 'type')"
+          />
+          <CheckboxInput
+            value="Eksterni disk"
+            name="type"
+            id="Eksterni disk"
+            @checkbox-click="changeCheckboxes('Eksterni disk', 'type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MONITORI')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>Tip:</h4>
+          <CheckboxInput
+            value="Ravan"
+            name="type"
+            id="Ravan"
+            @checkbox-click="changeCheckboxes('Ravan', 'type')"
+          />
+          <CheckboxInput
+            value="Zakrivljen"
+            name="type"
+            id="Zakrivljen"
+            @checkbox-click="changeCheckboxes('Zakrivljen', 'type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MONITORI')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>DIJAGONALA:</h4>
+          <CheckboxInput
+            value="22 inča"
+            name="size"
+            id="22"
+            @checkbox-click="changeCheckboxes('22 inča', 'size')"
+          />
+          <CheckboxInput
+            value="24 inča"
+            name="size"
+            id="24"
+            @checkbox-click="changeCheckboxes('24 inča', 'size')"
+          />
+          <CheckboxInput
+            value="27 inča"
+            name="size"
+            id="27"
+            @checkbox-click="changeCheckboxes('27 inča', 'size')"
+          />
+          <CheckboxInput
+            value="32 inča"
+            name="size"
+            id="32"
+            @checkbox-click="changeCheckboxes('32 inča', 'size')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MIŠEVI')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Logitech"
+            name="manufacturers"
+            id="Logitech"
+            @checkbox-click="changeCheckboxes('Logitech', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="MS"
+            name="manufacturers"
+            id="MS"
+            @checkbox-click="changeCheckboxes('MS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Razer"
+            name="manufacturers"
+            id="Razer"
+            @checkbox-click="changeCheckboxes('Razer', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Steelseries"
+            name="manufacturers"
+            id="Steelseries"
+            @checkbox-click="changeCheckboxes('Steelseries', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="White Shark"
+            name="manufacturers"
+            id="White Shark"
+            @checkbox-click="changeCheckboxes('White Shark', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+        </div>
+
+        <div
+          v-if="isTypeShown('MIŠEVI')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>TIP:</h4>
+          <CheckboxInput
+            value="Žičan"
+            name="type"
+            id="Žičan"
+            @checkbox-click="changeCheckboxes('Žičan', 'type')"
+          />
+          <CheckboxInput
+            value="Bežičan"
+            name="type"
+            id="Bežičan"
+            @checkbox-click="changeCheckboxes('Bežičan', 'type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('HLAĐENJE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="Arctic"
+            name="manufacturers"
+            id="Arctic"
+            @checkbox-click="changeCheckboxes('Arctic', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Be Quiet!"
+            name="manufacturers"
+            id="Be Quiet!"
+            @checkbox-click="changeCheckboxes('Be Quiet!', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Corsair"
+            name="manufacturers"
+            id="Corsair"
+            @checkbox-click="changeCheckboxes('Corsair', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Fractal"
+            name="manufacturers"
+            id="Fractal"
+            @checkbox-click="changeCheckboxes('Fractal', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Lian Li"
+            name="manufacturers"
+            id="Lian Li"
+            @checkbox-click="changeCheckboxes('Lian Li', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="MS"
+            name="manufacturers"
+            id="MS"
+            @checkbox-click="changeCheckboxes('MS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Zalman"
+            name="manufacturers"
+            id="Zalman"
+            @checkbox-click="changeCheckboxes('Zalman', 'manufacturers')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('POHRANA')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="Adata"
+            name="manufacturers"
+            id="Adata"
+            @checkbox-click="changeCheckboxes('Adata', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Crucial"
+            name="manufacturers"
+            id="Crucial"
+            @checkbox-click="changeCheckboxes('Crucial', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Kingston"
+            name="manufacturers"
+            id="Kingston"
+            @checkbox-click="changeCheckboxes('Kingston', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Orico"
+            name="manufacturers"
+            id="Orico"
+            @checkbox-click="changeCheckboxes('Orico', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Samsung"
+            name="manufacturers"
+            id="Samsung"
+            @checkbox-click="changeCheckboxes('Samsung', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Seagate"
+            name="manufacturers"
+            id="Seagate"
+            @checkbox-click="changeCheckboxes('Seagate', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Silicon Power"
+            name="manufacturers"
+            id="Silicon Power"
+            @checkbox-click="changeCheckboxes('Silicon Power', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Western Digital"
+            name="manufacturers"
+            id="Western Digital"
+            @checkbox-click="
+              changeCheckboxes('Western Digital', 'manufacturers')
+            "
+          />
+        </div>
+        <div
+          v-if="isTypeShown('HLAĐENJE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>VRSTA:</h4>
+          <CheckboxInput
+            value="Vodeno"
+            name="type"
+            id="Vodeno"
+            @checkbox-click="changeCheckboxes('Vodeno', 'type')"
+          />
+          <CheckboxInput
+            value="Obično"
+            name="type"
+            id="Obično"
+            @checkbox-click="changeCheckboxes('Obično', 'type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MATIČNE PLOČE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="ASRock"
+            name="manufacturers"
+            id="ASRock"
+            @checkbox-click="changeCheckboxes('ASRock', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+
+          <CheckboxInput
+            value="Gigabyte"
+            name="manufacturers"
+            id="Gigabyte"
+            @checkbox-click="changeCheckboxes('Gigabyte', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="MSI"
+            name="manufacturers"
+            id="MSI"
+            @checkbox-click="changeCheckboxes('MSI', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="NZTX"
+            name="manufacturers"
+            id="NZTX"
+            @checkbox-click="changeCheckboxes('NZTX', 'manufacturers')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MATIČNE PLOČE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PODNOŽJE:</h4>
+          <CheckboxInput
+            value="AMD AM4"
+            name="socket_type"
+            id="AMD AM4"
+            @checkbox-click="changeCheckboxes('AMD AM4', 'socket_type')"
+          />
+          <CheckboxInput
+            value="AMD AM5"
+            name="socket_type"
+            id="AMD AM5"
+            @checkbox-click="changeCheckboxes('AMD AM5', 'socket_type')"
+          />
+          <CheckboxInput
+            value="Intel LGA1200"
+            name="socket_type"
+            id="Intel LGA1200"
+            @checkbox-click="changeCheckboxes('Intel LGA1200', 'socket_type')"
+          />
+          <CheckboxInput
+            value="Intel LGA1700"
+            name="socket_type"
+            id="Intel LGA1700"
+            @checkbox-click="changeCheckboxes('Intel LGA1700', 'socket_type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MATIČNE PLOČE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>VELIČINA:</h4>
+          <CheckboxInput
+            value="ATX"
+            name="size"
+            id="ATX"
+            @checkbox-click="changeCheckboxes('ATX', 'size')"
+          />
+          <CheckboxInput
+            value="E-ATX"
+            name="size"
+            id="E-ATX"
+            @checkbox-click="changeCheckboxes('E-ATX', 'size')"
+          />
+          <CheckboxInput
+            value="Micro ATX"
+            name="size"
+            id="Micro ATX"
+            @checkbox-click="changeCheckboxes('Micro ATX', 'size')"
+          />
+          <CheckboxInput
+            value="Mini ITX"
+            name="size"
+            id="Mini ITX"
+            @checkbox-click="changeCheckboxes('Mini ITX', 'size')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('GRAFIČKE KARTICE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="AMD"
+            name="type"
+            id="AMD"
+            @checkbox-click="changeCheckboxes('AMD', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASRock"
+            name="type"
+            id="ASRock"
+            @checkbox-click="changeCheckboxes('ASRock', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="ASUS"
+            name="type"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Gigabyte"
+            name="type"
+            id="Gigabyte"
+            @checkbox-click="changeCheckboxes('Gigabyte', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Inno3d"
+            name="type"
+            id="Inno3d"
+            @checkbox-click="changeCheckboxes('Inno3d', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="KFA2"
+            name="type"
+            id="KFA2"
+            @checkbox-click="changeCheckboxes('KFA2', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="MSI"
+            name="type"
+            id="MSI"
+            @checkbox-click="changeCheckboxes('MSI', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="PNY"
+            name="type"
+            id="PNY"
+            @checkbox-click="changeCheckboxes('PNY', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Sapphire"
+            name="type"
+            id="Sapphire"
+            @checkbox-click="changeCheckboxes('Sapphire', 'manufacturers')"
+          />
+        </div>
+
+        <div
+          v-if="isTypeShown('TIPKOVNICE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>VRSTA:</h4>
+          <CheckboxInput
+            value="Mehanička"
+            name="type"
+            id="mehanicka"
+            @checkbox-click="changeCheckboxes('Mehanička', 'type')"
+          />
+          <CheckboxInput
+            value="Membranska"
+            name="type"
+            id="membranska"
+            @checkbox-click="changeCheckboxes('membranska', 'type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('TIPKOVNICE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Ducky"
+            name="manufacturers"
+            id="Ducky"
+            @checkbox-click="changeCheckboxes('Ducky', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Logitech"
+            name="manufacturers"
+            id="Logitech"
+            @checkbox-click="changeCheckboxes('Logitech', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Razer"
+            name="manufacturers"
+            id="Razer"
+            @checkbox-click="changeCheckboxes('Razer', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Redragon"
+            name="manufacturers"
+            id="Redragon"
+            @checkbox-click="changeCheckboxes('Redragon', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Steelseries"
+            name="manufacturers"
+            id="Steelseries"
+            @checkbox-click="changeCheckboxes('Steelseries', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Whiteshark"
+            name="manufacturers"
+            id="Whiteshark"
+            @checkbox-click="changeCheckboxes('Whiteshark', 'manufacturers')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('TIPKOVNICE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>SWITCHEVI:</h4>
+          <CheckboxInput
+            value="Crveni"
+            name="switch_type"
+            id="red"
+            @checkbox-click="changeCheckboxes('Crveni', 'switch_type')"
+          />
+          <CheckboxInput
+            value="Plavi"
+            name="switch_type"
+            id="blue"
+            @checkbox-click="changeCheckboxes('Plavi', 'switch_type')"
+          />
+          <CheckboxInput
+            value="Zeleni"
+            name="switch_type"
+            id="green"
+            @checkbox-click="changeCheckboxes('Zeleni', 'switch_type')"
+          />
+          <CheckboxInput
+            value="Žuti"
+            name="switch_type"
+            id="yellow"
+            @checkbox-click="changeCheckboxes('Žuti', 'switch_type')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('TIPKOVNICE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>SPAJANJE:</h4>
+          <CheckboxInput
+            value="Bežično"
+            name="connector"
+            id="wireless"
+            @checkbox-click="changeCheckboxes('Bežično', 'connector')"
+          />
+          <CheckboxInput
+            value="USB"
+            name="connector"
+            id="USB"
+            @checkbox-click="changeCheckboxes('USB', 'connector')"
+          />
+        </div>
+        <div
           v-if="isTypeShown('PROCESORI')"
           class="filter-dropdown-custom-filter-group"
         >
@@ -70,6 +688,24 @@
             name="cores"
             id="16"
             @checkbox-click="changeCheckboxes('16', 'cores')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('MIŠEVI') || isTypeShown('TIPKOVNICE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>RGB:</h4>
+          <CheckboxInput
+            value="Da"
+            name="rgb"
+            id="RGB"
+            @checkbox-click="changeCheckboxes('RGB', 'rgb')"
+          />
+          <CheckboxInput
+            value="Ne"
+            name="rgb"
+            id="no rgb"
+            @checkbox-click="changeCheckboxes('Bez RGB-a', 'rgb')"
           />
         </div>
         <div
@@ -242,7 +878,7 @@ const componentTypes = [
   "GRAFIČKE KARTICE",
   "MATIČNE PLOČE",
   "HLAĐENJE",
-  "MEMORIJA",
+  "POHRANA",
   "TIPKOVNICE",
   "MIŠEVI",
   "MONITORI",
@@ -252,13 +888,35 @@ const selectedComponentType = ref("");
 let cores = ref([]);
 let manufacturers = ref([]);
 let series = ref([]);
-let appliedFilters = ref([cores, manufacturers, series]);
+let type = ref([]);
+let switch_type = ref([]);
+let connector = ref([]);
+let size = ref([]);
+let socket_type = ref([]);
+let rgb = ref([]);
+
+let appliedFilters = ref([
+  cores,
+  manufacturers,
+  series,
+  type,
+  switch_type,
+  connector,
+  size,
+  socket_type,
+  rgb,
+]);
 
 function displayFilter(componentType) {
   clearArray(manufacturers);
   clearArray(cores);
   clearArray(series);
-
+  clearArray(type);
+  clearArray(switch_type);
+  clearArray(connector);
+  clearArray(size);
+  clearArray(socket_type);
+  clearArray(rgb);
   selectedComponentType.value = componentType;
 }
 
@@ -411,7 +1069,7 @@ function clearAppliedFilters() {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        width: 320px;
+        justify-content: start;
 
         .filter-dropdown-applied-filters-item {
           width: fit-content;
@@ -535,6 +1193,12 @@ function clearAppliedFilters() {
     }
 
     .filter-dropdown-component-container {
+      .filter-dropdown-applied-filters-container {
+        .filter-dropdown-applied-filters-inner {
+          width: 320px;
+        }
+      }
+
       .filter-dropdown-column {
         flex-flow: column-reverse;
         display: flex;
@@ -582,6 +1246,7 @@ function clearAppliedFilters() {
           margin: 0 4px;
           padding: 0;
           width: fit-content;
+          flex-wrap: wrap;
         }
       }
 
@@ -594,6 +1259,8 @@ function clearAppliedFilters() {
 
 @media screen and ($desktop) {
   .filter-dropdown-wrapper {
+    height: fit-content;
+
     .filter-dropdown-close-button {
       right: 20px;
       top: 20px;

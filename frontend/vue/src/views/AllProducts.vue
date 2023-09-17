@@ -119,6 +119,7 @@ const isFilterOpen = computed(() => store.state.filter.isOpen);
 
         .all-products-menu-item {
           display: flex;
+          align-items: center;
         }
       }
     }
