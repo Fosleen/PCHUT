@@ -10,14 +10,27 @@ use App\Models\Component;
 
 class PcCaseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pccases = PcCase::with('component')->get();
-        $formattedpccases = PCCaseResource::collection($pccases);
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $cases = PcCase::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $cases = PcCase::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'pccases' => $formattedpccases,
+            'cases' => PcCaseResource::collection($cases),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $cases->currentPage(),
+                'last_page' => $cases->lastPage(),
+                'per_page' => $cases->perPage(),
+                'total' => $cases->total(),
+            ] : null,
         ], 200);
     }
 

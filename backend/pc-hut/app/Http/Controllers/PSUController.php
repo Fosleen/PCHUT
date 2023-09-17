@@ -11,14 +11,27 @@ use App\Models\Component;
 
 class PSUController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $psus = PSU::with('component')->get();
-        $formattedpsus = PSUResource::collection($psus);
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $psus = PSU::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $psus = PSU::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'psus' => $formattedpsus,
+            'psus' => PSUResource::collection($psus),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $psus->currentPage(),
+                'last_page' => $psus->lastPage(),
+                'per_page' => $psus->perPage(),
+                'total' => $psus->total(),
+            ] : null,
         ], 200);
     }
 

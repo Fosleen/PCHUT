@@ -10,22 +10,28 @@ use Illuminate\Support\Facades\Validator;
 
 class MonitorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $monitors = Monitor::with('component')->get();
+        $paginate = $request->query('paginate', true);
 
-        if ($monitors->count() > 0) {
-            $data = [
-                'status' => 200,
-                'monitors' => $monitors
-            ];
-            return response()->json($data, 200);
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $monitors = Monitor::with('component')->paginate($perPage, ['*'], 'page', $page);
         } else {
-            return response()->json([
-                'status' => 404,
-                'monitors' => "No monitors"
-            ], 404);
+            $monitors = Monitor::with('component')->get();
         }
+
+        return response()->json([
+            'status' => 200,
+            'monitors' => MonitorResource::collection($monitors),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $monitors->currentPage(),
+                'last_page' => $monitors->lastPage(),
+                'per_page' => $monitors->perPage(),
+                'total' => $monitors->total(),
+            ] : null,
+        ], 200);
     }
 
     public function store(Request $request)

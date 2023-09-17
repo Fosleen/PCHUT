@@ -10,23 +10,28 @@ use Illuminate\Support\Facades\Validator;
 
 class MouseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mouses = Mouse::with('component')->get();
+        $paginate = $request->query('paginate', true);
 
-        if ($mouses->count() > 0) {
-            $data = [
-                'status' => 200,
-                'mouses' => $mouses
-            ];
-
-            return response()->json($data, 200);
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $mouses = Mouse::with('component')->paginate($perPage, ['*'], 'page', $page);
         } else {
-            return response()->json([
-                'status' => 404,
-                'mouses' => "No mouses"
-            ], 404);
+            $mouses = Mouse::with('component')->get();
         }
+
+        return response()->json([
+            'status' => 200,
+            'mouses' => MouseResource::collection($mouses),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $mouses->currentPage(),
+                'last_page' => $mouses->lastPage(),
+                'per_page' => $mouses->perPage(),
+                'total' => $mouses->total(),
+            ] : null,
+        ], 200);
     }
 
     public function store(Request $request)

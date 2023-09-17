@@ -12,22 +12,29 @@ use Illuminate\Support\Facades\Validator;
 
 class KeyboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $keyboards = Keyboard::with('component')->get();
 
-        foreach ($keyboards as $keyboard) {
-            $keyboardModel = $keyboard->model;
-            $keyboardManufacturer = $keyboard->manufacturer_id;
-            $componentModel = $keyboard->component->model;
-            $componentPrice = $keyboard->component->price;
+        $paginate = $request->query('paginate', true);
 
-            $keyboard->switchType;
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $keyboards = Keyboard::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $keyboards = Keyboard::with('component')->get();
         }
+
 
         return response()->json([
             'status' => 200,
-            'keyboards' => $keyboards,
+            'keyboards' => KeyboardResource::collection($keyboards),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $keyboards->currentPage(),
+                'last_page' => $keyboards->lastPage(),
+                'per_page' => $keyboards->perPage(),
+                'total' => $keyboards->total(),
+            ] : null,
         ], 200);
     }
 

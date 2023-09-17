@@ -130,3 +130,11 @@ export function getLoggedUser() {
       return data;
     });
 }
+
+export function getAllKeyboardsPaginated(page) {
+  return axiosClient
+    .get(`/keyboards/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
