@@ -110,23 +110,17 @@
 <script setup>
 import Dropdown from "../components/Dropdown.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 import {
   getAllGraphicCards,
-  getAllCPUs,
   getAllMotherboards,
-  getAllRAMs,
   getAllStorages,
   getAllPSUs,
   getAllCases,
+  getAllCPUsWithSocket,
+  getAllRAMsWithRamType,
 } from "../api/api";
-
-// watch([gpuOption, cpuOption], () => {
-//   totalPrice.value = calculateTotalPrice();
-// });
-
-//const totalPrice = ref(0);
 
 const calculateTotalPrice = () => {
   let totalPrice = 0;
@@ -203,14 +197,8 @@ onMounted(async () => {
   const graphicCards = await getAllGraphicCards();
   gpus.value = graphicCards.gpus;
 
-  const procesors = await getAllCPUs();
-  cpus.value = procesors.cpus;
-
   const allMotherboards = await getAllMotherboards();
   motherboards.value = allMotherboards.motherboards;
-
-  const allRams = await getAllRAMs();
-  rams.value = allRams.rams;
 
   const allStorages = await getAllStorages();
   storages.value = allStorages.storages;
@@ -220,6 +208,17 @@ onMounted(async () => {
 
   const allCases = await getAllCases();
   cases.value = allCases.pccases;
+});
+
+watch(motherboardOption, async (newMotherboardOption) => {
+  if (newMotherboardOption) {
+    const cpuData = await getAllCPUsWithSocket(newMotherboardOption.socket_id);
+    cpus.value = cpuData.cpus;
+    const ramData = await getAllRAMsWithRamType(
+      newMotherboardOption.ram_type_id
+    );
+    rams.value = ramData.rams;
+  }
 });
 </script>
 
