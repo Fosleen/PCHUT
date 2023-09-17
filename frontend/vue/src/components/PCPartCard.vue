@@ -11,7 +11,7 @@
   >
     <div class="pc-part-card-wrapper">
       <div class="pc-part-card-image-wrapper">
-        <img :src="component.images[0]" alt="" />
+        <img :src="image" alt="" />
       </div>
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
@@ -69,6 +69,13 @@ import PCPartCardList from "./PCPartCardList.vue";
 const { component } = defineProps({
   component: Object,
 });
+
+const image =
+  component.images.length === 0
+    ? [
+        "https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png",
+      ]
+    : component.images;
 
 const getModelName = () => {
   const modelName = component.productable_type.replace("App\\Models\\", "");

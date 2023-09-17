@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/pc-builder">
+  <router-link class="build-pc-link-wrapper" to="/pc-builder">
     <div class="build-pc-button-wrapper">
       <div class="build-pc-button-border">
         <div class="build-pc-button-content">
@@ -84,7 +84,7 @@ import { PhHammer } from "@phosphor-icons/vue";
     }
   }
 
-  a {
+  .build-pc-link-wrapper {
     width: fit-content;
   }
 }
