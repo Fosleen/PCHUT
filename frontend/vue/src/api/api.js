@@ -26,6 +26,12 @@ export function getAllCPUs() {
   });
 }
 
+export function getAllCPUsWithSocket(socket_id) {
+  return axiosClient.get("cpus/socket/" + socket_id).then(({ data }) => {
+    return data;
+  });
+}
+
 export function getAllCPUsPaginated(page) {
   return axiosClient
     .get(`/cpus/?paginate=true&page=${page}`)
@@ -56,6 +62,12 @@ export function getAllMotherboardsPaginated(page) {
 
 export function getAllRAMs() {
   return axiosClient.get("/rams").then(({ data }) => {
+    return data;
+  });
+}
+
+export function getAllRAMsWithRamType(ram_type_id) {
+  return axiosClient.get("rams/ram_types/" + ram_type_id).then(({ data }) => {
     return data;
   });
 }
@@ -114,6 +126,38 @@ export function getLoggedUser() {
 
   return axiosClient
     .get("/logged-user", bodyParameters, config)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getAllKeyboardsPaginated(page) {
+  return axiosClient
+    .get(`/keyboards/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getAllPSUsPaginated(page) {
+  return axiosClient
+    .get(`/psus/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getAllStoragesPaginated(page) {
+  return axiosClient
+    .get(`/storages/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getAllPCCasesPaginated(page) {
+  return axiosClient
+    .get(`/pccases/?paginate=true&page=${page}`)
     .then(({ data }) => {
       return data;
     });

@@ -12,14 +12,27 @@ use App\Models\Component;
 
 class StorageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $storages = Storage::with('component')->get();
-        $formattedstorages = StorageResource::collection($storages);
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $storages = Storage::with('component')->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $storages = Storage::with('component')->get();
+        }
 
         return response()->json([
             'status' => 200,
-            'storages' => $formattedstorages,
+            'storages' => StorageResource::collection($storages),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $storages->currentPage(),
+                'last_page' => $storages->lastPage(),
+                'per_page' => $storages->perPage(),
+                'total' => $storages->total(),
+            ] : null,
         ], 200);
     }
 
@@ -59,7 +72,9 @@ class StorageController extends Controller
                 'description' => $request->description,
                 'productable_id' => $storage->id,
                 'productable_type' => Storage::class,
-                'discount' => $request->discount
+                'discount' => $request->discount,
+                'product_type_cro' => "Pohrana",
+
             ]);
 
             $storage->component()->save($component);

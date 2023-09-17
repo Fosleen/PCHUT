@@ -59,6 +59,7 @@ Route::delete('monitors/{id}/delete', [MonitorController::class, 'destroy']);
 //=============================================================//
 
 Route::get('cpus', [CPUController::class, 'index']);
+Route::get('cpus/socket/{socketId}', [CPUController::class, 'indexWithSocket']);
 Route::post('cpus', [CPUController::class, 'store']);
 Route::get('cpus/{id}', [CPUController::class, 'show']);
 Route::put('cpus/{id}/update', [CPUController::class, 'update']);
@@ -81,6 +82,7 @@ Route::delete('gpus/{id}', [GPUController::class, 'destroy']);
 //=============================================================//
 
 Route::get('rams', [RAMController::class, 'index']);
+Route::get('rams/ram_types/{ram_type_id}', [RAMController::class, 'indexWithRamType']);
 Route::get('rams/{id}', [RAMController::class, 'show']);
 Route::post('rams', [RAMController::class, 'store']);
 Route::delete('rams/{id}', [RAMController::class, 'destroy']);
