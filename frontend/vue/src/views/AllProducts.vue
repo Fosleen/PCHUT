@@ -68,6 +68,52 @@
       <div class="pagination-button-wrapper">
         <Button shape="trapezoid" text="Učitaj više" @click="loadMoreRAMs" />
       </div>
+
+      <h1 class="homepage-component-wrapper-title">Napajanja</h1>
+
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(psu, index) in psus"
+          :key="index"
+          :component="psu"
+        />
+      </div>
+
+      <div class="pagination-button-wrapper">
+        <Button shape="trapezoid" text="Učitaj više" @click="loadMorePSUs" />
+      </div>
+
+      <h1 class="homepage-component-wrapper-title">Pohrana</h1>
+
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(storage, index) in storages"
+          :key="index"
+          :component="storage"
+        />
+      </div>
+
+      <div class="pagination-button-wrapper">
+        <Button
+          shape="trapezoid"
+          text="Učitaj više"
+          @click="loadMoreStorages"
+        />
+      </div>
+
+      <h1 class="homepage-component-wrapper-title">Kućišta za pc</h1>
+
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(storage, index) in cases"
+          :key="index"
+          :component="storage"
+        />
+      </div>
+
+      <div class="pagination-button-wrapper">
+        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCases" />
+      </div>
     </div>
   </div>
 </template>
@@ -86,12 +132,20 @@ import {
   getAllCPUsPaginated,
   getAllMotherboardsPaginated,
   getAllRAMsPaginated,
+  getAllPSUsPaginated,
+  getAllStoragesPaginated,
+  getAllPCCasesPaginated,
 } from "../api/api";
+
+//optimize this file code later
 
 const gpuCurrentPage = ref(1);
 const cpuCurrentPage = ref(1);
 const motherboardCurrentPage = ref(1);
 const ramsCurrentPage = ref(1);
+const psusCurrentPage = ref(1);
+const storagesCurrentPage = ref(1);
+const pcCasesCurrentPage = ref(1);
 
 const gpus = ref([]);
 
@@ -101,44 +155,80 @@ const mbs = ref([]);
 
 const rams = ref([]);
 
+const psus = ref([]);
+
+const storages = ref([]);
+
+const cases = ref([]);
+
 const fetchGpuData = async (page) => {
   const response = await getAllGraphicCardsPaginated(page);
-  gpus.value = [...gpus.value, ...response.gpus]; //to append items that were loaded before
+  gpus.value = [...gpus.value, ...response.gpus];
 };
 
 const fetchCpuData = async (page) => {
   const response = await getAllCPUsPaginated(page);
-  cpus.value = [...cpus.value, ...response.cpus]; //to append items that were loaded before
+  cpus.value = [...cpus.value, ...response.cpus];
 };
 
 const fetchMotherboardsData = async (page) => {
   const response = await getAllMotherboardsPaginated(page);
-  mbs.value = [...mbs.value, ...response.motherboards]; //to append items that were loaded before
+  mbs.value = [...mbs.value, ...response.motherboards];
 };
 
 const fetchRAMsData = async (page) => {
   const response = await getAllRAMsPaginated(page);
-  rams.value = [...rams.value, ...response.rams]; //to append items that were loaded before
+  rams.value = [...rams.value, ...response.rams];
+};
+
+const fetchPSUsData = async (page) => {
+  const response = await getAllPSUsPaginated(page);
+  psus.value = [...psus.value, ...response.psus];
+};
+
+const fetchStoragesData = async (page) => {
+  const response = await getAllStoragesPaginated(page);
+  storages.value = [...storages.value, ...response.storages];
+};
+
+const fetchCasesData = async (page) => {
+  const response = await getAllPCCasesPaginated(page);
+  cases.value = [...cases.value, ...response.cases];
 };
 
 const loadMoreGPU = () => {
   gpuCurrentPage.value++;
-  fetchGpuData(gpuCurrentPage.value); // Fetch data for the next page
+  fetchGpuData(gpuCurrentPage.value);
 };
 
 const loadMoreCPU = () => {
   cpuCurrentPage.value++;
-  fetchCpuData(cpuCurrentPage.value); // Fetch data for the next page
+  fetchCpuData(cpuCurrentPage.value);
 };
 
 const loadMoreMotherboards = () => {
   motherboardCurrentPage.value++;
-  fetchMotherboardsData(motherboardCurrentPage.value); // Fetch data for the next page
+  fetchMotherboardsData(motherboardCurrentPage.value);
 };
 
 const loadMoreRAMs = () => {
   ramsCurrentPage.value++;
-  fetchRAMsData(ramsCurrentPage.value); // Fetch data for the next page
+  fetchRAMsData(ramsCurrentPage.value);
+};
+
+const loadMorePSUs = () => {
+  psusCurrentPage.value++;
+  fetchPSUsData(psusCurrentPage.value);
+};
+
+const loadMoreStorages = () => {
+  storagesCurrentPage.value++;
+  fetchStoragesData(storagesCurrentPage.value);
+};
+
+const loadMoreCases = () => {
+  pcCasesCurrentPage.value++;
+  fetchCasesData(pcCasesCurrentPage.value);
 };
 
 const isFilterOpen = computed(() => store.state.filter.isOpen);
@@ -151,6 +241,12 @@ onMounted(async () => {
   await fetchMotherboardsData(motherboardCurrentPage.value);
 
   await fetchRAMsData(ramsCurrentPage.value);
+
+  await fetchPSUsData(psusCurrentPage.value);
+
+  await fetchStoragesData(storagesCurrentPage.value);
+
+  await fetchCasesData(pcCasesCurrentPage.value);
 });
 </script>
 

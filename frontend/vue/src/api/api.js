@@ -138,3 +138,27 @@ export function getAllKeyboardsPaginated(page) {
       return data;
     });
 }
+
+export function getAllPSUsPaginated(page) {
+  return axiosClient
+    .get(`/psus/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getAllStoragesPaginated(page) {
+  return axiosClient
+    .get(`/storages/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getAllPCCasesPaginated(page) {
+  return axiosClient
+    .get(`/pccases/?paginate=true&page=${page}`)
+    .then(({ data }) => {
+      return data;
+    });
+}
