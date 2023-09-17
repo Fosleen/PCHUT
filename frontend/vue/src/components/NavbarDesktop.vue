@@ -35,16 +35,12 @@ const toggleTheme = () => {
   const isDarkThemeValue = !isDarkTheme.value;
   const backgroundColor = isDarkThemeValue ? "#282828" : "#f5f5f5";
   const textColor = isDarkThemeValue ? "#D9D9D9" : "#282828";
-  const shadowColor = isDarkThemeValue ? "#68E199" : "";
-
-  // Apply styles here
 
   document.querySelector("body").style.backgroundColor = backgroundColor;
 
   const pcPartCardWrappers = document.querySelectorAll(".pc-part-card-wrapper");
   pcPartCardWrappers.forEach((pcPartCardWrapper) => {
     pcPartCardWrapper.style.backgroundColor = backgroundColor;
-    pcPartCardWrapper.style.boxShadow = `0 0 20px 0 ${shadowColor}`;
   });
 
   const pcPartCardListItems = document.querySelectorAll(

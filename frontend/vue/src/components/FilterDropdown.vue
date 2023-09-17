@@ -1,7 +1,10 @@
 <template>
   <div class="filter-dropdown-wrapper">
-    <div class="filter-dropdown-close-button">
-      <PhX :size="32" @click="store.dispatch('toggleFilterDropdown')" />
+    <div
+      class="filter-dropdown-close-button"
+      @click="store.dispatch('toggleFilterDropdown')"
+    >
+      <PhX :size="32" />
     </div>
     <div class="filter-dropdown-component-container">
       <div class="filter-dropdown-component-types-container">

@@ -7,8 +7,9 @@
         <div v-if="!isFilterOpen" class="all-products-menu">
           <div class="all-products-menu-item">
             <PhDesktopTower :size="20" />
-            <p>LAPTOPI, RAČUNALA</p>
+            <p>GRAFIČKE KARTICE</p>
           </div>
+
           <div class="all-products-menu-item">
             <PhCpu :size="20" />
             <p>PROCESORI</p>
@@ -169,7 +170,13 @@ import Button from "../components/Button.vue";
 import store from "../store";
 
 import FilterDropdown from "../components/FilterDropdown.vue";
-import { PhSliders } from "@phosphor-icons/vue";
+import {
+  PhSliders,
+  PhCpu,
+  PhKeyboard,
+  PhMouse,
+  PhDesktopTower,
+} from "@phosphor-icons/vue";
 
 import {
   getAllGraphicCardsPaginated,
@@ -181,8 +188,6 @@ import {
   getAllPCCasesPaginated,
 } from "../api/api";
 
-//optimize this file code later
-
 const gpuCurrentPage = ref(1);
 const cpuCurrentPage = ref(1);
 const motherboardCurrentPage = ref(1);
@@ -192,17 +197,11 @@ const storagesCurrentPage = ref(1);
 const pcCasesCurrentPage = ref(1);
 
 const gpus = ref([]);
-
 const cpus = ref([]);
-
 const mbs = ref([]);
-
 const rams = ref([]);
-
 const psus = ref([]);
-
 const storages = ref([]);
-
 const cases = ref([]);
 
 const fetchGpuData = async (page) => {
@@ -279,17 +278,11 @@ const isFilterOpen = computed(() => store.state.filter.isOpen);
 
 onMounted(async () => {
   await fetchGpuData(gpuCurrentPage.value);
-
   await fetchCpuData(cpuCurrentPage.value);
-
   await fetchMotherboardsData(motherboardCurrentPage.value);
-
   await fetchRAMsData(ramsCurrentPage.value);
-
   await fetchPSUsData(psusCurrentPage.value);
-
   await fetchStoragesData(storagesCurrentPage.value);
-
   await fetchCasesData(pcCasesCurrentPage.value);
 });
 </script>

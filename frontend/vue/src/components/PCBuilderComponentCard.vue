@@ -48,11 +48,6 @@ const { Image, className, component } = defineProps({
 const wrapperClasses = {
   [className]: className !== undefined,
 };
-
-const getModelName = () => {
-  const modelName = component.productable_type.replace("App\\Models\\", "");
-  return modelName;
-};
 </script>
 
 <style lang="scss">
@@ -76,7 +71,7 @@ const getModelName = () => {
 
   .pc-builder-component-card-text-group-name {
     color: $grey-light;
-    font-size: 28px; 
+    font-size: 28px;
   }
 }
 
