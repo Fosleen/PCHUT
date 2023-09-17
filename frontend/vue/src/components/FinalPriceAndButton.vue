@@ -2,7 +2,7 @@
   <div class="final-price-button-parent-wrapper">
     <div class="final-price-wrapper">
       <h5>{{ props.priceLabel }}</h5>
-      <h3>{{ props.price }} €</h3>
+      <h3>{{ props.price }} eura</h3>
     </div>
 
     <div class="final-price-button-wrapper">
@@ -17,8 +17,8 @@ import { defineProps } from "vue";
 
 const props = defineProps({
   priceLabel: String,
-  price: String,
   buttonText: String,
+  price: String,
 });
 </script>
 
