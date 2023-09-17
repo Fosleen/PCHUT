@@ -1,16 +1,40 @@
 <template>
   <div>
+    <div class="all-products-wrapper">
+      <FilterDropdown v-if="isFilterOpen" />
+
+      <div class="all-products-container">
+        <div v-if="!isFilterOpen" class="all-products-menu">
+          <div class="all-products-menu-item">
+            <PhDesktopTower :size="20" />
+            <p>LAPTOPI, RAČUNALA</p>
+          </div>
+          <div class="all-products-menu-item">
+            <PhCpu :size="20" />
+            <p>PROCESORI</p>
+          </div>
+          <div class="all-products-menu-item">
+            <PhKeyboard :size="20" />
+            <p>TIPKOVNICE</p>
+          </div>
+          <div class="all-products-menu-item">
+            <PhMouse :size="20" />
+            <p>MIŠEVI</p>
+          </div>
+          <div
+            class="all-products-open-filter"
+            @click="store.dispatch('toggleFilterDropdown')"
+            v-if="!isFilterOpen"
+          >
+            FILTRIRAJ<PhSliders :size="28" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="homepage-component-outer-wrapper">
       <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
 
-      <div
-        class="all-products-open-filter"
-        @click="store.dispatch('toggleFilterDropdown')"
-        v-if="!isFilterOpen"
-      >
-        FILTRIRAJ<PhSliders :size="28" />
-      </div>
-      <FilterDropdown v-if="isFilterOpen" />
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(gpu, index) in gpus"
@@ -20,7 +44,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreGPU" />
+        <Button
+          shape="trapezoid pink"
+          text="Učitaj više"
+          @click="loadMoreGPU"
+        />
       </div>
 
       <h1 class="homepage-component-wrapper-title">Procesori</h1>
@@ -34,7 +62,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCPU" />
+        <Button
+          shape="trapezoid pink"
+          text="Učitaj više"
+          @click="loadMoreCPU"
+        />
       </div>
 
       <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
@@ -49,7 +81,7 @@
 
       <div class="pagination-button-wrapper">
         <Button
-          shape="trapezoid"
+          shape="trapezoid pink"
           text="Učitaj više"
           @click="loadMoreMotherboards"
         />
@@ -66,7 +98,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreRAMs" />
+        <Button
+          shape="trapezoid pink"
+          text="Učitaj više"
+          @click="loadMoreRAMs"
+        />
       </div>
 
       <h1 class="homepage-component-wrapper-title">Napajanja</h1>
@@ -80,7 +116,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMorePSUs" />
+        <Button
+          shape="trapezoid pink"
+          text="Učitaj više"
+          @click="loadMorePSUs"
+        />
       </div>
 
       <h1 class="homepage-component-wrapper-title">Pohrana</h1>
@@ -95,7 +135,7 @@
 
       <div class="pagination-button-wrapper">
         <Button
-          shape="trapezoid"
+          shape="trapezoid pink"
           text="Učitaj više"
           @click="loadMoreStorages"
         />
@@ -112,7 +152,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCases" />
+        <Button
+          shape="trapezoid pink"
+          text="Učitaj više"
+          @click="loadMoreCases"
+        />
       </div>
     </div>
   </div>
@@ -260,6 +304,7 @@ onMounted(async () => {
   .homepage-component-wrapper-title {
     color: $pink;
     padding: 12px 12px 0;
+    text-transform: uppercase;
   }
 
   .item-type-wrapper {

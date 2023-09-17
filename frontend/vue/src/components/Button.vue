@@ -93,4 +93,9 @@ button {
   background-color: $white-dark;
   color: $colorTextPrimary;
 }
+
+.pink {
+  background-color: $colorBtnPrimary;
+  color: $white-dark;
+}
 </style>
