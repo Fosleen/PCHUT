@@ -93,13 +93,13 @@
     button-text="Kupi"
     @click="
       addToCart(
-        gpuOption,
-        cpuOption,
-        psuOption,
-        ramOption,
-        caseOption,
-        motherboardOption,
-        storageOption
+        { id: gpuOption },
+        { id: cpuOption },
+        { id: psuOption },
+        { id: ramOption },
+        { id: caseOption },
+        { id: motherboardOption },
+        { id: storageOption }
       )
     "
   />
@@ -120,7 +120,7 @@ import {
   getAllCases,
 } from "../api/api";
 
-const addToCart = (...ids) => {
+const addToCart = (...options) => {
   const existingItems = sessionStorage.getItem("cart");
   let cartItems = [];
 
@@ -128,8 +128,12 @@ const addToCart = (...ids) => {
     cartItems = JSON.parse(existingItems);
   }
 
-  const product = { id: ids, quantity: 1 };
-  cartItems.push(product);
+  options.forEach((option) => {
+    if (option && option.id) {
+      const product = { id: option.id.id, quantity: 1 };
+      cartItems.push(product);
+    }
+  });
 
   sessionStorage.setItem("cart", JSON.stringify(cartItems));
 
@@ -153,30 +157,6 @@ const addToCart = (...ids) => {
     }
   }
 };
-
-// const addToCart = (...items) => {
-//   const existingItems = sessionStorage.getItem("cart");
-//   let cartItems = [];
-
-//   if (existingItems) {
-//     cartItems = JSON.parse(existingItems);
-//   }
-
-//   items.forEach(({ id, quantity = 1 }) => {
-//     const existingProductIndex = cartItems.findIndex((item) => item.id === id);
-
-//     if (existingProductIndex !== -1) {
-//       cartItems[existingProductIndex].quantity += quantity;
-//     } else {
-//       const product = { id, quantity };
-//       cartItems.push(product);
-//     }
-//   });
-
-//   sessionStorage.setItem("cart", JSON.stringify(cartItems));
-
-//   console.log("Updated Cart:", cartItems);
-// };
 
 const motherboardOption = ref(null);
 const cpuOption = ref(null);
