@@ -35,7 +35,7 @@ const toggleTheme = () => {
   const isDarkThemeValue = !isDarkTheme.value;
   const backgroundColor = isDarkThemeValue ? "#282828" : "#f5f5f5";
   const textColor = isDarkThemeValue ? "#D9D9D9" : "#282828";
-  // const shadowColor = isDarkThemeValue ? "#68E199" : "#be166e";
+  const shadowColor = isDarkThemeValue ? "#68E199" : "";
 
   // Apply styles here
 

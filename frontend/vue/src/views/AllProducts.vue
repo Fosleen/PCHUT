@@ -297,23 +297,82 @@ onMounted(async () => {
   }
 }
 
-.all-products-open-filter {
-  background-color: $colorSecondary;
-  width: fit-content;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: $white-dark;
-  font-size: 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-left: auto;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+.all-products-wrapper {
+  .all-products-container {
+    max-width: 1200px;
+    margin: 0 auto;
 
-  &:hover {
-    background-color: #19013a;
-    transition: 0.5s;
+    .all-products-menu {
+      display: flex;
+      gap: 24px;
+      background-color: white;
+      border-radius: 8px;
+      width: fit-content;
+      margin-left: auto;
+      align-items: center;
+      padding: 0 0 0 0;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      margin-top: 24px;
+      margin-right: 8px;
+
+      .all-products-menu-item {
+        gap: 4px;
+        text-align: right;
+        cursor: pointer;
+        display: none;
+
+        p {
+          font-weight: 500;
+        }
+
+        svg {
+          color: $colorTextTertiary;
+        }
+      }
+    }
+
+    .all-products-open-filter {
+      background-color: $colorSecondary;
+      width: fit-content;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: $white-dark;
+      font-size: 24px;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #19013a;
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+@media screen and ($tabletLarge) {
+  .all-products-wrapper {
+    .all-products-container {
+      .all-products-menu {
+        padding: 0 0 0 16px;
+
+        .all-products-menu-item {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and ($desktop) {
+  .all-products-wrapper {
+    .all-products-container {
+      .all-products-menu {
+        margin-right: 0px;
+      }
+    }
   }
 }
 </style>
