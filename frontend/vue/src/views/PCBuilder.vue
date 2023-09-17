@@ -38,6 +38,7 @@
         class="pc-builder-background-image pc-builder-gpu-image"
       />
 
+      <!--na change bilo kojeg dropdowna treba procitati cijenu svih trenutno selectanih itema-->
       <div class="pc-builder-dropdowns-wrapper">
         <Dropdown
           placeholder="Odaberi procesor"
@@ -89,6 +90,7 @@
   </div>
 
   <FinalPriceAndButton
+    :price="calculateTotalPrice()"
     price-label="Ukupna cijena"
     button-text="Kupi"
     @click="
@@ -119,6 +121,25 @@ import {
   getAllPSUs,
   getAllCases,
 } from "../api/api";
+
+// watch([gpuOption, cpuOption], () => {
+//   totalPrice.value = calculateTotalPrice();
+// });
+
+//const totalPrice = ref(0);
+
+const calculateTotalPrice = () => {
+  let totalPrice = 0;
+  if (gpuOption.value) totalPrice += gpuOption.value.price;
+  if (cpuOption.value) totalPrice += cpuOption.value.price;
+  if (ramOption.value) totalPrice += ramOption.value.price;
+  if (storageOption.value) totalPrice += storageOption.value.price;
+  if (motherboardOption.value) totalPrice += motherboardOption.value.price;
+  if (psuOption.value) totalPrice += psuOption.value.price;
+  if (caseOption.value) totalPrice += caseOption.value.price;
+
+  return totalPrice;
+};
 
 const addToCart = (...options) => {
   const existingItems = sessionStorage.getItem("cart");
