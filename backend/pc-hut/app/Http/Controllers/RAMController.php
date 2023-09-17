@@ -36,6 +36,31 @@ class RAMController extends Controller
         ], 200);
     }
 
+
+    public function indexWithRamType(Request $request, $ramTypeId)
+    {
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $rams = RAM::with('component')->where('ram_type_id', $ramTypeId)->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $rams = RAM::with('component')->where('ram_type_id', $ramTypeId)->get();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'rams' => RAMResource::collection($rams),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $rams->currentPage(),
+                'last_page' => $rams->lastPage(),
+                'per_page' => $rams->perPage(),
+                'total' => $rams->total(),
+            ] : null,
+        ], 200);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

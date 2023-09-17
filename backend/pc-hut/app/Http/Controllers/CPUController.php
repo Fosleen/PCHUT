@@ -35,6 +35,32 @@ class CPUController extends Controller
         ], 200);
     }
 
+
+    public function indexWithSocket(Request $request, $socketId)
+    {
+
+        $paginate = $request->query('paginate', true);
+
+        if ($paginate === 'true') {
+            $page = $request->query('page', 1);
+            $perPage = 4;
+            $cpus = CPU::with('component')->where('socket_id', $socketId)->paginate($perPage, ['*'], 'page', $page);
+        } else {
+            $cpus = CPU::with('component')->where('socket_id', $socketId)->get();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'cpus' => CPUResource::collection($cpus),
+            'pagination' => ($paginate === 'true') ? [
+                'current_page' => $cpus->currentPage(),
+                'last_page' => $cpus->lastPage(),
+                'per_page' => $cpus->perPage(),
+                'total' => $cpus->total(),
+            ] : null,
+        ], 200);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
