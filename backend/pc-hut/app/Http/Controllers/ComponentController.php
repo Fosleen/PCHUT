@@ -8,13 +8,23 @@ use Illuminate\Http\Request;
 
 class ComponentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $components = Component::with('productable')->get();
+        $components = Component::with('productable');
+        $query = Component::query();
+        $product_type = null;
+
+        if ($request->has('product_type')) {
+            $product_type = $request->input('product_type');
+            $query->where('productable_type', 'App\\Models\\' . $product_type); // string concatenation
+        }
+
+        $components = $query->get();
 
         if ($components->count() > 0) {
             $data = [
                 'status' => 200,
+                'product_type' => $product_type,
                 'components' => $components,
             ];
 
@@ -22,7 +32,8 @@ class ComponentController extends Controller
         } else {
             return response()->json([
                 'status' => 404,
-                'message' => "No components"
+                'product_type' => $product_type,
+                'message' => "No components",
             ], 404);
         }
     }
