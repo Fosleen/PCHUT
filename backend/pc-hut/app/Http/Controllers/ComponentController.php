@@ -19,6 +19,14 @@ class ComponentController extends Controller
             $query->where('productable_type', 'App\\Models\\' . $product_type); // string concatenation
         }
 
+        if ($request->has('min')) {
+            $query->where('price', '>=', $request->input('min'));
+        }
+
+        if ($request->has('max')) {
+            $query->where('price', '<=', $request->input('max'));
+        }
+
         $components = $query->get();
 
         if ($components->count() > 0) {
