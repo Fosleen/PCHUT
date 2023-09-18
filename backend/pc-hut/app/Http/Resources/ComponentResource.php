@@ -18,9 +18,12 @@ class ComponentResource extends JsonResource
             'id' => $this->id,
             'model' => $this->model,
             'price' => $this->price,
-            'productable_id' =>  $this->productable_id,
+            'productable_id' => $this->productable_id,
             'productable_type' =>  $this->productable_type,
+            'product_type_cro' => $this->product_type_cro,
             'discount' => $this->discount,
+            'description' => $this->description,
+
             'socket_name' => $this->when($this->productable_type === 'App\\Models\\CPU' || $this->productable_type === 'App\\Models\\Motherboard', function () {
                 return $this->productable->socket->name;
             }),
@@ -33,6 +36,7 @@ class ComponentResource extends JsonResource
                 return $this->productable->cores;
             }),
 
+            'manufacturer' => $this->manufacturer,
             'images' =>  $this->images->pluck('url')->toArray()
         ];
     }

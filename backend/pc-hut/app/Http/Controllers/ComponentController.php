@@ -25,7 +25,7 @@ class ComponentController extends Controller
             $data = [
                 'status' => 200,
                 'product_type' => $product_type,
-                'components' => $components,
+                'components' => ComponentResource::collection($components),
             ];
 
             return response()->json($data, 200);
