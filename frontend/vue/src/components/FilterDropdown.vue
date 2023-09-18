@@ -815,6 +815,7 @@
             <h3>PRIMIJENJENI FILTERI:</h3>
             <PhTrash :size="32" @click="clearAppliedFilters" />
           </div>
+
           <div class="filter-dropdown-applied-filters-inner">
             <div
               v-if="selectedComponentType"
@@ -830,6 +831,10 @@
                 {{ getArrayText(item) }}
               </div>
             </div>
+          </div>
+          <div class="filter-dropdown-search-button" @click="searchProducts">
+            <PhMagnifyingGlass weight="bold" :size="24" />
+            <h3>PRETRAŽI</h3>
           </div>
         </div>
         <div class="filter-dropdown-price-range-container">
@@ -864,6 +869,7 @@ import {
   PhKeyboard,
   PhTrash,
   PhCaretRight,
+  PhMagnifyingGlass,
 } from "@phosphor-icons/vue";
 import { ref, computed } from "vue";
 import RangeSlider from "./RangeSlider.vue";
@@ -926,6 +932,10 @@ function displayFilter(componentType) {
 function clearArray(name) {
   // console.log("delete " + JSON.parse(JSON.stringify(name.value)));
   name.value = [];
+}
+
+function searchProducts() {
+  console.log(selectedComponentType.value);
 }
 
 function getArrayText(name) {
@@ -1000,6 +1010,25 @@ function clearAppliedFilters() {
     display: flex;
     flex-direction: column-reverse;
 
+    .filter-dropdown-column {
+      .filter-dropdown-search-button {
+        background-color: $colorBtnTertiary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 20px;
+        color: $colorTextPrimary;
+        padding: 8px;
+        border-radius: 8px;
+        margin-top: auto;
+
+        h3 {
+          font-weight: 600;
+        }
+      }
+    }
+
     .filter-dropdown-component-types-container {
       order: 1;
 
@@ -1048,6 +1077,7 @@ function clearAppliedFilters() {
         display: flex;
         justify-content: space-between;
         color: $colorTextSecondary;
+        align-items: center;
 
         h3 {
           font-size: 20px;
@@ -1197,6 +1227,11 @@ function clearAppliedFilters() {
 
     .filter-dropdown-component-container {
       .filter-dropdown-applied-filters-container {
+        height: 100%;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+
         .filter-dropdown-applied-filters-inner {
           width: 320px;
         }
@@ -1205,6 +1240,7 @@ function clearAppliedFilters() {
       .filter-dropdown-column {
         flex-flow: column-reverse;
         display: flex;
+        position: relative;
 
         .filter-dropdown-custom-filters {
           width: 100%;
@@ -1275,11 +1311,7 @@ function clearAppliedFilters() {
       max-width: 1200px;
       margin: 0 auto;
 
-      .filter-dropdown-custom-filters {
-        /* width: fit-content; */
-      }
       .filter-dropdown-column {
-        /* width: fit-content; */
         margin-left: auto;
       }
     }
