@@ -23,7 +23,9 @@ class ComponentResource extends JsonResource
             'product_type_cro' => $this->product_type_cro,
             'discount' => $this->discount,
             'description' => $this->description,
+            'productable_details' => $this->productable,
 
+            // TODO remove this and use productable_details
             'socket_name' => $this->when($this->productable_type === 'App\\Models\\CPU' || $this->productable_type === 'App\\Models\\Motherboard', function () {
                 return $this->productable->socket->name;
             }),
