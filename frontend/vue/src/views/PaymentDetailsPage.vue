@@ -46,7 +46,7 @@
                 @update:inputValue="card.number = $event"
               />
               <img
-                src="https://www.creditcardvergelijking.nl/images/product/revolut-card.png"
+                src="https://images.contentstack.io/v3/assets/bltc05b5aa7ae1c3a47/blta54a2e549cacf89a/64abc3a08f332a057d544fe3/Standard_v3xxhdpi.png"
                 alt="recognise-card-type"
               />
             </div>
@@ -146,7 +146,7 @@
             @click="createOrder"
             priceLabel="Ukupan iznos narudžbe:"
             :price="totalPrice"
-            buttonText="Završi narudžbu i plati"
+            buttonText="Završi i plati"
           />
         </div>
       </div>
@@ -161,6 +161,7 @@ import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
 import axiosClient from "../axios";
 import store from "../store";
 import { getLoggedUser } from "../api/api";
+import router from "../router";
 
 const cartItemsId = ref([]);
 const cartItemsQuantity = ref([]);
@@ -226,6 +227,7 @@ const createOrder = async () => {
       })
       .then(({ data }) => {
         console.log(data);
+        router.push("/narudzbe");
       });
   } catch (err) {
     console.log("Error - " + err);
