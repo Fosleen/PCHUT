@@ -163,9 +163,9 @@ export function getAllPCCasesPaginated(page) {
     });
 }
 
-export function getAllFilteredProductsData(selectedType) {
+export function getAllFilteredProductsData(selectedType, min, max) {
   return axiosClient
-    .get(`/component?product_type=${selectedType}`)
+    .get(`/component?product_type=${selectedType}&min=${min}&max=${max}`)
     .then(({ data }) => {
       return data;
     });

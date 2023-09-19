@@ -223,17 +223,17 @@ const filteredProducts = ref([]);
 
 const isFilteredShown = ref(false);
 
-const fetchFilteredProductsData = async (selectedType) => {
+const fetchFilteredProductsData = async (selectedType, min, max) => {
   console.log(selectedType);
   filteredProducts.value = [];
-  const response = await getAllFilteredProductsData(selectedType);
+  const response = await getAllFilteredProductsData(selectedType, min, max);
   console.log(response.components);
 
   filteredProducts.value = [...filteredProducts.value, ...response.components];
 };
 
-const search = async (selectedType) => {
-  fetchFilteredProductsData(selectedType);
+const search = async (selectedType, min, max) => {
+  fetchFilteredProductsData(selectedType, min, max);
   isFilteredShown.value = true;
 };
 

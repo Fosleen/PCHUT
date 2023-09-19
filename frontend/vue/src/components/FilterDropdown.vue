@@ -823,6 +823,13 @@
             >
               {{ selectedComponentType.title }}
             </div>
+
+            <div
+              v-if="minRange != 0 || maxRange != 2000"
+              class="filter-dropdown-applied-filters-item"
+            >
+              {{ minRange }} € - {{ maxRange }} €
+            </div>
             <div v-for="item in appliedFilters" :key="item.value">
               <div
                 v-if="item.value.length > 0"
@@ -848,7 +855,10 @@
             </div>
           </div>
           <div class="filter-dropdown-price-range-slider">
-            <RangeSlider @price-range-change="changePriceRange" />
+            <RangeSlider
+              @price-range-change="changePriceRange"
+              ref="rangeSliderRef"
+            />
           </div>
         </div>
         <div class="filter-dropdown-only-avaliable-container">
@@ -877,9 +887,10 @@ import CheckboxInput from "./CheckboxInput.vue";
 import store from "../store";
 
 const emit = defineEmits();
+const rangeSliderRef = ref(null);
 const isFilterOpen = computed(() => store.state.filter.isOpen);
 let minRange = ref(0); // default values
-let maxRange = ref(6000);
+let maxRange = ref(2000);
 
 const componentTypes = [
   { title: "LAPTOPI, PC", product_type: "pc" },
@@ -926,8 +937,6 @@ function displayFilter(componentType) {
   clearArray(size);
   clearArray(socket_type);
   clearArray(rgb);
-  console.log(componentType);
-
   selectedComponentType.value = componentType;
 }
 
@@ -938,7 +947,12 @@ function clearArray(name) {
 
 function searchProducts() {
   console.log(selectedComponentType.value.product_type);
-  emit("searchProducts", selectedComponentType.value.product_type);
+  emit(
+    "searchProducts",
+    selectedComponentType.value.product_type,
+    minRange.value,
+    maxRange.value
+  );
 }
 
 function getArrayText(name) {
@@ -983,6 +997,9 @@ function clearAppliedFilters() {
     clearArray(filterArray);
   });
   selectedComponentType.value = null;
+  minRange.value = 0;
+  maxRange.value = 2000;
+  rangeSliderRef.value.setDefaultValues();
   emit("clearFilters");
 }
 </script>
