@@ -12,10 +12,10 @@
           <li
             v-for="type of componentTypes"
             :key="type"
-            @mouseover="displayFilter(`${type}`)"
-            @click="displayFilter(`${type}`)"
+            @mouseover="displayFilter(type)"
+            @click="displayFilter(type)"
           >
-            <PhCpu :size="26" />{{ type }}
+            <PhCpu :size="26" />{{ type.title }}
             <div class="icon"><PhCaretRight :size="20" /></div>
           </li>
         </ul>
@@ -821,7 +821,7 @@
               v-if="selectedComponentType"
               class="filter-dropdown-applied-filters-item"
             >
-              {{ selectedComponentType }}
+              {{ selectedComponentType.title }}
             </div>
             <div v-for="item in appliedFilters" :key="item.value">
               <div
@@ -882,18 +882,18 @@ let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
 const componentTypes = [
-  "LAPTOPI, PC",
-  "PROCESORI",
-  "GRAFIČKE KARTICE",
-  "MATIČNE PLOČE",
-  "HLAĐENJE",
-  "POHRANA",
-  "TIPKOVNICE",
-  "MIŠEVI",
-  "MONITORI",
+  { title: "LAPTOPI, PC", product_type: "pc" },
+  { title: "PROCESORI", product_type: "cpu" },
+  { title: "GRAFIČKE KARTICE", product_type: "gpu" },
+  { title: "MATIČNE PLOČE", product_type: "motherboard" },
+  { title: "HLAĐENJE", product_type: "cooling" },
+  { title: "POHRANA", product_type: "storage" },
+  { title: "TIPKOVNICE", product_type: "keyboard" },
+  { title: "MIŠEVI", product_type: "mouse" },
+  { title: "MONITORI", product_type: "monitor" },
 ];
 
-const selectedComponentType = ref("");
+const selectedComponentType = ref({});
 let cores = ref([]);
 let manufacturers = ref([]);
 let series = ref([]);
@@ -926,6 +926,8 @@ function displayFilter(componentType) {
   clearArray(size);
   clearArray(socket_type);
   clearArray(rgb);
+  console.log(componentType);
+
   selectedComponentType.value = componentType;
 }
 
@@ -935,7 +937,7 @@ function clearArray(name) {
 }
 
 function searchProducts() {
-  console.log(selectedComponentType.value);
+  console.log(selectedComponentType.value.product_type);
   emit("searchProducts");
 }
 
@@ -966,14 +968,21 @@ function isFilterShown(name, groupName) {
 }
 
 function isTypeShown(groupName) {
-  return selectedComponentType.value === groupName;
+  if (selectedComponentType.value) {
+    return (
+      JSON.parse(JSON.stringify(selectedComponentType.value)).title ===
+      groupName
+    );
+  } else {
+    return false;
+  }
 }
 
 function clearAppliedFilters() {
   appliedFilters.value.forEach((filterArray) => {
     clearArray(filterArray);
   });
-  selectedComponentType.value = "";
+  selectedComponentType.value = null;
   emit("clearFilters");
 }
 </script>
