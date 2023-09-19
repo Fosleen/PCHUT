@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="all-products-wrapper">
-      <FilterDropdown v-if="isFilterOpen" />
+      <FilterDropdown
+        v-if="isFilterOpen"
+        @search-products="search"
+        @clear-filters="clear"
+      />
 
       <div class="all-products-container">
         <div v-if="!isFilterOpen" class="all-products-menu">
@@ -33,7 +37,7 @@
       </div>
     </div>
 
-    <div class="homepage-component-outer-wrapper">
+    <div class="homepage-component-outer-wrapper" v-if="!isFilteredShown">
       <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
 
       <div class="item-type-wrapper">
@@ -160,6 +164,10 @@
         />
       </div>
     </div>
+
+    <div class="homepage-component-outer-wrapper" v-if="isFilteredShown">
+      <h1 class="homepage-component-wrapper-title">Filtrirani proizvodi</h1>
+    </div>
   </div>
 </template>
 
@@ -203,6 +211,8 @@ const rams = ref([]);
 const psus = ref([]);
 const storages = ref([]);
 const cases = ref([]);
+
+const isFilteredShown = ref(false);
 
 const fetchGpuData = async (page) => {
   const response = await getAllGraphicCardsPaginated(page);
@@ -275,6 +285,14 @@ const loadMoreCases = () => {
 };
 
 const isFilterOpen = computed(() => store.state.filter.isOpen);
+
+const search = () => {
+  isFilteredShown.value = true;
+};
+
+const clear = () => {
+  isFilteredShown.value = false;
+};
 
 onMounted(async () => {
   await fetchGpuData(gpuCurrentPage.value);

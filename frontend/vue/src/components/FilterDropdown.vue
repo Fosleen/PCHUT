@@ -876,8 +876,8 @@ import RangeSlider from "./RangeSlider.vue";
 import CheckboxInput from "./CheckboxInput.vue";
 import store from "../store";
 
+const emit = defineEmits();
 const isFilterOpen = computed(() => store.state.filter.isOpen);
-
 let minRange = ref(0); // default values
 let maxRange = ref(6000);
 
@@ -936,6 +936,7 @@ function clearArray(name) {
 
 function searchProducts() {
   console.log(selectedComponentType.value);
+  emit("searchProducts");
 }
 
 function getArrayText(name) {
@@ -973,6 +974,7 @@ function clearAppliedFilters() {
     clearArray(filterArray);
   });
   selectedComponentType.value = "";
+  emit("clearFilters");
 }
 </script>
 
@@ -1012,6 +1014,7 @@ function clearAppliedFilters() {
 
     .filter-dropdown-column {
       .filter-dropdown-search-button {
+        cursor: pointer;
         background-color: $colorBtnTertiary;
         display: flex;
         justify-content: center;
