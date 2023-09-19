@@ -162,3 +162,11 @@ export function getAllPCCasesPaginated(page) {
       return data;
     });
 }
+
+export function getAllFilteredProductsData(selectedType) {
+  return axiosClient
+    .get(`/component?product_type=${selectedType}`)
+    .then(({ data }) => {
+      return data;
+    });
+}

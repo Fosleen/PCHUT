@@ -893,7 +893,7 @@ const componentTypes = [
   { title: "MONITORI", product_type: "monitor" },
 ];
 
-const selectedComponentType = ref({});
+const selectedComponentType = ref(null);
 let cores = ref([]);
 let manufacturers = ref([]);
 let series = ref([]);
@@ -938,7 +938,7 @@ function clearArray(name) {
 
 function searchProducts() {
   console.log(selectedComponentType.value.product_type);
-  emit("searchProducts");
+  emit("searchProducts", selectedComponentType.value.product_type);
 }
 
 function getArrayText(name) {

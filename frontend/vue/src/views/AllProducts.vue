@@ -167,6 +167,13 @@
 
     <div class="homepage-component-outer-wrapper" v-if="isFilteredShown">
       <h1 class="homepage-component-wrapper-title">Filtrirani proizvodi</h1>
+      <div class="item-type-wrapper">
+        <PCPartCard
+          v-for="(filteredProduct, index) in filteredProducts"
+          :key="index"
+          :component="filteredProduct"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -194,6 +201,7 @@ import {
   getAllPSUsPaginated,
   getAllStoragesPaginated,
   getAllPCCasesPaginated,
+  getAllFilteredProductsData,
 } from "../api/api";
 
 const gpuCurrentPage = ref(1);
@@ -211,8 +219,27 @@ const rams = ref([]);
 const psus = ref([]);
 const storages = ref([]);
 const cases = ref([]);
+const filteredProducts = ref([]);
 
 const isFilteredShown = ref(false);
+
+const fetchFilteredProductsData = async (selectedType) => {
+  console.log(selectedType);
+  filteredProducts.value = [];
+  const response = await getAllFilteredProductsData(selectedType);
+  console.log(response.components);
+
+  filteredProducts.value = [...filteredProducts.value, ...response.components];
+};
+
+const search = async (selectedType) => {
+  fetchFilteredProductsData(selectedType);
+  isFilteredShown.value = true;
+};
+
+const clear = () => {
+  isFilteredShown.value = false;
+};
 
 const fetchGpuData = async (page) => {
   const response = await getAllGraphicCardsPaginated(page);
@@ -285,14 +312,6 @@ const loadMoreCases = () => {
 };
 
 const isFilterOpen = computed(() => store.state.filter.isOpen);
-
-const search = () => {
-  isFilteredShown.value = true;
-};
-
-const clear = () => {
-  isFilteredShown.value = false;
-};
 
 onMounted(async () => {
   await fetchGpuData(gpuCurrentPage.value);
