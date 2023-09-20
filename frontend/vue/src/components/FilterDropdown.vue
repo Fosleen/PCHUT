@@ -140,30 +140,30 @@
           v-if="isTypeShown('MONITORI')"
           class="filter-dropdown-custom-filter-group"
         >
-          <h4>DIJAGONALA:</h4>
+          <h4>DIJAGONALA (''):</h4>
           <CheckboxInput
             value="22 inča"
             name="size"
             id="22"
-            @checkbox-click="changeCheckboxes('22 inča', 'size')"
+            @checkbox-click="changeCheckboxes('22', 'size')"
           />
           <CheckboxInput
             value="24 inča"
             name="size"
             id="24"
-            @checkbox-click="changeCheckboxes('24 inča', 'size')"
+            @checkbox-click="changeCheckboxes('24', 'size')"
           />
           <CheckboxInput
             value="27 inča"
             name="size"
             id="27"
-            @checkbox-click="changeCheckboxes('27 inča', 'size')"
+            @checkbox-click="changeCheckboxes('27', 'size')"
           />
           <CheckboxInput
             value="32 inča"
             name="size"
             id="32"
-            @checkbox-click="changeCheckboxes('32 inča', 'size')"
+            @checkbox-click="changeCheckboxes('32', 'size')"
           />
         </div>
         <div
@@ -957,7 +957,8 @@ function searchProducts() {
     JSON.parse(JSON.stringify(cores.value)),
     JSON.parse(JSON.stringify(type.value)),
     JSON.parse(JSON.stringify(rgb.value)),
-    JSON.parse(JSON.stringify(connector.value))
+    JSON.parse(JSON.stringify(connector.value)),
+    JSON.parse(JSON.stringify(size.value))
   );
 }
 

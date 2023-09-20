@@ -7,6 +7,7 @@ use App\Models\Component;
 use App\Models\CPU;
 use App\Models\Keyboard;
 use App\Models\Manufacturer;
+use App\Models\Monitor;
 use App\Models\Mouse;
 use Illuminate\Http\Request;
 
@@ -48,6 +49,15 @@ class ComponentController extends Controller
                 $query->whereIn('productable_id', $productIdsArray);
             }
 
+            if ($request->has('size')) {
+                $connector = $request->input('size');
+                $connectorArray = explode(',', $connector);
+                if ($request->input('product_type') == "monitor") {
+                    $productIdsArray = Monitor::whereIn('size', $connectorArray)->pluck('id')->toArray();
+                }
+                $query->whereIn('productable_id', $productIdsArray);
+            }
+
             if ($request->has('type')) {
                 $types = $request->input('type');
                 $typesArray = explode(',', $types);
@@ -56,6 +66,8 @@ class ComponentController extends Controller
                     $productIdsArray = Keyboard::whereIn('type', $typesArray)->pluck('id')->toArray();
                 } else if ($request->input('product_type') == "mouse") {
                     $productIdsArray = Mouse::whereIn('wired', $typesArray)->pluck('id')->toArray();
+                } else if ($request->input('product_type') == "monitor") {
+                    $productIdsArray = Monitor::whereIn('curved', $typesArray)->pluck('id')->toArray();
                 }
 
                 $query->whereIn('productable_id', $productIdsArray);

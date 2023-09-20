@@ -231,7 +231,8 @@ const search = async (
   cores,
   type,
   rgb,
-  connector
+  connector,
+  size
 ) => {
   fetchFilteredProductsData(
     selectedType,
@@ -241,7 +242,8 @@ const search = async (
     cores,
     type,
     rgb,
-    connector
+    connector,
+    size
   );
   isFilteredShown.value = true;
 };
@@ -254,7 +256,8 @@ const fetchFilteredProductsData = async (
   cores,
   type,
   rgb,
-  connector
+  connector,
+  size
 ) => {
   filteredProducts.value = [];
   const finalType = changeTypeValues(type);
@@ -269,7 +272,8 @@ const fetchFilteredProductsData = async (
     cores,
     finalType,
     finalRgb,
-    finalConnector
+    finalConnector,
+    size
   );
   console.log(response.components);
 
@@ -279,9 +283,14 @@ const fetchFilteredProductsData = async (
 const changeTypeValues = (typesArray) => {
   const finalArray = [];
   typesArray.forEach((el) => {
-    if (el == "RGB" || el == "Žičan" || el == "USB") {
+    if (el == "RGB" || el == "Žičan" || el == "USB" || el == "Zakrivljen") {
       finalArray.push(1);
-    } else if (el == "Bez RGB-a" || el == "Bežičan" || el == "Bežično") {
+    } else if (
+      el == "Bez RGB-a" ||
+      el == "Bežičan" ||
+      el == "Bežično" ||
+      el == "Ravan"
+    ) {
       finalArray.push(0);
     } else finalArray.push(el);
   });
