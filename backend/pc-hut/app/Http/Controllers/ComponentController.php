@@ -7,6 +7,7 @@ use App\Models\Component;
 use App\Models\CPU;
 use App\Models\Keyboard;
 use App\Models\Manufacturer;
+use App\Models\Mouse;
 use Illuminate\Http\Request;
 
 class ComponentController extends Controller
@@ -29,10 +30,34 @@ class ComponentController extends Controller
                 $query->whereIn('productable_id', $productIdsArray);
             }
 
-            if ($request->has('type') && $request->input('product_type') == "keyboard") {
+            if ($request->has('rgb')) {
+                $rgb = $request->input('rgb');
+                $rgbArray = explode(',', $rgb);
+                if ($request->input('product_type') == "mouse") {
+                    $productIdsArray = Mouse::whereIn('rgb', $rgbArray)->pluck('id')->toArray();
+                } else if ($request->input('product_type') == "keyboard") {
+                    $productIdsArray = Keyboard::whereIn('rgb', $rgbArray)->pluck('id')->toArray();
+                }
+                $query->whereIn('productable_id', $productIdsArray);
+            }
+
+            if ($request->has('con')) {
+                $connector = $request->input('con');
+                $connectorArray = explode(',', $connector);
+                $productIdsArray = Keyboard::whereIn('wired', $connectorArray)->pluck('id')->toArray();
+                $query->whereIn('productable_id', $productIdsArray);
+            }
+
+            if ($request->has('type')) {
                 $types = $request->input('type');
                 $typesArray = explode(',', $types);
-                $productIdsArray = Keyboard::whereIn('type', $typesArray)->pluck('id')->toArray();
+
+                if ($request->input('product_type') == "keyboard") {
+                    $productIdsArray = Keyboard::whereIn('type', $typesArray)->pluck('id')->toArray();
+                } else if ($request->input('product_type') == "mouse") {
+                    $productIdsArray = Mouse::whereIn('wired', $typesArray)->pluck('id')->toArray();
+                }
+
                 $query->whereIn('productable_id', $productIdsArray);
             }
         }

@@ -956,6 +956,8 @@ function searchProducts() {
     JSON.parse(JSON.stringify(manufacturers.value)),
     JSON.parse(JSON.stringify(cores.value)),
     JSON.parse(JSON.stringify(type.value)),
+    JSON.parse(JSON.stringify(rgb.value)),
+    JSON.parse(JSON.stringify(connector.value))
   );
 }
 

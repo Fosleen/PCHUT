@@ -169,7 +169,9 @@ export function getAllFilteredProductsData(
   max,
   manufacturers,
   cores,
-  type
+  type,
+  rgb,
+  connector
 ) {
   let fetchUrl = `/component?product_type=${selectedType}&min=${min}&max=${max}`;
 
@@ -183,6 +185,14 @@ export function getAllFilteredProductsData(
 
   if (type.length != 0) {
     fetchUrl += `&type=${type.toString()}`;
+  }
+
+  if (rgb.length != 0) {
+    fetchUrl += `&rgb=${rgb.toString()}`;
+  }
+
+  if (connector.length != 0) {
+    fetchUrl += `&con=${connector.toString()}`;
   }
 
   return axiosClient.get(fetchUrl).then(({ data }) => {

@@ -223,31 +223,69 @@ const filteredProducts = ref([]);
 
 const isFilteredShown = ref(false);
 
+const search = async (
+  selectedType,
+  min,
+  max,
+  manufacturers,
+  cores,
+  type,
+  rgb,
+  connector
+) => {
+  fetchFilteredProductsData(
+    selectedType,
+    min,
+    max,
+    manufacturers,
+    cores,
+    type,
+    rgb,
+    connector
+  );
+  isFilteredShown.value = true;
+};
+
 const fetchFilteredProductsData = async (
   selectedType,
   min,
   max,
   manufacturers,
   cores,
-  type
+  type,
+  rgb,
+  connector
 ) => {
   filteredProducts.value = [];
+  const finalType = changeTypeValues(type);
+  const finalRgb = changeTypeValues(rgb);
+  const finalConnector = changeTypeValues(connector);
+
   const response = await getAllFilteredProductsData(
     selectedType,
     min,
     max,
     manufacturers,
     cores,
-    type
+    finalType,
+    finalRgb,
+    finalConnector
   );
   console.log(response.components);
 
   filteredProducts.value = [...filteredProducts.value, ...response.components];
 };
 
-const search = async (selectedType, min, max, manufacturers, cores, type) => {
-  fetchFilteredProductsData(selectedType, min, max, manufacturers, cores, type);
-  isFilteredShown.value = true;
+const changeTypeValues = (typesArray) => {
+  const finalArray = [];
+  typesArray.forEach((el) => {
+    if (el == "RGB" || el == "Žičan" || el == "USB") {
+      finalArray.push(1);
+    } else if (el == "Bez RGB-a" || el == "Bežičan" || el == "Bežično") {
+      finalArray.push(0);
+    } else finalArray.push(el);
+  });
+  return finalArray;
 };
 
 const clear = () => {
