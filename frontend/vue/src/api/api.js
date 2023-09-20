@@ -163,10 +163,19 @@ export function getAllPCCasesPaginated(page) {
     });
 }
 
-export function getAllFilteredProductsData(selectedType, min, max) {
-  return axiosClient
-    .get(`/component?product_type=${selectedType}&min=${min}&max=${max}`)
-    .then(({ data }) => {
-      return data;
-    });
+export function getAllFilteredProductsData(
+  selectedType,
+  min,
+  max,
+  manufacturers
+) {
+  let fetchUrl = `/component?product_type=${selectedType}&min=${min}&max=${max}`;
+
+  if (manufacturers.length != 0) {
+    fetchUrl += `&manufacturer=${manufacturers.toString()}`;
+  }
+
+  return axiosClient.get(fetchUrl).then(({ data }) => {
+    return data;
+  });
 }

@@ -947,11 +947,13 @@ function clearArray(name) {
 
 function searchProducts() {
   console.log(selectedComponentType.value.product_type);
+
   emit(
     "searchProducts",
     selectedComponentType.value.product_type,
     minRange.value,
-    maxRange.value
+    maxRange.value,
+    JSON.parse(JSON.stringify(manufacturers.value))
   );
 }
 
