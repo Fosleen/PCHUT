@@ -953,7 +953,8 @@ function searchProducts() {
     selectedComponentType.value.product_type,
     minRange.value,
     maxRange.value,
-    JSON.parse(JSON.stringify(manufacturers.value))
+    JSON.parse(JSON.stringify(manufacturers.value)),
+    JSON.parse(JSON.stringify(cores.value))
   );
 }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ComponentResource;
 use App\Models\Component;
+use App\Models\CPU;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,13 @@ class ComponentController extends Controller
         if ($request->has('product_type')) {
             $product_type = $request->input('product_type');
             $query->where('productable_type', 'App\\Models\\' . $product_type); // string concatenation
+
+            if ($request->has('cores')) {
+                $cores = $request->input('cores');
+                $coresArray = explode(',', $cores);
+                $productIdsArray = CPU::whereIn('cores', $coresArray)->pluck('id')->toArray();
+                $query->whereIn('productable_id', $productIdsArray);
+            }
         }
 
         if ($request->has('min')) {
