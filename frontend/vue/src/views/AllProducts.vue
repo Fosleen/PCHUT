@@ -228,7 +228,8 @@ const fetchFilteredProductsData = async (
   min,
   max,
   manufacturers,
-  cores
+  cores,
+  type
 ) => {
   filteredProducts.value = [];
   const response = await getAllFilteredProductsData(
@@ -236,15 +237,16 @@ const fetchFilteredProductsData = async (
     min,
     max,
     manufacturers,
-    cores
+    cores,
+    type
   );
   console.log(response.components);
 
   filteredProducts.value = [...filteredProducts.value, ...response.components];
 };
 
-const search = async (selectedType, min, max, manufacturers, cores) => {
-  fetchFilteredProductsData(selectedType, min, max, manufacturers, cores);
+const search = async (selectedType, min, max, manufacturers, cores, type) => {
+  fetchFilteredProductsData(selectedType, min, max, manufacturers, cores, type);
   isFilteredShown.value = true;
 };
 

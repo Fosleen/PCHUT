@@ -954,7 +954,8 @@ function searchProducts() {
     minRange.value,
     maxRange.value,
     JSON.parse(JSON.stringify(manufacturers.value)),
-    JSON.parse(JSON.stringify(cores.value))
+    JSON.parse(JSON.stringify(cores.value)),
+    JSON.parse(JSON.stringify(type.value)),
   );
 }
 

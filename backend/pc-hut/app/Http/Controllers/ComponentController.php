@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ComponentResource;
 use App\Models\Component;
 use App\Models\CPU;
+use App\Models\Keyboard;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,13 @@ class ComponentController extends Controller
                 $cores = $request->input('cores');
                 $coresArray = explode(',', $cores);
                 $productIdsArray = CPU::whereIn('cores', $coresArray)->pluck('id')->toArray();
+                $query->whereIn('productable_id', $productIdsArray);
+            }
+
+            if ($request->has('type') && $request->input('product_type') == "keyboard") {
+                $types = $request->input('type');
+                $typesArray = explode(',', $types);
+                $productIdsArray = Keyboard::whereIn('type', $typesArray)->pluck('id')->toArray();
                 $query->whereIn('productable_id', $productIdsArray);
             }
         }
