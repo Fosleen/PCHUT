@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ComponentResource;
 use App\Models\Component;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
 class ComponentController extends Controller
@@ -13,6 +14,7 @@ class ComponentController extends Controller
         $components = Component::with('productable');
         $query = Component::query();
         $product_type = null;
+        $manufacturer = null;
 
         if ($request->has('product_type')) {
             $product_type = $request->input('product_type');
@@ -27,12 +29,20 @@ class ComponentController extends Controller
             $query->where('price', '<=', $request->input('max'));
         }
 
+        if ($request->has('manufacturer')) {
+            $manufacturer = $request->input('manufacturer');
+            $manufacturerNamesArray = explode(',', $manufacturer); // "a,b' => ["a","b"]
+            $manufacturerIds = Manufacturer::whereIn('name', $manufacturerNamesArray)->pluck('id')->toArray();
+            $query->whereIn('manufacturer_id', $manufacturerIds);
+        }
+
         $components = $query->get();
 
         if ($components->count() > 0) {
             $data = [
                 'status' => 200,
                 'product_type' => $product_type,
+                'manufacturer' => $manufacturer,
                 'components' => ComponentResource::collection($components),
             ];
 
@@ -41,6 +51,7 @@ class ComponentController extends Controller
             return response()->json([
                 'status' => 404,
                 'product_type' => $product_type,
+                'manufacturer' => $manufacturer,
                 'message' => "No components",
             ], 404);
         }
