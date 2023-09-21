@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\ComponentImageController;
+use App\Http\Controllers\CoolingController;
 use App\Http\Controllers\CoolingTypeController;
 use App\Http\Controllers\CPUController;
 use App\Http\Controllers\GPUController;
@@ -41,6 +42,10 @@ Route::get('keyboards/{id}', [KeyboardController::class, 'show']);
 Route::post('keyboards', [KeyboardController::class, 'store']);
 Route::put('keyboards/{id}', [KeyboardController::class, 'update']);
 Route::delete('keyboards/{id}', [KeyboardController::class, 'destroy']);
+
+Route::get('coolings', [CoolingController::class, 'index']);
+Route::get('coolings/{id}', [CoolingController::class, 'show']);
+Route::post('coolings', [CoolingController::class, 'store']);
 
 Route::get('mouses', [MouseController::class, 'index']);
 Route::post('mouses', [MouseController::class, 'store']);
