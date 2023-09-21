@@ -172,7 +172,8 @@ export function getAllFilteredProductsData(
   type,
   rgb,
   connector,
-  size
+  size,
+  switch_type
 ) {
   let fetchUrl = `/component?product_type=${selectedType}&min=${min}&max=${max}`;
 
@@ -198,6 +199,10 @@ export function getAllFilteredProductsData(
 
   if (size.length != 0) {
     fetchUrl += `&size=${size.toString()}`;
+  }
+
+  if (switch_type.length != 0) {
+    fetchUrl += `&sw_ty=${switch_type.toString()}`;
   }
 
   return axiosClient.get(fetchUrl).then(({ data }) => {

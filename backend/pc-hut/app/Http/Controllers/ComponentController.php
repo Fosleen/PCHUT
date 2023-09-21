@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ComponentResource;
 use App\Models\Component;
+use App\Models\Cooling;
+use App\Models\CoolingType;
 use App\Models\CPU;
 use App\Models\Keyboard;
 use App\Models\Manufacturer;
 use App\Models\Monitor;
 use App\Models\Mouse;
+use App\Models\RamType;
+use App\Models\Storage;
+use App\Models\StorageType;
+use App\Models\SwitchType;
 use Illuminate\Http\Request;
 
 class ComponentController extends Controller
@@ -58,6 +64,14 @@ class ComponentController extends Controller
                 $query->whereIn('productable_id', $productIdsArray);
             }
 
+            if ($request->has('sw_ty')) {
+                $switchType = $request->input('sw_ty');
+                $switchTypeArray = explode(',', $switchType);
+                $switchIds = SwitchType::whereIn('name', $switchTypeArray)->pluck('id')->toArray();
+                $productIdsArray = Keyboard::whereIn('switch_type_id', $switchIds)->pluck('id')->toArray();
+                $query->whereIn('productable_id', $productIdsArray);
+            }
+
             if ($request->has('type')) {
                 $types = $request->input('type');
                 $typesArray = explode(',', $types);
@@ -68,6 +82,12 @@ class ComponentController extends Controller
                     $productIdsArray = Mouse::whereIn('wired', $typesArray)->pluck('id')->toArray();
                 } else if ($request->input('product_type') == "monitor") {
                     $productIdsArray = Monitor::whereIn('curved', $typesArray)->pluck('id')->toArray();
+                } else if ($request->input('product_type') == "cooling") {
+                    $coolingIds = CoolingType::whereIn('name', $typesArray)->pluck('id')->toArray();
+                    $productIdsArray = Cooling::whereIn('cooling_type_id', $coolingIds)->pluck('id')->toArray();
+                }else if ($request->input('product_type') == "storage") {
+                    $coolingIds = StorageType::whereIn('name', $typesArray)->pluck('id')->toArray();
+                    $productIdsArray = Storage::whereIn('storage_type_id', $coolingIds)->pluck('id')->toArray();
                 }
 
                 $query->whereIn('productable_id', $productIdsArray);

@@ -76,24 +76,7 @@
             @checkbox-click="changeCheckboxes('Samsung', 'manufacturers')"
           />
         </div>
-        <div
-          v-if="isTypeShown('LAPTOPI, PC')"
-          class="filter-dropdown-custom-filter-group"
-        >
-          <h4>Tip:</h4>
-          <CheckboxInput
-            value="Laptop"
-            name="type"
-            id="Laptop"
-            @checkbox-click="changeCheckboxes('Laptop', 'type')"
-          />
-          <CheckboxInput
-            value="PC"
-            name="type"
-            id="PC"
-            @checkbox-click="changeCheckboxes('PC', 'type')"
-          />
-        </div>
+
         <div
           v-if="isTypeShown('POHRANA')"
           class="filter-dropdown-custom-filter-group"
@@ -893,7 +876,6 @@ let minRange = ref(0); // default values
 let maxRange = ref(2000);
 
 const componentTypes = [
-  { title: "LAPTOPI, PC", product_type: "pc" },
   { title: "PROCESORI", product_type: "cpu" },
   { title: "GRAFIČKE KARTICE", product_type: "gpu" },
   { title: "MATIČNE PLOČE", product_type: "motherboard" },
@@ -958,7 +940,8 @@ function searchProducts() {
     JSON.parse(JSON.stringify(type.value)),
     JSON.parse(JSON.stringify(rgb.value)),
     JSON.parse(JSON.stringify(connector.value)),
-    JSON.parse(JSON.stringify(size.value))
+    JSON.parse(JSON.stringify(size.value)),
+    JSON.parse(JSON.stringify(switch_type.value))
   );
 }
 

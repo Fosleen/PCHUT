@@ -36,6 +36,20 @@ class StorageController extends Controller
         ], 200);
     }
 
+    public function show($id)
+    {
+        $storage = Storage::with('component')->find($id);
+
+        if ($storage) {
+            return new StorageResource($storage);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "No storage found"
+            ], 404);
+        }
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -74,7 +88,6 @@ class StorageController extends Controller
                 'productable_type' => Storage::class,
                 'discount' => $request->discount,
                 'product_type_cro' => "Pohrana",
-
             ]);
 
             $storage->component()->save($component);

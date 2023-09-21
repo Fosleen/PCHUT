@@ -47,6 +47,10 @@ Route::get('coolings', [CoolingController::class, 'index']);
 Route::get('coolings/{id}', [CoolingController::class, 'show']);
 Route::post('coolings', [CoolingController::class, 'store']);
 
+Route::get('storages', [StorageController::class, 'index']);
+Route::get('storages/{id}', [StorageController::class, 'show']);
+Route::post('storages', [StorageController::class, 'store']);
+
 Route::get('mouses', [MouseController::class, 'index']);
 Route::post('mouses', [MouseController::class, 'store']);
 Route::get('mouses/{id}', [MouseController::class, 'show']);

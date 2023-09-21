@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Storage extends Model
@@ -18,5 +19,10 @@ class Storage extends Model
     public function component(): MorphOne
     {
         return $this->morphOne(Component::class, 'productable');
+    }
+
+    public function storageType(): BelongsTo
+    {
+        return $this->belongsTo(StorageType::class, 'storage_type_id');
     }
 }

@@ -25,8 +25,7 @@ class StorageResource extends JsonResource
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
             'manufacturer' => $this->component->manufacturer->name,
-            // 'storage_type_id' => $this->storage_type->name, fix later if needed
-
+            'storage_type' => $this->storageType->name,
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }
