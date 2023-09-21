@@ -25,24 +25,43 @@ const props = defineProps({
 <style lang="scss">
 @import "../utils/theme.scss";
 
-.footer-ul {
-  list-style: none;
-  padding: 0;
-}
+.footer-text-group-item-wrapper {
+  margin-bottom: 32px;
 
-.footer-text-group-name {
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 15px;
+  .footer-text-group-name {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
 
-  @media screen and ($tabletLarge) {
-    margin-bottom: 10px;
+  .footer-ul {
+    list-style: none;
+    padding: 0;
+
+    .footer-list-item {
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 100;
+      text-align: center;
+    }
   }
 }
 
-.footer-list-item {
-  margin-bottom: 12px;
-  font-size: 16px;
+@media screen and ($tabletLarge) {
+  .footer-text-group-item-wrapper {
+    .footer-text-group-name {
+      margin-bottom: 10px;
+      font-size: 22px;
+      text-align: left;
+    }
+
+    .footer-ul {
+      .footer-list-item {
+        text-align: left;
+      }
+    }
+  }
 }
 </style>

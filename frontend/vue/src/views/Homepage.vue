@@ -14,7 +14,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreGPU" />
+        <Button
+          shape="trapezoid pink"
+          text="UČITAJ VIŠE"
+          @click="loadMoreGPU"
+        />
       </div>
 
       <h1 class="homepage-component-wrapper-title">Procesori</h1>
@@ -28,7 +32,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreCPU" />
+        <Button
+          shape="trapezoid pink"
+          text="UČITAJ VIŠE"
+          @click="loadMoreCPU"
+        />
       </div>
 
       <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
@@ -43,8 +51,8 @@
 
       <div class="pagination-button-wrapper">
         <Button
-          shape="trapezoid"
-          text="Učitaj više"
+          shape="trapezoid pink"
+          text="UČITAJ VIŠE"
           @click="loadMoreMotherboards"
         />
       </div>
@@ -60,7 +68,11 @@
       </div>
 
       <div class="pagination-button-wrapper">
-        <Button shape="trapezoid" text="Učitaj više" @click="loadMoreRAMs" />
+        <Button
+          shape="trapezoid pink"
+          text="UČITAJ VIŠE"
+          @click="loadMoreRAMs"
+        />
       </div>
     </div>
 
@@ -105,17 +117,17 @@ const fetchGpuData = async (page) => {
 
 const fetchCpuData = async (page) => {
   const response = await getAllCPUsPaginated(page);
-  cpus.value = [...cpus.value, ...response.cpus]; //to append items that were loaded before
+  cpus.value = [...cpus.value, ...response.cpus];
 };
 
 const fetchMotherboardsData = async (page) => {
   const response = await getAllMotherboardsPaginated(page);
-  mbs.value = [...mbs.value, ...response.motherboards]; //to append items that were loaded before
+  mbs.value = [...mbs.value, ...response.motherboards];
 };
 
 const fetchRAMsData = async (page) => {
   const response = await getAllRAMsPaginated(page);
-  rams.value = [...rams.value, ...response.rams]; //to append items that were loaded before
+  rams.value = [...rams.value, ...response.rams];
 };
 
 const loadMoreGPU = () => {
@@ -125,26 +137,23 @@ const loadMoreGPU = () => {
 
 const loadMoreCPU = () => {
   cpuCurrentPage.value++;
-  fetchCpuData(cpuCurrentPage.value); // Fetch data for the next page
+  fetchCpuData(cpuCurrentPage.value);
 };
 
 const loadMoreMotherboards = () => {
   motherboardCurrentPage.value++;
-  fetchMotherboardsData(motherboardCurrentPage.value); // Fetch data for the next page
+  fetchMotherboardsData(motherboardCurrentPage.value);
 };
 
 const loadMoreRAMs = () => {
   ramsCurrentPage.value++;
-  fetchRAMsData(ramsCurrentPage.value); // Fetch data for the next page
+  fetchRAMsData(ramsCurrentPage.value);
 };
 
 onMounted(async () => {
   await fetchGpuData(gpuCurrentPage.value);
-
   await fetchCpuData(cpuCurrentPage.value);
-
   await fetchMotherboardsData(motherboardCurrentPage.value);
-
   await fetchRAMsData(ramsCurrentPage.value);
 });
 </script>

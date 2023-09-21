@@ -71,6 +71,7 @@ export default {
 
 <style lang="scss">
 @import "../utils/theme.scss";
+
 .footer-parent-wrapper {
   background-image: url("../assets/footer_img.jpg");
   padding-left: 60px;
@@ -92,16 +93,18 @@ export default {
   text-align: left;
   margin-bottom: 50px;
   text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px;
 
   @media screen and ($tabletLarge) {
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
 }
 
 .footer-badges-wrapper {
   height: 90px;
-
   display: flex;
   flex-direction: row;
   justify-content: center;

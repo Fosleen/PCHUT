@@ -1,14 +1,16 @@
 <template>
-  <h1 class="homepage-component-wrapper-title">
-    Još određeno vrijeme na akciji
-  </h1>
+  <div class="homepage-discount-component-wrapper">
+    <h1 class="homepage-component-wrapper-title">
+      Još određeno vrijeme na akciji
+    </h1>
 
-  <div class="item-type-wrapper">
-    <DiscountPartCard
-      v-for="(part, index) in productsWithDiscount"
-      :key="index"
-      :component="part"
-    />
+    <div class="item-type-wrapper">
+      <DiscountPartCard
+        v-for="(part, index) in productsWithDiscount"
+        :key="index"
+        :component="part"
+      />
+    </div>
   </div>
 </template>
 
@@ -28,29 +30,40 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 @import "../utils/theme.scss";
-.item-type-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
 
-  @media screen and ($tabletLarge) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    justify-content: center;
+.homepage-discount-component-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .homepage-component-wrapper-title {
+    text-transform: uppercase;
+    color: $pink;
+    margin-bottom: 16px;
   }
-
-  @media screen and ($desktopLarge) {
-    grid-template-columns: repeat(4, 1fr);
+  .item-type-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
   }
 }
 
-.homepage-component-wrapper-title {
-  text-transform: uppercase;
-  color: $pink;
-  margin-bottom: 16px;
+@media screen and ($tabletLarge) {
+  .homepage-discount-component-wrapper {
+    .item-type-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and ($desktopLarge) {
+  .homepage-discount-component-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 </style>
