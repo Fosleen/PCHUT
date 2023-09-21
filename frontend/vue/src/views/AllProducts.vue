@@ -233,7 +233,9 @@ const search = async (
   rgb,
   connector,
   size,
-  switch_type
+  switch_type,
+  models,
+  socket_type
 ) => {
   fetchFilteredProductsData(
     selectedType,
@@ -245,7 +247,9 @@ const search = async (
     rgb,
     connector,
     size,
-    switch_type
+    switch_type,
+    models,
+    socket_type
   );
   isFilteredShown.value = true;
 };
@@ -260,7 +264,9 @@ const fetchFilteredProductsData = async (
   rgb,
   connector,
   size,
-  switch_type
+  switch_type,
+  models,
+  socket_type
 ) => {
   filteredProducts.value = [];
   const finalType = changeTypeValues(type);
@@ -277,7 +283,9 @@ const fetchFilteredProductsData = async (
     finalRgb,
     finalConnector,
     size,
-    switch_type
+    switch_type,
+    models,
+    socket_type
   );
   console.log(response.components);
 

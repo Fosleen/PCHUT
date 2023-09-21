@@ -10,8 +10,10 @@ use App\Models\CPU;
 use App\Models\Keyboard;
 use App\Models\Manufacturer;
 use App\Models\Monitor;
+use App\Models\Motherboard;
 use App\Models\Mouse;
 use App\Models\RamType;
+use App\Models\Socket;
 use App\Models\Storage;
 use App\Models\StorageType;
 use App\Models\SwitchType;
@@ -72,6 +74,14 @@ class ComponentController extends Controller
                 $query->whereIn('productable_id', $productIdsArray);
             }
 
+            if ($request->has('so_ty')) {
+                $socketType = $request->input('so_ty');
+                $socketTypeArray = explode(',', $socketType);
+                $switchIds = Socket::whereIn('name', $socketTypeArray)->pluck('id')->toArray();
+                $productIdsArray = Motherboard::whereIn('socket_id', $switchIds)->pluck('id')->toArray();
+                $query->whereIn('productable_id', $productIdsArray);
+            }
+
             if ($request->has('type')) {
                 $types = $request->input('type');
                 $typesArray = explode(',', $types);
@@ -85,7 +95,7 @@ class ComponentController extends Controller
                 } else if ($request->input('product_type') == "cooling") {
                     $coolingIds = CoolingType::whereIn('name', $typesArray)->pluck('id')->toArray();
                     $productIdsArray = Cooling::whereIn('cooling_type_id', $coolingIds)->pluck('id')->toArray();
-                }else if ($request->input('product_type') == "storage") {
+                } else if ($request->input('product_type') == "storage") {
                     $coolingIds = StorageType::whereIn('name', $typesArray)->pluck('id')->toArray();
                     $productIdsArray = Storage::whereIn('storage_type_id', $coolingIds)->pluck('id')->toArray();
                 }
@@ -107,6 +117,13 @@ class ComponentController extends Controller
             $manufacturerNamesArray = explode(',', $manufacturer); // "a,b' => ["a","b"]
             $manufacturerIds = Manufacturer::whereIn('name', $manufacturerNamesArray)->pluck('id')->toArray();
             $query->whereIn('manufacturer_id', $manufacturerIds);
+        }
+
+        if ($request->has('model')) {
+            $models = $request->input('model');
+            $modelsArray = explode(',', $models);
+            $productIdsArray = Component::whereIn('model', $modelsArray)->pluck('id')->toArray();
+            $query->whereIn('id', $productIdsArray);
         }
 
         $components = $query->get();

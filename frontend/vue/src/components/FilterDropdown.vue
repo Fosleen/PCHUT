@@ -418,36 +418,7 @@
             @checkbox-click="changeCheckboxes('Intel LGA1700', 'socket_type')"
           />
         </div>
-        <div
-          v-if="isTypeShown('MATIČNE PLOČE')"
-          class="filter-dropdown-custom-filter-group"
-        >
-          <h4>VELIČINA:</h4>
-          <CheckboxInput
-            value="ATX"
-            name="size"
-            id="ATX"
-            @checkbox-click="changeCheckboxes('ATX', 'size')"
-          />
-          <CheckboxInput
-            value="E-ATX"
-            name="size"
-            id="E-ATX"
-            @checkbox-click="changeCheckboxes('E-ATX', 'size')"
-          />
-          <CheckboxInput
-            value="Micro ATX"
-            name="size"
-            id="Micro ATX"
-            @checkbox-click="changeCheckboxes('Micro ATX', 'size')"
-          />
-          <CheckboxInput
-            value="Mini ITX"
-            name="size"
-            id="Mini ITX"
-            @checkbox-click="changeCheckboxes('Mini ITX', 'size')"
-          />
-        </div>
+
         <div
           v-if="isTypeShown('GRAFIČKE KARTICE')"
           class="filter-dropdown-custom-filter-group"
@@ -484,22 +455,16 @@
             @checkbox-click="changeCheckboxes('Inno3d', 'manufacturers')"
           />
           <CheckboxInput
-            value="KFA2"
-            name="type"
-            id="KFA2"
-            @checkbox-click="changeCheckboxes('KFA2', 'manufacturers')"
-          />
-          <CheckboxInput
             value="MSI"
             name="type"
             id="MSI"
             @checkbox-click="changeCheckboxes('MSI', 'manufacturers')"
           />
           <CheckboxInput
-            value="PNY"
+            value="NVIDIA"
             name="type"
-            id="PNY"
-            @checkbox-click="changeCheckboxes('PNY', 'manufacturers')"
+            id="NVIDIA"
+            @checkbox-click="changeCheckboxes('NVIDIA', 'manufacturers')"
           />
           <CheckboxInput
             value="Sapphire"
@@ -733,25 +698,25 @@
               value="AMD Ryzen 3"
               name="series"
               id="AMD Ryzen 3"
-              @checkbox-click="changeCheckboxes('AMD Ryzen 3', 'series')"
+              @checkbox-click="changeCheckboxes('Ryzen 3', 'series')"
             />
             <CheckboxInput
               value="AMD Ryzen 5"
               name="series"
               id="AMD Ryzen 5"
-              @checkbox-click="changeCheckboxes('AMD Ryzen 5', 'series')"
+              @checkbox-click="changeCheckboxes('Ryzen 5', 'series')"
             />
             <CheckboxInput
               value="AMD Ryzen 7"
               name="series"
               id="AMD Ryzen 7"
-              @checkbox-click="changeCheckboxes('AMD Ryzen 7', 'series')"
+              @checkbox-click="changeCheckboxes('Ryzen 7', 'series')"
             />
             <CheckboxInput
               value="AMD Ryzen 9"
               name="series"
               id="AMD Ryzen 9"
-              @checkbox-click="changeCheckboxes('AMD Ryzen 9', 'series')"
+              @checkbox-click="changeCheckboxes('Ryzen 9', 'series')"
             />
           </div>
           <div
@@ -762,31 +727,31 @@
               value="Intel Core i3"
               name="series"
               id="intel-core-i3"
-              @checkbox-click="changeCheckboxes('Intel Core i3', 'series')"
+              @checkbox-click="changeCheckboxes('Core i3', 'series')"
             />
             <CheckboxInput
               value="Intel Core i5"
               name="series"
               id="intel-core-i5"
-              @checkbox-click="changeCheckboxes('Intel Core i5', 'series')"
+              @checkbox-click="changeCheckboxes('Core i5', 'series')"
             />
             <CheckboxInput
               value="Intel Core i7"
               name="series"
               id="intel-core-i7"
-              @checkbox-click="changeCheckboxes('Intel Core i7', 'series')"
+              @checkbox-click="changeCheckboxes('Core i7', 'series')"
             />
             <CheckboxInput
               value="Intel Core i9"
               name="series"
               id="intel-core-i9"
-              @checkbox-click="changeCheckboxes('Intel Core i9', 'series')"
+              @checkbox-click="changeCheckboxes('Core i9', 'series')"
             />
             <CheckboxInput
               value="Intel Pentium Gold"
               name="series"
               id="Intel Pentium Gold"
-              @checkbox-click="changeCheckboxes('Intel Pentium Gold', 'series')"
+              @checkbox-click="changeCheckboxes('Pentium Gold', 'series')"
             />
           </div>
         </div>
@@ -941,7 +906,9 @@ function searchProducts() {
     JSON.parse(JSON.stringify(rgb.value)),
     JSON.parse(JSON.stringify(connector.value)),
     JSON.parse(JSON.stringify(size.value)),
-    JSON.parse(JSON.stringify(switch_type.value))
+    JSON.parse(JSON.stringify(switch_type.value)),
+    JSON.parse(JSON.stringify(series.value)),
+    JSON.parse(JSON.stringify(socket_type.value))
   );
 }
 
