@@ -219,3 +219,11 @@ export function getAllFilteredProductsData(
     return data;
   });
 }
+
+export function getFilteredDataByProductType(selectedType) {
+  return axiosClient
+    .get(`/component?product_type=${selectedType}`)
+    .then(({ data }) => {
+      return data;
+    });
+}

@@ -9,20 +9,20 @@
 
       <div class="all-products-container">
         <div v-if="!isFilterOpen" class="all-products-menu">
-          <div class="all-products-menu-item">
+          <div class="all-products-menu-item" @click="quickSearch('gpu')">
             <PhDesktopTower :size="20" />
             <p>GRAFIČKE KARTICE</p>
           </div>
 
-          <div class="all-products-menu-item">
+          <div class="all-products-menu-item" @click="quickSearch('cpu')">
             <PhCpu :size="20" />
             <p>PROCESORI</p>
           </div>
-          <div class="all-products-menu-item">
+          <div class="all-products-menu-item" @click="quickSearch('keyboard')">
             <PhKeyboard :size="20" />
             <p>TIPKOVNICE</p>
           </div>
-          <div class="all-products-menu-item">
+          <div class="all-products-menu-item" @click="quickSearch('mouse')">
             <PhMouse :size="20" />
             <p>MIŠEVI</p>
           </div>
@@ -202,6 +202,7 @@ import {
   getAllStoragesPaginated,
   getAllPCCasesPaginated,
   getAllFilteredProductsData,
+  getFilteredDataByProductType,
 } from "../api/api";
 
 const gpuCurrentPage = ref(1);
@@ -290,6 +291,12 @@ const fetchFilteredProductsData = async (
   console.log(response.components);
 
   filteredProducts.value = [...filteredProducts.value, ...response.components];
+};
+
+const quickSearch = async (productType) => {
+  const response = await getFilteredDataByProductType(productType);
+  filteredProducts.value = [...response.components];
+  isFilteredShown.value = true;
 };
 
 const changeTypeValues = (typesArray) => {
