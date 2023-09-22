@@ -14,6 +14,7 @@
       aria-label="The carousel with thumbnails. Selecting a thumbnail will change the main carousel"
       :options="thumbsOptions"
       ref="thumbs"
+      style="transform: translateX(0px)"
     >
       <SplideSlide v-for="(slide, index) in slides" :key="slide">
         <img :src="slide" :alt="`img ${index + 1}`" />
@@ -59,10 +60,16 @@ const thumbsOptions = {
   fixedWidth: 90,
   fixedHeight: 70,
   cover: true,
-  focus: "center",
+  focus: "left",
   isNavigation: true,
   updateOnMove: true,
   arrows: false,
+  breakpoints: {
+    480: {
+      fixedWidth: 50,
+      fixedHeight: 40,
+    },
+  },
 };
 
 onMounted(() => {
@@ -106,7 +113,7 @@ onMounted(() => {
 
   .splide__slide {
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
     max-width: 650px;
     flex-direction: column;
 
