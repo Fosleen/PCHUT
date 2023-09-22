@@ -10,14 +10,14 @@
         class="pc-builder-homepage-components-wrapper"
         v-if="gpu && cpu && mbd"
       >
-        <PcBuilderComponentCard
+        <PcBuilderCard
           class="pc-builder-component-small-card-wrapper"
           :component="gpu"
           v-if="gpu && gpu.images"
           :Image="gpu?.images[0]"
         />
         <h2>+</h2>
-        <PcBuilderComponentCard
+        <PcBuilderCard
           class="pc-builder-component-small-card-wrapper"
           :component="cpu"
           v-if="cpu && cpu.images"
@@ -25,7 +25,7 @@
         />
 
         <h2>+</h2>
-        <PcBuilderComponentCard
+        <PcBuilderCard
           class="pc-builder-component-small-card-wrapper"
           :component="mbd"
           v-if="mbd && mbd.images"
@@ -41,10 +41,10 @@
 </template>
 
 <script setup>
-import BuildPCButton from "./BuildPCButton.vue";
-import PcBuilderComponentCard from "../components/PcBuilderComponentCard.vue";
 import { onMounted, ref } from "vue";
 import { getGraphicCardById, getCPUById, getMotherboardById } from "../api/api";
+import BuildPCButton from "./BuildPCButton.vue";
+import PcBuilderCard from "./PcBuilderCard.vue";
 
 const gpu = ref([]);
 const cpu = ref([]);

@@ -43,12 +43,14 @@
         <h3>Dostupno</h3>
 
         <div class="discount-part-card-prices-wrapper">
-        <h2 class="discount-part-card-price-wrapper">
-          {{ `${component.price} &#x20AC` }}
-        </h2>
+          <h2 class="discount-part-card-price-wrapper">
+            {{ `${component.price} €` }}
+          </h2>
 
-        <h2 class="discount-part-card-discount-price-wrapper">{{ `${component.discount} &#x20AC` }}</h2>
-      </div>
+          <h2 class="discount-part-card-discount-price-wrapper">
+            {{ `${component.discount} €` }}
+          </h2>
+        </div>
       </div>
 
       <div class="discount-part-card-button-wrapper">
@@ -70,7 +72,6 @@
 import PCPartCardList from "./PCPartCardList.vue";
 import Button from "./Button.vue";
 
-
 const getModelName = () => {
   const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
@@ -79,11 +80,9 @@ const getModelName = () => {
 const { component } = defineProps({
   component: Object,
 });
-
 </script>
 
 <style lang="scss" scoped>
-
 @import "../utils/theme.scss";
 
 .discount-part-card-wrapper {
@@ -134,16 +133,15 @@ const { component } = defineProps({
 }
 
 .discount-part-card-price-wrapper {
-  color:$pink;
+  color: $pink;
 }
 .discount-part-card-prices-wrapper {
   display: flex;
   justify-content: space-between;
   padding-right: 48px;
-
 }
 
 .discount-part-card-discount-price-wrapper {
-  text-decoration:line-through;
+  text-decoration: line-through;
 }
 </style>

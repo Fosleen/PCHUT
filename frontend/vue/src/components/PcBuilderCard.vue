@@ -5,13 +5,13 @@
         <img :src="Image" alt="" />
       </div>
       <div class="pc-builder-component-card-text-wrapper">
-        <PCBuilderComponentCardList
+        <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Grafička kartica'"
           :text-group-name="component.model"
           :text-group-items="[component.memory + ' GB memorije']"
         />
 
-        <PCBuilderComponentCardList
+        <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Procesor'"
           :text-group-name="component.model"
           :text-group-items="[
@@ -20,7 +20,7 @@
           ]"
         />
 
-        <PCBuilderComponentCardList
+        <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Matična ploča'"
           :text-group-name="component.model"
           :text-group-items="[component.socket + ' socket']"
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import PCBuilderComponentCardList from "./PCBuilderComponentCardList.vue";
+import PcBuilderComponentCardList from "./PcBuilderComponentCardList.vue";
 
 const { Image, className, component } = defineProps({
   Image: String,
