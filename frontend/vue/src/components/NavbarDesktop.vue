@@ -93,6 +93,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+@import "../utils/theme.scss";
+
 .navbar {
   z-index: 2;
   position: relative;

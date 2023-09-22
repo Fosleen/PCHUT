@@ -1,5 +1,6 @@
 <template>
   <div>
+    <HomepageSubmenu/>
     <Hero />
 
     <div class="homepage-component-outer-wrapper">
@@ -96,6 +97,7 @@ import {
   getAllRAMsPaginated,
 } from "../api/api";
 import DiscountProducts from "../components/DiscountProducts.vue";
+import HomepageSubmenu from "../components/HomepageSubmenu.vue";
 
 const gpuCurrentPage = ref(1);
 const cpuCurrentPage = ref(1);

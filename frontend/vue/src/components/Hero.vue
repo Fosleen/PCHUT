@@ -47,7 +47,7 @@ const photos = ["hero.jpg", "hero2.jpg", "hero.jpg"];
 @media screen and ($desktop) {
   .swiper {
     height: 600px;
-    height: calc(100vh - 92px);
+    height: calc(100vh - 92px - 50px);
   }
 }
 </style>
