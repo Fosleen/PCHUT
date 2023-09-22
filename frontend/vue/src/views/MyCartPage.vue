@@ -28,13 +28,21 @@
             @change-quantity="change(item.id, item.price, $event)"
           />
         </div>
-        <div class="my-cart-items-total-price-wrapper">
+        <Message
+          v-if="cartItems.length == 0"
+          text="Još nemate proizvoda u košarici."
+          imageName="empty-cart"
+        />
+        <div
+          class="my-cart-items-total-price-wrapper"
+          v-if="cartItems.length > 0"
+        >
           <div class="my-cart-items-total-price">
             <p>{{ totalPrice.toFixed(2) }} €</p>
           </div>
         </div>
       </div>
-      <div class="my-cart-details-container">
+      <div class="my-cart-details-container" v-if="cartItems.length > 0">
         <div class="my-cart-details-delivery">
           <p>Odaberi način dostave:</p>
           <div class="delivery-type">
@@ -80,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div class="my-cart-continue">
+      <div class="my-cart-continue" v-if="cartItems.length > 0">
         <router-link to="/detalji-placanja">
           <Button shape="trapezoid" text="Nastavi na plaćanje" />
         </router-link>
@@ -92,6 +100,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
+import Message from "../components/Message.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import { PhCalendarCheck } from "@phosphor-icons/vue";
 import { getComponentById } from "../api/api";

@@ -1,78 +1,83 @@
 <template>
-  <div class="orders-wrapper">
-    <img class="img-background" src="../assets/gpu-grey.png" alt="" />
-    <img class="img-background" src="../assets/cpu-grey.png" alt="" />
-    <div class="orders-container">
-      <div class="past-orders-wrapper">
-        <h3>Povijest naručivanja</h3>
-        <div class="past-orders-container">
-          <OrdersListItem
-            v-for="order in orders"
-            v-bind:key="order.id"
-            @click="changeSelectedOrder(order)"
-            :order="{
-              id: order.id,
-              total: calculateTotalPrice(order),
-              quantity: calculateTotalQuantity(order),
-              shipping: order.delivery_status,
-              payment: recalculatePayment(order),
-            }"
-          />
-        </div>
-      </div>
-      <div v-if="selectedOrder" class="current-order-wrapper">
-        <div class="current-order-items-wrapper">
-          <div class="current-order-items-title">
-            <h2>#{{ selectedOrder.id }}</h2>
-            <p>({{ calculateTotalQuantity(selectedOrder) }})</p>
-          </div>
-          <div class="current-order-items-container">
-            <OrderItem
-              v-for="component in selectedOrder.components"
-              v-bind:key="component.id"
-              :item="{
-                img: component.images,
-                manufacturer: component.manufacturer,
-                model: component.model,
-                price: component.price,
-                type: component.product_type_cro,
-                quantity: component.quantity,
+  <div>
+    <div class="orders-wrapper" v-if="orders.length > 0">
+      <img class="img-background" src="../assets/gpu-grey.png" alt="" />
+      <img class="img-background" src="../assets/cpu-grey.png" alt="" />
+      <div class="orders-container">
+        <div class="past-orders-wrapper">
+          <h3>Povijest naručivanja</h3>
+          <div class="past-orders-container">
+            <OrdersListItem
+              v-for="order in orders"
+              v-bind:key="order.id"
+              @click="changeSelectedOrder(order)"
+              :order="{
+                id: order.id,
+                total: calculateTotalPrice(order),
+                quantity: calculateTotalQuantity(order),
+                shipping: order.delivery_status,
+                payment: recalculatePayment(order),
               }"
             />
           </div>
         </div>
-        <div class="current-order-details-wrapper">
-          <div class="current-order-details-title">
-            <h2>Detalji</h2>
+        <div v-if="selectedOrder" class="current-order-wrapper">
+          <div class="current-order-items-wrapper">
+            <div class="current-order-items-title">
+              <h2>#{{ selectedOrder.id }}</h2>
+              <p>({{ calculateTotalQuantity(selectedOrder) }})</p>
+            </div>
+            <div class="current-order-items-container">
+              <OrderItem
+                v-for="component in selectedOrder.components"
+                v-bind:key="component.id"
+                :item="{
+                  img: component.images,
+                  manufacturer: component.manufacturer,
+                  model: component.model,
+                  price: component.price,
+                  type: component.product_type_cro,
+                  quantity: component.quantity,
+                }"
+              />
+            </div>
           </div>
-          <div class="current-order-details-container">
-            <div>
-              <p>Ime i prezime:</p>
-              <p>{{ selectedOrder.order_name }}</p>
+          <div class="current-order-details-wrapper">
+            <div class="current-order-details-title">
+              <h2>Detalji</h2>
             </div>
-            <div>
-              <p>Adresa:</p>
-              <p>{{ selectedOrder.order_address }}</p>
-            </div>
-            <div>
-              <p>Način plaćanja:</p>
-              <p>{{ recalculatePayment(selectedOrder) }}</p>
-            </div>
-            <div>
-              <p>Status dostave:</p>
-              <p>{{ recalculateDeliveryStatus(selectedOrder) }}</p>
-            </div>
-            <div>
-              <p>Očekivan datum dostave:</p>
-              <p>15. kolovoz - 17. kolovoz 2023.</p>
-            </div>
-            <div>
-              <p>Ukupno:</p>
-              <p>{{ calculateTotalPrice(selectedOrder) }} €</p>
+            <div class="current-order-details-container">
+              <div>
+                <p>Ime i prezime:</p>
+                <p>{{ selectedOrder.order_name }}</p>
+              </div>
+              <div>
+                <p>Adresa:</p>
+                <p>{{ selectedOrder.order_address }}</p>
+              </div>
+              <div>
+                <p>Način plaćanja:</p>
+                <p>{{ recalculatePayment(selectedOrder) }}</p>
+              </div>
+              <div>
+                <p>Status dostave:</p>
+                <p>{{ recalculateDeliveryStatus(selectedOrder) }}</p>
+              </div>
+              <div>
+                <p>Očekivan datum dostave:</p>
+                <p>15. kolovoz - 17. kolovoz 2023.</p>
+              </div>
+              <div>
+                <p>Ukupno:</p>
+                <p>{{ calculateTotalPrice(selectedOrder) }} €</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="message" v-else>
+      <Message text="Još nemate prethodnih narudžbi." imageName="empty-order" />
     </div>
   </div>
 </template>
@@ -80,6 +85,7 @@
 <script setup>
 import OrderItem from "../components/OrderItem.vue";
 import OrdersListItem from "../components/OrdersListItem.vue";
+import Message from "../components/Message.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
@@ -132,6 +138,10 @@ const recalculateDeliveryStatus = (order) => {
 
 <style lang="scss">
 @import "../utils/theme.scss";
+
+.message {
+  margin: 24px 0;
+}
 
 .orders-wrapper {
   position: relative;
