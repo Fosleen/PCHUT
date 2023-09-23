@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="my-orders-page-tracker-wrapper">
+      <PageTracker />
+    </div>
     <div class="orders-wrapper" v-if="orders.length > 0">
       <img class="img-background" src="../assets/gpu-grey.png" alt="" />
       <img class="img-background" src="../assets/cpu-grey.png" alt="" />
@@ -88,6 +91,7 @@ import OrdersListItem from "../components/OrdersListItem.vue";
 import Message from "../components/Message.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import PageTracker from "../components/PageTracker.vue";
 const store = useStore();
 
 store.dispatch("getOrdersByUser", {
@@ -337,5 +341,12 @@ const recalculateDeliveryStatus = (order) => {
       }
     }
   }
+}
+
+.my-orders-page-tracker-wrapper {
+  display: flex;
+  max-width: 1200px;
+  position: relative;
+  margin: 16px auto;
 }
 </style>

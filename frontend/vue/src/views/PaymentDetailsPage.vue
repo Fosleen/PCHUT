@@ -1,4 +1,8 @@
 <template>
+  <div class="payment-details-page-tracker-wrapper">
+    <PageTracker />
+  </div>
+
   <div class="payment-details-wrapper">
     <div class="payment-details-inner">
       <div class="payment-details-card-details">
@@ -162,6 +166,7 @@ import axiosClient from "../axios";
 import store from "../store";
 import { getLoggedUser } from "../api/api";
 import router from "../router";
+import PageTracker from "../components/PageTracker.vue";
 
 const cartItemsId = ref([]);
 const cartItemsQuantity = ref([]);
@@ -457,5 +462,14 @@ input {
       }
     }
   }
+}
+
+.payment-details-page-tracker-wrapper {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  justify-content: center;
+
+  //margin-left: 96px;
 }
 </style>

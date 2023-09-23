@@ -1,5 +1,6 @@
 <template>
   <div>
+    <PageTracker />
     <div class="all-products-wrapper">
       <FilterDropdown
         v-if="isFilterOpen"

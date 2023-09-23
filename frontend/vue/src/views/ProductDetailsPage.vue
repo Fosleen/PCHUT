@@ -1,6 +1,7 @@
 <template>
   <div v-if="productLoading">Loading...</div>
   <div v-else class="product-details-wrapper">
+    <PageTracker :text="product.model" />
     <h2>
       {{ product.product_type_cro }} {{ product.manufacturer }}
       {{ product.model }}
@@ -132,6 +133,7 @@ import {
   PhPackage,
   PhArrowUDownLeft,
 } from "@phosphor-icons/vue";
+import PageTracker from "../components/PageTracker.vue";
 
 const route = useRoute();
 const productLoading = computed(() => store.state.currentProduct.loading);
