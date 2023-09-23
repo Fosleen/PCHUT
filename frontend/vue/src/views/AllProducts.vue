@@ -1,6 +1,5 @@
 <template>
   <div>
-    <PageTracker />
     <div class="all-products-wrapper">
       <FilterDropdown
         v-if="isFilterOpen"
@@ -9,6 +8,8 @@
       />
 
       <div class="all-products-container">
+        <PageTracker />
+
         <div v-if="!isFilterOpen" class="all-products-menu">
           <div class="all-products-menu-item" @click="quickSearch('gpu')">
             <PhDesktopTower :size="20" />
