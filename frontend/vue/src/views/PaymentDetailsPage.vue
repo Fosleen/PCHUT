@@ -227,6 +227,7 @@ const createOrder = async () => {
       })
       .then(({ data }) => {
         console.log(data);
+        sessionStorage.setItem("cart", []);
         router.push("/narudzbe");
       });
   } catch (err) {
