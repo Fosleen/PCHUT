@@ -24,10 +24,10 @@ class MotherboardResource extends JsonResource
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
-            'manufacturer' => $this->component->manufacturer->name,
-            'socket' => $this->socket->name,
+            'manufacturer' => $this->component->manufacturer,
+            'socket' => $this->socket,
             'socket_id' => $this->socket->id,
-            'ram_type_id' => $this->ram_type->id,
+            'ram_type' => $this->ramType,
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }

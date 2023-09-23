@@ -34,6 +34,20 @@ class PcCaseController extends Controller
         ], 200);
     }
 
+    public function show($id)
+    {
+        $pc_case = PcCase::with('component')->find($id);
+
+        if ($pc_case) {
+            return new PCCaseResource($pc_case);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => "No PC case found"
+            ], 404);
+        }
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -66,9 +80,9 @@ class PcCaseController extends Controller
                 'manufacturer_id' => $request->manufacturer_id,
                 'description' => $request->description,
                 'productable_id' => $pccase->id,
-                'productable_type' => pccase::class,
+                'productable_type' => PcCase::class,
                 'discount' => $request->discount,
-                'product_type_cro' => "Kučište",
+                'product_type_cro' => "Kućište",
             ]);
 
             $pccase->component()->save($component);

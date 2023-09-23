@@ -2,11 +2,11 @@
   <div class="order-item-wrapper">
     <div class="order-item-image-wrapper">
       <div class="order-item-image">
-        <img :src="props.item.img" :alt="props.item.title" />
+        <img :src="image" :alt="props.item.title" />
       </div>
     </div>
     <div class="order-item-info">
-      <h4>{{ props.item.manufacturer }} {{ props.item.model }}</h4>
+      <h4>{{ props.item.manufacturer.name }} {{ props.item.model }}</h4>
       <div class="order-item-info-details">
         <p>{{ props.item.type }}</p>
         <div>
@@ -19,7 +19,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+const image =
+  props.item.img.length === 0
+    ? [
+        "https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png",
+      ]
+    : props.item.img;
 
 const props = defineProps({
   item: Object,
@@ -118,7 +123,7 @@ const props = defineProps({
     .order-item-image-wrapper {
       height: 110px;
       margin: 12px;
-      width: 110px;
+      width: 140px;
     }
   }
 }

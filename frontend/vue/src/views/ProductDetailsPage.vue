@@ -2,7 +2,7 @@
   <div v-if="productLoading">Loading...</div>
   <div v-else class="product-details-wrapper">
     <h2>
-      {{ product.product_type_cro }} {{ product.manufacturer }}
+      {{ product.product_type_cro }} {{ product.manufacturer.name }}
       {{ product.model }}
     </h2>
     <div class="product-details-container">
@@ -21,7 +21,11 @@
         <div class="product-details-data-container">
           <div class="product-details-data-row">
             <p>Brand:</p>
-            <p>{{ product.manufacturer }}</p>
+            <p>{{ product.manufacturer.name }}</p>
+          </div>
+          <div class="product-details-data-row">
+            <p>Model:</p>
+            <p>{{ product.model }}</p>
           </div>
           <div v-if="product.connector" class="product-details-data-row">
             <p>Vrsta priključka:</p>
@@ -35,13 +39,21 @@
             <p>Broj jezgri:</p>
             <p>{{ product.cores }}</p>
           </div>
+          <div v-if="product.socket" class="product-details-data-row">
+            <p>Podnožje:</p>
+            <p>{{ product.socket.name }}</p>
+          </div>
           <div v-if="product.memory" class="product-details-data-row">
             <p>Memorija:</p>
             <p>{{ product.memory }} GB</p>
           </div>
           <div v-if="product.speed" class="product-details-data-row">
             <p>Brzina:</p>
-            <p>{{ product.speed }} GHz</p>
+            <p>{{ product.speed }}GHz</p>
+          </div>
+          <div v-if="product.power" class="product-details-data-row">
+            <p>Snaga:</p>
+            <p>{{ product.power }}W</p>
           </div>
           <div v-if="product.dpi" class="product-details-data-row">
             <p>DPI:</p>
@@ -62,10 +74,6 @@
           <div v-if="product.switch_type" class="product-details-data-row">
             <p>Switchevi:</p>
             <p>{{ product.switch_type }}</p>
-          </div>
-          <div v-if="product.socket" class="product-details-data-row">
-            <p>Socket:</p>
-            <p>{{ product.socket }}</p>
           </div>
           <div v-if="product.rgb" class="product-details-data-row">
             <p>RGB:</p>
@@ -146,6 +154,7 @@ let product = ref({
   type: null,
   wired: null,
   rgb: null,
+  power: null,
   product_type: null,
   discount: null,
   manufacturer_img: null,

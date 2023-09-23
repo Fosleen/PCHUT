@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class RAM extends Model
@@ -18,5 +19,10 @@ class RAM extends Model
     public function component(): MorphOne
     {
         return $this->morphOne(Component::class, 'productable');
+    }
+
+    public function ramType(): BelongsTo
+    {
+        return $this->belongsTo(RamType::class, 'ram_type_id');
     }
 }

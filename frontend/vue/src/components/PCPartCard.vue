@@ -16,36 +16,161 @@
       <div class="pc-part-card-text-wrapper">
         <PCPartCardList
           v-if="getModelName() == 'GPU'"
-          :text-group-name="component.model"
-          :text-group-items="[component.memory + 'GB memorije']"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[
+            'Serija: ' + component.model,
+            'Memorija: ' + component.memory + ' GB',
+          ]"
         />
         <PCPartCardList
           v-if="getModelName() == 'CPU'"
-          :text-group-name="component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model +
+            ', ' +
+            component.socket.name
+          "
           :text-group-items="[
-            component.cores + ' jezgri',
-            component.socket + ' socket',
+            'Serija: ' + component.model,
+            'Podnožje: ' + component.socket.name,
+            'Broj jezgri: ' + component.cores,
           ]"
         />
-
         <PCPartCardList
           v-if="getModelName() == 'Motherboard'"
-          :text-group-name="component.model"
-          :text-group-items="[component.socket + ' socket']"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[
+            'Serija: ' + component.model,
+            'Memorija: ' + component.ram_type.name,
+            'Podnožje: ' + component.socket.name,
+          ]"
         />
-
         <PCPartCardList
           v-if="getModelName() == 'RAM'"
-          :text-group-name="component.model"
-          :text-group-items="[component.speed + ' MHz']"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model +
+            ', ' +
+            component.speed +
+            'MHz'
+          "
+          :text-group-items="[
+            'Brzina: ' + component.speed + 'MHz',
+            'Vrsta: ' + component.ram_type,
+          ]"
         />
-
+        <PCPartCardList
+          v-if="getModelName() == 'Cooling'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="['Vrsta hlađenja: ' + component.cooling_type.name]"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'PcCase'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="['Veličina: ' + component.case_size.name]"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'PSU'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="['Snaga: ' + component.power + 'W']"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'Mouse'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[
+            'Vrsta: ' + (component.wired ? 'žičan' : 'bežičan'),
+          ]"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'Monitor'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[
+            'Dijagonala: ' + component.size + '\'\'',
+            'Osvježavanje slike: ' + component.refresh_rate + 'Hz',
+          ]"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'Keyboard'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[
+            'Vrsta : ' + component.type,
+            'Switchevi: ' + component.switch_type.name,
+            'Spajanje: ' + component.connector,
+          ]"
+        />
+        <PCPartCardList
+          v-if="getModelName() == 'Storage'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[
+            'Veličina: ' + component.size + ' GB',
+            'Vrsta: ' + component.storage_type.name,
+          ]"
+        />
         <h3>Dostupno</h3>
         <h2 class="pc-part-card-price-wrapper">
-          {{ `${component.price} &#x20AC;` }}
+          {{ `${component.price.toFixed(2)} €` }}
         </h2>
       </div>
-
       <div class="pc-part-card-button-wrapper">
         <Button
           shape="odd-shape"
@@ -78,6 +203,7 @@ const image =
     : component.images;
 
 const getModelName = () => {
+  console.log(JSON.parse(JSON.stringify(component)));
   const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
 };
@@ -85,6 +211,7 @@ const getModelName = () => {
 
 <style lang="scss" scoped>
 @import "../utils/theme.scss";
+
 .pc-part-card-wrapper {
   background-color: $white-dark;
   width: 100%;

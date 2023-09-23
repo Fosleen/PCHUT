@@ -25,7 +25,7 @@ class Motherboard extends Model
         return $this->belongsTo(Socket::class, 'socket_id');
     }
 
-    public function ram_type(): BelongsTo
+    public function ramType(): BelongsTo
     {
         return $this->belongsTo(RamType::class, 'ram_type_id');
     }

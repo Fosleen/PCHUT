@@ -24,8 +24,8 @@ class PSUResource extends JsonResource
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
-            'speed' => $this->speed,
-            'manufacturer' => $this->component->manufacturer->name,
+            'power' => $this->power,
+            'manufacturer' => $this->component->manufacturer,
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }

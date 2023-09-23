@@ -31,7 +31,7 @@ class OrderResource extends JsonResource
                     'discount' => $component->discount,
                     'product_type_cro' => $component->product_type_cro,
                     'description' => $component->description,
-                    'manufacturer' => $component->manufacturer->name,
+                    'manufacturer' => $component->manufacturer,
                     'quantity' => $component->pivot->quantity,
                     'images' => $component->images->map(function ($image) {
                         return $image->url;

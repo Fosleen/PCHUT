@@ -24,7 +24,8 @@ class PCCaseResource extends JsonResource
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
-            'manufacturer' => $this->component->manufacturer->name,
+            'manufacturer' => $this->component->manufacturer,
+            'case_size' => $this->caseSize,
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }

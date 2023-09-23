@@ -25,9 +25,8 @@ class RAMResource extends JsonResource
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
-            //'ram_type_name' => $this->component->ram_type->name, fix this
-
-            'manufacturer' => $this->component->manufacturer->name,
+            'ram_type' => $this->ramType->name,
+            'manufacturer' => $this->component->manufacturer,
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];
     }

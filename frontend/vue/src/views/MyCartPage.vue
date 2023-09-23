@@ -128,17 +128,15 @@ function change(id, price, newQuantity) {
 }
 
 const fetchCartItemsData = async () => {
+  console.log(JSON.parse(sessionStorage.getItem("cart")));
+
   try {
     for (const el of JSON.parse(sessionStorage.getItem("cart"))) {
       // this kind of loop is for async calls
-      console.log(el.quantity);
-
       const response = await getComponentById(el.id);
-      response.component.currQuantity = el.quantity;
-      console.log(response.component);
-
-      cartItems.value.push(response.component);
-      totalPrice.value += response.component.price * el.quantity;
+      response.data.currQuantity = el.quantity;
+      cartItems.value.push(response.data);
+      totalPrice.value += response.data.price * el.quantity;
     }
   } catch (err) {
     console.log("Error - " + err);

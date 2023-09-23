@@ -69,7 +69,7 @@ class PSUController extends Controller
                 'productable_id' => $psu->id,
                 'productable_type' => PSU::class,
                 'discount' => $request->discount,
-                'product_type_cro' => "PSU",
+                'product_type_cro' => "Napajanje",
             ]);
 
             $psu->component()->save($component);
@@ -87,7 +87,7 @@ class PSUController extends Controller
         $psu = PSU::with('component')->find($id);
 
         if ($psu) {
-            return $psu; //mby add resource later
+            return new PSUResource($psu);
         } else {
             return response()->json([
                 'status' => 404,

@@ -294,6 +294,8 @@ const fetchFilteredProductsData = async (
 };
 
 const quickSearch = async (productType) => {
+  console.log(productType);
+  filteredProducts.value = [];
   const response = await getFilteredDataByProductType(productType);
   filteredProducts.value = [...response.components];
   isFilteredShown.value = true;

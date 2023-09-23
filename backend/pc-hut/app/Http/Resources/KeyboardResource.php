@@ -29,7 +29,7 @@ class KeyboardResource extends JsonResource
             'productable_type' =>  $this->component->productable_type,
             'discount' => $this->discount,
             'manufacturer_img' => $this->component->manufacturer->logo_url,
-            'manufacturer' => $this->component->manufacturer->name,
+            'manufacturer' => $this->component->manufacturer,
             'switch_type' => $this->switchType->name,
             'images' =>  $this->component->images->pluck('url')->toArray(),
         ];

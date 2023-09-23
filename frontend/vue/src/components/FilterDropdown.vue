@@ -150,6 +150,102 @@
           />
         </div>
         <div
+          v-if="isTypeShown('NAPAJANJE')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Be Quiet!"
+            name="manufacturers"
+            id="Be Quiet!"
+            @checkbox-click="changeCheckboxes('Be Quiet!', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Corsair"
+            name="manufacturers"
+            id="Corsair"
+            @checkbox-click="changeCheckboxes('Corsair', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Gigabyte"
+            name="manufacturers"
+            id="Gigabyte"
+            @checkbox-click="changeCheckboxes('Gigabyte', 'manufacturers')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('KUĆIŠTA')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>PROIZVOĐAČ:</h4>
+          <CheckboxInput
+            value="ASUS"
+            name="manufacturers"
+            id="ASUS"
+            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Be Quiet!"
+            name="manufacturers"
+            id="Be Quiet!"
+            @checkbox-click="changeCheckboxes('Be Quiet!', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Fractal"
+            name="manufacturers"
+            id="Fractal"
+            @checkbox-click="changeCheckboxes('Fractal', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Lian Li"
+            name="manufacturers"
+            id="Lian Li"
+            @checkbox-click="changeCheckboxes('Lian Li', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="Razer"
+            name="manufacturers"
+            id="Razer"
+            @checkbox-click="changeCheckboxes('Razer', 'manufacturers')"
+          />
+          <CheckboxInput
+            value="NZXT"
+            name="manufacturers"
+            id="NZXT"
+            @checkbox-click="changeCheckboxes('NZXT', 'manufacturers')"
+          />
+        </div>
+        <div
+          v-if="isTypeShown('KUĆIŠTA')"
+          class="filter-dropdown-custom-filter-group"
+        >
+          <h4>VELIČINA:</h4>
+          <CheckboxInput
+            value="Veliko"
+            name="size"
+            id="Veliko"
+            @checkbox-click="changeCheckboxes('Veliko', 'size')"
+          />
+          <CheckboxInput
+            value="Srednje"
+            name="size"
+            id="Srednje"
+            @checkbox-click="changeCheckboxes('Srednje', 'size')"
+          />
+          <CheckboxInput
+            value="Mini"
+            name="size"
+            id="Mini"
+            @checkbox-click="changeCheckboxes('Mini', 'size')"
+          />
+        </div>
+        <div
           v-if="isTypeShown('MIŠEVI')"
           class="filter-dropdown-custom-filter-group"
         >
@@ -849,6 +945,8 @@ const componentTypes = [
   { title: "TIPKOVNICE", product_type: "keyboard" },
   { title: "MIŠEVI", product_type: "mouse" },
   { title: "MONITORI", product_type: "monitor" },
+  { title: "NAPAJANJE", product_type: "psu" },
+  { title: "KUĆIŠTA", product_type: "pccase" },
 ];
 
 const selectedComponentType = ref(null);

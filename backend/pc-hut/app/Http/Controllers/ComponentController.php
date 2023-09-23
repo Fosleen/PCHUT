@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ComponentResource;
+use App\Models\CaseSize;
 use App\Models\Component;
 use App\Models\Cooling;
 use App\Models\CoolingType;
@@ -12,6 +13,7 @@ use App\Models\Manufacturer;
 use App\Models\Monitor;
 use App\Models\Motherboard;
 use App\Models\Mouse;
+use App\Models\PcCase;
 use App\Models\RamType;
 use App\Models\Socket;
 use App\Models\Storage;
@@ -58,10 +60,13 @@ class ComponentController extends Controller
             }
 
             if ($request->has('size')) {
-                $connector = $request->input('size');
-                $connectorArray = explode(',', $connector);
+                $size = $request->input('size');
+                $sizeArray = explode(',', $size);
                 if ($request->input('product_type') == "monitor") {
-                    $productIdsArray = Monitor::whereIn('size', $connectorArray)->pluck('id')->toArray();
+                    $productIdsArray = Monitor::whereIn('size', $sizeArray)->pluck('id')->toArray();
+                } else if ($request->input('product_type') == "pccase") {
+                    $sizeIds = CaseSize::whereIn('name', $sizeArray)->pluck('id')->toArray();
+                    $productIdsArray = PcCase::whereIn('case_size_id', $sizeIds)->pluck('id')->toArray();
                 }
                 $query->whereIn('productable_id', $productIdsArray);
             }
@@ -177,10 +182,7 @@ class ComponentController extends Controller
         $component->manufacturer;
 
         if ($component) {
-            return response()->json([
-                'status' => 200,
-                'component' => $component,
-            ], 200);
+            return new ComponentResource($component);
         } else {
             return response()->json([
                 'status' => 404,
