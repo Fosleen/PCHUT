@@ -1,5 +1,6 @@
 <template>
   <div class="profile-wrapper">
+    <PageTracker />
     <div class="profile-container">
       <div class="profile-menu">
         <div class="profile-menu-item">
@@ -106,6 +107,7 @@ import Button from "../components/Button.vue";
 import InputField from "../components/InputField.vue";
 import store from "../store";
 import { PhX, PhPencilSimpleLine } from "@phosphor-icons/vue";
+import PageTracker from "../components/PageTracker.vue";
 
 import { ref, onMounted } from "vue";
 
@@ -121,7 +123,7 @@ const initialUser = ref({
   postal: "",
   city: "",
 });
-const user = ref({ ...initialUser.value }); 
+const user = ref({ ...initialUser.value });
 
 function update() {
   store
@@ -136,13 +138,13 @@ function update() {
 
 function discardChanges() {
   isEdit.value = false;
-  user.value = { ...initialUser.value }; 
+  user.value = { ...initialUser.value };
 }
 
 onMounted(async () => {
   const userData = store.getters.getUserData;
-  user.value = { ...userData }; 
-  initialUser.value = { ...userData }; 
+  user.value = { ...userData };
+  initialUser.value = { ...userData };
 });
 </script>
 

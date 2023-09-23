@@ -206,6 +206,8 @@ import {
   getFilteredDataByProductType,
 } from "../api/api";
 
+import PageTracker from "../components/PageTracker.vue";
+
 const gpuCurrentPage = ref(1);
 const cpuCurrentPage = ref(1);
 const motherboardCurrentPage = ref(1);

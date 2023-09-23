@@ -23,6 +23,18 @@
     <h1 v-if="location == 'PCBuilderPage'" class="page-tracker-text">
       >> Homepage >> Izradi svoj PC {{ text }}
     </h1>
+
+    <h1 v-if="location == 'ProductsPage'" class="page-tracker-text">
+      >> Svi proizvodi {{ text }}
+    </h1>
+
+    <h1 v-if="location == 'ContactPage'" class="page-tracker-text">
+      >> Kontakt {{ text }}
+    </h1>
+
+    <h1 v-if="location == 'ProfilePage'" class="page-tracker-text">
+      >> Profil {{ text }}
+    </h1>
   </div>
 </template>
 
