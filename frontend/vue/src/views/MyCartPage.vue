@@ -2,6 +2,7 @@
   <div class="my-cart-wrapper">
     <div class="my-cart-container">
       <div class="my-cart-items-container">
+        <PageTracker />
         <div class="my-cart-items-header">
           <router-link to="/proizvodi">
             <Button shape="odd-shape-reversed" text="Povratak u trgovinu" />
@@ -105,6 +106,7 @@ import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import { PhCalendarCheck } from "@phosphor-icons/vue";
 import { getComponentById } from "../api/api";
 import store from "../store";
+import PageTracker from "../components/PageTracker.vue";
 
 const deliveryType = ref("home-delivery");
 const cartItems = ref([]);

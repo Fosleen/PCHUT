@@ -1,4 +1,8 @@
 <template>
+  <div class="pc-builder-page-tracker-wrapper">
+    <PageTracker />
+  </div>
+
   <div class="pc-builder-parent-wrapper">
     <div class="pc-builder-wrapper">
       <div class="pc-builder-pc-wrapper">
@@ -121,6 +125,7 @@ import {
   getAllCPUsWithSocket,
   getAllRAMsWithRamType,
 } from "../api/api";
+import PageTracker from "../components/PageTracker.vue";
 
 const calculateTotalPrice = () => {
   let totalPrice = 0;
@@ -394,5 +399,9 @@ watch(motherboardOption, async (newMotherboardOption) => {
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
+}
+
+.pc-builder-page-tracker-wrapper {
+  display: flex;
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
   <div class="contact-page-wrapper">
+    <PageTracker />
+
+    <div class="contact-page-page-tracker-wrapper"></div>
+
     <img src="../assets/cpu-grey.png" alt="" class="contact-page-grey-cpu" />
     <img src="../assets/gpu-grey.png" alt="" class="contact-page-grey-gpu" />
     <img
@@ -47,6 +51,7 @@
 import InputField from "../components/InputField.vue";
 import Button from "../components/Button.vue";
 import Textarea from "../components/Textarea.vue";
+import PageTracker from "../components/PageTracker.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -124,5 +129,9 @@ import Textarea from "../components/Textarea.vue";
   bottom: -80px;
   left: 20%;
   transform: rotate(-20deg);
+}
+
+.contact-page-page-tracker-wrapper {
+  background-color: red;
 }
 </style>

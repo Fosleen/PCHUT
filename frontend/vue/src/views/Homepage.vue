@@ -1,9 +1,10 @@
 <template>
   <div>
-    <HomepageSubmenu/>
+    <HomepageSubmenu />
     <Hero />
 
     <div class="homepage-component-outer-wrapper">
+      <PageTracker />
       <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
       <div class="item-type-wrapper">
         <PCPartCard
@@ -98,6 +99,7 @@ import {
 } from "../api/api";
 import DiscountProducts from "../components/DiscountProducts.vue";
 import HomepageSubmenu from "../components/HomepageSubmenu.vue";
+import PageTracker from "../components/PageTracker.vue";
 
 const gpuCurrentPage = ref(1);
 const cpuCurrentPage = ref(1);
