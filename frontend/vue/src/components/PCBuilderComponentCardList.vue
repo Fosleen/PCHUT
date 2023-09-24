@@ -28,7 +28,6 @@ const props = defineProps({
 @import "../utils/theme.scss";
 
 .pc-builder-component-card-ul {
-  //color: red;
   color: white;
   padding-left: 24px;
 }

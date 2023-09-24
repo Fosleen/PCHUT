@@ -175,7 +175,7 @@
         <Button
           @click="addToCart"
           shape="odd-shape"
-          text="Dodaj uu"
+          text="Dodaj u"
           :style="{
             'background-color': '#D9D9D9',
             color: '#282828',
@@ -266,10 +266,6 @@ const addToCart = (e) => {
     justify-content: center;
     padding-bottom: 8px;
     z-index: 1;
-
-    &:hover {
-      background-color: red;
-    }
   }
 }
 

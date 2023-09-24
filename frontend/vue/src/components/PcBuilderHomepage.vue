@@ -14,14 +14,26 @@
           class="pc-builder-component-small-card-wrapper"
           :component="gpu"
           v-if="gpu && gpu.images"
-          :Image="gpu?.images[0]"
+          :Image="
+            gpu?.images[0]
+              ? gpu?.images[0]
+              : [
+                  'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
+                ]
+          "
         />
         <h2>+</h2>
         <PcBuilderCard
           class="pc-builder-component-small-card-wrapper"
           :component="cpu"
           v-if="cpu && cpu.images"
-          :Image="cpu?.images[0]"
+          :Image="
+            cpu?.images[0]
+              ? cpu?.images[0]
+              : [
+                  'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
+                ]
+          "
         />
 
         <h2>+</h2>
@@ -29,7 +41,13 @@
           class="pc-builder-component-small-card-wrapper"
           :component="mbd"
           v-if="mbd && mbd.images"
-          :Image="mbd?.images[0]"
+          :Image="
+            mbd?.images[0]
+              ? mbd?.images[0]
+              : [
+                  'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
+                ]
+          "
         />
       </div>
       <div class="pc-builder-choose-container">
