@@ -26,6 +26,7 @@
               memory: item.memory,
               price: item.price,
               quantity: item.currQuantity,
+              product_type_cro: item.product_type_cro,
               img:
                 item.images && item.images.length > 0
                   ? item.images[0]

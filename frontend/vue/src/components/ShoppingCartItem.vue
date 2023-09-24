@@ -10,8 +10,8 @@
     </div>
     <div class="shopping-cart-item-info">
       <h4>
-        {{ props.item.manufacturer }} {{ props.item.model }},
-        {{ props.item.memory }}
+        {{ props.item.product_type_cro }} {{ props.item.manufacturer }}
+        {{ props.item.model }}
       </h4>
       <QuantityCalculator :quantity="quantity" @change-quantity="change" />
       <div>

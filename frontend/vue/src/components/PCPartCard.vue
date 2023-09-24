@@ -173,8 +173,9 @@
       </div>
       <div class="pc-part-card-button-wrapper">
         <Button
+          @click="addToCart"
           shape="odd-shape"
-          text="Dodaj u"
+          text="Dodaj uu"
           :style="{
             'background-color': '#D9D9D9',
             color: '#282828',
@@ -206,6 +207,20 @@ const getModelName = () => {
   console.log(JSON.parse(JSON.stringify(component)));
   const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
+};
+
+const addToCart = (e) => {
+  e.preventDefault(); // do not redirect to product details
+  const existingItems = sessionStorage.getItem("cart");
+  let cartItems = [];
+
+  if (existingItems) {
+    cartItems = JSON.parse(existingItems);
+  }
+
+  const product = { id: component.id, quantity: 1 };
+  cartItems.push(product);
+  sessionStorage.setItem("cart", JSON.stringify(cartItems));
 };
 </script>
 
@@ -250,6 +265,11 @@ const getModelName = () => {
     display: flex;
     justify-content: center;
     padding-bottom: 8px;
+    z-index: 1;
+
+    &:hover {
+      background-color: red;
+    }
   }
 }
 
