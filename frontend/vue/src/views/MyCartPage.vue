@@ -1,5 +1,11 @@
 <template>
   <div class="my-cart-wrapper">
+    <Modal
+      ref="modalComponentRef"
+      text="Jeste li sigurni da želite ukloniti proizvod iz košarice?"
+      @cancel-click="onCancelClick"
+      @confirm-click="onConfirmClick"
+    />
     <div class="my-cart-container">
       <div class="my-cart-items-container">
         <div class="my-cart-items-header">
@@ -101,6 +107,7 @@
 import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 import Message from "../components/Message.vue";
+import Modal from "../components/Modal.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import { PhCalendarCheck } from "@phosphor-icons/vue";
 import { getComponentById } from "../api/api";
@@ -109,6 +116,28 @@ import store from "../store";
 const deliveryType = ref("home-delivery");
 const cartItems = ref([]);
 const totalPrice = ref(0);
+const selectedItemId = ref(0);
+const modalComponentRef = ref(null);
+
+function onCancelClick() {
+  const savedCart = JSON.parse(sessionStorage.getItem("cart"));
+  savedCart.forEach((element) => {
+    if (element.id == selectedItemId.value) {
+      element.quantity = 1;
+    }
+    sessionStorage.setItem("cart", JSON.stringify(savedCart));
+    cartItems.value = savedCart;
+  });
+  modalComponentRef.value.close();
+  fetchCartItemsData();
+}
+
+function onConfirmClick() {
+  const oldCart = JSON.parse(sessionStorage.getItem("cart"));
+  const updatedCart = oldCart.filter((el) => el.id !== selectedItemId.value);
+  sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+  fetchCartItemsData(); // TODO can it be done without this?
+}
 
 function change(id, price, newQuantity) {
   const savedCart = JSON.parse(sessionStorage.getItem("cart"));
@@ -120,6 +149,11 @@ function change(id, price, newQuantity) {
         : (totalPrice.value -= price);
 
       element.quantity = newQuantity;
+
+      if (element.quantity == 0) {
+        selectedItemId.value = element.id;
+        modalComponentRef.value.show(element.id);
+      }
     }
     sessionStorage.setItem("cart", JSON.stringify(savedCart));
   });
@@ -129,7 +163,8 @@ function change(id, price, newQuantity) {
 
 const fetchCartItemsData = async () => {
   console.log(JSON.parse(sessionStorage.getItem("cart")));
-
+  cartItems.value = [];
+  totalPrice.value = 0;
   try {
     for (const el of JSON.parse(sessionStorage.getItem("cart"))) {
       // this kind of loop is for async calls
