@@ -28,7 +28,7 @@
               quantity: item.currQuantity,
               img:
                 item.images && item.images.length > 0
-                  ? item.images[0].url
+                  ? item.images[0]
                   : 'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
             }"
             @change-quantity="change(item.id, item.price, $event)"
