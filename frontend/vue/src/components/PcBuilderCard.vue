@@ -7,23 +7,23 @@
       <div class="pc-builder-component-card-text-wrapper">
         <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Grafička kartica'"
-          :text-group-name="component.model"
+          :text-group-name="component.product_type_cro + ' ' + component.model"
           :text-group-items="[component.memory + ' GB memorije']"
         />
 
         <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Procesor'"
-          :text-group-name="component.model"
+          :text-group-name="component.product_type_cro + ' ' + component.model"
           :text-group-items="[
             component.cores + ' jezgri',
-            component.socket + ' socket',
+            component.socket.name + ' podnožje',
           ]"
         />
 
         <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Matična ploča'"
-          :text-group-name="component.model"
-          :text-group-items="[component.socket + ' socket']"
+          :text-group-name="component.product_type_cro + ' ' + component.model"
+          :text-group-items="[component.socket.name + ' podnožje']"
         />
       </div>
     </div>

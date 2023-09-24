@@ -6,7 +6,10 @@
       </div>
     </div>
     <div class="order-item-info">
-      <h4>{{ props.item.manufacturer.name }} {{ props.item.model }}</h4>
+      <h4>
+        {{ props.item.manufacturer.name }}
+        {{ props.item.model }}
+      </h4>
       <div class="order-item-info-details">
         <p>{{ props.item.type }}</p>
         <div>
