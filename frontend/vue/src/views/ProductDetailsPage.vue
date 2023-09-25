@@ -126,6 +126,7 @@
         </div>
       </div>
     </div>
+    <Recommended />
   </div>
 </template>
 
@@ -134,6 +135,7 @@ import { ref, watch, computed } from "vue";
 import store from "../store";
 import { useRoute } from "vue-router";
 import Button from "../components/Button.vue";
+import Recommended from "../components/Recommended.vue";
 import ProductImagesCarousel from "../components/ProductImagesCarousel.vue";
 import {
   PhShieldCheck,

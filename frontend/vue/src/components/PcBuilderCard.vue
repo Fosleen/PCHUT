@@ -7,23 +7,62 @@
       <div class="pc-builder-component-card-text-wrapper">
         <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Grafička kartica'"
-          :text-group-name="component.product_type_cro + ' ' + component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
           :text-group-items="[component.memory + ' GB memorije']"
         />
-
         <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Procesor'"
-          :text-group-name="component.product_type_cro + ' ' + component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
           :text-group-items="[
             component.cores + ' jezgri',
             component.socket.name + ' podnožje',
           ]"
         />
-
         <PcBuilderComponentCardList
           v-if="component && component.product_type_cro == 'Matična ploča'"
-          :text-group-name="component.product_type_cro + ' ' + component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
           :text-group-items="[component.socket.name + ' podnožje']"
+        />
+
+        <PcBuilderComponentCardList
+          v-if="component && component.product_type_cro == 'Pohrana'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[]"
+        />
+        <PcBuilderComponentCardList
+          v-if="component && component.product_type_cro == 'Napajanje'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[]"
         />
       </div>
     </div>
@@ -52,7 +91,6 @@ const wrapperClasses = {
 
 <style lang="scss">
 @import "../utils/theme.scss";
-@import "../utils/theme.scss";
 
 @mixin card-wrapper {
   background-color: $grey-dark;
@@ -68,10 +106,26 @@ const wrapperClasses = {
   display: flex;
   flex-direction: column;
   height: 100%;
+  cursor: pointer;
 
   .pc-builder-component-card-text-group-name {
     color: $grey-light;
-    font-size: 28px;
+    font-size: 20px;
+  }
+
+  &.white-bg {
+    background-color: $white-dark;
+    box-shadow: none;
+
+    .pc-builder-component-card-text-group-name {
+      color: $colorTextPrimary;
+    }
+  }
+
+  &.list-item-none {
+    .pc-builder-component-card-list-item {
+      display: none;
+    }
   }
 }
 
@@ -80,42 +134,43 @@ const wrapperClasses = {
   padding-top: 40px;
 }
 
-.pc-builder-component-card-image-wrapper {
-  height: 80vw;
-  width: 100%;
-  padding: 24px;
-
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .pc-builder-component-card-button-wrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: auto;
+
+  .price-wrapper {
+    background-color: $grey-light;
+    width: fit-content;
+    clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%);
+    padding-bottom: 5px;
+    padding-top: 5px;
+
+    p {
+      text-align: right;
+      width: 120px;
+      padding-right: 8px;
+      font-size: 24px;
+      font-weight: 600;
+      color: $purple-dark;
+    }
+  }
 }
 
 .pc-builder-component-image-and-text-card-wrapper {
   padding: 0 16px;
-}
 
-.price-wrapper {
-  background-color: $grey-light;
-  width: fit-content;
-  clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%);
-  padding-bottom: 5px;
-  padding-top: 5px;
+  .pc-builder-component-card-image-wrapper {
+    height: 24vw;
+    width: 100%;
+    padding: 0px; //padding: 24px;
+    margin: 16px 0;
 
-  p {
-    text-align: right;
-    width: 140px;
-    padding-right: 8px;
-    font-size: 30px;
-    font-weight: 600;
-    color: $purple-dark;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -130,10 +185,21 @@ const wrapperClasses = {
     padding-top: 16px;
     display: flex;
     flex-direction: column;
-    height: 360px;
+    height: 320px;
 
     .pc-builder-component-card-text-group-name {
-      font-size: 28px;
+      font-size: 20px;
+    }
+  }
+
+  .pc-builder-component-image-and-text-card-wrapper {
+    padding: 0 16px;
+
+    .pc-builder-component-card-image-wrapper {
+      height: 200px;
+      width: 100%;
+      padding: 8px;
+      margin: 0;
     }
   }
 
@@ -157,16 +223,29 @@ const wrapperClasses = {
 }
 
 @media screen and ($desktop) {
-  .pc-builder-component-card-image-wrapper {
-    height: 240px;
-  }
-
   .pc-builder-component-small-card-wrapper {
-    height: 480px;
+    height: 420px;
   }
 
   .pc-builder-component-card-list-item {
     font-size: 20px;
+  }
+
+  .pc-builder-component-image-and-text-card-wrapper {
+    padding: 0 16px;
+
+    .pc-builder-component-card-image-wrapper {
+      height: 240px;
+      width: 100%;
+      padding: 8px;
+      margin: 0;
+    }
+  }
+
+  .pc-builder-component-small-card-wrapper {
+    &.white-bg {
+      height: 380px;
+    }
   }
 }
 </style>

@@ -46,6 +46,12 @@ export function getCPUById(id) {
   });
 }
 
+export function getStorageById(id) {
+  return axiosClient.get(`/storages/${id}`).then(({ data }) => {
+    return data;
+  });
+}
+
 export function getMotherboardById(id) {
   return axiosClient.get(`/motherboards/${id}`).then(({ data }) => {
     return data;

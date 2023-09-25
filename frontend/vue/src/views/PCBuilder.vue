@@ -1,118 +1,113 @@
 <template>
-  <div class="pc-builder-page-tracker-wrapper">
-    <PageTracker />
-  </div>
+  <div>
+    <div class="pc-builder-page-tracker-wrapper">
+      <PageTracker />
+    </div>
 
-  <div class="pc-builder-parent-wrapper">
-    <div class="pc-builder-wrapper">
-      <div class="pc-builder-pc-wrapper">
+    <div class="pc-builder-parent-wrapper">
+      <div class="pc-builder-wrapper">
+        <div class="pc-builder-pc-wrapper">
+          <img
+            src="../assets/pc_build_image.png"
+            class="pc-builder-custom-pc-image"
+          />
+
+          <img
+            src="../assets/maticna.png"
+            class="pc-builder-custom-motherboard-image"
+          />
+        </div>
+
         <img
-          src="../assets/pc_build_image.png"
-          class="pc-builder-custom-pc-image"
+          src="../assets/gaming.png"
+          class="pc-b-bg-img pc-builder-gamepad-image"
+        />
+
+        <img src="../assets/cpu.png" class="pc-b-bg-img pc-builder-cpu-image" />
+
+        <img
+          src="../assets/gaming2.png"
+          class="pc-b-bg-img pc-builder-gaming2-image"
         />
 
         <img
-          src="../assets/maticna.png"
-          alt=""
-          class="pc-builder-custom-motherboard-image"
-        />
-      </div>
-
-      <img
-        src="../assets/gaming.png"
-        alt=""
-        class="pc-builder-background-image pc-builder-gamepad-image"
-      />
-
-      <img
-        src="../assets/cpu.png"
-        alt=""
-        class="pc-builder-background-image pc-builder-cpu-image"
-      />
-
-      <img
-        src="../assets/gaming2.png"
-        alt=""
-        class="pc-builder-background-image pc-builder-gaming2-image"
-      />
-
-      <img
-        src="../assets/graphics-card.png"
-        alt=""
-        class="pc-builder-background-image pc-builder-gpu-image"
-      />
-
-      <!--na change bilo kojeg dropdowna treba procitati cijenu svih trenutno selectanih itema-->
-      <div class="pc-builder-dropdowns-wrapper">
-        <Dropdown
-          placeholder="Odaberi procesor"
-          :options="cpus"
-          class="pc-builder-first-dropdown"
-          :disabled="!motherboardOption"
-          v-model="cpuOption"
+          src="../assets/graphics-card.png"
+          class="pc-b-bg-img pc-builder-gpu-image"
         />
 
-        <Dropdown
-          placeholder="Odaberi grafičku karticu"
-          :options="gpus"
-          class="pc-builder-second-dropdown"
-          v-model="gpuOption"
-        />
-        <Dropdown
-          placeholder="Odaberi memoriju (pohranu)"
-          :options="storages"
-          class="pc-builder-third-dropdown"
-          v-model="storageOption"
-        />
-        <Dropdown
-          placeholder="Odaberi RAM memoriju"
-          :options="rams"
-          class="pc-builder-fourth-drodpown"
-          :disabled="!motherboardOption"
-          v-model="ramOption"
-        />
-        <Dropdown
-          placeholder="Odaberi napajanje"
-          :options="psus"
-          class="pc-builder-fifth-background"
-          v-model="psuOption"
-        />
-        <Dropdown
-          placeholder="Odaberi matičnu ploču"
-          :options="motherboards"
-          class="pc-builder-sixth-background"
-          v-model="motherboardOption"
-        />
-        <Dropdown
-          placeholder="Odaberi kućište"
-          :options="cases"
-          class="pc-builder-seventh-background"
-          v-model="caseOption"
-        />
+        <div class="pc-builder-dropdowns-wrapper">
+          <Dropdown
+            placeholder="Odaberi procesor"
+            :options="cpus"
+            class="pc-builder-first-dropdown"
+            :disabled="!motherboardOption"
+            v-model="cpuOption"
+          />
+
+          <Dropdown
+            placeholder="Odaberi grafičku karticu"
+            :options="gpus"
+            class="pc-builder-second-dropdown"
+            v-model="gpuOption"
+          />
+          <Dropdown
+            placeholder="Odaberi memoriju (pohranu)"
+            :options="storages"
+            class="pc-builder-third-dropdown"
+            v-model="storageOption"
+          />
+          <Dropdown
+            placeholder="Odaberi RAM memoriju"
+            :options="rams"
+            class="pc-builder-fourth-drodpown"
+            :disabled="!motherboardOption"
+            v-model="ramOption"
+          />
+          <Dropdown
+            placeholder="Odaberi napajanje"
+            :options="psus"
+            class="pc-builder-fifth-background"
+            v-model="psuOption"
+          />
+          <Dropdown
+            placeholder="Odaberi matičnu ploču"
+            :options="motherboards"
+            class="pc-builder-sixth-background"
+            v-model="motherboardOption"
+          />
+          <Dropdown
+            placeholder="Odaberi kućište"
+            :options="cases"
+            class="pc-builder-seventh-background"
+            v-model="caseOption"
+          />
+        </div>
       </div>
     </div>
-  </div>
 
-  <FinalPriceAndButton
-    :price="calculateTotalPrice()"
-    price-label="Ukupna cijena"
-    button-text="Kupi"
-    @click="
-      addToCart(
-        { id: gpuOption },
-        { id: cpuOption },
-        { id: psuOption },
-        { id: ramOption },
-        { id: caseOption },
-        { id: motherboardOption },
-        { id: storageOption }
-      )
-    "
-  />
+    <FinalPriceAndButton
+      :price="calculateTotalPrice()"
+      price-label="Ukupna cijena"
+      button-text="Kupi"
+      @click="
+        addToCart(
+          { id: gpuOption },
+          { id: cpuOption },
+          { id: psuOption },
+          { id: ramOption },
+          { id: caseOption },
+          { id: motherboardOption },
+          { id: storageOption }
+        )
+      "
+    />
+    <Recommended />
+  </div>
 </template>
 
 <script setup>
 import Dropdown from "../components/Dropdown.vue";
+import Recommended from "../components/Recommended.vue";
 import FinalPriceAndButton from "../components/FinalPriceAndButton.vue";
 import { onMounted, ref, watch } from "vue";
 
@@ -170,8 +165,6 @@ const addToCart = (...options) => {
           totalPrice += itemInArray.price;
         }
       }
-
-      console.log("Total Price of kart is", totalPrice);
     } else {
       console.log("Invalid item structure at index", i + 1);
     }
@@ -189,13 +182,9 @@ const storageOption = ref(null);
 const gpus = ref([]);
 const cpus = ref([]);
 const motherboards = ref([]);
-
 const rams = ref([]);
-
 const storages = ref([]);
-
 const psus = ref([]);
-
 const cases = ref([]);
 
 onMounted(async () => {
@@ -234,10 +223,8 @@ watch(motherboardOption, async (newMotherboardOption) => {
   justify-content: center;
   padding-top: 48px;
   padding-bottom: -20px;
-
-  /* @media screen and ($tabletLarge) {
-    padding-bottom: 40px;
-  } */
+  max-width: 1200px;
+  margin: 0 auto;
 
   .pc-builder-gpu-image,
   .pc-builder-cpu-image,
@@ -255,6 +242,7 @@ watch(motherboardOption, async (newMotherboardOption) => {
     }
   }
 }
+
 .pc-builder-wrapper {
   background-color: #eee3ff;
   width: 90%;
@@ -295,10 +283,8 @@ watch(motherboardOption, async (newMotherboardOption) => {
 .pc-builder-custom-motherboard-image {
   position: absolute;
   height: 15%;
-  //margin-right: 140px;
   margin-right: 130px;
   margin-top: 25px;
-  //margin-bottom: 130px;
   z-index: 500;
 
   @media screen and ($tabletLarge) {
@@ -306,7 +292,7 @@ watch(motherboardOption, async (newMotherboardOption) => {
   }
 }
 
-.pc-builder-background-image {
+.pc-b-bg-img {
   position: absolute;
   height: 35%;
 }

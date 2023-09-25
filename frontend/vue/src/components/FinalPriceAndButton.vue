@@ -18,7 +18,7 @@ import { defineProps } from "vue";
 const props = defineProps({
   priceLabel: String,
   buttonText: String,
-  price: String,
+  price: Number,
 });
 </script>
 
