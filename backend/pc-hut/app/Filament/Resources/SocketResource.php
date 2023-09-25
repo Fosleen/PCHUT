@@ -34,7 +34,6 @@ class SocketResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name',),
-                Tables\Actions\DeleteAction::make(),
 
 
             ])
@@ -43,6 +42,8 @@ class SocketResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
