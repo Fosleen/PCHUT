@@ -19,8 +19,10 @@ use App\Http\Controllers\PcCaseController;
 use App\Http\Controllers\PSUController;
 use App\Http\Controllers\RAMController;
 use App\Http\Controllers\StorageController;
+use App\Http\Controllers\StorageTypeController;
 use App\Http\Controllers\SwitchTypeController;
 use App\Http\Controllers\UserController;
+use App\Models\StorageType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +41,8 @@ Route::get('parts', [PartController::class, 'index']);
 
 Route::get('switch-types', [SwitchTypeController::class, 'index']);
 Route::get('switch-types/{id}', [SwitchTypeController::class, 'show']);
+Route::post('switch-types/', [SwitchTypeController::class, 'store']);
+
 
 Route::get('keyboards', [KeyboardController::class, 'index']);
 Route::get('keyboards/{id}', [KeyboardController::class, 'show']);
@@ -152,3 +156,6 @@ Route::put('users/{id}', [UserController::class, 'update']);
 
 Route::get('case_sizes', [CaseSizeController::class, 'index']);
 Route::post('case_sizes', [CaseSizeController::class, 'store']);
+
+Route::get('storage_types', [StorageTypeController::class, 'index']);
+Route::post('storage_types', [StorageTypeController::class, 'store']);
