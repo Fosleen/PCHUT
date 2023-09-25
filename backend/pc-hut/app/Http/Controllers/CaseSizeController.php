@@ -2,30 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoolingType;
+use App\Models\CaseSize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
-
-class CoolingTypeController extends Controller
+class CaseSizeController extends Controller
 {
     public function index()
     {
-        $cooling_types = CoolingType::all();
+        $case_sizes = CaseSize::all();
 
-        if ($cooling_types->count() > 0) {
+        if ($case_sizes->count() > 0) {
             $data = [
                 'status' => 200,
-                'cooling_types' => $cooling_types
+                'case_sizes' => $case_sizes
             ];
-
             return response()->json($data, 200);
         } else {
             return response()->json(
-                ['status' => 404, 'cooling_types' => "No response"],
+                ['status' => 404, 'case_sizes' => "No response"],
                 404
-            );
+            ); //same format as above
+
         }
     }
 
@@ -41,14 +39,14 @@ class CoolingTypeController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         } else {
-            $cooling_type = CoolingType::create([
+            $case_size = CaseSize::create([
                 'name' => $request->name,
             ]);
 
-            if ($cooling_type) {
-                return response()->json(['message' => 'cooling_type created successfully'], 200);
+            if ($case_size) {
+                return response()->json(['message' => 'case_size created successfully'], 200);
             } else {
-                return response()->json(['message' => 'cooling_type not created!'], 500);
+                return response()->json(['message' => 'case_size not created!'], 500);
             }
         }
     }

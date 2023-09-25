@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CaseSizeController;
 use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\ComponentImageController;
 use App\Http\Controllers\CoolingController;
@@ -32,6 +33,8 @@ Route::get('/logged-user', [AuthController::class, 'getLoggedUser'])->middleware
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('cooling_types', [CoolingTypeController::class, 'index']);
+Route::post('cooling_types', [CoolingTypeController::class, 'store']);
+
 Route::get('parts', [PartController::class, 'index']);
 
 Route::get('switch-types', [SwitchTypeController::class, 'index']);
@@ -146,3 +149,6 @@ Route::get('discount-components', [ComponentController::class, 'indexDiscount'])
 Route::get('users', [UserController::class, 'index']);
 Route::get('users/{id}', [UserController::class, 'show']);
 Route::put('users/{id}', [UserController::class, 'update']);
+
+Route::get('case_sizes', [CaseSizeController::class, 'index']);
+Route::post('case_sizes', [CaseSizeController::class, 'store']);
