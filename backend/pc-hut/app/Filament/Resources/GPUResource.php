@@ -46,22 +46,24 @@ class GPUResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('model'),
-                Tables\Columns\TextColumn::make('memory'),
-                Tables\Columns\TextColumn::make('price'),
-                Tables\Columns\TextColumn::make('manufacturer_id'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('discount'),
-                Tables\Columns\TextColumn::make('productable_id'),
-                Tables\Columns\TextColumn::make('productable_type'),
-
-
+                // Tables\Columns\TextColumn::make('model'),
+                // Tables\Columns\TextColumn::make('memory'),
+                // Tables\Columns\TextColumn::make('price'),
+                // Tables\Columns\TextColumn::make('manufacturer_id'),
+                // Tables\Columns\TextColumn::make('description'),
+                // Tables\Columns\TextColumn::make('discount'),
+                // Tables\Columns\TextColumn::make('productable_id'),
+                // Tables\Columns\TextColumn::make('productable_type'),
+                Tables\Columns\TextColumn::make('component.model',), //show details from related component
+                Tables\Columns\TextColumn::make('component.price',), //show details from related componen
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
