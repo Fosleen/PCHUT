@@ -189,12 +189,16 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import Button from "./Button.vue";
 import PCPartCardList from "./PCPartCardList.vue";
+import { useToast } from "vue-toastification";
 
 const { component } = defineProps({
   component: Object,
 });
+const toast = useToast();
+const isAlreadyInCart = ref(false);
 
 const image =
   component.images.length === 0
@@ -211,16 +215,35 @@ const getModelName = () => {
 
 const addToCart = (e) => {
   e.preventDefault(); // do not redirect to product details
-  const existingItems = sessionStorage.getItem("cart");
-  let cartItems = [];
+  const existingItems = sessionStorage.getItem("cart") || "[]";
 
-  if (existingItems) {
-    cartItems = JSON.parse(existingItems);
+  JSON.parse(existingItems).forEach((element) => {
+    if (element.id == component.id) {
+      isAlreadyInCart.value = true;
+      toast.error("Ovaj se proizvod već nalazi u košarici!", {
+        timeout: 2500,
+      });
+    }
+  });
+
+  if (isAlreadyInCart.value == false) {
+    let cartItems = [];
+
+    if (existingItems) {
+      cartItems = JSON.parse(existingItems);
+    }
+
+    const currProduct = { id: component.id, quantity: 1 };
+    cartItems.push(currProduct);
+
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
+    toast.success(
+      `Uspješno dodan ${component.manufacturer.name} ${component.model} u košaricu!`,
+      {
+        timeout: 2500,
+      }
+    );
   }
-
-  const product = { id: component.id, quantity: 1 };
-  cartItems.push(product);
-  sessionStorage.setItem("cart", JSON.stringify(cartItems));
 };
 </script>
 

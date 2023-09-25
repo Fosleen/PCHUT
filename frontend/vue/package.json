@@ -19,6 +19,7 @@
     "vue-credit-card-validation": "^1.0.5",
     "vue-router": "^4.0.13",
     "vue-swiper": "^0.5.0",
+    "vue-toastification": "^2.0.0-rc.5",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

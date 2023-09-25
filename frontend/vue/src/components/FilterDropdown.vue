@@ -287,12 +287,6 @@
             id="White Shark"
             @checkbox-click="changeCheckboxes('White Shark', 'manufacturers')"
           />
-          <CheckboxInput
-            value="ASUS"
-            name="manufacturers"
-            id="ASUS"
-            @checkbox-click="changeCheckboxes('ASUS', 'manufacturers')"
-          />
         </div>
 
         <div
@@ -630,10 +624,10 @@
             @checkbox-click="changeCheckboxes('Steelseries', 'manufacturers')"
           />
           <CheckboxInput
-            value="Whiteshark"
+            value="White Shark"
             name="manufacturers"
-            id="Whiteshark"
-            @checkbox-click="changeCheckboxes('Whiteshark', 'manufacturers')"
+            id="White Shark"
+            @checkbox-click="changeCheckboxes('White Shark', 'manufacturers')"
           />
         </div>
         <div

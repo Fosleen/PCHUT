@@ -148,7 +148,10 @@ import PageTracker from "../components/PageTracker.vue";
 const route = useRoute();
 const productLoading = computed(() => store.state.currentProduct.loading);
 const productImages = computed(() => product.value.images);
+const isAlreadyInCart = ref(false);
+import { useToast } from "vue-toastification";
 
+const toast = useToast();
 let product = ref({
   id: null,
   model: null,
@@ -178,19 +181,35 @@ watch(
 );
 
 const addToCart = (id) => {
-  const existingItems = sessionStorage.getItem("cart");
-  let cartItems = [];
+  const existingItems = sessionStorage.getItem("cart") || "[]";
 
-  if (existingItems) {
-    cartItems = JSON.parse(existingItems);
+  JSON.parse(existingItems).forEach((element) => {
+    if (element.id == id) {
+      isAlreadyInCart.value = true;
+      toast.error("Ovaj se proizvod već nalazi u košarici!", {
+        timeout: 2500,
+      });
+    }
+  });
+
+  if (isAlreadyInCart.value == false) {
+    let cartItems = [];
+
+    if (existingItems) {
+      cartItems = JSON.parse(existingItems);
+    }
+
+    const currProduct = { id: id, quantity: 1 };
+    cartItems.push(currProduct);
+
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
+    toast.success(
+      `Uspješno dodan ${product.value.manufacturer.name} ${product.value.model} u košaricu!`,
+      {
+        timeout: 2500,
+      }
+    );
   }
-
-  const product = { id: id, quantity: 1 };
-  cartItems.push(product);
-
-  console.log(cartItems);
-
-  sessionStorage.setItem("cart", JSON.stringify(cartItems));
 };
 
 store.dispatch("getProduct", {
