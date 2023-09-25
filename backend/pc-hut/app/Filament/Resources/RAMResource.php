@@ -2,23 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\GPUResource\Pages;
-use App\Models\Component;
-use App\Models\GPU;
+use App\Filament\Resources\RAMResource\Pages;
+use App\Filament\Resources\RAMResource\RelationManagers;
+use App\Models\RAM;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Fieldset;
-
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Fieldset;
 
-class GPUResource extends Resource
+class RAMResource extends Resource
 {
-    protected static ?string $model = GPU::class;
+    protected static ?string $model = RAM::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -26,7 +25,9 @@ class GPUResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('memory')->required(),
+                Forms\Components\TextInput::make('speed')->required(),
+                Forms\Components\TextInput::make('ram_type_id')->required(),
+
                 Fieldset::make('Component')
                     ->relationship('component')
                     ->schema([
@@ -39,8 +40,6 @@ class GPUResource extends Resource
                     ])
             ]);
     }
-
-
 
     public static function table(Table $table): Table
     {
@@ -62,8 +61,6 @@ class GPUResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -85,9 +82,9 @@ class GPUResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGPUS::route('/'),
-            'create' => Pages\CreateGPU::route('/create'),
-            'edit' => Pages\EditGPU::route('/{record}/edit'),
+            'index' => Pages\ListRAMS::route('/'),
+            'create' => Pages\CreateRAM::route('/create'),
+            'edit' => Pages\EditRAM::route('/{record}/edit'),
         ];
     }
 }
