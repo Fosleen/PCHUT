@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cooling_type', function (Blueprint $table) {
             $table->id();
             $table->string("name", 45)->nullable(false);
+            $table->timestamps();
         });
     }
 
