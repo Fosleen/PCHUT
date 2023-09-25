@@ -33,8 +33,6 @@ class AuthController extends Controller
 
         $token = $user->createToken('main')->plainTextToken;
 
-
-        //give this to frontend...mby just id is enough not the whole user
         return response([
             'user' => $user,
             'token' => $token,
@@ -43,7 +41,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
         $credentials = $request->validate([
             'email' => 'required|email|string|exists:user,email',
             'password' => [
@@ -74,5 +71,12 @@ class AuthController extends Controller
     public function getLoggedUser(Request $request)
     {
         return $request->user();
+    }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        $user->currentAccessToken()->delete();
+        return response(['success' => true]);
     }
 }

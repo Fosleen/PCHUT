@@ -13,6 +13,9 @@
       </ul>
     </div>
     <div class="navbar-icons-wrapper">
+      <div @click="signOut" v-if="isUserLoggedIn">
+        <PhSignOut :size="32" color="white" />
+      </div>
       <router-link to="/profil">
         <PhUser :size="32" color="white" />
       </router-link>
@@ -26,10 +29,18 @@
 
 <script setup>
 import Logo from "../assets/logo_new.png";
-import { PhUser, PhShoppingCartSimple, PhMoon } from "@phosphor-icons/vue";
+import {
+  PhUser,
+  PhShoppingCartSimple,
+  PhMoon,
+  PhSignOut,
+} from "@phosphor-icons/vue";
 import { ref, onMounted } from "vue";
+import store from "../store";
+import router from "../router";
 
 const isDarkTheme = ref(true);
+const isUserLoggedIn = ref(!!store.state.user.token); // truthy or falsy
 
 const toggleTheme = () => {
   const isDarkThemeValue = !isDarkTheme.value;
@@ -80,6 +91,21 @@ const saveThemePreference = () => {
   localStorage.setItem("theme", themeToSave);
 };
 
+const signOut = () => {
+  localStorage.setItem("access_token", "");
+  sessionStorage.setItem("cart", []);
+  store
+    .dispatch("logout")
+    .then(() => {
+      console.log("Uspjesna odjava");
+      isUserLoggedIn.value = false;
+      router.push("/")
+    })
+    .catch((err) => {
+      console.log(`Error - ${err}`);
+    });
+};
+
 onMounted(() => {
   const currentTheme = localStorage.getItem("theme");
   if (currentTheme === "dark") {
@@ -112,10 +138,10 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 150px;
   padding-right: 20px;
 
   svg {
+    width: 50px;
     cursor: pointer;
   }
 }

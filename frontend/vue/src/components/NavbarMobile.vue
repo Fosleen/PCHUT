@@ -29,6 +29,9 @@
             </router-link>
           </li>
           <div class="mobile-navbar-ph-icons">
+            <div @click="signOut" v-if="isUserLoggedIn">
+              <PhSignOut :size="32" color="white" />
+            </div>
             <router-link to="/profil" @click.native="closeNav">
               <PhUser :size="32" color="white" />
             </router-link>
@@ -43,37 +46,44 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
 import {
   PhUser,
   PhShoppingCartSimple,
   PhMoon,
   PhX,
   PhList,
+  PhSignOut,
 } from "@phosphor-icons/vue";
+import store from "../store";
+import router from "../router";
 
-export default {
-  components: {
-    PhList,
-    PhX,
-    PhUser,
-    PhShoppingCartSimple,
-    PhMoon,
-  },
-  data() {
-    return {
-      openNav: false,
-    };
-  },
-  methods: {
-    navHandler() {
-      this.openNav = !this.openNav;
-    },
+const openNav = ref(false);
+const isUserLoggedIn = ref(!!store.state.user.token); // truthy or falsy
 
-    closeNav() {
-      this.openNav = false;
-    },
-  },
+const navHandler = () => {
+  openNav.value = !openNav.value;
+};
+
+const closeNav = () => {
+  openNav.value = false;
+};
+
+const signOut = () => {
+  localStorage.setItem("access_token", "");
+  sessionStorage.setItem("cart", []);
+  store
+    .dispatch("logout")
+    .then(() => {
+      console.log("Uspjesna odjava");
+      isUserLoggedIn.value = false;
+      closeNav();
+      router.push("/");
+    })
+    .catch((err) => {
+      console.log(`Error - ${err}`);
+    });
 };
 </script>
 

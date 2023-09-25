@@ -40,6 +40,13 @@ const store = createStore({
       });
     },
 
+    logout({ commit }) {
+      return axiosClient.post("/logout").then((response) => {
+        commit("logout");
+        return response;
+      });
+    },
+
     totalCartPrice({ commit }, price) {
       console.log(price);
 
@@ -151,6 +158,13 @@ const store = createStore({
 
     toggleFilter: (state) => {
       state.filter.isOpen = !state.filter.isOpen;
+    },
+
+    logout: (state) => {
+      state.user.data = {};
+      state.user.token = null;
+      state.user.cart = null;
+      state.user.orders = null;
     },
   },
 
