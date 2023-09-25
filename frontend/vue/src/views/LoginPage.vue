@@ -2,6 +2,11 @@
   <div class="login-outer">
     <div class="login-inner">
       <h2>Prijava</h2>
+      <p v-if="errorMessage != ''" class="error-msg">
+        <PhWarning @click="errorMessage = ''" weight="bold" :size="24" />
+        {{ errorMessage }}
+        <PhX @click="errorMessage = ''" weight="bold" :size="24" />
+      </p>
       <form @submit="login" id="login">
         <InputField
           placeholder="Email *"
@@ -25,11 +30,15 @@ import store from "../store";
 import InputField from "../components/InputField.vue";
 import Button from "../components/Button.vue";
 import router from "../router";
+import { ref } from "vue";
+import { PhX, PhWarning } from "@phosphor-icons/vue";
 
 const user = {
   email: "",
   password: "",
 };
+
+const errorMessage = ref("");
 
 function login(e) {
   e.preventDefault();
@@ -43,6 +52,7 @@ function login(e) {
     })
     .catch((err) => {
       console.log(`Nest je puklo: ${err}`);
+      errorMessage.value = "Netočni podaci!";
     });
 }
 </script>
@@ -71,6 +81,22 @@ function login(e) {
       text-transform: uppercase;
       color: $colorTextPrimary;
       margin: 32px;
+    }
+
+    .error-msg {
+      background-color: #ee5555;
+      margin: 0 20px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      text-shadow: none;
+      color: white;
+
+      svg {
+        cursor: pointer;
+      }
     }
 
     & form {

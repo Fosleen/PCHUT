@@ -2,9 +2,7 @@
   <div>
     <div class="mobile-nav-icons">
       <PhX v-if="openNav" @click="navHandler" class="iconBar" :size="32" />
-
       <PhList v-else @click="navHandler" class="iconBar" :size="32" />
-
       <router-link to="/">
         <img src="../assets/logo_new.png" alt="" class="mobile-nav-logo" />
       </router-link>
@@ -46,13 +44,16 @@
 </template>
 
 <script>
-import { PhList } from "@phosphor-icons/vue";
-import { PhX } from "@phosphor-icons/vue";
-import { PhUser, PhShoppingCartSimple, PhMoon } from "@phosphor-icons/vue";
+import {
+  PhUser,
+  PhShoppingCartSimple,
+  PhMoon,
+  PhX,
+  PhList,
+} from "@phosphor-icons/vue";
 
 export default {
   components: {
-    //da ih moze prepoznati gore
     PhList,
     PhX,
     PhUser,
