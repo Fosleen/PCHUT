@@ -26,8 +26,6 @@ class SocketResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-
-
             ]);
     }
 
@@ -36,6 +34,8 @@ class SocketResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name',),
+                Tables\Actions\DeleteAction::make(),
+
 
             ])
             ->filters([
