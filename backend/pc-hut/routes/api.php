@@ -34,6 +34,8 @@ Route::get('/logged-user', [AuthController::class, 'getLoggedUser'])->middleware
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');;
+
 Route::get('cooling_types', [CoolingTypeController::class, 'index']);
 Route::post('cooling_types', [CoolingTypeController::class, 'store']);
 

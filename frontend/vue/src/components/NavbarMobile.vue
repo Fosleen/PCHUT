@@ -2,9 +2,7 @@
   <div>
     <div class="mobile-nav-icons">
       <PhX v-if="openNav" @click="navHandler" class="iconBar" :size="32" />
-
       <PhList v-else @click="navHandler" class="iconBar" :size="32" />
-
       <router-link to="/">
         <img src="../assets/logo_new.png" alt="" class="mobile-nav-logo" />
       </router-link>
@@ -31,6 +29,9 @@
             </router-link>
           </li>
           <div class="mobile-navbar-ph-icons">
+            <div @click="signOut" v-if="isUserLoggedIn">
+              <PhSignOut :size="32" color="white" />
+            </div>
             <router-link to="/profil" @click.native="closeNav">
               <PhUser :size="32" color="white" />
             </router-link>
@@ -45,34 +46,44 @@
   </div>
 </template>
 
-<script>
-import { PhList } from "@phosphor-icons/vue";
-import { PhX } from "@phosphor-icons/vue";
-import { PhUser, PhShoppingCartSimple, PhMoon } from "@phosphor-icons/vue";
+<script setup>
+import { ref } from "vue";
+import {
+  PhUser,
+  PhShoppingCartSimple,
+  PhMoon,
+  PhX,
+  PhList,
+  PhSignOut,
+} from "@phosphor-icons/vue";
+import store from "../store";
+import router from "../router";
 
-export default {
-  components: {
-    //da ih moze prepoznati gore
-    PhList,
-    PhX,
-    PhUser,
-    PhShoppingCartSimple,
-    PhMoon,
-  },
-  data() {
-    return {
-      openNav: false,
-    };
-  },
-  methods: {
-    navHandler() {
-      this.openNav = !this.openNav;
-    },
+const openNav = ref(false);
+const isUserLoggedIn = ref(!!store.state.user.token); // truthy or falsy
 
-    closeNav() {
-      this.openNav = false;
-    },
-  },
+const navHandler = () => {
+  openNav.value = !openNav.value;
+};
+
+const closeNav = () => {
+  openNav.value = false;
+};
+
+const signOut = () => {
+  localStorage.setItem("access_token", "");
+  sessionStorage.setItem("cart", []);
+  store
+    .dispatch("logout")
+    .then(() => {
+      console.log("Uspjesna odjava");
+      isUserLoggedIn.value = false;
+      closeNav();
+      router.push("/");
+    })
+    .catch((err) => {
+      console.log(`Error - ${err}`);
+    });
 };
 </script>
 
