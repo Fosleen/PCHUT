@@ -26,6 +26,10 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('password')->required(),
                 Forms\Components\TextInput::make('email')->required(),
+                Forms\Components\TextInput::make('surname'),
+                Forms\Components\TextInput::make('address'),
+                Forms\Components\TextInput::make('city'),
+                Forms\Components\TextInput::make('postal'),
 
             ]);
     }
@@ -37,6 +41,11 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('password'),
                 Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('surname'),
+                Tables\Columns\TextColumn::make('city'),
+                Tables\Columns\TextColumn::make('address'),
+                Tables\Columns\TextColumn::make('postal'),
+
 
             ])
             ->filters([
