@@ -6,7 +6,6 @@
         @search-products="search"
         @clear-filters="clear"
       />
-
       <div class="all-products-container">
         <PageTracker />
 
@@ -41,7 +40,7 @@
 
     <div class="homepage-component-outer-wrapper" v-if="!isFilteredShown">
       <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
-
+      <span v-if="gpus.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(gpu, index) in gpus"
@@ -59,7 +58,7 @@
       </div>
 
       <h1 class="homepage-component-wrapper-title">Procesori</h1>
-
+      <span v-if="cpus.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(cpu, index) in cpus"
@@ -77,7 +76,7 @@
       </div>
 
       <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
-
+      <span v-if="mbs.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(motherboard, index) in mbs"
@@ -95,7 +94,7 @@
       </div>
 
       <h1 class="homepage-component-wrapper-title">RAM memorije</h1>
-
+      <span v-if="rams.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(motherboard, index) in rams"
@@ -113,7 +112,7 @@
       </div>
 
       <h1 class="homepage-component-wrapper-title">Napajanja</h1>
-
+      <span v-if="psus.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(psu, index) in psus"
@@ -131,7 +130,7 @@
       </div>
 
       <h1 class="homepage-component-wrapper-title">Pohrana</h1>
-
+      <span v-if="storages.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(storage, index) in storages"
@@ -149,7 +148,7 @@
       </div>
 
       <h1 class="homepage-component-wrapper-title">Kućišta za pc</h1>
-
+      <span v-if="cases.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(storage, index) in cases"
@@ -169,6 +168,7 @@
 
     <div class="homepage-component-outer-wrapper" v-if="isFilteredShown">
       <h1 class="homepage-component-wrapper-title">Filtrirani proizvodi</h1>
+      <span v-if="filteredProducts.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
           v-for="(filteredProduct, index) in filteredProducts"
@@ -181,11 +181,12 @@
 </template>
 
 <script setup>
+import { ContentLoader } from "vue-content-loader";
 import PCPartCard from "../components/PCPartCard.vue";
+import LoaderAllProducts from "../components/LoaderAllProducts.vue";
 import { ref, onMounted, computed } from "vue";
 import Button from "../components/Button.vue";
 import store from "../store";
-
 import FilterDropdown from "../components/FilterDropdown.vue";
 import {
   PhSliders,

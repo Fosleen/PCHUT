@@ -863,7 +863,7 @@
             </div>
 
             <div
-              v-if="minRange != 0 || maxRange != 2000"
+              v-if="minRange != 0 || maxRange != 2500"
               class="filter-dropdown-applied-filters-item"
             >
               {{ minRange }} € - {{ maxRange }} €
@@ -928,7 +928,7 @@ const emit = defineEmits();
 const rangeSliderRef = ref(null);
 const isFilterOpen = computed(() => store.state.filter.isOpen);
 let minRange = ref(0); // default values
-let maxRange = ref(2000);
+let maxRange = ref(2500);
 
 const componentTypes = [
   { title: "PROCESORI", product_type: "cpu" },
@@ -1047,7 +1047,7 @@ function clearAppliedFilters() {
   });
   selectedComponentType.value = null;
   minRange.value = 0;
-  maxRange.value = 2000;
+  maxRange.value = 2500;
   rangeSliderRef.value.setDefaultValues();
   emit("clearFilters");
 }
