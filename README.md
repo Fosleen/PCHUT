@@ -48,14 +48,16 @@ This full-stack project technology stack includes:
 
 ### Backend
 - **Laravel** 💙 - A PHP web application framework
+- **Filament** - a content management framework for building an administration interface
 
 ### Frontend
 - **Vue** 💚 - A progressive JavaScript framework for building user interfaces
 - **Vuex** - State management pattern and library for Vue.js applications
-- **Vue-toastification** - A library for displaying toast messages 
 - **Axios** - A popular JavaScript library for making HTTP requests
-- **Vue-credit-card-validation** - A Vue library for credit card validation
+- **Vue-toastification** - A library for displaying toast messages
+- **Vue-content-loader** - Customizable loaders library (placeholder loading) 
 - **Vue-swiper** - A customizable image swiper/slider library
+- **Vue-credit-card-validation** - A Vue library for credit card validation
 
 
 ### Database 
@@ -82,6 +84,7 @@ This full-stack project technology stack includes:
    
 ## PChut UI 
 <div id="ui"></div>
+
 ### Home page
 ![homepage-light-mode](https://github.com/Fosleen/PCHUT/assets/90924342/baadbd08-5adc-48d5-a607-cc8ec41b676f)
 
@@ -93,7 +96,7 @@ This full-stack project technology stack includes:
   <li>Desktop and mobile filter version</li>
 </ul>
 
-![products-filter](https://github.com/Fosleen/PCHUT/assets/90924342/50d1aa7d-3f37-4c24-97eb-ad796c7d676d)
+![products-filter](https://github.com/Fosleen/PCHUT/assets/90924342/e2412626-0acc-4362-bec7-f08ccb7a0b94)
 
 ### PC builder page
 ![pc-builder](https://github.com/Fosleen/PCHUT/assets/90924342/f4fb13e7-eab7-4b1c-9d0d-9db596217fcf)
@@ -106,7 +109,7 @@ This full-stack project technology stack includes:
   <li>Desktop and mobile cart item component version</li>
 </ul>
 
-![your-cart](https://github.com/Fosleen/PCHUT/assets/90924342/8a687cb2-7600-43b7-a2a9-8db182056340)
+![your-cart](https://github.com/Fosleen/PCHUT/assets/90924342/91722bdd-b04d-4102-91ca-d1ac2a28c4ab)
 
 ### My orders page
 ![my-orders](https://github.com/Fosleen/PCHUT/assets/90924342/aa6c23c4-f546-4c06-b5c0-54389bcbdaa9)
@@ -114,6 +117,8 @@ This full-stack project technology stack includes:
 ### Payment details page
 ![pay](https://github.com/Fosleen/PCHUT/assets/90924342/e543772b-02e3-4b62-aba1-6da464ec62b4)
 
+### Custom placeholder loaders
+![loader](https://github.com/Fosleen/PCHUT/assets/90924342/b0bdfc45-8f84-4df8-b678-6c8e7e575323)
 
 Designed in Figma. 
 
