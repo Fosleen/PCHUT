@@ -1,6 +1,6 @@
 <template>
   <div class="shopping-cart-item-wrapper">
-    <div class="shopping-cart-item-icon">
+    <div class="shopping-cart-item-icon" @click="$emit('removeProduct')">
       <PhTrash :size="24" />
     </div>
     <div class="shopping-cart-item-image-wrapper">

@@ -18,7 +18,6 @@
           <p>Količina</p>
           <p>Cijena</p>
         </div>
-        <span v-if="!cartLoaded"><LoaderCartItem /></span>
         <div class="my-cart-items-list">
           <ShoppingCartItem
             v-for="item in cartItems"
@@ -36,8 +35,11 @@
                   : 'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png',
             }"
             @change-quantity="change(item.id, item.price, $event)"
+            @remove-product="removeProduct(item.id)"
           />
         </div>
+        <span v-if="!cartLoaded"><LoaderCartItem /></span>
+
         <Message
           v-if="cartItems.length === 0 && cartLoaded"
           text="Još nemate proizvoda u košarici."
@@ -137,6 +139,7 @@ store.watch(
 );
 
 function onCancelClick() {
+  cartLoaded.value = false;
   const savedCart = JSON.parse(sessionStorage.getItem("cart"));
   savedCart.forEach((element) => {
     if (element.id == selectedItemId.value) {
@@ -150,10 +153,16 @@ function onCancelClick() {
 }
 
 function onConfirmClick() {
+  cartLoaded.value = false;
   const oldCart = JSON.parse(sessionStorage.getItem("cart"));
   const updatedCart = oldCart.filter((el) => el.id !== selectedItemId.value);
   sessionStorage.setItem("cart", JSON.stringify(updatedCart));
   fetchCartItemsData(); // TODO can it be done without this?
+}
+
+function removeProduct(id) {
+  selectedItemId.value = id;
+  onConfirmClick();
 }
 
 function change(id, price, newQuantity) {
