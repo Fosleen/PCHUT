@@ -144,12 +144,12 @@ import {
   PhArrowUDownLeft,
 } from "@phosphor-icons/vue";
 import PageTracker from "../components/PageTracker.vue";
+import { useToast } from "vue-toastification";
 
 const route = useRoute();
 const productLoading = computed(() => store.state.currentProduct.loading);
 const productImages = computed(() => product.value.images);
 const isAlreadyInCart = ref(false);
-import { useToast } from "vue-toastification";
 
 const toast = useToast();
 let product = ref({

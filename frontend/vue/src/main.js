@@ -4,12 +4,12 @@ import App from "./App.vue";
 import router from "./router";
 import "./style.scss";
 import VueCreditCardValidation from "vue-credit-card-validation";
-import Toast from "vue-toastification";
+import Toast, { POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 createApp(App)
   .use(store)
   .use(router)
   .use(VueCreditCardValidation)
-  .use(Toast)
+  .use(Toast, { position: POSITION.BOTTOM_RIGHT })
   .mount("#app");

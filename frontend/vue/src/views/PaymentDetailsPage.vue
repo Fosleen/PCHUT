@@ -1,157 +1,158 @@
 <template>
-  <div class="payment-details-page-tracker-wrapper">
-    <PageTracker />
-  </div>
-
-  <div class="payment-details-wrapper">
-    <div class="payment-details-inner">
-      <div class="payment-details-card-details">
-        <h2>Posljednji korak!</h2>
-        <p>Odaberite način plaćanja i unesite podatke</p>
-        <div class="payment-details-payment-type-container">
-          <div class="payment-details-item">
-            <input type="radio" value="card" v-model="paymentType" />
-            <img src="../assets/credit-card.png" alt="recognise-card-type" />
-            <p>Kartica</p>
-          </div>
-          <div class="payment-details-item">
-            <input type="radio" value="cod" v-model="paymentType" />
-            <img src="../assets/cod.png" alt="recognise-card-type" />
-            <div>
-              <p>Pouzećem</p>
-              <p>(+2 €)</p>
-            </div>
-          </div>
-        </div>
-        <div
-          v-if="paymentType == 'card'"
-          class="payment-details-payment-card-details"
-        >
-          <div class="payment-details-payment-card-details-item">
-            <p>Podaci o vlasniku</p>
-            <div class="payment-details-payment-card-details-row">
-              <InputField
-                placeholder="Ime *"
-                @update:inputValue="card.name = $event"
-              />
-              <InputField
-                placeholder="Prezime *"
-                @update:inputValue="card.surname = $event"
-              />
-            </div>
-          </div>
-          <div class="payment-details-payment-card-details-item">
-            <p>Broj kartice</p>
-            <div class="payment-details-payment-card-details-row">
-              <InputField
-                placeholder="4512 4514 2224 4444 *"
-                class="form-control"
-                v-cardformat:formatCardNumber
-                @update:inputValue="card.number = $event"
-              />
-              <img
-                src="https://images.contentstack.io/v3/assets/bltc05b5aa7ae1c3a47/blta54a2e549cacf89a/64abc3a08f332a057d544fe3/Standard_v3xxhdpi.png"
-                alt="recognise-card-type"
-              />
-            </div>
-          </div>
-          <div class="payment-details-payment-card-details-row">
-            <div class="payment-details-payment-card-detail">
-              <p>Istek kartice</p>
-              <InputField
-                placeholder="01/23 *"
-                v-cardformat:formatCardExpiry
-                @update:inputValue="card.expire_date = $event"
-              />
-            </div>
-            <div class="payment-details-payment-card-detail">
-              <p>CVV</p>
-              <InputField
-                placeholder="123 *"
-                type="number"
-                maxlength="3"
-                v-cardformat:formatCardCVC
-                @update:inputValue="card.cvv = $event"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="payment-details-person-price-wrapper">
-        <div class="payment-details-person-data">
-          <h2>Podaci o naručitelju</h2>
-          <p>Unesite podatke dostave</p>
-          <div class="payment-details-delivery-data-container">
-            <div class="payment-details-delivery-data-row">
-              <div class="payment-details-item">
-                <input type="radio" value="default" v-model="deliveryType" />
-                <span></span>
-                <p>Podaci profila</p>
-              </div>
-              <div
-                class="payment-details-default-data"
-                v-if="deliveryType == 'default'"
-              >
-                <p>{{ loggedUser.name }} {{ loggedUser.surname }}</p>
-                <p>
-                  {{ loggedUser.address }}, {{ loggedUser.postal }}
-                  {{ loggedUser.city }}
-                </p>
-                <p>{{ loggedUser.email }}</p>
-              </div>
+  <div>
+    <div class="payment-details-page-tracker-wrapper">
+      <PageTracker />
+    </div>
+    <div class="payment-details-wrapper">
+      <div class="payment-details-inner">
+        <div class="payment-details-card-details">
+          <h2>Posljednji korak!</h2>
+          <p>Odaberite način plaćanja i unesite podatke</p>
+          <div class="payment-details-payment-type-container">
+            <div class="payment-details-item">
+              <input type="radio" value="card" v-model="paymentType" />
+              <img src="../assets/credit-card.png" alt="recognise-card-type" />
+              <p>Kartica</p>
             </div>
             <div class="payment-details-item">
-              <input type="radio" value="custom" v-model="deliveryType" />
-              <span></span>
-              <p>Drugačiji podaci</p>
+              <input type="radio" value="cod" v-model="paymentType" />
+              <img src="../assets/cod.png" alt="recognise-card-type" />
+              <div>
+                <p>Pouzećem</p>
+                <p>(+2 €)</p>
+              </div>
             </div>
-            <form
-              id="delivery-data"
-              v-if="deliveryType == 'custom'"
-              class="payment-details-custom-data"
-            >
-              <p>Ime naručitelja:</p>
-              <InputField
-                placeholder="Ime *"
-                @update:inputValue="customer.name = $event"
-              />
-              <p>Prezime naručitelja:</p>
-              <InputField
-                placeholder="Prezime *"
-                @update:inputValue="customer.surname = $event"
-              />
-              <p>Email naručitelja:</p>
-              <InputField
-                placeholder="email@email.com *"
-                @update:inputValue="customer.email = $event"
-                type="email"
-              />
-              <p>Adresa dostave:</p>
-              <InputField
-                placeholder="Ulica Slavka Horvata 123a *"
-                @update:inputValue="customer.address = $event"
-              />
-              <p>Poštanski broj:</p>
-              <InputField
-                placeholder="10000 *"
-                @update:inputValue="customer.postal = $event"
-                type="number"
-              />
-              <p>Grad:</p>
-              <InputField
-                placeholder="Zagreb *"
-                @update:inputValue="customer.city = $event"
-              />
-            </form>
+          </div>
+          <div
+            v-if="paymentType == 'card'"
+            class="payment-details-payment-card-details"
+          >
+            <div class="payment-details-payment-card-details-item">
+              <p>Podaci o vlasniku</p>
+              <div class="payment-details-payment-card-details-row">
+                <InputField
+                  placeholder="Ime *"
+                  @update:inputValue="card.name = $event"
+                />
+                <InputField
+                  placeholder="Prezime *"
+                  @update:inputValue="card.surname = $event"
+                />
+              </div>
+            </div>
+            <div class="payment-details-payment-card-details-item">
+              <p>Broj kartice</p>
+              <div class="payment-details-payment-card-details-row">
+                <InputField
+                  placeholder="4512 4514 2224 4444 *"
+                  class="form-control"
+                  v-cardformat:formatCardNumber
+                  @update:inputValue="card.number = $event"
+                />
+                <img
+                  src="https://images.contentstack.io/v3/assets/bltc05b5aa7ae1c3a47/blta54a2e549cacf89a/64abc3a08f332a057d544fe3/Standard_v3xxhdpi.png"
+                  alt="recognise-card-type"
+                />
+              </div>
+            </div>
+            <div class="payment-details-payment-card-details-row">
+              <div class="payment-details-payment-card-detail">
+                <p>Istek kartice</p>
+                <InputField
+                  placeholder="01/23 *"
+                  v-cardformat:formatCardExpiry
+                  @update:inputValue="card.expire_date = $event"
+                />
+              </div>
+              <div class="payment-details-payment-card-detail">
+                <p>CVV</p>
+                <InputField
+                  placeholder="123 *"
+                  type="number"
+                  maxlength="3"
+                  v-cardformat:formatCardCVC
+                  @update:inputValue="card.cvv = $event"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="payment-details-price-wrapper">
-          <FinalPriceAndButton
-            @click="createOrder"
-            priceLabel="Ukupan iznos narudžbe:"
-            :price="totalPrice"
-            buttonText="Završi i plati"
-          />
+        <div class="payment-details-person-price-wrapper">
+          <div class="payment-details-person-data">
+            <h2>Podaci o naručitelju</h2>
+            <p>Unesite podatke dostave</p>
+            <div class="payment-details-delivery-data-container">
+              <div class="payment-details-delivery-data-row">
+                <div class="payment-details-item">
+                  <input type="radio" value="default" v-model="deliveryType" />
+                  <span></span>
+                  <p>Podaci profila</p>
+                </div>
+                <div
+                  class="payment-details-default-data"
+                  v-if="deliveryType == 'default'"
+                >
+                  <p>{{ loggedUser.name }} {{ loggedUser.surname }}</p>
+                  <p>
+                    {{ loggedUser.address }}, {{ loggedUser.postal }}
+                    {{ loggedUser.city }}
+                  </p>
+                  <p>{{ loggedUser.email }}</p>
+                </div>
+              </div>
+              <div class="payment-details-item">
+                <input type="radio" value="custom" v-model="deliveryType" />
+                <span></span>
+                <p>Drugačiji podaci</p>
+              </div>
+              <form
+                id="delivery-data"
+                v-if="deliveryType == 'custom'"
+                class="payment-details-custom-data"
+              >
+                <p>Ime naručitelja:</p>
+                <InputField
+                  placeholder="Ime *"
+                  @update:inputValue="customer.name = $event"
+                />
+                <p>Prezime naručitelja:</p>
+                <InputField
+                  placeholder="Prezime *"
+                  @update:inputValue="customer.surname = $event"
+                />
+                <p>Email naručitelja:</p>
+                <InputField
+                  placeholder="email@email.com *"
+                  @update:inputValue="customer.email = $event"
+                  type="email"
+                />
+                <p>Adresa dostave:</p>
+                <InputField
+                  placeholder="Ulica Slavka Horvata 123a *"
+                  @update:inputValue="customer.address = $event"
+                />
+                <p>Poštanski broj:</p>
+                <InputField
+                  placeholder="10000 *"
+                  @update:inputValue="customer.postal = $event"
+                  type="number"
+                />
+                <p>Grad:</p>
+                <InputField
+                  placeholder="Zagreb *"
+                  @update:inputValue="customer.city = $event"
+                />
+              </form>
+            </div>
+          </div>
+          <div class="payment-details-price-wrapper">
+            <FinalPriceAndButton
+              @click="createOrder"
+              priceLabel="Ukupan iznos narudžbe:"
+              :price="totalPrice"
+              buttonText="Završi i plati"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -167,10 +168,11 @@ import store from "../store";
 import { getLoggedUser } from "../api/api";
 import router from "../router";
 import PageTracker from "../components/PageTracker.vue";
+import { useToast } from "vue-toastification";
 
 const cartItemsId = ref([]);
 const cartItemsQuantity = ref([]);
-
+const toast = useToast();
 const paymentType = ref("card");
 const deliveryType = ref("default");
 const totalPrice = computed(() => store.state.user.cart.totalPrice.toFixed(2));
@@ -234,6 +236,9 @@ const createOrder = async () => {
         console.log(data);
         sessionStorage.setItem("cart", []);
         router.push("/narudzbe");
+        toast.success(`Narudžba uspješno zaprimljena!`, {
+          timeout: 2500,
+        });
       });
   } catch (err) {
     console.log("Error - " + err);
