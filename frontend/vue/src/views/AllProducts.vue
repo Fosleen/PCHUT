@@ -181,7 +181,6 @@
 </template>
 
 <script setup>
-import { ContentLoader } from "vue-content-loader";
 import PCPartCard from "../components/PCPartCard.vue";
 import LoaderAllProducts from "../components/LoaderAllProducts.vue";
 import { ref, onMounted, computed } from "vue";

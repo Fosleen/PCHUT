@@ -3,12 +3,17 @@
     <div class="my-orders-page-tracker-wrapper">
       <PageTracker />
     </div>
-    <div class="orders-wrapper" v-if="orders.length > 0">
+
+    <div class="orders-wrapper">
       <img class="img-background" src="../assets/gpu-grey.png" alt="" />
       <img class="img-background" src="../assets/cpu-grey.png" alt="" />
       <div class="orders-container">
         <div class="past-orders-wrapper">
           <h3>Povijest naručivanja</h3>
+          <div v-if="!ordersLoaded">
+            <LoaderOrderListItem /> <LoaderOrderListItem />
+            <LoaderOrderListItem />
+          </div>
           <div class="past-orders-container">
             <OrdersListItem
               v-for="order in orders"
@@ -23,6 +28,12 @@
               }"
             />
           </div>
+        </div>
+        <div class="message" v-if="orders.length === 0 && ordersLoaded">
+          <Message
+            text="Još nemate prethodnih narudžbi."
+            imageName="empty-order"
+          />
         </div>
         <div v-if="selectedOrder" class="current-order-wrapper">
           <div class="current-order-items-wrapper">
@@ -79,9 +90,6 @@
         </div>
       </div>
     </div>
-    <div class="message" v-else>
-      <Message text="Još nemate prethodnih narudžbi." imageName="empty-order" />
-    </div>
   </div>
 </template>
 
@@ -89,16 +97,27 @@
 import OrderItem from "../components/OrderItem.vue";
 import OrdersListItem from "../components/OrdersListItem.vue";
 import Message from "../components/Message.vue";
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
+import { ref } from "vue";
 import PageTracker from "../components/PageTracker.vue";
-const store = useStore();
+import LoaderOrderListItem from "../components/LoaderOrderListItem.vue";
+import store from "../store";
 
 store.dispatch("getOrdersByUser", {
   id: store.state.user.data.id,
 });
-const orders = computed(() => store.state.user.orders);
+const orders = ref([]);
 const selectedOrder = ref(null);
+const ordersLoaded = ref(false);
+
+store.watch(
+  () => store.state.user.orders,
+  (newOrders) => {
+    console.log(newOrders);
+
+    orders.value = newOrders;
+    ordersLoaded.value = true;
+  }
+);
 
 const calculateTotalQuantity = (order) => {
   let totalQuantity = 0;

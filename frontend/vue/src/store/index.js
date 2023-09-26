@@ -84,7 +84,8 @@ const store = createStore({
           return res;
         })
         .catch((err) => {
-          throw err;
+          console.log(err);
+          commit("setCartItem", []);
         });
     },
 
@@ -104,7 +105,8 @@ const store = createStore({
           return res;
         })
         .catch((err) => {
-          throw err;
+          console.log(err);
+          commit("setUsersOrders", []);
         });
     },
 

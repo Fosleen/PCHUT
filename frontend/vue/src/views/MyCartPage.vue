@@ -9,6 +9,7 @@
     <div class="my-cart-container">
       <div class="my-cart-items-container">
         <PageTracker />
+
         <div class="my-cart-items-header">
           <router-link to="/proizvodi">
             <Button shape="odd-shape-reversed" text="Povratak u trgovinu" />
@@ -17,6 +18,7 @@
           <p>Količina</p>
           <p>Cijena</p>
         </div>
+        <span v-if="!cartLoaded"><LoaderCartItem /></span>
         <div class="my-cart-items-list">
           <ShoppingCartItem
             v-for="item in cartItems"
@@ -37,7 +39,7 @@
           />
         </div>
         <Message
-          v-if="cartItems.length == 0"
+          v-if="cartItems.length === 0 && cartLoaded"
           text="Još nemate proizvoda u košarici."
           imageName="empty-cart"
         />
@@ -113,6 +115,7 @@ import Modal from "../components/Modal.vue";
 import ShoppingCartItem from "../components/ShoppingCartItem.vue";
 import { PhCalendarCheck } from "@phosphor-icons/vue";
 import { getComponentById } from "../api/api";
+import LoaderCartItem from "../components/LoaderCartItem.vue";
 import store from "../store";
 import PageTracker from "../components/PageTracker.vue";
 
@@ -121,6 +124,17 @@ const cartItems = ref([]);
 const totalPrice = ref(0);
 const selectedItemId = ref(0);
 const modalComponentRef = ref(null);
+const cartLoaded = ref(false);
+
+store.watch(
+  () => store.state.user.cart,
+  (newItems) => {
+    console.log(newItems);
+
+    cartItems.value = newItems;
+    cartLoaded.value = true;
+  }
+);
 
 function onCancelClick() {
   const savedCart = JSON.parse(sessionStorage.getItem("cart"));
@@ -165,7 +179,6 @@ function change(id, price, newQuantity) {
 }
 
 const fetchCartItemsData = async () => {
-  console.log(JSON.parse(sessionStorage.getItem("cart")));
   cartItems.value = [];
   totalPrice.value = 0;
   try {
@@ -180,7 +193,9 @@ const fetchCartItemsData = async () => {
     console.log("Error - " + err);
   }
   console.log(JSON.parse(JSON.stringify(cartItems.value)));
+
   store.dispatch("totalCartPrice", totalPrice.value);
+  cartLoaded.value = true;
 };
 
 onMounted(async () => {

@@ -4,7 +4,7 @@
       viewBox="0 0 400 160"
       :speed="2"
       primaryColor="#e6e6e6"
-      secondaryColor="#ecebeb"
+      secondaryColor="#e0d7df"
       v-if="isTabletLarge"
     >
       <rect x="4" y="4" rx="2" ry="2" width="93" height="148" />
@@ -16,7 +16,7 @@
       viewBox="0 0 202 500"
       :speed="2"
       primaryColor="#e6e6e6"
-      secondaryColor="#ecebeb"
+      secondaryColor="#e0d7df"
       v-if="!isTabletLarge"
     >
       <rect x="4" y="4" rx="2" ry="2" width="93" height="180" />
