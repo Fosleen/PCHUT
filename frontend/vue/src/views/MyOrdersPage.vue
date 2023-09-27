@@ -79,7 +79,7 @@
               </div>
               <div>
                 <p>Očekivan datum dostave:</p>
-                <p>15. kolovoz - 17. kolovoz 2023.</p>
+                <p>{{ result }}</p>
               </div>
               <div>
                 <p>Ukupno:</p>
@@ -126,6 +126,19 @@ const calculateTotalQuantity = (order) => {
   });
   return totalQuantity;
 };
+
+const options = { day: "numeric", month: "long" };
+const today = new Date();
+const threeDaysLater = new Date();
+threeDaysLater.setDate(today.getDate() + 3);
+
+const formattedToday = today.toLocaleDateString("hr-HR", options);
+const formattedThreeDaysLater = threeDaysLater.toLocaleDateString(
+  "hr-HR",
+  options
+);
+
+const result = `${formattedToday} - ${formattedThreeDaysLater}`;
 
 const calculateTotalPrice = (order) => {
   let totalPrice = 0;

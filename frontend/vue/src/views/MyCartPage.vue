@@ -77,7 +77,7 @@
             <p>Očekivana isporuka:</p>
             <div>
               <PhCalendarCheck />
-              <p>25. kolovoz - 28. kolovoz</p>
+              <p>{{ result }}</p>
             </div>
           </div>
           <div class="my-cart-details-details-data-prices">
@@ -159,6 +159,19 @@ function onConfirmClick() {
   sessionStorage.setItem("cart", JSON.stringify(updatedCart));
   fetchCartItemsData(); // TODO can it be done without this?
 }
+
+const options = { day: "numeric", month: "long" };
+const today = new Date();
+const threeDaysLater = new Date();
+threeDaysLater.setDate(today.getDate() + 3);
+
+const formattedToday = today.toLocaleDateString("hr-HR", options);
+const formattedThreeDaysLater = threeDaysLater.toLocaleDateString(
+  "hr-HR",
+  options
+);
+
+const result = `${formattedToday} - ${formattedThreeDaysLater}`;
 
 function removeProduct(id) {
   selectedItemId.value = id;
