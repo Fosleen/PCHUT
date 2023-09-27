@@ -1,30 +1,30 @@
 <template>
   <div class="submenu-wrapper">
     <div class="submenu-container">
-      <router-link to="/proizvodi">
+      <a href="/#gpu">
         <div class="submenu-items">
           <PhDesktopTower :size="20" />
           <p>GRAFIČKE KARTICE</p>
         </div>
-      </router-link>
-      <router-link to="/proizvodi">
+      </a>
+      <a href="/#cpu">
         <div class="submenu-items" @click="quickSearch('cpu')">
           <PhCpu :size="20" />
           <p>PROCESORI</p>
         </div>
-      </router-link>
-      <router-link to="/proizvodi">
+      </a>
+      <a href="/#mb">
         <div class="submenu-items" @click="quickSearch('keyboard')">
-          <PhKeyboard :size="20" />
-          <p>TIPKOVNICE</p>
+          <PhSquareLogo :size="20" />
+          <p>MATIČNE PLOČE</p>
         </div>
-      </router-link>
-      <router-link to="/proizvodi">
+      </a>
+      <a href="/#ram">
         <div class="submenu-items" @click="quickSearch('mouse')">
-          <PhMouse :size="20" />
-          <p>MIŠEVI</p>
+          <PhRuler :size="20" />
+          <p>RAM MEMORIJE</p>
         </div>
-      </router-link>
+      </a>
       <router-link to="/proizvodi">
         <div class="submenu-items more" @click="quickSearch('mouse')">
           <p>VIŠE</p>
@@ -39,8 +39,8 @@
 import Logo from "../assets/logo_new.png";
 import {
   PhCpu,
-  PhKeyboard,
-  PhMouse,
+  PhSquareLogo,
+  PhRuler,
   PhDesktopTower,
 } from "@phosphor-icons/vue";
 import Searchbar from "./Searchbar.vue";
@@ -80,6 +80,7 @@ import Searchbar from "./Searchbar.vue";
         color: $colorTextSecondary;
         gap: 8px;
         cursor: pointer;
+        align-items: center;
 
         p {
           color: $colorTextSecondary;

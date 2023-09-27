@@ -3,9 +3,9 @@
     <HomepageSubmenu />
     <Hero />
 
-    <div class="homepage-component-outer-wrapper">
+    <div class="homepage-component-outer-wrapper" id="gpu">
       <PageTracker />
-      <h1 class="homepage-component-wrapper-title">Grafičke kartice</h1>
+      <h1 class="homepage-component-wrapper-title">GRAFIČKE KARTICE</h1>
       <span v-if="gpus.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
@@ -24,7 +24,7 @@
         />
       </div>
 
-      <h1 class="homepage-component-wrapper-title">Procesori</h1>
+      <h1 class="homepage-component-wrapper-title" id="cpu">PROCESORI</h1>
       <span v-if="cpus.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
@@ -42,7 +42,7 @@
         />
       </div>
 
-      <h1 class="homepage-component-wrapper-title">Matične ploče</h1>
+      <h1 class="homepage-component-wrapper-title" id="mb">MATIČNE PLOČE</h1>
       <span v-if="mbs.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
@@ -60,7 +60,7 @@
         />
       </div>
 
-      <h1 class="homepage-component-wrapper-title">RAM memorije</h1>
+      <h1 class="homepage-component-wrapper-title" id="ram">RAM MEMORIJE</h1>
       <span v-if="rams.length == 0"> <LoaderAllProducts /> </span>
       <div class="item-type-wrapper">
         <PCPartCard
