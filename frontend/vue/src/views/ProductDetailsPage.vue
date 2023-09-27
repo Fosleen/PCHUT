@@ -441,4 +441,14 @@ store.dispatch("getProduct", {
     justify-content: space-between;
   }
 }
+
+.Vue-Toastification__toast-body {
+  margin: auto 18px auto 0px;
+}
+
+.Vue-Toastification__close-button {
+  &:hover {
+    background-color: transparent;
+  }
+}
 </style>

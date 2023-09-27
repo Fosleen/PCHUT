@@ -478,4 +478,14 @@ input {
 
   //margin-left: 96px;
 }
+
+.Vue-Toastification__toast-body {
+  margin: auto 18px auto 0px;
+}
+
+.Vue-Toastification__close-button {
+  &:hover {
+    background-color: transparent;
+  }
+}
 </style>
