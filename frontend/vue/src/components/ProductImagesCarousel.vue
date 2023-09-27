@@ -96,7 +96,6 @@ onMounted(() => {
 
 .splide__slide {
   width: 100vw;
-  margin: 0 auto;
   max-width: 500px;
 
   & img {

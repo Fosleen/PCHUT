@@ -59,19 +59,34 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+@import "../utils/theme.scss";
+
 .page-tracker-wrapper {
   display: flex;
   gap: 4px;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin: 8px;
   color: #454545;
+
+  @media screen and ($tablet) {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
 }
 .page-tracker-text {
+  font-size: 14px;
   text-transform: uppercase;
+
+  @media screen and ($tablet) {
+    font-size: 24px;
+  }
 }
 
 .right-arrow-wrapper {
-  font-size: 44px;
+  font-size: 20px;
   color: #454545;
+
+  @media screen and ($tablet) {
+    font-size: 30px;
+  }
 }
 </style>

@@ -229,9 +229,9 @@ store.dispatch("getProduct", {
   h2 {
     color: $colorBtnPrimary;
     text-transform: uppercase;
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
-    padding: 20px;
+    padding: 4px 16px;
   }
 
   .product-details-container {
@@ -253,6 +253,8 @@ store.dispatch("getProduct", {
       .product-details-logo-image {
         width: 140px;
         background: white;
+        margin-top: 8px;
+        margin-bottom: 8px;
 
         & img {
           width: 100%;
@@ -284,6 +286,7 @@ store.dispatch("getProduct", {
     h2 {
       font-size: 28px;
       color: $grey-dark;
+      padding: 20px;
     }
 
     .product-details-detailed-info {
@@ -334,6 +337,10 @@ store.dispatch("getProduct", {
 
 @media screen and ($tablet) {
   .product-details-wrapper {
+    h2 {
+      font-size: 36px;
+    }
+
     .product-details-container {
       flex-direction: row;
       margin: 0 20px 0 28px;
@@ -419,26 +426,15 @@ store.dispatch("getProduct", {
   display: flex;
   width: 100%;
   max-width: 1200px;
-  //background-color: red;
+  font-size: 14px;
 
   @media screen and ($tablet) {
-    //background-color: red;
     justify-content: flex-start;
-    margin-left: 50px;
     width: 100%;
   }
 
   @media screen and ($desktop) {
-    //background-color: blue;
-    margin-left: 0;
-    //margin-left: 350px;
-  }
-
-  @media screen and ($desktopLarge) {
-    //background-color: purple;
-    //margin-left: 80px;
-    padding-left: 80px;
-    justify-content: space-between;
+    margin: 0 auto;
   }
 }
 
