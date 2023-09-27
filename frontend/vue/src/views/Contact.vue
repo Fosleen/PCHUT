@@ -1,6 +1,8 @@
 <template>
   <div class="contact-page-wrapper">
-    <PageTracker />
+    <div class="contact-page-page-tracker-wrapper">
+      <PageTracker />
+    </div>
 
     <div class="contact-page-page-tracker-wrapper"></div>
 
@@ -132,6 +134,9 @@ import PageTracker from "../components/PageTracker.vue";
 }
 
 .contact-page-page-tracker-wrapper {
-  background-color: red;
+  //background-color: red;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
 }
 </style>

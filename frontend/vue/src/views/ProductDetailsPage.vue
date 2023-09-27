@@ -1,7 +1,9 @@
 <template>
   <div v-if="productLoading">Loading...</div>
   <div v-else class="product-details-wrapper">
-    <PageTracker :text="product.model" />
+    <div class="product-details-page-tracker-wrapper">
+      <PageTracker :text="product.model" />
+    </div>
     <h2>
       {{ product.product_type_cro }} {{ product.manufacturer.name }}
       {{ product.model }}
@@ -410,6 +412,33 @@ store.dispatch("getProduct", {
         }
       }
     }
+  }
+}
+
+.product-details-page-tracker-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  //background-color: red;
+
+  @media screen and ($tablet) {
+    //background-color: red;
+    justify-content: flex-start;
+    margin-left: 50px;
+    width: 100%;
+  }
+
+  @media screen and ($desktop) {
+    //background-color: blue;
+    margin-left: 0;
+    //margin-left: 350px;
+  }
+
+  @media screen and ($desktopLarge) {
+    //background-color: purple;
+    //margin-left: 80px;
+    padding-left: 80px;
+    justify-content: space-between;
   }
 }
 </style>
