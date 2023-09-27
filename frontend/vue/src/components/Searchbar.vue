@@ -12,12 +12,16 @@
       @input="handleInputChange($event.target.value)"
     />
     <div class="search-results" v-if="resultsLength > 0">
-      {{ console.log("Je vise od 0") }}
-      <ul>
-        <li v-for="result in searchResults" :key="result.id">
-          {{ result.model }}
-        </li>
-      </ul>
+      <div
+        v-for="result in searchResults"
+        :key="result.id"
+        class="search-results-item"
+      >
+        <img :src="result.images[0]" alt="" />
+
+        <p>{{ result.product_type_cro + " " + result.model }}</p>
+        <p>{{ result.price }} &#x20AC;</p>
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +44,6 @@ const handleInputChange = async (phrase) => {
   console.log("U searchbaru je data", data);
 
   console.log("Fraza je", phrase);
-  //untill here is good
 
   searchResults.value = data.filter((item) => item.model.includes(phrase));
 
@@ -102,30 +105,36 @@ const handleInputChange = async (phrase) => {
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: white;
+  background-color: $colorTextTertiary;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      padding: 10px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #f0f0f0;
-      }
-    }
-  }
 }
 
 .search-results {
-  background-color: red;
+  //background-color: red;
   z-index: 15000;
   //position: absolute;
+}
+
+.search-results-item {
+  border-top: 1px solid $colorTextTertiary;
+  border-bottom: 1px solid $colorTextTertiary;
+  gap: 12px;
+
+  display: flex;
+  flex-direction: row;
+  //color: blue;
+  align-items: center;
+
+  &:hover {
+    color: green;
+  }
+
+  img {
+    width: 100px;
+    padding: 4px;
+    //border: 1px solid blue;
+  }
 }
 </style>

@@ -208,7 +208,7 @@ const image =
     : component.images;
 
 const getModelName = () => {
-  console.log(JSON.parse(JSON.stringify(component)));
+  //console.log(JSON.parse(JSON.stringify(component)));
   const modelName = component.productable_type.replace("App\\Models\\", "");
   return modelName;
 };

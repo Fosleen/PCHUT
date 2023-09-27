@@ -72,17 +72,17 @@ onMounted(async () => {
   try {
     const graphicCard = await getGraphicCardById(1);
     gpu.value = graphicCard.data;
-    console.log("Gpu", gpu.value);
+    //console.log("Gpu", gpu.value);
 
     const procesor = await getCPUById(2);
     cpu.value = procesor.data;
-    console.log("CPU", cpu.value);
+    //console.log("CPU", cpu.value);
 
     const motherboard = await getMotherboardById(2);
     mbd.value = motherboard.data;
-    console.log("Motherboard", mbd.value);
+    // console.log("Motherboard", mbd.value);
   } catch {
-    console.log("Doslo je do errora");
+    // console.log("Doslo je do errora");
   }
 });
 </script>
