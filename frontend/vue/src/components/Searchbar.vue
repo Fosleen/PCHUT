@@ -19,7 +19,15 @@
       >
         <img :src="result.images[0]" alt="" />
 
-        <p>{{ result.product_type_cro + " " + result.model }}</p>
+        <p>
+          {{
+            result.product_type_cro +
+            " " +
+            result.manufacturer.name +
+            " " +
+            result.model
+          }}
+        </p>
         <p>{{ result.price }} &#x20AC;</p>
       </div>
     </div>
