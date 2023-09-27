@@ -40,26 +40,16 @@ import { ref, computed } from "vue";
 import { getAllComponents } from "../api/api";
 
 const searchResults = ref([]);
-const searchPhrase = ref("");
 const resultsLength = computed(() =>
   searchResults.value ? searchResults.value.length : 0
 );
 
 const handleInputChange = async (phrase) => {
   const response = await getAllComponents();
-  console.log("U searchbaru je response", response);
   const data = response.components;
-  console.log("U searchbaru je data", data);
 
-  console.log("Fraza je", phrase);
-
-  searchResults.value = data.filter((item) => item.model.includes(phrase));
-
-  console.log(
-    "Vrijednost nakon search je",
-    searchResults.value,
-    "duljina je",
-    searchResults.value.length
+  searchResults.value = data.filter((item) =>
+    item.model.toLowerCase().includes(phrase.toLowerCase())
   );
 };
 </script>
