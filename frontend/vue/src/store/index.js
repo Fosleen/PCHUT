@@ -6,7 +6,7 @@ const store = createStore({
     user: {
       data: {},
       token: sessionStorage.getItem("access_token"),
-      cart: { data: sessionStorage.getItem("cart"), totalPrice: null },
+      cart: { data: sessionStorage.getItem("cart"), totalPrice: 0 },
       orders: {},
     },
     currentProduct: {
@@ -165,8 +165,9 @@ const store = createStore({
     logout: (state) => {
       state.user.data = {};
       state.user.token = null;
-      state.user.cart = null;
-      state.user.orders = null;
+      state.user.cart.data = {};
+      state.user.cart.totalPrice = 0;
+      state.user.orders = {};
     },
   },
 

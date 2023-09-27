@@ -66,21 +66,39 @@ This full-stack project technology stack includes:
 ## Installation - how to run the code?
 <div id="installation">To start this project on your PC locally, follow these steps:</div>
 
-1. Clone the repository:
+ + Clone the repository:
 `git clone https://github.com/Fosleen/PCHUT`
 
-2. In terminal, navigate to the Vue directory:
+## Frontend
+
+ + In terminal, navigate to the Vue directory:
 `cd frontend/vue`
    
-3. Install all dependencies: `npm install`
++ Install all dependencies: `npm install`
    
-4. Start the application locally on port 5173: `npm run dev`
++ Start the application locally on port 5173: `npm run dev`
+
+## Backend
+
++ Start server on XAMPP (Apache & MySQL services)
    
-5. In new terminal, navigate to the Laravel directory: `cd backend/pc-hut`
++ In new terminal, navigate to the Laravel directory: `cd backend/pc-hut`
 
-6. Start the server locally on port 8000: `php artisan serve`
++ Start the server locally on port 8000: `php artisan serve`
+  
++ Run database migrations: `php artisan migrate`
 
-7. // TODO add start xampp, migrate database
+  ### Admin
+
+  If you want to access admin dashboard, you have to install Laravel Filament.
+
+  + Go in new terminal while your backend is running and run `composer require filament/filament:"^3.0-stable" -W`
+  + Then run `php artisan filament:install --panels`
+
+    To access admin dashboard, you need to create a user in terminal: `php artisan make:filament-user`
+    On admin dashboard, you can do CRUD operations on database.
+    
+
    
 ## PChut UI 
 <div id="ui"></div>

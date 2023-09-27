@@ -215,7 +215,7 @@ const fetchCartItemsData = async () => {
     console.log("Error - " + err);
   }
   console.log(JSON.parse(JSON.stringify(cartItems.value)));
-
+  
   store.dispatch("totalCartPrice", totalPrice.value);
   cartLoaded.value = true;
 };
