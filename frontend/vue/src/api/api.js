@@ -233,3 +233,9 @@ export function getFilteredDataByProductType(selectedType) {
       return data;
     });
 }
+
+export function getAllComponents() {
+  return axiosClient.get("/component").then(({ data }) => {
+    return data;
+  });
+}
