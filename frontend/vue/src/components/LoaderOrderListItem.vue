@@ -18,7 +18,6 @@
 
 <script setup>
 import { ContentLoader } from "vue-content-loader";
-
 </script>
 
 

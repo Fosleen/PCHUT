@@ -1,134 +1,144 @@
 <template>
-  <div v-if="productLoading">Loading...</div>
-  <div v-else class="product-details-wrapper">
-    <div class="product-details-page-tracker-wrapper">
-      <PageTracker :text="product.model" />
-    </div>
-    <h2>
-      {{ product.product_type_cro }} {{ product.manufacturer.name }}
-      {{ product.model }}
-    </h2>
-    <div class="product-details-container">
-      <ProductImagesCarousel :images="productImages" />
-
-      <div class="product-details-info">
-        <h5>Dostupno</h5>
-        <h3>{{ product.price }} €</h3>
-        <div class="product-details-logo-image">
-          <img
-            :src="`${product.manufacturer_img}`"
-            :alt="`${product.manufacturer} logo`"
-          />
-        </div>
-
-        <div class="product-details-data-container">
-          <div class="product-details-data-row">
-            <p>Brand:</p>
-            <p>{{ product.manufacturer.name }}</p>
-          </div>
-          <div class="product-details-data-row">
-            <p>Model:</p>
-            <p>{{ product.model }}</p>
-          </div>
-          <div v-if="product.connector" class="product-details-data-row">
-            <p>Vrsta priključka:</p>
-            <p>{{ product.connector }}</p>
-          </div>
-          <div v-if="product.type" class="product-details-data-row">
-            <p>Tip:</p>
-            <p>{{ product.type }}</p>
-          </div>
-          <div v-if="product.cores" class="product-details-data-row">
-            <p>Broj jezgri:</p>
-            <p>{{ product.cores }}</p>
-          </div>
-          <div v-if="product.socket" class="product-details-data-row">
-            <p>Podnožje:</p>
-            <p>{{ product.socket.name }}</p>
-          </div>
-          <div v-if="product.memory" class="product-details-data-row">
-            <p>Memorija:</p>
-            <p>{{ product.memory }} GB</p>
-          </div>
-          <div v-if="product.speed" class="product-details-data-row">
-            <p>Brzina:</p>
-            <p>{{ product.speed }}GHz</p>
-          </div>
-          <div v-if="product.power" class="product-details-data-row">
-            <p>Snaga:</p>
-            <p>{{ product.power }}W</p>
-          </div>
-          <div v-if="product.dpi" class="product-details-data-row">
-            <p>DPI:</p>
-            <p>{{ product.dpi }}</p>
-          </div>
-          <div v-if="product.size" class="product-details-data-row">
-            <p>Dijagonala:</p>
-            <p>{{ product.size }}''</p>
-          </div>
-          <div v-if="product.refresh_rate" class="product-details-data-row">
-            <p>Osvježavanje slike:</p>
-            <p>{{ product.refresh_rate }}</p>
-          </div>
-          <div v-if="product.wired" class="product-details-data-row">
-            <p>Tip:</p>
-            <p>{{ product.wired ? "žičan" : "bežičan" }}</p>
-          </div>
-          <div v-if="product.switch_type" class="product-details-data-row">
-            <p>Switchevi:</p>
-            <p>{{ product.switch_type }}</p>
-          </div>
-          <div v-if="product.rgb" class="product-details-data-row">
-            <p>RGB:</p>
-            <p>{{ product.rgb ? "da" : "ne" }}</p>
-          </div>
-          <div v-if="product.curved == true" class="product-details-data-row">
-            <p>Zakrivljen:</p>
-            <p>{{ product.curved ? "da" : "ne" }}</p>
-          </div>
-        </div>
-        <div @click="addToCart(product.id)" class="product-details-btn-wrapper">
-          <Button
-            shape="trapezoid"
-            text="Dodaj u"
-            :style="{
-              'background-color': '#D9D9D9',
-              color: '#282828',
-            }"
-            :icon="true"
-          />
-        </div>
+  <div>
+    <div v-if="productLoading" class="product-details-wrapper">
+      <div class="product-details-container">
+        <LoaderProductDetails />
       </div>
     </div>
-    <div class="product-details-detailed-container">
-      <h2>DETALJAN OPIS</h2>
-      <div class="product-details-detailed-info">
-        <p>{{ product.description }}</p>
-        <div class="product-details-detailed-data-container">
-          <div class="product-details-data-row">
-            <PhShieldCheck :size="24" color="#5a01cc" />
-            <p>Jamstvo:</p>
-            <p>24 mjeseca</p>
+
+    <div v-else class="product-details-wrapper">
+      <div class="product-details-page-tracker-wrapper">
+        <PageTracker :text="product.model" />
+      </div>
+      <h2>
+        {{ product.product_type_cro }} {{ product.manufacturer.name }}
+        {{ product.model }}
+      </h2>
+      <div class="product-details-container">
+        <ProductImagesCarousel :images="productImages" />
+
+        <div class="product-details-info">
+          <h5>Dostupno</h5>
+          <h3>{{ product.price }} €</h3>
+          <div class="product-details-logo-image">
+            <img
+              :src="`${product.manufacturer_img}`"
+              :alt="`${product.manufacturer} logo`"
+            />
           </div>
-          <div class="product-details-data-row">
-            <PhTruck :size="24" color="#5a01cc" />
-            <p>Dostava:</p>
-            <p>besplatna</p>
+
+          <div class="product-details-data-container">
+            <div class="product-details-data-row">
+              <p>Brand:</p>
+              <p>{{ product.manufacturer.name }}</p>
+            </div>
+            <div class="product-details-data-row">
+              <p>Model:</p>
+              <p>{{ product.model }}</p>
+            </div>
+            <div v-if="product.connector" class="product-details-data-row">
+              <p>Vrsta priključka:</p>
+              <p>{{ product.connector }}</p>
+            </div>
+            <div v-if="product.type" class="product-details-data-row">
+              <p>Tip:</p>
+              <p>{{ product.type }}</p>
+            </div>
+            <div v-if="product.cores" class="product-details-data-row">
+              <p>Broj jezgri:</p>
+              <p>{{ product.cores }}</p>
+            </div>
+            <div v-if="product.socket" class="product-details-data-row">
+              <p>Podnožje:</p>
+              <p>{{ product.socket.name }}</p>
+            </div>
+            <div v-if="product.memory" class="product-details-data-row">
+              <p>Memorija:</p>
+              <p>{{ product.memory }} GB</p>
+            </div>
+            <div v-if="product.speed" class="product-details-data-row">
+              <p>Brzina:</p>
+              <p>{{ product.speed }}GHz</p>
+            </div>
+            <div v-if="product.power" class="product-details-data-row">
+              <p>Snaga:</p>
+              <p>{{ product.power }}W</p>
+            </div>
+            <div v-if="product.dpi" class="product-details-data-row">
+              <p>DPI:</p>
+              <p>{{ product.dpi }}</p>
+            </div>
+            <div v-if="product.size" class="product-details-data-row">
+              <p>Dijagonala:</p>
+              <p>{{ product.size }}''</p>
+            </div>
+            <div v-if="product.refresh_rate" class="product-details-data-row">
+              <p>Osvježavanje slike:</p>
+              <p>{{ product.refresh_rate }}</p>
+            </div>
+            <div v-if="product.wired" class="product-details-data-row">
+              <p>Tip:</p>
+              <p>{{ product.wired ? "žičan" : "bežičan" }}</p>
+            </div>
+            <div v-if="product.switch_type" class="product-details-data-row">
+              <p>Switchevi:</p>
+              <p>{{ product.switch_type }}</p>
+            </div>
+            <div v-if="product.rgb" class="product-details-data-row">
+              <p>RGB:</p>
+              <p>{{ product.rgb ? "da" : "ne" }}</p>
+            </div>
+            <div v-if="product.curved == true" class="product-details-data-row">
+              <p>Zakrivljen:</p>
+              <p>{{ product.curved ? "da" : "ne" }}</p>
+            </div>
           </div>
-          <div class="product-details-data-row">
-            <PhPackage :size="24" color="#5a01cc" />
-            <p>Isporuka:</p>
-            <p>2-5 radnih dana</p>
-          </div>
-          <div class="product-details-data-row">
-            <PhArrowUDownLeft :size="24" color="#5a01cc" />
-            <p>Pravo povrata:</p>
-            <p>14 dana</p>
+          <div
+            @click="addToCart(product.id)"
+            class="product-details-btn-wrapper"
+          >
+            <Button
+              shape="trapezoid"
+              text="Dodaj u"
+              :style="{
+                'background-color': '#D9D9D9',
+                color: '#282828',
+              }"
+              :icon="true"
+            />
           </div>
         </div>
       </div>
+      <div class="product-details-detailed-container">
+        <h2>DETALJAN OPIS</h2>
+        <div class="product-details-detailed-info">
+          <p>{{ product.description }}</p>
+          <div class="product-details-detailed-data-container">
+            <div class="product-details-data-row">
+              <PhShieldCheck :size="24" color="#5a01cc" />
+              <p>Jamstvo:</p>
+              <p>24 mjeseca</p>
+            </div>
+            <div class="product-details-data-row">
+              <PhTruck :size="24" color="#5a01cc" />
+              <p>Dostava:</p>
+              <p>besplatna</p>
+            </div>
+            <div class="product-details-data-row">
+              <PhPackage :size="24" color="#5a01cc" />
+              <p>Isporuka:</p>
+              <p>2-5 radnih dana</p>
+            </div>
+            <div class="product-details-data-row">
+              <PhArrowUDownLeft :size="24" color="#5a01cc" />
+              <p>Pravo povrata:</p>
+              <p>14 dana</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Recommended />
     </div>
-    <Recommended />
   </div>
 </template>
 
@@ -146,6 +156,7 @@ import {
   PhArrowUDownLeft,
 } from "@phosphor-icons/vue";
 import PageTracker from "../components/PageTracker.vue";
+import LoaderProductDetails from "../components/LoaderProductDetails.vue";
 import { useToast } from "vue-toastification";
 
 const route = useRoute();
@@ -222,6 +233,10 @@ store.dispatch("getProduct", {
 
 <style lang="scss">
 @import "../utils/theme.scss";
+.loader-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 .product-details-wrapper {
   background-color: $colorBgPrimary;

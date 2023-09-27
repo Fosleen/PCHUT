@@ -11,7 +11,7 @@
       placeholder="Pretraži po modelu... "
       @input="handleInputChange($event.target.value)"
     />
-    <div class="search-results" v-if="resultsLength > 0">
+    <div class="search-results" v-if="searchResultsLoaded">
       <div v-for="result in searchResults" :key="result.id">
         <router-link
           class="search-results-item"
@@ -40,6 +40,12 @@
         </router-link>
       </div>
     </div>
+    <div
+      class="search-results"
+      v-if="!searchResultsLoaded && searchResultsShown"
+    >
+      <LoaderSearchbarItem />
+    </div>
   </div>
 </template>
 
@@ -47,19 +53,25 @@
 import { PhMagnifyingGlass } from "@phosphor-icons/vue";
 import { ref, computed } from "vue";
 import { getAllComponents } from "../api/api";
+import LoaderSearchbarItem from "./LoaderSearchbarItem.vue";
 
+const searchResultsLoaded = ref(false);
+const searchResultsShown = ref(false);
 const searchResults = ref([]);
-const resultsLength = computed(() =>
-  searchResults.value ? searchResults.value.length : 0
-);
 
 const handleInputChange = async (phrase) => {
-  const response = await getAllComponents();
-  const data = response.components;
+  searchResultsLoaded.value = false;
+  searchResultsShown.value = true;
 
-  searchResults.value = data.filter((item) =>
-    item.model.toLowerCase().includes(phrase.toLowerCase())
-  );
+  getAllComponents().then((response) => {
+    const data = response.components;
+    const filteredData = data.filter((item) =>
+      item.model.toLowerCase().includes(phrase.toLowerCase())
+    );
+
+    searchResults.value = filteredData;
+    searchResultsLoaded.value = true;
+  });
 };
 
 const getModelName = (item) => {
