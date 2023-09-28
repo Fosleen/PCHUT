@@ -10,8 +10,20 @@
     class="discount-part-card-link"
   >
     <div class="discount-part-card-wrapper">
-      <div class="discount-part-card-image-wrapper" v-if="component.images">
+      <div
+        class="discount-part-card-image-wrapper"
+        v-if="component.images.length > 0"
+      >
+        {{ console.log("Ima sliku") }}
         <img :src="component.images[0]" alt="" />
+      </div>
+
+      <div class="discount-part-card-image-wrapper" v-else>
+        {{ console.log("Ima sliku") }}
+        <img
+          src="https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png"
+          alt=""
+        />
       </div>
       <div class="discount-part-card-text-wrapper">
         <PCPartCardList
