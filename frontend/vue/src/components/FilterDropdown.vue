@@ -777,7 +777,7 @@
               isFilterShown('AMD', 'manufacturers')
             "
           >
-            SERIJA:
+            MODEL:
           </h4>
 
           <div

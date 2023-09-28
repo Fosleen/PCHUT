@@ -24,7 +24,7 @@
             component.model
           "
           :text-group-items="[
-            'Serija: ' + component.model,
+            'Model: ' + component.model,
             'Memorija: ' + component.memory + ' GB',
           ]"
         />
@@ -40,7 +40,7 @@
             component.socket.name
           "
           :text-group-items="[
-            'Serija: ' + component.model,
+            'Model: ' + component.model,
             'Podnožje: ' + component.socket.name,
             'Broj jezgri: ' + component.cores,
           ]"
@@ -55,7 +55,7 @@
             component.model
           "
           :text-group-items="[
-            'Serija: ' + component.model,
+            'Model: ' + component.model,
             'Memorija: ' + component.ram_type.name,
             'Podnožje: ' + component.socket.name,
           ]"
