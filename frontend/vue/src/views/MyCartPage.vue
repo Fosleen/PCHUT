@@ -131,7 +131,7 @@ const cartLoaded = ref(false);
 store.watch(
   () => store.state.user.cart,
   (newItems) => {
-    console.log(newItems);
+    //console.log(newItems);
 
     cartItems.value = newItems;
     cartLoaded.value = true;
@@ -212,10 +212,10 @@ const fetchCartItemsData = async () => {
       totalPrice.value += response.data.price * el.quantity;
     }
   } catch (err) {
-    console.log("Error - " + err);
+    // console.log("Error - " + err);
   }
-  console.log(JSON.parse(JSON.stringify(cartItems.value)));
-  
+  //console.log(JSON.parse(JSON.stringify(cartItems.value)));
+
   store.dispatch("totalCartPrice", totalPrice.value);
   cartLoaded.value = true;
 };

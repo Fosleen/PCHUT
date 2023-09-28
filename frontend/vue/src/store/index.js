@@ -48,7 +48,7 @@ const store = createStore({
     },
 
     totalCartPrice({ commit }, price) {
-      console.log(price);
+      //console.log(price);
 
       commit("setTotalCartPrice", price);
     },
@@ -60,7 +60,7 @@ const store = createStore({
       return axiosClient
         .get(apiUrl)
         .then((res) => {
-          console.log(res);
+          //console.log(res);
 
           commit("setProduct", res.data);
           commit("setCurrentProductLoading", false);
@@ -78,13 +78,13 @@ const store = createStore({
       return axiosClient
         .get(apiUrl)
         .then((res) => {
-          console.log(res);
+          //console.log(res);
 
           commit("setCartItem", res.data);
           return res;
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
           commit("setCartItem", []);
         });
     },
@@ -99,13 +99,13 @@ const store = createStore({
             ...ordersData[orderId],
             id: Number(orderId),
           }));
-          console.log(ordersArray);
+          //console.log(ordersArray);
 
           commit("setUsersOrders", ordersArray);
           return res;
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           commit("setUsersOrders", []);
         });
     },
@@ -124,16 +124,16 @@ const store = createStore({
   mutations: {
     setUser: (state, userData) => {
       state.user.token = userData.token;
-      console.log(userData.user);
+      //console.log(userData.user);
 
       state.user.data = userData.user;
-      console.log(state.user.data);
+      // console.log(state.user.data);
 
       localStorage.setItem("access_token", userData.token);
     },
 
     setUpdatedUser: (state, userData) => {
-      console.log(userData);
+      // console.log(userData);
       state.user.data = userData;
     },
 
@@ -146,7 +146,7 @@ const store = createStore({
     },
 
     setUsersOrders: (state, data) => {
-      console.log(data);
+      //console.log(data);
       state.user.orders = data;
     },
 

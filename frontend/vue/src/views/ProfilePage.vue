@@ -132,7 +132,7 @@ function update() {
       isEdit.value = false;
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
     });
 }
 

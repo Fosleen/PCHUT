@@ -166,7 +166,7 @@ const addToCart = (...options) => {
         }
       }
     } else {
-      console.log("Invalid item structure at index", i + 1);
+      // console.log("Invalid item structure at index", i + 1);
     }
   }
 };

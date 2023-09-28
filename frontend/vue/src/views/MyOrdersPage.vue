@@ -112,7 +112,7 @@ const ordersLoaded = ref(false);
 store.watch(
   () => store.state.user.orders,
   (newOrders) => {
-    console.log(newOrders);
+    //console.log(newOrders);
 
     orders.value = newOrders;
     ordersLoaded.value = true;
@@ -150,7 +150,7 @@ const calculateTotalPrice = (order) => {
 
 const changeSelectedOrder = (order) => {
   selectedOrder.value = order;
-  console.log(selectedOrder.value);
+  //console.log(selectedOrder.value);
 };
 
 const recalculatePayment = (order) => {

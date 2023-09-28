@@ -206,7 +206,7 @@ const loggedUser = ref({
 
 const createOrder = async () => {
   try {
-    console.log(loggedUser.value.id);
+    // console.log(loggedUser.value.id);
 
     await axiosClient
       .post("/order", {
@@ -233,7 +233,7 @@ const createOrder = async () => {
               customer.value.city,
       })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         sessionStorage.setItem("cart", []);
         router.push("/narudzbe");
         toast.success(`Narudžba uspješno zaprimljena!`, {
@@ -241,7 +241,7 @@ const createOrder = async () => {
         });
       });
   } catch (err) {
-    console.log("Error - " + err);
+    // console.log("Error - " + err);
   }
 };
 
@@ -252,7 +252,7 @@ const fetchCartItemsData = async () => {
       cartItemsQuantity.value.push(el.quantity);
     }
   } catch (err) {
-    console.log("Error - " + err);
+    // console.log("Error - " + err);
   }
 };
 
@@ -261,7 +261,7 @@ onMounted(async () => {
 
   try {
     const user = await getLoggedUser();
-    console.log(user);
+    // console.log(user);
 
     loggedUser.value = user;
   } catch (err) {

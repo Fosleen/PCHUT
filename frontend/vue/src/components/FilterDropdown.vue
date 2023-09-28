@@ -985,7 +985,7 @@ function clearArray(name) {
 }
 
 function searchProducts() {
-  console.log(selectedComponentType.value.product_type);
+  //console.log(selectedComponentType.value.product_type);
 
   emit(
     "searchProducts",
@@ -1023,7 +1023,7 @@ function changeCheckboxes(id, groupName) {
     groupArray.push(id);
   }
 
-  console.log(JSON.parse(JSON.stringify(groupArray))); // removes JS proxy and leaves normal array
+  //console.log(JSON.parse(JSON.stringify(groupArray))); // removes JS proxy and leaves normal array
 }
 
 function isFilterShown(name, groupName) {

@@ -42,16 +42,16 @@ const errorMessage = ref("");
 
 function login(e) {
   e.preventDefault();
-  console.log(user);
+  // console.log(user);
 
   store
     .dispatch("login", user)
     .then(() => {
-      console.log("Uspjesna prijava");
+      //console.log("Uspjesna prijava");
       router.push({ path: "/kosarica" });
     })
     .catch((err) => {
-      console.log(`Nest je puklo: ${err}`);
+      // console.log(`Nest je puklo: ${err}`);
       errorMessage.value = "Netočni podaci!";
     });
 }

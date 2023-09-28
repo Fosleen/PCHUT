@@ -48,7 +48,7 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const location = route.name;
-console.log("Lokacija je", location);
+//console.log("Lokacija je", location);
 
 const props = defineProps({
   text: {

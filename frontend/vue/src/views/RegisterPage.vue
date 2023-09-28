@@ -68,16 +68,16 @@ const user = {
 
 function register(e) {
   e.preventDefault();
-  console.log(user);
+  // console.log(user);
 
   store
     .dispatch("register", user)
     .then(() => {
-      console.log("Uspjesna registracija");
+      //console.log("Uspjesna registracija");
       router.push({ path: "/kosarica" });
     })
     .catch((err) => {
-      console.log(`Nest je puklo: ${err}`);
+      //console.log(`Nest je puklo: ${err}`);
     });
 }
 </script>

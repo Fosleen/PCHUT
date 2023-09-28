@@ -292,13 +292,13 @@ const fetchFilteredProductsData = async (
     models,
     socket_type
   );
-  console.log(response.components);
+  //console.log(response.components);
 
   filteredProducts.value = [...filteredProducts.value, ...response.components];
 };
 
 const quickSearch = async (productType) => {
-  console.log(productType);
+  //console.log(productType);
   filteredProducts.value = [];
   const response = await getFilteredDataByProductType(productType);
   filteredProducts.value = [...response.components];

@@ -97,12 +97,12 @@ const signOut = () => {
   store
     .dispatch("logout")
     .then(() => {
-      console.log("Uspjesna odjava");
+      //console.log("Uspjesna odjava");
       isUserLoggedIn.value = false;
-      router.push("/")
+      router.push("/");
     })
     .catch((err) => {
-      console.log(`Error - ${err}`);
+      //console.log(`Error - ${err}`);
     });
 };
 

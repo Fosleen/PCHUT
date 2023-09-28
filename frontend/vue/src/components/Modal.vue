@@ -19,12 +19,12 @@ defineExpose({
 });
 
 function show() {
-  console.log("show");
+  //console.log("show");
   modal.showModal();
 }
 
 function close(a) {
-  console.log("closee");
+  //console.log("closee");
   modal.close();
 }
 </script>

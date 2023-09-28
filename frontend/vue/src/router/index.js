@@ -83,7 +83,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !store.state.user.token) {
-    console.log(store.state.user.token);
+    //console.log(store.state.user.token);
     next({ name: "LoginPage" });
   } else {
     next();
