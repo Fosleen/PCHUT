@@ -79,7 +79,7 @@
 import PcBuilderComponentCardList from "./PcBuilderComponentCardList.vue";
 
 const { Image, className, component } = defineProps({
-  Image: String,
+  Image: [Array, String],
   className: String,
   component: Object,
 });

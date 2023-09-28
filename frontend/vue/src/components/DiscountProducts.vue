@@ -24,7 +24,7 @@ const productsWithDiscount = ref([]);
 onMounted(async () => {
   const discountProducts = await getAllProductsOnDiscount();
   productsWithDiscount.value = discountProducts.data;
-  console.log("Discount products", productsWithDiscount.value);
+  //console.log("Discount products", productsWithDiscount.value);
 });
 </script>
 
