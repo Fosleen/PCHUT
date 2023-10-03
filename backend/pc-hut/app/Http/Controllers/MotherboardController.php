@@ -40,7 +40,7 @@ class MotherboardController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'model' => 'required|string',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'manufacturer_id' => 'required|integer',
             'socket_id' => 'required|integer',
             'ram_type_id' => 'required|integer',
