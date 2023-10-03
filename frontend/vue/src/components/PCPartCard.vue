@@ -294,12 +294,13 @@ const addToCart = (e) => {
 
 .pc-part-card-link {
   text-decoration: none;
+  height: 100%;
 }
 
 @media screen and ($tablet) {
   .pc-part-card-wrapper {
     padding: 12px 12px 0;
-
+    height: 100%;
     .pc-part-card-text-wrapper {
       h3 {
         font-size: 20px;

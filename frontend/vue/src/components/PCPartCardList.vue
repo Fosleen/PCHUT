@@ -36,6 +36,7 @@ const props = defineProps({
   margin-bottom: 10px;
   font-size: 20px;
   color: $grey-dark;
+  height: 48px;
 }
 
 .pc-part-card-list-item {
