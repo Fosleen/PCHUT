@@ -148,7 +148,7 @@
           "
           :text-group-items="[
             'Vrsta : ' + component.type,
-            'Switchevi: ' + component.switch_type.name,
+            'Switchevi: ' + component.switch_type_name,
             'Spajanje: ' + component.connector,
           ]"
         />

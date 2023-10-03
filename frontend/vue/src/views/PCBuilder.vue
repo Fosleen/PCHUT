@@ -132,7 +132,7 @@ const calculateTotalPrice = () => {
   if (psuOption.value) totalPrice += psuOption.value.price;
   if (caseOption.value) totalPrice += caseOption.value.price;
 
-  return totalPrice;
+  return totalPrice.toFixed(2);
 };
 
 const addToCart = (...options) => {
@@ -201,7 +201,7 @@ onMounted(async () => {
   psus.value = allPsus.psus;
 
   const allCases = await getAllCases();
-  cases.value = allCases.pccases;
+  cases.value = allCases.cases;
 });
 
 watch(motherboardOption, async (newMotherboardOption) => {
@@ -209,8 +209,10 @@ watch(motherboardOption, async (newMotherboardOption) => {
     const cpuData = await getAllCPUsWithSocket(newMotherboardOption.socket_id);
     cpus.value = cpuData.cpus;
     const ramData = await getAllRAMsWithRamType(
-      newMotherboardOption.ram_type_id
+      newMotherboardOption.ram_type.id
     );
+    console.log(ramData);
+
     rams.value = ramData.rams;
   }
 });
