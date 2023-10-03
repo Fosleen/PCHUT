@@ -3,7 +3,7 @@
     <div class="orders-list-item-left">
       <h4>#{{ props.order.id }}</h4>
       <p>
-        Ukupan iznos: <b> {{ props.order.total }}</b> €
+        Ukupan iznos: <b> {{ props.order.total.toFixed(2) }}</b> €
       </p>
       <p>Proizvoda: {{ props.order.quantity }}</p>
     </div>

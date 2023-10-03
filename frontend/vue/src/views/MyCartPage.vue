@@ -95,7 +95,7 @@
             </div>
             <div class="my-cart-details-details-data-prices-row">
               <p>Ukupan iznos košarice:</p>
-              <p>{{ totalPrice }} €</p>
+              <p>{{ totalPrice.toFixed(2) }} €</p>
             </div>
           </div>
         </div>
