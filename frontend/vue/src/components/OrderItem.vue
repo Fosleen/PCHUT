@@ -14,7 +14,7 @@
         <p>{{ props.item.type }}</p>
         <div>
           <p>{{ props.item.quantity }} kom</p>
-          <h3>{{ props.item.price * props.item.quantity }} €</h3>
+          <h3>{{ props.item.price.toFixed(2) * props.item.quantity }} €</h3>
         </div>
       </div>
     </div>

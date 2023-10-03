@@ -152,6 +152,9 @@ onMounted(async () => {
 @import "../utils/theme.scss";
 
 .profile-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+
   .profile-container {
     .profile-menu {
       background-color: $colorBgPrimary;
