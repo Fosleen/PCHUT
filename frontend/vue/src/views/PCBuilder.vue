@@ -388,6 +388,7 @@ watch(motherboardOption, async (newMotherboardOption) => {
 }
 
 .pc-builder-page-tracker-wrapper {
-  display: flex;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 </style>

@@ -162,7 +162,7 @@
             component.model
           "
           :text-group-items="[
-            'Veličina: ' + component.size + ' GB',
+            'Veličina: ' + component.size + ' TB',
             'Vrsta: ' + component.storage_type.name,
           ]"
         />

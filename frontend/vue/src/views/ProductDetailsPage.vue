@@ -68,9 +68,19 @@
               <p>DPI:</p>
               <p>{{ product.dpi }}</p>
             </div>
-            <div v-if="product.size" class="product-details-data-row">
+            <div
+              v-if="product.size && product.product_type_cro == 'Monitor'"
+              class="product-details-data-row"
+            >
               <p>Dijagonala:</p>
               <p>{{ product.size }}''</p>
+            </div>
+            <div
+              v-if="product.size && product.product_type_cro == 'Pohrana'"
+              class="product-details-data-row"
+            >
+              <p>Veličina:</p>
+              <p>{{ product.size }}TB</p>
             </div>
             <div v-if="product.refresh_rate" class="product-details-data-row">
               <p>Osvježavanje slike:</p>
