@@ -45,8 +45,8 @@ class ComponentResource extends JsonResource
                 return $this->productable->type;
             }),
 
-            'switch_type' => $this->when($this->productable_type === 'App\\Models\\Keyboard', function () {
-                return $this->productable->switchType;
+            'switch_type_name' => $this->when($this->productable_type === 'App\\Models\\Keyboard', function () {
+                return $this->productable->switchType->name;
             }),
 
             'case_size' => $this->when($this->productable_type === 'App\\Models\\PcCase', function () {
@@ -71,6 +71,10 @@ class ComponentResource extends JsonResource
 
             'wired' => $this->when($this->productable_type === 'App\\Models\\Keyboard' || $this->productable_type === 'App\\Models\\Mouse', function () {
                 return $this->productable->wired;
+            }),
+
+            'dpi' => $this->when($this->productable_type === 'App\\Models\\Mouse', function () {
+                return $this->productable->dpi;
             }),
 
             'power' => $this->when($this->productable_type === 'App\\Models\\PSU', function () {

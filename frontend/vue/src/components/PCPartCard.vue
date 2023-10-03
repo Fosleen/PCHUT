@@ -256,7 +256,7 @@ const addToCart = (e) => {
   box-shadow: 0 0 8px #eebdd6;
   outline: 3px solid transparent;
   outline-offset: -3px;
-  padding: 8px 8px 0;
+  margin: 20px;
 
   .pc-part-card-image-wrapper {
     background-color: white;
@@ -294,7 +294,6 @@ const addToCart = (e) => {
 
 .pc-part-card-link {
   text-decoration: none;
-  height: 100%;
 }
 
 @media screen and ($tablet) {

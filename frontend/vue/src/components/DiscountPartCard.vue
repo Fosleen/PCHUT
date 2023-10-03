@@ -26,12 +26,24 @@
       <div class="discount-part-card-text-wrapper">
         <PCPartCardList
           v-if="getModelName() == 'GPU'"
-          :text-group-name="component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
           :text-group-items="[component.memory + 'GB memorije']"
         />
         <PCPartCardList
           v-if="getModelName() == 'CPU'"
-          :text-group-name="component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
           :text-group-items="[
             component.cores + ' jezgri',
             component.socket_name + ' socket',
@@ -40,25 +52,61 @@
 
         <PCPartCardList
           v-if="getModelName() == 'Motherboard'"
-          :text-group-name="component.model"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
           :text-group-items="[component.socket_name + ' socket']"
         />
 
         <PCPartCardList
+          v-if="getModelName() == 'Mouse'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[component.dpi + ' DPI']"
+        />
+
+        <PCPartCardList
+          v-if="getModelName() == 'Keyboard'"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[component.switch_type_name + ' switchevi']"
+        />
+
+        <PCPartCardList
           v-if="getModelName() == 'RAM'"
-          :text-group-name="component.model"
-          :text-group-items="[component.speed + ' MHz']"
+          :text-group-name="
+            component.product_type_cro +
+            ' ' +
+            component.manufacturer.name +
+            ' ' +
+            component.model
+          "
+          :text-group-items="[component.dpi + ' DPI']"
         />
 
         <h3>Dostupno</h3>
 
         <div class="discount-part-card-prices-wrapper">
           <h2 class="discount-part-card-price-wrapper">
-            {{ `${component.price} €` }}
+            {{ `${component.price.toFixed(2)} €` }}
           </h2>
 
           <h2 class="discount-part-card-discount-price-wrapper">
-            {{ `${component.discount} €` }}
+            {{ `${component.discount.toFixed(2)} €` }}
           </h2>
         </div>
       </div>
@@ -96,15 +144,13 @@ const { component } = defineProps({
 @import "../utils/theme.scss";
 
 .discount-part-card-wrapper {
-  background-color: #eaeaea;
-  width: 400px;
+  box-shadow: 0 0 8px #eebdd6;
+  width: 100%;
   padding-top: 12px;
-  box-shadow: 0 0 20px #be166e;
   outline: 3px solid transparent;
   outline-offset: -3px;
   padding-left: 16px;
   padding-right: 16px;
-  //max-width: 400px;
 }
 
 .discount-part-card-image-wrapper {
@@ -112,6 +158,7 @@ const { component } = defineProps({
   height: 240px;
   width: 100%;
   margin-bottom: 16px;
+
   img {
     object-fit: contain;
     height: 100%;
@@ -126,9 +173,8 @@ const { component } = defineProps({
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 28px;
     margin-bottom: 8px;
-    //color: $colorSuccess;
   }
 }
 
@@ -148,10 +194,15 @@ const { component } = defineProps({
 .discount-part-card-prices-wrapper {
   display: flex;
   justify-content: space-between;
-  padding-right: 48px;
 }
 
 .discount-part-card-discount-price-wrapper {
   text-decoration: line-through;
+}
+
+@media screen and ($desktop) {
+  .discount-part-card-wrapper {
+    /* width: 400px; */
+  }
 }
 </style>

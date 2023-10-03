@@ -33,7 +33,7 @@
 
       <FooterTextGroupVue
         text-group-name="Kontaktirajte nas"
-        :text-group-items="['Instagram', 'Facebook', 'Email', '01 512']"
+        :text-group-items="['Instagram', 'Facebook', 'Email', '01 512 1234']"
       />
     </div>
 
@@ -136,6 +136,14 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h4 {
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.7px;
+  }
 }
 
 .footer-logo-fosleen {

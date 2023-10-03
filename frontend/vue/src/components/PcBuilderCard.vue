@@ -107,6 +107,7 @@ const wrapperClasses = {
   flex-direction: column;
   height: 100%;
   cursor: pointer;
+  padding: 12px;
 
   .pc-builder-component-card-text-group-name {
     color: $grey-light;
@@ -161,7 +162,7 @@ const wrapperClasses = {
   padding: 0 16px;
 
   .pc-builder-component-card-image-wrapper {
-    height: 24vw;
+    height: 260px;
     width: 100%;
     padding: 0px; //padding: 24px;
     margin: 16px 0;
@@ -186,6 +187,7 @@ const wrapperClasses = {
     display: flex;
     flex-direction: column;
     height: 320px;
+    padding: 12px;
 
     .pc-builder-component-card-text-group-name {
       font-size: 20px;

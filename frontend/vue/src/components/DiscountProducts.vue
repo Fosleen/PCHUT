@@ -53,6 +53,7 @@ onMounted(async () => {
 @media screen and ($tabletLarge) {
   .homepage-discount-component-wrapper {
     .item-type-wrapper {
+      max-width: 1200px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
@@ -63,7 +64,9 @@ onMounted(async () => {
 
 @media screen and ($desktopLarge) {
   .homepage-discount-component-wrapper {
-    grid-template-columns: repeat(4, 1fr);
+    .item-type-wrapper {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }
 </style>
