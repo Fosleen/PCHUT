@@ -4,7 +4,11 @@
 
 <img src="https://github.com/Fosleen/PCHUT/blob/main/frontend/vue/src/assets/logo_new.png" alt="pchut-logo" style="width:350px"/>
 
-Watch <a href="https://youtu.be/Y4T0aCTp1qI" target="_blank">PChut video</a>. 
+
+<p align="center">
+
+[![Watch the video](https://img.youtube.com/vi/Y4T0aCTp1qI/hqdefault.jpg)](https://youtu.be/Y4T0aCTp1qI)
+</p>
 
 ## PChut documentation
 
