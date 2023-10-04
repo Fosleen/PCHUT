@@ -7,7 +7,8 @@
 
 <p align="center">
 
-[![Watch the video](https://img.youtube.com/vi/Y4T0aCTp1qI/hqdefault.jpg)](https://youtu.be/Y4T0aCTp1qI)
+[<img src="https://img.youtube.com/vi/Y4T0aCTp1qI/hqdefault.jpg"/>](https://youtu.be/Y4T0aCTp1qI)
+
 </p>
 
 ## PChut documentation
