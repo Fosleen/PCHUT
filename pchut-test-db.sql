@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2023 at 10:27 PM
+-- Generation Time: Oct 04, 2023 at 08:38 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -106,7 +106,7 @@ INSERT INTO `component` (`id`, `productable_id`, `productable_type`, `product_ty
 (38, 4, 'App\\Models\\PcCase', 'Kućište', 'North', 199.00, NULL, 'Case Size Mid Tower', 15, '2023-10-03 17:04:15', '2023-10-03 17:04:15'),
 (39, 5, 'App\\Models\\PcCase', 'Kućište', 'Tomahawk', 210.00, NULL, 'Case Size Mini Tower, kaljeno staklo, bez napajanja, crno, RGB', 29, '2023-10-03 17:05:08', '2023-10-03 17:05:08'),
 (40, 5, 'App\\Models\\Storage', 'Pohrana', 'T700', 520.00, NULL, 'Introducing the fastest Gen5 SSD on the planet', 20, '2023-10-03 17:10:34', '2023-10-03 17:10:34'),
-(41, 6, 'App\\Models\\Storage', 'Pohrana', 'IronWolf NAS', 115.00, NULL, 'The Power of Agility for home, SOHO and SMB NAS enclosures. IronWolf is designed for everything NAS. Get used to tough, ready and scalable 24/7 performance that can handle multi-drive environments with a wide range of capacities.', 24, '2023-10-03 17:11:58', '2023-10-03 17:11:58'),
+(41, 1, 'App\\Models\\Storage', 'Pohrana', 'IronWolf NAS', 115.00, NULL, 'The Power of Agility for home, SOHO and SMB NAS enclosures. IronWolf is designed for everything NAS. Get used to tough, ready and scalable 24/7 performance that can handle multi-drive environments with a wide range of capacities.', 24, '2023-10-03 17:11:58', '2023-10-03 17:11:58'),
 (42, 1, 'App\\Models\\Monitor', 'Monitor', 'Extragood', 300.00, NULL, 'nekaj opisno za monitor cool je', 1, '2023-10-03 17:45:56', '2023-10-03 17:45:56');
 
 -- --------------------------------------------------------
@@ -203,7 +203,8 @@ INSERT INTO `component_order` (`id`, `quantity`, `order_id`, `component_id`, `cr
 (12, 2, 9, 7, NULL, NULL),
 (13, 3, 10, 22, NULL, NULL),
 (14, 1, 10, 4, NULL, NULL),
-(15, 1, 10, 5, NULL, NULL);
+(15, 1, 10, 5, NULL, NULL),
+(16, 3, 11, 22, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -529,7 +530,8 @@ INSERT INTO `order` (`id`, `order_name`, `order_address`, `user_id`, `payment`, 
 (7, 'Ana Bananic', 'ulica 15, 10000 Orlovac', 1, 1, 0, '2023-09-27 06:03:42', '2023-09-27 06:03:42'),
 (8, 'Marko Slovarkovski', 'Nekoga Mi 23a, 10000 Zagreb', 4, 1, 0, '2023-10-03 17:48:31', '2023-10-03 17:48:31'),
 (9, 'Lovro Lovakovic', 'Ulica Mirka 21a, 10000 Zagreb', 5, 1, 0, '2023-10-03 18:15:32', '2023-10-03 18:15:32'),
-(10, 'Zlatko Netkovic', 'Ulica Mirka 12a, 10000 Zagreb', 7, 1, 0, '2023-10-03 18:25:29', '2023-10-03 18:25:29');
+(10, 'Zlatko Netkovic', 'Ulica Mirka 12a, 10000 Zagreb', 7, 1, 0, '2023-10-03 18:25:29', '2023-10-03 18:25:29'),
+(11, 'Robert Robovic', 'Ulica Nikole 23a, 10000 Zagreb', 8, 1, 0, '2023-10-04 04:33:23', '2023-10-04 04:33:23');
 
 -- --------------------------------------------------------
 
@@ -638,7 +640,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (43, 'App\\Models\\User', 1, 'main', '58df2aa53799c633dbc0b8ede32a28e21f98c9a86b0786e2970afdc2f907a446', '[\"*\"]', '2023-09-27 06:03:20', NULL, '2023-09-27 06:02:18', '2023-09-27 06:03:20'),
 (44, 'App\\Models\\User', 4, 'main', '2a9b86bdf4641678b3c848347e0031dcefa7abbf49bc3705ab02a4a3887b5546', '[\"*\"]', '2023-10-03 17:48:06', NULL, '2023-10-03 17:47:24', '2023-10-03 17:48:06'),
 (45, 'App\\Models\\User', 5, 'main', '0112135aea79edb8bb6c57864598efd83fe4de42d85e5bd36fcb487fb2018e49', '[\"*\"]', '2023-10-03 18:14:50', NULL, '2023-10-03 18:14:18', '2023-10-03 18:14:50'),
-(46, 'App\\Models\\User', 6, 'main', '139e06865dd107f1257c49f98049dc176c28e40e149a3c2ce15f1e5351e5cea2', '[\"*\"]', NULL, NULL, '2023-10-03 18:20:04', '2023-10-03 18:20:04');
+(46, 'App\\Models\\User', 6, 'main', '139e06865dd107f1257c49f98049dc176c28e40e149a3c2ce15f1e5351e5cea2', '[\"*\"]', NULL, NULL, '2023-10-03 18:20:04', '2023-10-03 18:20:04'),
+(48, 'App\\Models\\User', 8, 'main', '3ec765cfaa5e3b689659dd233dd20180245220eb5fb236e5b9e57111e11ac0c3', '[\"*\"]', '2023-10-04 04:33:04', NULL, '2023-10-04 04:32:30', '2023-10-04 04:33:04'),
+(49, 'App\\Models\\User', 8, 'main', '130268b58078b58a746687b4ed9c1919143158e6d1a21f66678fd56b8d014016', '[\"*\"]', NULL, NULL, '2023-10-04 04:34:19', '2023-10-04 04:34:19');
 
 -- --------------------------------------------------------
 
@@ -751,10 +755,10 @@ CREATE TABLE `storage` (
 --
 
 INSERT INTO `storage` (`id`, `storage_type_id`, `size`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, '2023-10-03 17:11:58', '2023-10-03 17:11:58'),
 (3, 3, 2, '2023-09-28 05:51:28', '2023-09-28 05:51:28'),
 (4, 1, 2, '2023-09-28 05:51:31', '2023-09-28 05:51:31'),
-(5, 2, 2, '2023-10-03 17:10:34', '2023-10-03 17:10:34'),
-(6, 1, 4, '2023-10-03 17:11:58', '2023-10-03 17:11:58');
+(5, 2, 2, '2023-10-03 17:10:34', '2023-10-03 17:10:34');
 
 -- --------------------------------------------------------
 
@@ -831,7 +835,8 @@ INSERT INTO `user` (`id`, `name`, `surname`, `address`, `city`, `postal`, `passw
 (4, 'Marko', 'Slovarkovski', 'Nekoga Mi 23a', 'Zagreb', '10000', '$2y$10$lGpODtkp38HdDWyXPAFgYOW2Gbl835kN2tHugc0we5et.ywEZ0yom', 'm@gmail.com', '2023-10-03 17:47:24', '2023-10-03 17:47:57'),
 (5, 'Lovro', 'Lovakovic', 'Ulica Mirka 21a', 'Zagreb', '10000', '$2y$10$6vM7JvP9v796JCIO7TwQLerNPSZtduyVmBkRvW.2Ab/phMttZxrVm', 'mirko@gmail.com', '2023-10-03 18:14:18', '2023-10-03 18:14:37'),
 (6, 'Nikola', 'Klasinic', 'Ulica Tomislava 240', 'Zagreb', '10000', '$2y$10$6iaJzwvNf3smGst32/VlKeqQnT43OEVQ9QmGSQ8P/4DyFEVtdSrGC', 't@gmail.com', '2023-10-03 18:20:04', '2023-10-03 18:20:36'),
-(7, 'Zlatko', 'Netkovic', 'Ulica Mirka 12a', 'Zagreb', '10000', '$2y$10$3TuSrR7v2C94rv5uu6FJJ.KAX39HUTRaIRb3USA5v/C2f6.2qLLAK', 'z@gmail.com', '2023-10-03 18:24:17', '2023-10-03 18:24:55');
+(7, 'Zlatko', 'Netkovic', 'Ulica Mirka 12a', 'Zagreb', '10000', '$2y$10$3TuSrR7v2C94rv5uu6FJJ.KAX39HUTRaIRb3USA5v/C2f6.2qLLAK', 'z@gmail.com', '2023-10-03 18:24:17', '2023-10-03 18:24:55'),
+(8, 'Robert', 'Robovic', 'Ulica Nikole 23a', 'Zagreb', '10000', '$2y$10$UESGzYJutDY4glVw0cbGmee19IRm3r/5ppEr42KhGuEMFab0Geu46', 'r@gmail.com', '2023-10-04 04:32:30', '2023-10-04 04:32:57');
 
 -- --------------------------------------------------------
 
@@ -1071,7 +1076,7 @@ ALTER TABLE `component_images`
 -- AUTO_INCREMENT for table `component_order`
 --
 ALTER TABLE `component_order`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `cooling`
@@ -1143,7 +1148,7 @@ ALTER TABLE `mouse`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pc`
@@ -1161,7 +1166,7 @@ ALTER TABLE `pc_case`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `psu`
@@ -1209,7 +1214,7 @@ ALTER TABLE `switch_type`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
