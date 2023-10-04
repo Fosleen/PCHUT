@@ -4,6 +4,8 @@
 
 <img src="https://github.com/Fosleen/PCHUT/blob/main/frontend/vue/src/assets/logo_new.png" alt="pchut-logo" style="width:350px"/>
 
+Watch <a href="https://youtu.be/Y4T0aCTp1qI" target="_blank">PChut video</a>. 
+
 ## PChut documentation
 
 <ul>
@@ -81,6 +83,8 @@ This full-stack project technology stack includes:
 ## Backend
 
 + Start server on XAMPP (Apache & MySQL services)
+
++ Optional - in PhpMyAdmin create database with name `pchut` and import our test database from `pchut-test-db.sql` file 
    
 + In new terminal, navigate to the Laravel directory: `cd backend/pc-hut`
 
